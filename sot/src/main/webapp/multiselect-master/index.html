@@ -22,8 +22,8 @@
 				<p>Bundle Control
 					<div class="clearfix">
 						<ul class="span4">
-							<li><a href="create.html">Create Bundle</a></li>
 							<li><a href="">View Bundle</a></li>
+							<li><a href="create.html">Create Bundle</a></li>
 							<li><a href="">Edit Bundle</a></li>
 							<li><a href="">Delete Bundle</a></li>
 						</ul>
@@ -31,73 +31,6 @@
 				</p>
 			</div>
 		</div>
-
-		<div id="demo" class="container">
-			<div class="page-header"><h3>Demo</h3></div>
-
-			<h4 id="demo-zero-configuration">Zero configuration</h4>
-
-			<div class="row-fluid">
-				<div class="span5">
-					<select name="from" id="multiselect" class="span12" size="8" multiple="multiple">
-						<option value="1">Item 1</option>
-						<option value="2">Item 5</option>
-						<option value="2">Item 2</option>
-						<option value="2">Item 4</option>
-						<option value="3">Item 3</option>
-					</select>
-				</div>
-
-				<div class="span2">
-					<button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="icon-forward"></i></button>
-					<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="icon-chevron-right"></i></button>
-					<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="icon-chevron-left"></i></button>
-					<button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="icon-backward"></i></button>
-				</div>
-
-				<div class="span5">
-					<select name="to" id="multiselect_to" class="span12" size="8" multiple="multiple"></select>
-				</div>
-			</div>
-
-
-
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="lib/google-code-prettify/prettify.js"></script>
-	<script type="text/javascript" src="js/multiselect.js"></script>
-
-
-	<script type="text/javascript">
-	$(document).ready(function() {
-		// make code pretty
-		window.prettyPrint && prettyPrint();
-
-		if ( window.location.hash ) {
-			scrollTo(window.location.hash);
-		}
-
-		$('.nav').on('click', 'a', function(e) {
-			scrollTo($(this).attr('href'));
-		});
-
-		$('#multiselect').multiselect();
-		$('.multiselect').multiselect();
-		$('.js-multiselect').multiselect({
-			right: '#js_multiselect_to_1',
-			rightAll: '#js_right_All_1',
-			rightSelected: '#js_right_Selected_1',
-			leftSelected: '#js_left_Selected_1',
-			leftAll: '#js_left_All_1'
-		});
-	});
-
-	function scrollTo( id ) {
-		if ( $(id).length ) {
-			$('html,body').animate({scrollTop: $(id).offset().top - 40},'slow');
-		}
-	}
-	</script>
 
 
 	</div>
