@@ -1,0 +1,1046 @@
+Advice Admin Tools 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Advice Admin Tools 1.0.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Advice Admin Tools 1.0.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Advice Admin Tools 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Advice Integration 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Assembly Point Sample 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Document Confirmation Rules 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS General Rules 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Lump Sum Cash Withdrawal Rules 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS MDM Rules 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Mutual Funds Rules 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Ping Rule 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Retirement Illustration Rules 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Rules 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS Rules Proxy 1.1 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+BRMS WODM 8.5 Executiontree Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    .bset env "JAVA_HOME=/buildforge/app/jrockit-jdk1.6.0_24-R28.1.3-4.0.1"
+export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Bank ALM UI 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIBankCustomerWSV1 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIBatchErrorExtraction 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDICommons 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIConfirmationVerification 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDICustomerInteractionBPWS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIMessaging 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIOrgStructureWSV1 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIOrganizationProfileBPWS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIParticipantProfileService 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIPlanAdministrationBPWS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIProductAdministrationWS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIProspectProfileWS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIReporting 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+CDIReportingDaemon 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Content Retrieval WS 2.1 Sonar scan Active=false Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Customer Profile 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Customer Transaction PIN RS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Customer Transaction QC WS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Digital Forms Factory Web 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Digital Forms Factory Web 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Digital Forms Factory Web 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Digital Forms Factory Web 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Digital Forms Factory Web 1.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Employee Sample RS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Endeca Java Interface 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Endeca Java Interface 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Endeca Java Interface 2.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Financial Planning RS 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+GoFolio 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+GoFolio 2.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+GoFolio 3.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+GoFolio 3.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Graphite 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Graphite 2.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+IVR CTI Driver 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IVR Common 1.9 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IVR Console 1.6 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IWC File Upload Tool 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IWC Site Config 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IWC Site Config 2.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IWC Site Config 3.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+IWC Site Config 4.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Insurance New Business RS 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Insurance New Business RS 1.1 Sonar scan Active=false Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Insurance New Business RS 1.2 Sonar scan Active=false Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Insurance Producer RS 1.0 Sonar scan Active=false Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+JSON Java 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Life Insurance Inforce 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Lumpsum Transaction RS 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+
+----------------------------------------------------------------------------------------------------
+LumpsumTransactionRSV1 2.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+
+----------------------------------------------------------------------------------------------------
+LumpsumTransactionRSV1 2.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+
+----------------------------------------------------------------------------------------------------
+LumpsumTransactionRSV1 3.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+
+----------------------------------------------------------------------------------------------------
+Microsites RS 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Model Transactions Customer Transaction Routing RS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Model Transactions User Security RS 13.12 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Multi Vendor Tools 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+PRISM Retirement Plan RS 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PRISM Retirement Plan RS 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PRISM Retirement Plan RS 1.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PRISM Retirement Plan RS 1.3 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PRISM Retirement Plan RS 1.4 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PRISM Retirement Plan RS 1.5 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Home 4.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Home 4.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Home 5.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Plan Sponsor RS 4.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Plan Sponsor RS 4.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Plan Sponsor RS 5.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Trans 4.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Trans 4.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Trans 5.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS Trans 5.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS UI Framework 4.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS UI Framework 4.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS UI Framework 5.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS UI Framework 5.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS User Management 4.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS User Management 4.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+PSS User Management 5.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Profile 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Profile 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Profile 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Profile 1.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Profile 1.5 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Retirement Transactions 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Retirement Transactions 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Retirement Transactions 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Retirement Transactions 1.2.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Participant Retirement Transactions 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Prism Call Statistics 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Prism Coherence Tutorial 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Prism Coherence Tutorial 1.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Prism Object Model 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Prism Object Model 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Prism Shared Lib 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+RECO NFS Test Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+RECO Utilities 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+RECO Utilities 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Redirect Dictionary 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Reference Data Cache 5.5 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Splunk Java SDK 1.0 Sonar scan Active=false Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+TIAA Gomez 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+TIAA Service Now 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Transmissions 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Common Services 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Common Services 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Content 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Content 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Core 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Core 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Core 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Core 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Enrollment 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopEnrollmentEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Enrollment 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopEnrollmentEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Enrollment 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopEnrollmentEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Enrollment Services 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Enrollment Services 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Framework 2.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop IRA Enrollment 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopIRAEnrollmentEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop IRA Enrollment 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopIRAEnrollmentEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Institutional Summary Services 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 2.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 2.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 2.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 2.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Interfaces 2.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Microsites 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop My BoB 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop OCL 3.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 1.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 2.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+(RT=0; for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); RT=`expr $RT + $?`; done; exit $RT)
+
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 2.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+(RT=0; for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); RT=`expr $RT + $?`; done; exit $RT)
+
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 2.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+(RT=0; for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); RT=`expr $RT + $?`; done; exit $RT)
+
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant 2.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+(RT=0; for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); RT=`expr $RT + $?`; done; exit $RT)
+
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant RS 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant RS 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant RS 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant RS 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant RS 1.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant Services 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant Services 1.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant Services 1.3 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant Services 2.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Participant Services 2.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Payment Summary 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism Templates 1.3 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism Templates 1.4 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism Templates 1.5 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism Templates 1.6 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism UI 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism UI 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Prism UI 1.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Proxy 1.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopProxyEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Proxy 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopProxyEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Proxy 1.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopProxyEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Reference App 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Reference App Services 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Retirement Advisor 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Retirement Advisor 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Retirement Advisor 1.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Retirement Advisor 1.3 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transaction Core Services 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+for sr in `find . -name 'sonar-project.properties'`; do (cd `dirname $sr`; sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}); done
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 1.0 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 2.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 2.1 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 3.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 4.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 4.1 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transactions 5.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+cp UnifiedDesktopParticipantEAR/sonar-project.properties .
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Transmissions Services 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop UI 1.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop UI 1.3 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop UI 1.4 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop UI 2.1 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop UI 2.2 Sonar scan Active=true Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Wealth 1.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Wealth 1.1 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Wealth 1.2 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+Unified Desktop Wealth 2.0 Sonar scan Active=true Continue=CONTINUE
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------
+User Preferences RS 1.0 Sonar scan Active=false Continue=HALT
+----------------------------------------------------------------------------------------------------
+    export PATH=${SONAR_RUNNER}/bin:${JAVA_HOME}/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin
+sonar-runner -Dsonar.jdbc.username=${SONAR_USER} -Dsonar.jdbc.password=${SONAR_PASSWD} -Dsonar.projectVersion=${BF_TAG}
+----------------------------------------------------------------------------------------------------

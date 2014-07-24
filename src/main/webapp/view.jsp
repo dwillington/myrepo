@@ -23,9 +23,20 @@
 		</div>
 
 		<div id="demo" class="container">
-			<div class=""><h3>Create Bundle</h3></div>
+			<div class=""><h3>View Bundles</h3></div>
 
-			<h4 id="demo-zero-configuration">Name <input type="text" value="Unified Desktop"></input></h4>
+			<h4 id="demo-zero-configuration">Atom</h4>
+
+			<div class="row-fluid">
+				<div class="span5">
+					<select name="from" id="multiselect" class="span12" size="8" multiple="multiple">
+<option value="1">Atom_Framework</option>
+<option value="2">Atom_Profile</option>
+					</select>
+				</div>
+			</div>
+
+			<h4 id="demo-zero-configuration">Unified Desktop</h4>
 
 			<div class="row-fluid">
 				<div class="span5">
@@ -34,36 +45,13 @@
 <option value="2">UnifiedDesktopBulkEmail</option>
 <option value="3">UnifiedDesktopParticipant</option>
 <option value="4">UnifiedDesktopEnrollment</option>
-<option value="5">UnifiedDesktopFraudAnalysis</option>
-<option value="6">UnifiedDesktopEnrollmentServices</option>
-<option value="7">UnifiedDesktopParticipantServices</option>
-<option value="8">UnifiedDesktopIRAEnrollmentEAR</option>
-<option value="9">UnifiedDesktopInternalUserProfileRS</option>
-<option value="11">UnifiedDesktopCore</option>
-<option value="12">UnifiedDesktopTransactionCoreServices</option>
-<option value="13">UnifiedDesktopContent</option>
-<option value="14">UnifiedDesktopBrokerageEnrollment</option>
-<option value="15">UnifiedDesktopAssociate</option>
 					</select>
-				</div>
-
-				<div class="span2">
-					<button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="icon-forward"></i></button>
-					<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="icon-chevron-right"></i></button>
-					<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="icon-chevron-left"></i></button>
-					<button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="icon-backward"></i></button>
-				</div>
-
-				<div class="span5">
-					<select name="to" id="multiselect_to" class="span12" size="8" multiple="multiple"></select>
 				</div>
 			</div>
 
+
 	</div>
 
-    <div class="span5">
-	    <button type="submit">Save</i></button>
-    </div>
 
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>

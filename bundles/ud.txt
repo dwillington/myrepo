@@ -1,0 +1,19 @@
+Unified Desktop My BoB
+Unified Desktop Core
+Unified Desktop Bulk Email
+#Unified Desktop Participant
+#Unified Desktop Enrollment
+#Unified Desktop Fraud Analysis
+#Unified Desktop Enrollment Services
+#Unified Desktop Participant Services
+#Unified Desktop Party Communication RS
+#Unified Desktop Internal User Profile RS
+#Unified Desktop Participant RS
+#Unified Desktop Transaction Core Services
+#Unified Desktop Content
+#Unified Desktop Brokerage Enrollment
+#Unified Desktop Associate
+#Unified Desktop IRA Enrollment/UnifiedDesktopIRAEnrollmentWeb
+#Unified Desktop IRA Enrollment/UnifiedDesktopIRAEnrollmentEAR
+#Unified Desktop IRA Enrollment/UnifiedDesktopIRAEnrollmentConfigs
+#Unified Desktop Participant RS/UnifiedDesktopParticipantRSConfigs

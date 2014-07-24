@@ -23,30 +23,39 @@
 		</div>
 
 		<div id="demo" class="container">
-			<div class=""><h3>View Bundles</h3></div>
+			<div class=""><h3>Edit Bundle</h3></div>
 
-			<h4 id="demo-zero-configuration">Atom</h4>
+			<h4 id="demo-zero-configuration">Atom</input></h4>
 
 			<div class="row-fluid">
 				<div class="span5">
 					<select name="from" id="multiselect" class="span12" size="8" multiple="multiple">
-<option value="1">Atom_Framework</option>
-<option value="2">Atom_Profile</option>
 <option value="3">Atom_Samples</option>
 <option value="4">Atom_UI_Resources</option>
 					</select>
 				</div>
+
+				<div class="span2">
+					<button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="icon-forward"></i></button>
+					<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="icon-chevron-right"></i></button>
+					<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="icon-chevron-left"></i></button>
+					<button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="icon-backward"></i></button>
+				</div>
+
+				<div class="span5">
+					<select name="to" id="multiselect_to" class="span12" size="8" multiple="multiple">
+<option value="1">Atom_Framework</option>
+<option value="2">Atom_Profile</option>
+					</select>
+				</div>
 			</div>
 
-			<h4 id="demo-zero-configuration">Unified Desktop</h4>
+
+			<h4 id="demo-zero-configuration">Unified Desktop</input></h4>
 
 			<div class="row-fluid">
 				<div class="span5">
 					<select name="from" id="multiselect" class="span12" size="8" multiple="multiple">
-<option value="1">UnifiedDesktopMyBoB</option>
-<option value="2">UnifiedDesktopBulkEmail</option>
-<option value="3">UnifiedDesktopParticipant</option>
-<option value="4">UnifiedDesktopEnrollment</option>
 <option value="5">UnifiedDesktopFraudAnalysis</option>
 <option value="6">UnifiedDesktopEnrollmentServices</option>
 <option value="7">UnifiedDesktopParticipantServices</option>
@@ -59,8 +68,27 @@
 <option value="15">UnifiedDesktopAssociate</option>
 					</select>
 				</div>
+
+				<div class="span2">
+					<button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="icon-forward"></i></button>
+					<button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="icon-chevron-right"></i></button>
+					<button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="icon-chevron-left"></i></button>
+					<button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="icon-backward"></i></button>
+				</div>
+
+				<div class="span5">
+					<select name="to" id="multiselect_to" class="span12" size="8" multiple="multiple">
+<option value="1">UnifiedDesktopMyBoB</option>
+<option value="2">UnifiedDesktopBulkEmail</option>
+<option value="3">UnifiedDesktopParticipant</option>
+<option value="4">UnifiedDesktopEnrollment</option>
+					</select>
+				</div>
 			</div>
 
+			<div class="span5">
+				<button type="submit">Save</i></button>
+			</div>
 
 	</div>
 

@@ -22,10 +22,10 @@
 				<p>Bundle Control
 					<div class="clearfix">
 						<ul class="span4">
-							<li><a href="view.html">View Bundles</a></li>
-							<li><a href="create.html">Create Bundle</a></li>
-							<li><a href="">Edit Bundle</a></li>
-							<li><a href="">Delete Bundle</a></li>
+							<li><a href="view.jsp">View Bundles</a></li>
+							<li><a href="create.jsp">Create Bundle</a></li>
+							<li><a href="edit.jsp">Edit Bundle</a></li>
+							<li><a href="delete.jsp">Delete Bundle</a></li>
 						</ul>
 					</div>
 				</p>
