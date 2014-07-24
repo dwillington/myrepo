@@ -17,10 +17,10 @@
       <version>1.0</version>
     </dependency>
     <dependency>
-       <groupId>log4j</groupId>
-       <artifactId>log4j</artifactId>
-       <version>1.2.12</version>
-     </dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.12</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -44,6 +44,16 @@
         <version>1.2</version>
         <configuration>
           <mainClass>org.tiaacref.ad.App</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>8.1.9.v20130131</version>
+        <configuration>
+          <stopKey>STOP</stopKey>
+          <stopPort>9999</stopPort>
+          <scanIntervalSeconds>5</scanIntervalSeconds>
         </configuration>
       </plugin>
     </plugins>
