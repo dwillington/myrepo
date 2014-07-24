@@ -12,13 +12,13 @@
     <fail unless="sot.project.key">You forgot to set sot.project.key!</fail>
 
 <!--
+-->
     <sshexec host="${host}" username="${username}" password="${password}" command="tar -cf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
     <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="C:/Temp"/>
     <untar src="C:/Temp/${sot.project.name}.tgz" dest="C:/Temp" />
     <move todir="C:/Temp/sot_workspace/${sot.PROJ_DIR}">
       <fileset dir="C:/Temp/${sot.project.dir}/${sot.PROJ_DIR}"/>
     </move>
--->
     <replaceregexp file="C:/Temp/sot_workspace/${sot.PROJ_DIR}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
   </target>
   
