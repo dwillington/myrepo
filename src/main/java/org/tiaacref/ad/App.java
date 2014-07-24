@@ -223,11 +223,9 @@ if(false)
         try
         {
           System.out.println("Starting...");
-          Coverage coverage = new Coverage();
-          coverage.read();
 
-          //App app = new App();
-          //app.getLatestBuilds();
+          App app = new App();
+          app.getLatestBuilds();
         }
 	    catch(Throwable t)
 	    {
