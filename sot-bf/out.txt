@@ -1,0 +1,51 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Building sot-bf
+[INFO]    task-segment: [clean, package, exec:java]
+[INFO] ------------------------------------------------------------------------
+[INFO] [clean:clean {execution: default-clean}]
+[INFO] Deleting directory C:\Temp\git\myrepo\sot-bf\target
+[INFO] [resources:resources {execution: default-resources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] [compiler:compile {execution: default-compile}]
+[INFO] Compiling 8 source files to C:\Temp\git\myrepo\sot-bf\target\classes
+[INFO] [resources:testResources {execution: default-testResources}]
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\Temp\git\myrepo\sot-bf\src\test\resources
+[INFO] [compiler:testCompile {execution: default-testCompile}]
+[INFO] Compiling 1 source file to C:\Temp\git\myrepo\sot-bf\target\test-classes
+[INFO] [surefire:test {execution: default-test}]
+[INFO] Surefire report directory: C:\Temp\git\myrepo\sot-bf\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.tiaacref.ad.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] [jar:jar {execution: default-jar}]
+[INFO] Building jar: C:\Temp\git\myrepo\sot-bf\target\sot-bf-1.0-SNAPSHOT.jar
+[INFO] Preparing exec:java
+[INFO] No goals needed for project - skipping
+[INFO] [exec:java {execution: default-cli}]
+Starting...
+1065 unique projects found in Build Forge
+1065
+Advice Admin Tools 1.0-(34)-ABC StarTeam Test
+[INFO] ------------------------------------------------------------------------
+[ERROR] BUILD ERROR
+[INFO] ------------------------------------------------------------------------
+[INFO] An exception occured while executing the Java class. null
+
+[INFO] ------------------------------------------------------------------------
+[INFO] For more information, run Maven with the -e switch
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3 seconds
+[INFO] Finished at: Fri Aug 08 16:32:52 EDT 2014
+[INFO] Final Memory: 19M/46M
+[INFO] ------------------------------------------------------------------------
