@@ -64,11 +64,17 @@ public class BundleManager
         }
         return retValue;
 	}
-	
+
 	public static long getLastScanTime(String bundle) throws IOException
 	{
     	String lastScanTime = getPropertyValue("lastScanTime", BUNDLES_DIR + "/" + bundle + "/bundle.properties");
     	return Long.valueOf(lastScanTime).longValue();
+	}
+
+	public static void setLastScanTime(String bundle) throws IOException
+	{
+		String lastScanTime = String.valueOf(System.currentTimeMillis()/1000);
+    	setPropertyValue("lastScanTime", lastScanTime, BUNDLES_DIR + "/" + bundle + "/bundle.properties");
 	}
 
 	public static String getProjectKey(String project) throws IOException

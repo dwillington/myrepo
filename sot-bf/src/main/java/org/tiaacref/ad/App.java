@@ -1,16 +1,11 @@
 package org.tiaacref.ad;
 
-import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.buildforge.services.client.api.APIClientConnection;
-import com.buildforge.services.client.dbo.AccessGroup;
-import com.buildforge.services.client.dbo.Project;
-import com.buildforge.services.client.dbo.Step;
-import com.buildforge.services.common.dbo.StepDBO;
 
 /**
  *
@@ -53,9 +48,10 @@ public class App
 
 	public static void main(String[] args)
     {
-		System.out.println("Starting...");
+		Logger.getLogger(App.class).debug("Starting...");
 
 		APIClientConnection conn = null;
+		DBManager dbManager = null;
 		try 
 		{
 			Properties props = System.getProperties();
@@ -69,10 +65,13 @@ public class App
 				Logger.getLogger(App.class).error("usage: -Dpassword=xxx");
 				System.exit(0);
 			}
+			
+			dbManager = DBManager.getInstance();
+			dbManager.start();
 
 			conn = getBFConnection();
 			SonarOverTime sot = new SonarOverTime();
-//			sot.listProjects(conn);
+////			sot.listProjects(conn);
 			sot.checkBundles(conn);
 
 		} 
@@ -83,6 +82,10 @@ public class App
 		finally 
 		{
 			closeConn(conn);
+			if(null != dbManager)
+			{
+				dbManager.stop();
+			}
 		}
     }
 }

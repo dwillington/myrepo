@@ -1,1 +1,0 @@
-java -cp "C:\Users\ashrafa\.m2\repository\org\tiaacref\ad\rbf-services-client-java\1.0\rbf-services-client-java-1.0.jar;target/buildforge-1.0-SNAPSHOT.jar" "org.tiaacref.ad.App"

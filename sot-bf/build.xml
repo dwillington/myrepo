@@ -3,6 +3,7 @@
 
   <property name="username" value="ashrafa" />
   <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
+  <property name="sonar.runner" value="c:/sonar-runner-2.3.local/bin/sonar-runner   " />
 
   <target name="prerequisites">
     <fail unless="password">You forgot to password!</fail>
@@ -13,42 +14,44 @@
     <fail unless="sot.PROJ_DIR">You forgot to sot.PROJ_DIR!</fail>
     <fail unless="sot.project.key">You forgot to sot.project.key!</fail>
     <echo>
-    sot.parent.bundle=${sot.parent.bundle}
-    sot.project.dir=${sot.project.dir}
-    sot.project.name.spaces=${sot.project.name.spaces}
-    sot.project.name=${sot.project.name}
-    sot.PROJ_DIR=${sot.PROJ_DIR}
-    sot.project.key=${sot.project.key}
+      sot.parent.bundle=${sot.parent.bundle}
+      sot.project.dir=${sot.project.dir}
+      sot.project.name.spaces=${sot.project.name.spaces}
+      sot.project.name=${sot.project.name}
+      sot.PROJ_DIR=${sot.PROJ_DIR}
+      sot.project.key=${sot.project.key}
     </echo>
     <property name="sonar-runner.working.dir" value="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.project.name.spaces}/${sot.project.name}" />
   </target>
 
   <target name="build" depends="prerequisites">
+    <sshexec host="${host}" username="${username}" password="${password}" command="tar -cf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
 <!--
-    <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} -name *.properties | tar -cf /tmp/${sot.project.name}.tgz -T -" />
-<sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} -name *.xml | tar -cf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
+    <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} \( -name *.*.properties -o -name *.java \) | tar -cf /tmp/${sot.project.name}.tgz -T -" />
 http://stackoverflow.com/questions/18731603/how-to-tar-certain-file-types-in-all-subdirectories
+http://alvinalexander.com/blog/post/linux-unix/an-example-of-use-unix-linux-find-command-locate-files-with-dif
 find /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591 -name *.xml | tar -cf /tmp/Unified_Desktop_My_BoB_2.8.tgz /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591
+
+-->
     <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="C:/Temp"/>
     <untar src="C:/Temp/${sot.project.name}.tgz" dest="C:/Temp" />
     <move todir="${sonar-runner.working.dir}">
-      <filedir="C:/Temp/${sot.project.dir}/${sot.PROJ_DIR}/"/>
+      <fileset dir="C:/Temp/${sot.project.dir}/${sot.PROJ_DIR}" />
     </move>
--->
 
-  <fail message="${sonar-runner.working.dir}/sonar-project.properties DOES NOT EXIST">
-    <condition>
-      <not>
-        <available file="${sonar-runner.working.dir}/sonar-project.properties" />
-      </not>
-    </condition>
-  </fail>
-  <replaceregexp file="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.project.name.spaces}/${sot.project.name}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
+    <fail message="${sonar-runner.working.dir}/sonar-project.properties DOES NOT EXIST">
+      <condition>
+        <not>
+          <available file="${sonar-runner.working.dir}/sonar-project.properties" />
+        </not>
+      </condition>
+    </fail>
+    <replaceregexp file="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.project.name.spaces}/${sot.project.name}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
   </target>
 
   <target name="sonar-runner" depends="prerequisites">
     <exec dir="${sonar-runner.working.dir}" executable="cmd.exe" failonerror="true">
-      <arg line="/c c:/sonar-runner-2.3/bin/sonar-runner"/>
+      <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
     </exec>
 <!--
 -->

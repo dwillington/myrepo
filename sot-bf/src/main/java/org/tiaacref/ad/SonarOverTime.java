@@ -62,11 +62,15 @@ public class SonarOverTime
 	{
 		try
 		{
-			Logger.getLogger(SonarOverTime.class).debug("staging project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS"));
+//			Logger.getLogger(SonarOverTime.class).debug("staging project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS"));
             int exitValue = runAnt(sotProject, "");
 			if(exitValue != 0)
 			{
 				Logger.getLogger(SonarOverTime.class).error("staging project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " failed");
+			}
+			else
+			{
+				sotProject.staged = true;
 			}
 		}
 	    catch(Exception e)
@@ -334,7 +338,7 @@ public class SonarOverTime
 	{
         try
         {
-        	String bundles[] = BundleManager.getBundles();
+        	String bundles[] = DBManager.getInstance().getBundles();
         	if(null != bundles)
         	{
         		for(int i=0; i<bundles.length; i++)
@@ -346,6 +350,7 @@ public class SonarOverTime
         				SOTProjectData projectDatas[] = new SOTProjectData[bundleFolders.length];
 
         				long lastScanTime =  BundleManager.getLastScanTime(bundles[i]);
+
         				boolean scanBundle = false;
 	        			for(int j=0; j<bundleFolders.length; j++)
 	        			{
@@ -368,11 +373,17 @@ public class SonarOverTime
 	        				// scan bundle: scan individual bundle folders + scan parent bundle
 		        			for(int j=0; j<bundleFolders.length; j++)
 		        			{
-		        				scanBundle(projectDatas[j]);
+		        				if(projectDatas[j].staged)
+		        				{
+		        					scanBundle(projectDatas[j]);
+		        				}
 		        			}
 	        			}
 	        			
 	        			// scan parent bundle
+
+	        			// set last scan time to now
+	        			//BundleManager.setLastScanTime(bundles[i]);
         			}
         			else
         			{
