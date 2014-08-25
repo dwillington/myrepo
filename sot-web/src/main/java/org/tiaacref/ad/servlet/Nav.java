@@ -27,7 +27,7 @@ public class Nav extends HttpServlet {
 				if(action.equals("create"))
 				{
 					SonarOverTime sot = new SonarOverTime();
-					String projects[] = sot.getAllUniqueProjects(App.getBFConnection());
+					String projects[] = null;
 					if(null == projects)
 					{
 				    	Logger.getLogger(Nav.class).error("projects is null!");

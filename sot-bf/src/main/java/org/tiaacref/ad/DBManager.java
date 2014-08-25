@@ -104,5 +104,41 @@ public class DBManager
 		return retValue.toArray(new String[0]);
 	}
 	
+	public String[] getProjectsFromBundle(String bundle)
+	{
+       	ArrayList<String> retValue = new ArrayList<String>();
+		Connection conn = null;
+		try
+		{
+			Class.forName("org.h2.Driver");
+	        conn = getConnection();
+	        Statement stmt = conn.createStatement();
+	        String sql = "SELECT NAME FROM BUNDLES";
+	        ResultSet rs = stmt.executeQuery(sql);
 
+	        while(rs.next())
+	        {
+	           String name = rs.getString("NAME");
+	           retValue.add(name);
+	        }
+		}
+	    catch(Exception e)
+	    {
+	    	Logger.getLogger(DBManager.class).error("", e);
+	    }
+        finally
+        {
+        	try 
+        	{
+				DbUtils.close(conn);
+			}
+        	catch (SQLException e) 
+        	{
+    	    	Logger.getLogger(DBManager.class).error("", e);
+			}
+        }
+		return retValue.toArray(new String[0]);
+	}
+
+	
 }

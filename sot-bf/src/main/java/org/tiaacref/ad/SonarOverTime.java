@@ -338,7 +338,7 @@ public class SonarOverTime
 	{
         try
         {
-        	String bundles[] = DBManager.getInstance().getBundles();
+        	String bundles[] = BundleManager.getBundles();
         	if(null != bundles)
         	{
         		for(int i=0; i<bundles.length; i++)
