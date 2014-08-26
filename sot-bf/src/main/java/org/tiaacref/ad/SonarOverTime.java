@@ -66,11 +66,11 @@ public class SonarOverTime
 			Logger.getLogger(SonarOverTime.class).debug("staging project " + "/Temp" + sotProject.bfVars.get("BF_ROOT"));
 			
 			File f = new File("/Temp" + sotProject.bfVars.get("BF_ROOT"));
-			if (f.exists() && f.isDirectory()) 
-			{
-				Logger.getLogger(SonarOverTime.class).error(sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " already staged, skipping...");
-			}
-			else
+//			if (f.exists() && f.isDirectory()) 
+//			{
+//				Logger.getLogger(SonarOverTime.class).error(sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " already staged, skipping...");
+//			}
+//			else
 			{				
 				int exitValue = runAnt(sotProject, "");
 				if(exitValue != 0)

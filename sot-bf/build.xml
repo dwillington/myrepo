@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="buildforge" default="build" basedir=".">
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
   <property name="username" value="ashrafa" />
   <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
   <property name="sonar.runner" value="C:/sonar-runner-2.3.local/bin/sonar-runner" />
   <property name="zip.dir" value="/Temp/Zips" />
+  <property name="ignore-failed-read" value="--ignore-failed-read" />
 
   <target name="prerequisites">
     <fail unless="password">You forgot to password!</fail>
@@ -26,16 +28,28 @@
   </target>
 
   <target name="build" depends="prerequisites">
-    <sshexec host="${host}" username="${username}" password="${password}" command="tar --ignore-failed-read -czf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
-    <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="${zip.dir}"/>
-    <untar compression="gzip" src="${zip.dir}/${sot.project.name}.tgz" dest="/Temp" />
+    <if>
+      <available file="${zip.dir}/${sot.project.name}.tgz"/>
+      <then>
+        <echo>
+          ${zip.dir}/${sot.project.name}.tgz exists, not fetching from remote...
+        </echo>
+      </then>
+      <else>
+        <sshexec host="${host}" username="${username}" password="${password}" command="tar ${ignore-failed-read} -kczf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
+        <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="${zip.dir}"/>
+      </else>
+    </if>
+
+    <untar compression="none" src="${zip.dir}/${sot.project.name}.tgz" dest="/Temp" />
 <!--
+tar ignore-failed-read -kczf /tmp/Unified_Desktop_Transactions_5.0.tgz /bfbuilds/Unified_Desktop_Transactions_5.0/5.0.0.1304
 -->
     <move todir="/Temp/sot_workspace/bundles/${sot.parent.bundle}">
       <fileset dir="/Temp/${sot.project.dir}" >
-        <exclude name=".jazz5"/>
-        <exclude name="workspace"/>
-        <exclude name="ramassets.txt"/>
+        <exclude name="**/.jazz5/"/>
+        <exclude name="**/workspace/"/>
+        <exclude name="**/ramassets.txt"/>
       </fileset>
     </move>
     <fail message="${sonar-runner.working.dir}/sonar-project.properties DOES NOT EXIST">

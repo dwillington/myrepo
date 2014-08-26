@@ -85,9 +85,9 @@ public class BundleManager
 		String moduleNames = "";
 		for(int j=0; j<projectDatas.length; j++)
 		{
-			moduleNames += projectDatas[j].bfVars.get("PROJ_DIR") + ",";			
+			moduleNames += projectDatas[j].bfVars.get("PROJ_DIR") + ",";
 		}
-		setPropertyValue("sonar.modules", moduleNames.substring(moduleNames.length()-1), BUNDLES_DIR + "/" + bundle + "/sonar-project.properties");
+		setPropertyValue("sonar.modules", moduleNames.substring(0, moduleNames.length()-1), BUNDLES_DIR + "/" + bundle + "/sonar-project.properties");
 	}
 
 	public static String getProjectKey(String project) throws IOException
