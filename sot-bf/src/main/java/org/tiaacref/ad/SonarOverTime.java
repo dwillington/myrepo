@@ -1,5 +1,6 @@
 package org.tiaacref.ad;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.lang.StringUtils;
@@ -62,15 +63,24 @@ public class SonarOverTime
 	{
 		try
 		{
-//			Logger.getLogger(SonarOverTime.class).debug("staging project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS"));
-            int exitValue = runAnt(sotProject, "");
-			if(exitValue != 0)
+			Logger.getLogger(SonarOverTime.class).debug("staging project " + "/Temp" + sotProject.bfVars.get("BF_ROOT"));
+			
+			File f = new File("/Temp" + sotProject.bfVars.get("BF_ROOT"));
+			if (f.exists() && f.isDirectory()) 
 			{
-				Logger.getLogger(SonarOverTime.class).error("staging project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " failed");
+				Logger.getLogger(SonarOverTime.class).error(sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " already staged, skipping...");
 			}
 			else
-			{
-				sotProject.staged = true;
+			{				
+				int exitValue = runAnt(sotProject, "");
+				if(exitValue != 0)
+				{
+					Logger.getLogger(SonarOverTime.class).error("staging project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " failed");
+				}
+				else
+				{
+					sotProject.staged = true;
+				}
 			}
 		}
 	    catch(Exception e)
@@ -325,7 +335,7 @@ public class SonarOverTime
         }
         return retValue;
 	}
-
+	
 	/**
 	 * get bundle folders
 	 *   for each bundle folder, get all bundle projects
@@ -344,19 +354,18 @@ public class SonarOverTime
         		for(int i=0; i<bundles.length; i++)
         		{
     	        	Logger.getLogger(SonarOverTime.class).debug("Working on bundle " + bundles[i]);        		
-        			String bundleFolders[] = BundleManager.getProjectsFromBundleFolder(bundles[i]);
+        			String bundleFolders[] = BundleManager.getProjectsFromBundle(bundles[i]);
         			if(null != bundleFolders)
         			{
         				SOTProjectData projectDatas[] = new SOTProjectData[bundleFolders.length];
 
         				long lastScanTime =  BundleManager.getLastScanTime(bundles[i]);
-
+        				
         				boolean scanBundle = false;
 	        			for(int j=0; j<bundleFolders.length; j++)
 	        			{
 	        				SOTProjectData projectData = getProjectData(conn, bundles[i], bundleFolders[j], lastScanTime);
 	        				projectDatas[j] = projectData;
-
 	        				// if bundle project should be built
 	        				if(projectData.isNewBuild(lastScanTime))
 	        				{
@@ -364,8 +373,9 @@ public class SonarOverTime
 	        					stageProject(projectData);
 	        				}
 	        			}
-	        			
-	        			if(scanBundle)
+	        			BundleManager.setModuleNames(bundles[i], projectDatas);
+
+        				if(scanBundle)
 	        			{
 	        				// assume all projects have has been staged including their sonar-project.properties
 	        				// if no recent build was found, the last build is already staged ???

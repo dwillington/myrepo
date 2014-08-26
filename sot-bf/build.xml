@@ -21,24 +21,22 @@
       sot.PROJ_DIR=${sot.PROJ_DIR}
       sot.project.key=${sot.project.key}
     </echo>
-    <property name="sonar-runner.working.dir" value="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.project.name.spaces}/${sot.project.name}" />
+    <property name="sonar-runner.working.dir" value="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.PROJ_DIR}" /><!-- ${sot.project.name.spaces}/${sot.project.name} -->
   </target>
 
   <target name="build" depends="prerequisites">
-    <sshexec host="${host}" username="${username}" password="${password}" command="tar -cf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
-<!--
-    <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} \( -name *.*.properties -o -name *.java \) | tar -cf /tmp/${sot.project.name}.tgz -T -" />
-http://stackoverflow.com/questions/18731603/how-to-tar-certain-file-types-in-all-subdirectories
-http://alvinalexander.com/blog/post/linux-unix/an-example-of-use-unix-linux-find-command-locate-files-with-dif
-find /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591 -name *.xml | tar -cf /tmp/Unified_Desktop_My_BoB_2.8.tgz /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591
-
--->
+    <sshexec host="${host}" username="${username}" password="${password}" command="tar --ignore-failed-read -cf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
     <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="C:/Temp"/>
     <untar src="C:/Temp/${sot.project.name}.tgz" dest="C:/Temp" />
-    <move todir="${sonar-runner.working.dir}">
-      <fileset dir="C:/Temp/${sot.project.dir}/${sot.PROJ_DIR}" />
+<!--
+-->
+    <move todir="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}">
+      <fileset dir="C:/Temp/${sot.project.dir}" >
+        <exclude name=".jazz5"/>
+        <exclude name="workspace"/>
+        <exclude name="ramassets.txt"/>
+      </fileset>
     </move>
-
     <fail message="${sonar-runner.working.dir}/sonar-project.properties DOES NOT EXIST">
       <condition>
         <not>
@@ -61,6 +59,13 @@ find /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591 -name *.xml | tar -cf /tmp/U
 http://stackoverflow.com/questions/13079002/knownhosts-for-ant-scp-and-sshexec-tasks
 c:\users\ashrafa\.ssh\known_hosts
 ashrafa@chapdc3utrat09.ops.tiaa-cref.org
+
+
+    <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} \( -name *.*.properties -o -name *.java \) | tar -cf /tmp/${sot.project.name}.tgz -T -" />
+http://stackoverflow.com/questions/18731603/how-to-tar-certain-file-types-in-all-subdirectories
+http://alvinalexander.com/blog/post/linux-unix/an-example-of-use-unix-linux-find-command-locate-files-with-dif
+find /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591 -name *.xml | tar -cf /tmp/Unified_Desktop_My_BoB_2.8.tgz /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591
+
 -->
 
 </project>

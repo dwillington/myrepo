@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -15,66 +17,77 @@ import org.apache.log4j.Logger;
 public class BundleManager 
 {
 
-	public static String BUNDLES_DIR = "C:/Temp/sot_workspace/bundles";
-	public static String BUNDLE_KEYS_FILE = BUNDLES_DIR + "/keys.properties";
+	public static String BUNDLES_DIR = "/Temp/sot_workspace/bundles";
+	public static String BUNDLE_KEYS_FILE = "src/main/resources/keys.properties";
+	public static String BUNDLES_FILE = "src/main/resources/bundles.properties";
 
 	public static String[] getBundles()
 	{
-		return getFoldersFrom(BUNDLES_DIR);
-	}
-
-	public static String[] getProjectsFromBundleFolder(String bundle)
-	{
-		return getFoldersFrom(BUNDLES_DIR + "/" + bundle);
-	}
-
-	public static String[] getFoldersFrom(String folder)
-	{
-		String retValue [] = null;
-
-		File file = null;
+//		return getFoldersFrom(BUNDLES_DIR);
+		String[] retValue = null;
 		try
         {
-        	ArrayList<String> folders = new ArrayList<String>();
-        	file = new File(folder);        	
-            // Reading directory contents
-            File[] files = file.listFiles();
-        	if(null != files)
-        	{
-	            for (int i = 0; i < files.length; i++) 
-	            {
-	            	if(files[i].isDirectory())
-	            	{
-		            	folders.add(files[i].getName());
-//		    	    	Logger.getLogger(BundleManager.class).debug(files[i].getName());
-	            	}
-	            }
-        	}
-        	if(folders.size() > 0)
-        	{
-        		retValue = folders.toArray(new String[0]);
-        	}
+			retValue = getPropertyNames(BUNDLES_FILE);
         }
 	    catch(Exception e)
 	    {
 	    	Logger.getLogger(BundleManager.class).error("", e);
 	    }
-        finally
+		return retValue;
+	}
+
+	public static String[] getProjectsFromBundle(String bundle)
+	{
+//		return getFoldersFrom(BUNDLES_DIR + "/" + bundle);
+		ArrayList<String> projectsList = new ArrayList<String>();
+		try
         {
+			String projects = getPropertyValue(bundle, BUNDLES_FILE);
+			String split[] = projects.split(",");
+			if (null != split)
+			{
+				for(int i=0; i<split.length; i++)
+				{
+					projectsList.add(StringUtils.strip(split[i]));
+				}
+			}
+			else
+			{
+		    	Logger.getLogger(BundleManager.class).error("error");				
+			}
         }
-        return retValue;
+	    catch(Exception e)
+	    {
+	    	Logger.getLogger(BundleManager.class).error("", e);
+	    }
+		return projectsList.toArray(new String[0]);
 	}
 
 	public static long getLastScanTime(String bundle) throws IOException
 	{
-    	String lastScanTime = getPropertyValue("lastScanTime", BUNDLES_DIR + "/" + bundle + "/bundle.properties");
-    	return Long.valueOf(lastScanTime).longValue();
+		long retValue = 0;
+    	String lastScanTime = getPropertyValue(bundle + ".lastScanTime", BUNDLES_FILE);
+    	if(StringUtils.isNotBlank(lastScanTime))
+    	{
+    		retValue = Long.valueOf(lastScanTime).longValue();
+    	}
+    	return retValue;
 	}
 
 	public static void setLastScanTime(String bundle) throws IOException
 	{
 		String lastScanTime = String.valueOf(System.currentTimeMillis()/1000);
-    	setPropertyValue("lastScanTime", lastScanTime, BUNDLES_DIR + "/" + bundle + "/bundle.properties");
+    	setPropertyValue(bundle + ".lastScanTime", lastScanTime, BUNDLES_FILE);
+	}
+	
+	public static void setModuleNames(String bundle, SOTProjectData projectDatas[]) throws IOException
+	{
+		String moduleNames = "";
+		for(int j=0; j<projectDatas.length; j++)
+		{
+			moduleNames += projectDatas[j].bfVars.get("PROJ_DIR") + ",";			
+		}
+		setPropertyValue("sonar.modules", moduleNames.substring(moduleNames.length()-1), BUNDLES_DIR + "/" + bundle + "/sonar-project.properties");
 	}
 
 	public static String getProjectKey(String project) throws IOException
@@ -84,7 +97,7 @@ public class BundleManager
 		// can also use file:
 		//   read file for key
 		//     if not found, create key, add entry
-		retValue = getPropertyValue(project, BUNDLES_DIR + "/keys.properties");
+		retValue = getPropertyValue(project, BUNDLE_KEYS_FILE);
 		if(StringUtils.isBlank(retValue))
 		{
 			String uuid = java.util.UUID.randomUUID().toString();
@@ -107,21 +120,30 @@ public class BundleManager
 		} 
 		finally 
 		{
-			if (input != null) 
-			{
-				try 
-				{
-					input.close();
-				} 
-				catch (IOException e) 
-				{
-			    	Logger.getLogger(BundleManager.class).error("", e);
-				}
-			}
+			closeStream(input);
 		}
 		return retValue;
 	}
 
+	public static String[] getPropertyNames(String fileName) throws IOException
+	{
+		Set<String> retValue = null;
+		Properties prop = new Properties();
+		InputStream input = null;	 
+		try 
+		{
+			input = new FileInputStream(fileName);
+			prop.load(input);
+	 		retValue = prop.stringPropertyNames();	 
+		} 
+		finally 
+		{
+			closeStream(input);
+		}
+		return retValue.toArray(new String[0]);
+	}
+
+	
 	/**
 	 * http://stackoverflow.com/questions/7601259/how-do-i-edit-a-properties-file-without-trashing-the-rest-of-it
 	 */
@@ -143,29 +165,76 @@ public class BundleManager
 		} 
 		finally 
 		{
-			if (output != null) 
-			{
-				try 
-				{
-					output.close();
-				} 
-				catch (IOException e) 
-				{
-			    	Logger.getLogger(BundleManager.class).error("", e);
-				}
-			}
-			if (input != null) 
-			{
-				try 
-				{
-					input.close();
-				} 
-				catch (IOException e) 
-				{
-			    	Logger.getLogger(BundleManager.class).error("", e);
-				}
-			}	 
+			closeStream(output);
+			closeStream(input);
 		}
 	}
+	
+	public static void closeStream(InputStream input)
+	{
+		if (input != null) 
+		{
+			try 
+			{
+				input.close();
+			} 
+			catch (IOException e) 
+			{
+		    	Logger.getLogger(BundleManager.class).error("", e);
+			}
+		}		
+	}
+
+	public static void closeStream(OutputStream input)
+	{
+		if (input != null) 
+		{
+			try 
+			{
+				input.close();
+			} 
+			catch (IOException e) 
+			{
+		    	Logger.getLogger(BundleManager.class).error("", e);
+			}
+		}		
+	}
+
+//	public static String[] getFoldersFrom(String folder)
+//	{
+//		String retValue [] = null;
+//
+//		File file = null;
+//		try
+//        {
+//        	ArrayList<String> folders = new ArrayList<String>();
+//        	file = new File(folder);        	
+//            // Reading directory contents
+//            File[] files = file.listFiles();
+//        	if(null != files)
+//        	{
+//	            for (int i = 0; i < files.length; i++) 
+//	            {
+//	            	if(files[i].isDirectory())
+//	            	{
+//		            	folders.add(files[i].getName());
+//		    	    	Logger.getLogger(BundleManager.class).debug(files[i].getName());
+//	            	}
+//	            }
+//        	}
+//        	if(folders.size() > 0)
+//        	{
+//        		retValue = folders.toArray(new String[0]);
+//        	}
+//        }
+//	    catch(Exception e)
+//	    {
+//	    	Logger.getLogger(BundleManager.class).error("", e);
+//	    }
+//        finally
+//        {
+//        }
+//        return retValue;
+//	}
 
 }

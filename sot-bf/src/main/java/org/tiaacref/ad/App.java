@@ -66,8 +66,8 @@ public class App
 				System.exit(0);
 			}
 			
-			dbManager = DBManager.getInstance();
-			dbManager.start();
+//			dbManager = DBManager.getInstance();
+//			dbManager.start();
 
 			conn = getBFConnection();
 			SonarOverTime sot = new SonarOverTime();
@@ -82,10 +82,10 @@ public class App
 		finally 
 		{
 			closeConn(conn);
-			if(null != dbManager)
-			{
-				dbManager.stop();
-			}
+//			if(null != dbManager)
+//			{
+//				dbManager.stop();
+//			}
 		}
     }
 }
