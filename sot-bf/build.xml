@@ -3,7 +3,7 @@
 
   <property name="username" value="ashrafa" />
   <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
-  <property name="sonar.runner" value="/sonar-runner-2.3.local/bin/sonar-runner" />
+  <property name="sonar.runner" value="C:/sonar-runner-2.3.local/bin/sonar-runner" />
   <property name="zip.dir" value="/Temp/Zips" />
 
   <target name="prerequisites">
