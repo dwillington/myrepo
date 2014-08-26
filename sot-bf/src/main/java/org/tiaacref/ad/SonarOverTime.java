@@ -383,7 +383,7 @@ public class SonarOverTime
 	        				// scan bundle: scan individual bundle folders + scan parent bundle
 		        			for(int j=0; j<bundleFolders.length; j++)
 		        			{
-		        				if(projectDatas[j].staged)
+		        				//if(projectDatas[j].staged)
 		        				{
 		        					scanBundle(projectDatas[j]);
 		        				}

@@ -3,7 +3,8 @@
 
   <property name="username" value="ashrafa" />
   <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
-  <property name="sonar.runner" value="c:/sonar-runner-2.3.local/bin/sonar-runner   " />
+  <property name="sonar.runner" value="/sonar-runner-2.3.local/bin/sonar-runner" />
+  <property name="zip.dir" value="/Temp/Zips" />
 
   <target name="prerequisites">
     <fail unless="password">You forgot to password!</fail>
@@ -21,17 +22,17 @@
       sot.PROJ_DIR=${sot.PROJ_DIR}
       sot.project.key=${sot.project.key}
     </echo>
-    <property name="sonar-runner.working.dir" value="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.PROJ_DIR}" /><!-- ${sot.project.name.spaces}/${sot.project.name} -->
+    <property name="sonar-runner.working.dir" value="/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.PROJ_DIR}" /><!-- ${sot.project.name.spaces}/${sot.project.name} -->
   </target>
 
   <target name="build" depends="prerequisites">
-    <sshexec host="${host}" username="${username}" password="${password}" command="tar --ignore-failed-read -cf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
-    <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="C:/Temp"/>
-    <untar src="C:/Temp/${sot.project.name}.tgz" dest="C:/Temp" />
+    <sshexec host="${host}" username="${username}" password="${password}" command="tar --ignore-failed-read -czf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
+    <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="${zip.dir}"/>
+    <untar compression="gzip" src="${zip.dir}/${sot.project.name}.tgz" dest="/Temp" />
 <!--
 -->
-    <move todir="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}">
-      <fileset dir="C:/Temp/${sot.project.dir}" >
+    <move todir="/Temp/sot_workspace/bundles/${sot.parent.bundle}">
+      <fileset dir="/Temp/${sot.project.dir}" >
         <exclude name=".jazz5"/>
         <exclude name="workspace"/>
         <exclude name="ramassets.txt"/>
@@ -44,7 +45,7 @@
         </not>
       </condition>
     </fail>
-    <replaceregexp file="C:/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.project.name.spaces}/${sot.project.name}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
+    <replaceregexp file="${sonar-runner.working.dir}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
   </target>
 
   <target name="sonar-runner" depends="prerequisites">

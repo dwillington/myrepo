@@ -46,8 +46,8 @@ public class BFProjectsSingleton
         {
             if(allUniqueProjects == null) 
             {
-           	ArrayList<String> uniqueProjectsList = new ArrayList<String>();
-           	ArrayList<String> allProjectsList = new ArrayList<String>();
+	           	ArrayList<String> uniqueProjectsList = new ArrayList<String>();
+	           	ArrayList<String> allProjectsList = new ArrayList<String>();
                try
                {
                	String projectName = null;
@@ -76,13 +76,10 @@ public class BFProjectsSingleton
        	        allProjects = sortAllProjects(allProjectsList);
 
                }
-       	    catch(Exception e)
-       	    {
-       	    	Logger.getLogger(BFProjectsSingleton.class).error("", e);
-       	    }
-               finally
-               {
-               }
+	       	    catch(Exception e)
+	       	    {
+	       	    	Logger.getLogger(BFProjectsSingleton.class).error("", e);
+	       	    }
             }
         }		
 	}
@@ -129,7 +126,7 @@ public class BFProjectsSingleton
 	 */
 	private static String[] sortAllProjects(ArrayList<String> allProjects)
 	{
-		Logger.getLogger(SonarOverTime.class).debug(allProjects.size());			
+		Logger.getLogger(SonarOverTime.class).debug("Sorting " + allProjects.size() + " projects");
 
 		String lastName = null;
 		int versionDigits = 0;
