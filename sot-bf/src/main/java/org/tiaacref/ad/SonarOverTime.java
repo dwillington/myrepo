@@ -96,24 +96,16 @@ public class SonarOverTime
 	 * what folder is the bundle in?
 	 * sonar-runner
 	 */
-	public void scanBundle(SOTProjectData sotProject)
+	public int scanBundle(SOTProjectData sotProject) throws IOException
 	{
-		try
-		{
-			Logger.getLogger(SonarOverTime.class).debug("scanning project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS"));            
-            int exitValue = runAnt(sotProject, "sonar-runner");
-			if(exitValue != 0)
-			{
-				Logger.getLogger(SonarOverTime.class).error("scanning project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " failed");
-			}
-		}
-	    catch(Exception e)
-	    {
-	    	Logger.getLogger(SonarOverTime.class).error("", e);
-	    }
-        finally
-        {
-        }		
+		Logger.getLogger(SonarOverTime.class).debug("scanning project " + sotProject.bfVars.get("BF_PROJECTNAME_PHYS"));            
+        return runAnt(sotProject, "sonar-runner");
+	}
+
+	public int scanBundle(String bundle)
+	{
+		Logger.getLogger(SonarOverTime.class).debug("scanning bundle " + bundle);
+		return runCommnad(ANT_COMMAND_PREFIX + " -Dsot.parent.bundle=\"" + bundle + "\"" + " sonar-runner-bundle");
 	}
 
 	/**
@@ -367,7 +359,11 @@ public class SonarOverTime
 	        				SOTProjectData projectData = getProjectData(conn, bundles[i], bundleFolders[j], lastScanTime);
 	        				projectDatas[j] = projectData;
 	        				// if bundle project should be built
-	        				if(projectData.isNewBuild(lastScanTime))
+	        				if(projectDatas[j].startTime == 0)
+	        				{
+	            				Logger.getLogger(SonarOverTime.class).warn(projectDatas[j].name + " will not be staged as its startTime=0, and no build could be fetched...");
+	        				}
+	        				else if(projectData.isNewBuild(lastScanTime))
 	        				{
 	        					scanBundle = true;
 	        					stageProject(projectData);
@@ -381,19 +377,31 @@ public class SonarOverTime
 	        				// if no recent build was found, the last build is already staged ???
 	        				// stage parent bundle sonar-project.properties
 	        				// scan bundle: scan individual bundle folders + scan parent bundle
-		        			for(int j=0; j<bundleFolders.length; j++)
-		        			{
-		        				//if(projectDatas[j].staged)
-		        				{
-		        					scanBundle(projectDatas[j]);
-		        				}
-		        			}
+//		        			for(int j=0; j<bundleFolders.length; j++)
+//		        			{
+//		        				if(projectDatas[j].startTime == 0)
+//		        				{
+//		            				Logger.getLogger(SonarOverTime.class).warn(projectDatas[j].name + " will not be scanned as its startTime=0");	        					
+//		        				}
+//		        				//if(projectDatas[j].staged)
+//		        				else
+//		        				{
+//		        					scanBundle(projectDatas[j]);
+//		        				}
+//		        			}
+
+    	        			// scan parent bundle
+        					if(scanBundle(bundles[i]) != 0)
+        					{
+                				Logger.getLogger(SonarOverTime.class).warn("scan failed for bundle " + bundles[i]);        						
+        					}
+        					else
+        					{
+            					// set last scan time to now
+    		        			BundleManager.setLastScanTime(bundles[i]);        						
+        					}
 	        			}
 	        			
-	        			// scan parent bundle
-
-	        			// set last scan time to now
-	        			BundleManager.setLastScanTime(bundles[i]);
         			}
         			else
         			{

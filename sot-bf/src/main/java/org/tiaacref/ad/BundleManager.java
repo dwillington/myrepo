@@ -24,16 +24,25 @@ public class BundleManager
 	public static String[] getBundles()
 	{
 //		return getFoldersFrom(BUNDLES_DIR);
+		ArrayList<String> list = new ArrayList<String>();
 		String[] retValue = null;
 		try
         {
 			retValue = getPropertyNames(BUNDLES_FILE);
+			for(int i=0; i<retValue.length; i++)
+			{
+				// filter out values here
+				if(!retValue[i].contains("lastScanTime"))
+				{
+					list.add(retValue[i]);
+				}
+			}
         }
 	    catch(Exception e)
 	    {
 	    	Logger.getLogger(BundleManager.class).error("", e);
 	    }
-		return retValue;
+		return list.toArray(new String[0]);
 	}
 
 	public static String[] getProjectsFromBundle(String bundle)
@@ -85,7 +94,10 @@ public class BundleManager
 		String moduleNames = "";
 		for(int j=0; j<projectDatas.length; j++)
 		{
-			moduleNames += projectDatas[j].bfVars.get("PROJ_DIR") + ",";
+			if(projectDatas[j].startTime != 0)
+			{
+				moduleNames += projectDatas[j].bfVars.get("PROJ_DIR") + ",";
+			}
 		}
 		setPropertyValue("sonar.modules", moduleNames.substring(0, moduleNames.length()-1), BUNDLES_DIR + "/" + bundle + "/sonar-project.properties");
 	}

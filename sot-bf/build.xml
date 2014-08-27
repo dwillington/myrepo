@@ -68,7 +68,7 @@ tar ignore-failed-read -kczf /tmp/Unified_Desktop_Transactions_5.0.tgz /bfbuilds
     </exec>
   </target>
 
-  <target name="sonar-runner-bundle" depends="prerequisites">
+  <target name="sonar-runner-bundle">
     <exec dir="/Temp/sot_workspace/bundles/${sot.parent.bundle}" executable="cmd.exe" failonerror="true">
       <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
     </exec>
