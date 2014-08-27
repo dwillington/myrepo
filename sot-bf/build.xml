@@ -44,14 +44,14 @@
           command="if [ ! -f /tmp/${sot.project.tgz.name}.tgz ]; then tar ${ignore-failed-read} -czf /tmp/${sot.project.tgz.name}.tgz ${sot.project.dir} ; fi" />
         <scp file="${username}:${password}@${host}:/tmp/${sot.project.tgz.name}.tgz" todir="${zip.dir}"/>
         <untar compression="gzip" src="${zip.dir}/${sot.project.tgz.name}.tgz" dest="/Temp" />
+        <move todir="/Temp/sot_workspace/bundles/${sot.parent.bundle}">
+          <fileset dir="/Temp/${sot.project.dir}" >
+            <exclude name="**/.jazz5/"/>
+            <exclude name="**/workspace/"/>
+            <exclude name="**/ramassets.txt"/>
+          </fileset>
+        </move>
       </else>
-      <move todir="/Temp/sot_workspace/bundles/${sot.parent.bundle}">
-        <fileset dir="/Temp/${sot.project.dir}" >
-          <exclude name="**/.jazz5/"/>
-          <exclude name="**/workspace/"/>
-          <exclude name="**/ramassets.txt"/>
-        </fileset>
-      </move>
     </if>
 <!--
 if [ ! -f /tmp/_bfbuilds_Unified_Desktop_Transactions_5.0_5.0.0.1308.tgz ]; then tar ignore-failed-read -czf /tmp/_bfbuilds_Unified_Desktop_Transactions_5.0_5.0.0.1308.tgz /bfbuilds/Unified_Desktop_Transactions_5.0/5.0.0.1308 ; fi
