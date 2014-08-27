@@ -314,7 +314,7 @@ public class SonarOverTime
 	        	if(b.getResult() == BuildDBO.Result.PASSED)
 	        	{
 	        		retValue = b;
-//		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag());
+		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult());
 	        	}
 	        }
         }
