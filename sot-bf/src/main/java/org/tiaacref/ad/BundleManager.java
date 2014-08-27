@@ -142,7 +142,6 @@ public class BundleManager
 		}
 		return retValue.toArray(new String[0]);
 	}
-
 	
 	/**
 	 * http://stackoverflow.com/questions/7601259/how-do-i-edit-a-properties-file-without-trashing-the-rest-of-it

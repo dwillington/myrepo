@@ -36,12 +36,12 @@
         </echo>
       </then>
       <else>
-        <sshexec host="${host}" username="${username}" password="${password}" command="tar ${ignore-failed-read} -kczf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
+        <sshexec host="${host}" username="${username}" password="${password}" command="tar ${ignore-failed-read} -czf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
         <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="${zip.dir}"/>
       </else>
     </if>
 
-    <untar compression="none" src="${zip.dir}/${sot.project.name}.tgz" dest="/Temp" />
+    <untar compression="gzip" src="${zip.dir}/${sot.project.name}.tgz" dest="/Temp" />
 <!--
 tar ignore-failed-read -kczf /tmp/Unified_Desktop_Transactions_5.0.tgz /bfbuilds/Unified_Desktop_Transactions_5.0/5.0.0.1304
 -->
@@ -66,15 +66,25 @@ tar ignore-failed-read -kczf /tmp/Unified_Desktop_Transactions_5.0.tgz /bfbuilds
     <exec dir="${sonar-runner.working.dir}" executable="cmd.exe" failonerror="true">
       <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
     </exec>
-<!--
--->
+  </target>
+
+  <target name="sonar-runner-bundle" depends="prerequisites">
+    <exec dir="/Temp/sot_workspace/bundles/${sot.parent.bundle}" executable="cmd.exe" failonerror="true">
+      <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
+    </exec>
+  </target>
+
+  <target name="clean">
+    <delete includeemptydirs="true">  
+      <fileset dir="/Temp/Zips" includes="**/*"/>  
+      <fileset dir="/Temp/bfbuilds" includes="**/*"/>  
+    </delete>
   </target>
 
 <!-- 
 http://stackoverflow.com/questions/13079002/knownhosts-for-ant-scp-and-sshexec-tasks
 c:\users\ashrafa\.ssh\known_hosts
 ashrafa@chapdc3utrat09.ops.tiaa-cref.org
-
 
     <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} \( -name *.*.properties -o -name *.java \) | tar -cf /tmp/${sot.project.name}.tgz -T -" />
 http://stackoverflow.com/questions/18731603/how-to-tar-certain-file-types-in-all-subdirectories

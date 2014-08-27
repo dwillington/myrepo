@@ -393,7 +393,7 @@ public class SonarOverTime
 	        			// scan parent bundle
 
 	        			// set last scan time to now
-	        			//BundleManager.setLastScanTime(bundles[i]);
+	        			BundleManager.setLastScanTime(bundles[i]);
         			}
         			else
         			{
