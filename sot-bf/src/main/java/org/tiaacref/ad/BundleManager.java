@@ -112,9 +112,9 @@ public class BundleManager
 		retValue = getPropertyValue(project, BUNDLE_KEYS_FILE);
 		if(StringUtils.isBlank(retValue))
 		{
-			String uuid = java.util.UUID.randomUUID().toString();
-	    	Logger.getLogger(BundleManager.class).debug("creating key=" + uuid + " for project=" + project);
-			setPropertyValue(project, uuid, BUNDLE_KEYS_FILE );
+			retValue = java.util.UUID.randomUUID().toString();
+	    	Logger.getLogger(BundleManager.class).debug("creating key=" + retValue + " for project=" + project);
+			setPropertyValue(project, retValue, BUNDLE_KEYS_FILE );
 		}
 		return retValue;
 	}

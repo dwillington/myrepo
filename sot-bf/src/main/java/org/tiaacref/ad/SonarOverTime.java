@@ -316,6 +316,10 @@ public class SonarOverTime
 	        		retValue = b;
 		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult());
 	        	}
+	        	else
+	        	{
+		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult() + " <-- IGNORE");	        		
+	        	}
 	        }
         }
 	    catch(Exception e)
