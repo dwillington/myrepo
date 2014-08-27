@@ -28,22 +28,27 @@
   </target>
 
   <target name="build" depends="prerequisites">
+    <propertyregex property="sot.project.tgz.name" input="${sot.project.dir}" regexp="/" replace="_" global="true" />
     <if>
-      <available file="${zip.dir}/${sot.project.name}.tgz"/>
+      <available file="${zip.dir}/${sot.project.tgz.name}.tgz"/>
       <then>
         <echo>
-          ${zip.dir}/${sot.project.name}.tgz exists, not fetching from remote...
+          ${zip.dir}/${sot.project.tgz.name}.tgz exists, not fetching from remote...
         </echo>
       </then>
       <else>
-        <sshexec host="${host}" username="${username}" password="${password}" command="tar ${ignore-failed-read} -czf /tmp/${sot.project.name}.tgz ${sot.project.dir}" />
-        <scp file="${username}:${password}@${host}:/tmp/${sot.project.name}.tgz" todir="${zip.dir}"/>
+        <echo>
+          creating ${sot.project.tgz.name}.tgz archive...
+        </echo>
+        <sshexec host="${host}" username="${username}" password="${password}" 
+          command="if [ ! -f /tmp/${sot.project.tgz.name}.tgz ]; then tar ${ignore-failed-read} -czf /tmp/${sot.project.tgz.name}.tgz ${sot.project.dir} ; fi" />
+        <scp file="${username}:${password}@${host}:/tmp/${sot.project.tgz.name}.tgz" todir="${zip.dir}"/>
       </else>
     </if>
 
-    <untar compression="gzip" src="${zip.dir}/${sot.project.name}.tgz" dest="/Temp" />
+    <untar compression="gzip" src="${zip.dir}/${sot.project.tgz.name}.tgz" dest="/Temp" />
 <!--
-tar ignore-failed-read -kczf /tmp/Unified_Desktop_Transactions_5.0.tgz /bfbuilds/Unified_Desktop_Transactions_5.0/5.0.0.1304
+if [ ! -f /tmp/_bfbuilds_Unified_Desktop_Transactions_5.0_5.0.0.1308.tgz ]; then tar ignore-failed-read -czf /tmp/_bfbuilds_Unified_Desktop_Transactions_5.0_5.0.0.1308.tgz /bfbuilds/Unified_Desktop_Transactions_5.0/5.0.0.1308 ; fi
 -->
     <move todir="/Temp/sot_workspace/bundles/${sot.parent.bundle}">
       <fileset dir="/Temp/${sot.project.dir}" >

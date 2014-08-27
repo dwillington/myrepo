@@ -33,9 +33,9 @@ public class SonarOverTime
 		retValue = getLatestProjectBuildData(conn, project);
 		retValue.parentBundle = bundleParent;
 		retValue.name = project;
-		Logger.getLogger(SonarOverTime.class).debug(retValue.bfVars.get("BF_PROJECTNAME_PHYS"));
-		Logger.getLogger(SonarOverTime.class).debug(retValue.bfVars.get("BF_ROOT"));
-		Logger.getLogger(SonarOverTime.class).debug(retValue.bfVars.get("BF_HOST"));
+//		Logger.getLogger(SonarOverTime.class).debug(retValue.bfVars.get("BF_PROJECTNAME_PHYS"));
+//		Logger.getLogger(SonarOverTime.class).debug(retValue.bfVars.get("BF_ROOT"));
+//		Logger.getLogger(SonarOverTime.class).debug(retValue.bfVars.get("BF_HOST"));
 
 		return retValue;
 	}
