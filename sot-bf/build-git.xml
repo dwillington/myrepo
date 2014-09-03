@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="git" default="build" basedir=".">
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+  <property name="username" value="ashrafa" />
+  <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
+  <property name="ignore-failed-read" value="--ignore-failed-read" />
+
+  <target name="build">
+    <fail unless="password">You forgot to password!</fail>
+    <sshexec host="${host}" username="${username}" password="${password}" 
+      command="cd /home/ashrafa/maven_projects &#038;&#038; tar ${ignore-failed-read} -czf /tmp/myrepo.tgz ." />
+    <scp file="${username}:${password}@${host}:/tmp/myrepo.tgz" todir="/Temp"/>
+    <untar compression="gzip" src="/Temp/myrepo.tgz" dest="/Temp/git_projects" />
+  </target>
+
+</project>
