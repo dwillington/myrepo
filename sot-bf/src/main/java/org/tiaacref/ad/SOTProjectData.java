@@ -34,7 +34,6 @@ public class SOTProjectData
 	
 	public boolean isNewBuild(long lastScanTime)
 	{
-		Logger.getLogger(SOTProjectData.class).debug("startTime " + startTime + "-----------" + "lastScanTime " +  lastScanTime);
 
 		boolean retValue = false;
 		if(startTime > lastScanTime)
@@ -45,6 +44,7 @@ public class SOTProjectData
 		{
 			retValue = false;
 		}
+		Logger.getLogger(SOTProjectData.class).debug(name + " startTime " + startTime + "-----------" + "lastScanTime " +  lastScanTime + "=" + (retValue ? "NEW BUILD" : "old build"));
 		return retValue;
 	}
 }

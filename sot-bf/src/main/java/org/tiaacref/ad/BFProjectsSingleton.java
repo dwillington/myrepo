@@ -228,7 +228,7 @@ public class BFProjectsSingleton
     	{
 	    	for(int i=0; i<versionParts.length; i++)
 	    	{
-	    		retValue += Integer.parseInt(versionParts[i]) * Math.pow(10, (versionSize-i-1));
+	    		retValue += Integer.parseInt(versionParts[i]) * Math.pow(100, (versionSize-i-1));
 	    	}
     	}    	
     	return retValue;

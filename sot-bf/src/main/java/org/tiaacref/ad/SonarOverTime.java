@@ -1,7 +1,9 @@
 package org.tiaacref.ad;
 
-import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -18,8 +20,21 @@ import com.buildforge.services.common.dbo.BuildDBO;
  */
 public class SonarOverTime 
 {
-	
-	public static String ANT_COMMAND_PREFIX = "cmd.exe /C ant -Dpassword=" + App.pass + " ";
+
+	public static String ANT_COMMAND_PREFIX = "";	
+
+	static
+	{
+		 if (System.getProperty("os.name").startsWith("Windows")) 
+		 {
+			 ANT_COMMAND_PREFIX += "cmd.exe /C ";
+		 }
+		 else 
+		 {
+			 //ANT_COMMAND_PREFIX += "/bin/bash /C ";
+		 }
+		 ANT_COMMAND_PREFIX += "ant -Dpassword=" + App.pass + " ";
+	}
 
 	/**
 	 * if the last build time for this project is newer than lastScanTime
@@ -63,9 +78,9 @@ public class SonarOverTime
 	{
 		try
 		{
-			Logger.getLogger(SonarOverTime.class).debug("staging project " + "/Temp" + sotProject.bfVars.get("BF_ROOT"));
-			
-			File f = new File("/Temp" + sotProject.bfVars.get("BF_ROOT"));
+			Logger.getLogger(SonarOverTime.class).debug("staging project " + sotProject.bfVars.get("BF_ROOT"));
+
+//			File f = new File("/Temp" + sotProject.bfVars.get("BF_ROOT"));
 //			if (f.exists() && f.isDirectory()) 
 //			{
 //				Logger.getLogger(SonarOverTime.class).error(sotProject.bfVars.get("BF_PROJECTNAME_PHYS") + " already staged, skipping...");
@@ -263,18 +278,6 @@ public class SonarOverTime
         	BFProjectsSingleton.getAllUniqueProjects(conn);
         	String allProjectList[] = BFProjectsSingleton.getAllProjects(conn);
 
-//	        TODO: use a non lexical sorting algorithm so 3.11 shows up last
-//        	MATCHES: Unified Desktop Core 2.4
-//        	MATCHES: Unified Desktop Core 2.5
-//        	MATCHES: Unified Desktop Core 3.10
-//        	MATCHES: Unified Desktop Core 3.11
-//        	MATCHES: Unified Desktop Core 3.4
-//        	MATCHES: Unified Desktop Core 3.5
-//        	MATCHES: Unified Desktop Core 3.6
-//        	MATCHES: Unified Desktop Core 3.7
-//        	MATCHES: Unified Desktop Core 3.8
-//        	MATCHES: Unified Desktop Core 3.9	        
-
         	for (int i=0; i<allProjectList.length; i++)
 	        {
 	        	String projectName = allProjectList[i];
@@ -282,11 +285,12 @@ public class SonarOverTime
 	        	{
 		        	if(projectName.matches(name + " \\d.*"))
 		        	{
-		        		Logger.getLogger(SonarOverTime.class).debug("MATCHES: " + projectName);
+//		        		Logger.getLogger(SonarOverTime.class).debug("MATCHES: " + projectName);
 		        		retValue = projectName;
 		        	}
 	        	}
 	        }
+    		Logger.getLogger(SonarOverTime.class).debug("Choosing " + retValue + " as the latest version");
         }
 	    catch(Exception e)
 	    {
@@ -314,11 +318,14 @@ public class SonarOverTime
 	        	if(b.getResult() == BuildDBO.Result.PASSED)
 	        	{
 	        		retValue = b;
-		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult());
+	                Date date = new Date(b.getStartTime()*1000L);
+	                DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	                String formatted = format.format(date);
+		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult() + " at " + formatted);
 	        	}
 	        	else
 	        	{
-		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult() + " <-- IGNORE");	        		
+//		        	Logger.getLogger(SonarOverTime.class).debug(projectName + " " + b.getTag() + " " + b.getResult() + " <-- IGNORE");	        		
 	        	}
 	        }
         }
@@ -377,23 +384,6 @@ public class SonarOverTime
 
         				if(scanBundle)
 	        			{
-	        				// assume all projects have has been staged including their sonar-project.properties
-	        				// if no recent build was found, the last build is already staged ???
-	        				// stage parent bundle sonar-project.properties
-	        				// scan bundle: scan individual bundle folders + scan parent bundle
-//		        			for(int j=0; j<bundleFolders.length; j++)
-//		        			{
-//		        				if(projectDatas[j].startTime == 0)
-//		        				{
-//		            				Logger.getLogger(SonarOverTime.class).warn(projectDatas[j].name + " will not be scanned as its startTime=0");	        					
-//		        				}
-//		        				//if(projectDatas[j].staged)
-//		        				else
-//		        				{
-//		        					scanBundle(projectDatas[j]);
-//		        				}
-//		        			}
-
     	        			// scan parent bundle
         					if(scanBundle(bundles[i]) != 0)
         					{
@@ -405,7 +395,6 @@ public class SonarOverTime
     		        			BundleManager.setLastScanTime(bundles[i]);        						
         					}
 	        			}
-	        			
         			}
         			else
         			{

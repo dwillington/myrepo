@@ -1,13 +1,11 @@
 package org.tiaacref.ad;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Properties;
 import java.util.Set;
 
@@ -17,9 +15,23 @@ import org.apache.log4j.Logger;
 public class BundleManager 
 {
 
-	public static String BUNDLES_DIR = "/Temp/sot_workspace/bundles";
+	public static String BUNDLES_DIR = "";
 	public static String BUNDLE_KEYS_FILE = "src/main/resources/keys.properties";
 	public static String BUNDLES_FILE = "src/main/resources/bundles.properties";
+	
+	static
+	{
+		 if (System.getProperty("os.name").startsWith("Windows")) 
+		 {
+		     // includes: Windows 2000,  Windows 95, Windows 98, Windows NT, Windows Vista, Windows XP
+		 }
+		 else 
+		 {
+		     // everything else
+			 BUNDLES_DIR += "/home/ashrafa";
+		 }
+		 BUNDLES_DIR += "/Temp/sot_workspace/bundles";
+	}
 
 	public static String[] getBundles()
 	{
@@ -85,6 +97,7 @@ public class BundleManager
 
 	public static void setLastScanTime(String bundle) throws IOException
 	{
+		// number of seconds elapsed since midnight on January 1, 1970, UTC
 		String lastScanTime = String.valueOf(System.currentTimeMillis()/1000);
     	setPropertyValue(bundle + ".lastScanTime", lastScanTime, BUNDLES_FILE);
 	}

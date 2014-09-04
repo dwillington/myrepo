@@ -2,32 +2,108 @@
 <project name="buildforge" default="build" basedir=".">
   <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
+  <property name="linux.prefix" value="/home/ashrafa" />
   <property name="username" value="ashrafa" />
   <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
-  <property name="sonar.runner" value="C:/sonar-runner-2.3.local/bin/sonar-runner" />
+  <property name="sonar.runner" value="${linux.prefix}/sonar-runner-2.3.local/bin/sonar-runner" />
   <property name="zip.dir" value="/Temp/Zips" />
   <property name="ignore-failed-read" value="--ignore-failed-read" />
 
+  <target name="os-check">
+    <condition property="exec.command" value="cmd.exe" else="/bin/bash">
+      <os family="windows" />
+    </condition>
+  </target>
+
   <target name="prerequisites">
-    <fail unless="password">You forgot to password!</fail>
+    <fail unless="password">You forgot the password!</fail>
     <fail unless="sot.parent.bundle">You forgot to sot.parent.bundle!</fail>
     <fail unless="sot.project.dir">You forgot to sot.project.dir!</fail><!-- /bfbuilds/Unified_Desktop_Transactions_5.0/5.0.0.1245 -->
+<!-- only on windows
     <fail unless="sot.project.name.spaces">You forgot to sot.project.name.spaces!</fail>
     <fail unless="sot.project.name">You forgot to sot.project.name!</fail>
     <fail unless="sot.PROJ_DIR">You forgot to sot.PROJ_DIR!</fail>
+-->
     <fail unless="sot.project.key">You forgot to sot.project.key!</fail>
     <echo>
       sot.parent.bundle=${sot.parent.bundle}
       sot.project.dir=${sot.project.dir}
+<!-- only on windows
       sot.project.name.spaces=${sot.project.name.spaces}
       sot.project.name=${sot.project.name}
       sot.PROJ_DIR=${sot.PROJ_DIR}
+-->
       sot.project.key=${sot.project.key}
     </echo>
-    <property name="sonar-runner.working.dir" value="/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.PROJ_DIR}" /><!-- ${sot.project.name.spaces}/${sot.project.name} -->
+    <property name="sonar-runner.working.dir" value="${linux.prefix}/Temp/sot_workspace/bundles/${sot.parent.bundle}/${sot.PROJ_DIR}" /><!-- ${sot.project.name.spaces}/${sot.project.name} -->
   </target>
 
   <target name="build" depends="prerequisites">
+    <copy todir="${linux.prefix}/Temp/sot_workspace/bundles/${sot.parent.bundle}">
+      <fileset dir="${sot.project.dir}">
+        <exclude name="**/.jazz5/"/>
+        <exclude name="**/workspace/"/>
+        <exclude name="**/ramassets.txt"/>
+      </fileset>
+    </copy>
+    <fail message="${sonar-runner.working.dir}/sonar-project.properties DOES NOT EXIST">
+      <condition>
+        <not>
+          <available file="${sonar-runner.working.dir}/sonar-project.properties" />
+        </not>
+      </condition>
+    </fail>
+    <replaceregexp file="${sonar-runner.working.dir}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
+  </target>
+
+  <target name="sonar-runner" depends="os-check,prerequisites">
+    <exec dir="${sonar-runner.working.dir}" executable="${exec.command}" failonerror="true">
+      <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
+    </exec>
+  </target>
+
+  <target name="sonar-runner-bundle" depends="os-check,move-empty-files">
+    <exec dir="${linux.prefix}/Temp/sot_workspace/bundles/${sot.parent.bundle}" executable="${exec.command}" failonerror="true">
+      <arg line="-c '${sonar.runner} -Dsonar.projectVersion=1.0'"/>
+<!--
+      <arg value="-c "/>
+      <arg value="${sonar.runner} "/>
+      <arg value="-Dsonar.projectVersion=1.0 "/>
+-->
+    </exec>
+  </target>
+
+  <target name="move-empty-files">
+    <move todir="${linux.prefix}/Temp/emptyfiles">
+      <fileset dir="${linux.prefix}/Temp/sot_workspace/bundles"  >
+        <and>
+          <size value="0"/>
+          <type type="file"/>
+         </and>
+      </fileset>
+    </move>
+  </target>
+
+  <target name="clean">
+    <delete includeemptydirs="true">  
+      <fileset dir="${linux.prefix}/Temp/Zips" includes="**/*"/>  
+      <fileset dir="${linux.prefix}/Temp/bfbuilds" includes="**/*"/>  
+    </delete>
+  </target>
+
+<!-- 
+http://stackoverflow.com/questions/13079002/knownhosts-for-ant-scp-and-sshexec-tasks
+c:\users\ashrafa\.ssh\known_hosts
+ashrafa@chapdc3utrat09.ops.tiaa-cref.org
+
+    <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} \( -name *.*.properties -o -name *.java \) | tar -cf /tmp/${sot.project.name}.tgz -T -" />
+http://stackoverflow.com/questions/18731603/how-to-tar-certain-file-types-in-all-subdirectories
+http://alvinalexander.com/blog/post/linux-unix/an-example-of-use-unix-linux-find-command-locate-files-with-dif
+find /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591 -name *.xml | tar -cf /tmp/Unified_Desktop_My_BoB_2.8.tgz /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591
+
+-->
+
+  <target name="build.windows" depends="prerequisites">
     <propertyregex property="sot.project.tgz.name" input="${sot.project.dir}" regexp="/" replace="_" global="true" />
     <if>
       <available file="${zip.dir}/${sot.project.tgz.name}.tgz"/>
@@ -40,7 +116,7 @@
         <echo>
           creating ${sot.project.tgz.name}.tgz archive...
         </echo>
-        <sshexec host="${host}" username="${username}" password="${password}" 
+        <sshexec host="${host}" username="${username}" password="${password}"
           command="if [ ! -f /tmp/${sot.project.tgz.name}.tgz ]; then tar ${ignore-failed-read} -czf /tmp/${sot.project.tgz.name}.tgz ${sot.project.dir} ; fi" />
         <scp file="${username}:${password}@${host}:/tmp/${sot.project.tgz.name}.tgz" todir="${zip.dir}"/>
         <untar compression="gzip" src="${zip.dir}/${sot.project.tgz.name}.tgz" dest="/Temp" />
@@ -65,47 +141,5 @@ if [ ! -f /tmp/_bfbuilds_Unified_Desktop_Transactions_5.0_5.0.0.1308.tgz ]; then
     </fail>
     <replaceregexp file="${sonar-runner.working.dir}/sonar-project.properties" match="sonar.projectKey=(.*)" replace="sonar.projectKey=${sot.project.key}" byline="true"/>
   </target>
-
-  <target name="sonar-runner" depends="prerequisites">
-    <exec dir="${sonar-runner.working.dir}" executable="cmd.exe" failonerror="true">
-      <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
-    </exec>
-  </target>
-
-  <target name="sonar-runner-bundle" depends="move-empty-files">
-    <exec dir="/Temp/sot_workspace/bundles/${sot.parent.bundle}" executable="cmd.exe" failonerror="true">
-      <arg line="/c ${sonar.runner} -Dsonar.projectVersion=1.0"/>
-    </exec>
-  </target>
-
-  <target name="move-empty-files">
-    <move todir="/Temp/emptyfiles">
-      <fileset dir="/Temp/sot_workspace/bundles"  >
-        <and>
-          <size value="0"/>
-          <type type="file"/>
-         </and>
-      </fileset>
-    </move>
-  </target>
-
-  <target name="clean">
-    <delete includeemptydirs="true">  
-      <fileset dir="/Temp/Zips" includes="**/*"/>  
-      <fileset dir="/Temp/bfbuilds" includes="**/*"/>  
-    </delete>
-  </target>
-
-<!-- 
-http://stackoverflow.com/questions/13079002/knownhosts-for-ant-scp-and-sshexec-tasks
-c:\users\ashrafa\.ssh\known_hosts
-ashrafa@chapdc3utrat09.ops.tiaa-cref.org
-
-    <sshexec host="${host}" username="${username}" password="${password}" command="find ${sot.project.dir} \( -name *.*.properties -o -name *.java \) | tar -cf /tmp/${sot.project.name}.tgz -T -" />
-http://stackoverflow.com/questions/18731603/how-to-tar-certain-file-types-in-all-subdirectories
-http://alvinalexander.com/blog/post/linux-unix/an-example-of-use-unix-linux-find-command-locate-files-with-dif
-find /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591 -name *.xml | tar -cf /tmp/Unified_Desktop_My_BoB_2.8.tgz /bfbuilds/Unified_Desktop_My_BoB_2.8/2.8.0.591
-
--->
 
 </project>

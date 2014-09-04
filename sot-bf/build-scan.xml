@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="buildforge" default="build" basedir=".">
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+  <property name="username" value="ashrafa" />
+  <property name="host" value="chapdc3utrat09.ops.tiaa-cref.org" />
+
+  <target name="build">
+    <fail unless="password">You forgot to password!</fail>
+    <sshexec host="${host}" username="${username}" password="${password}" 
+      command="source ~/.bash_profile &#038;&#038; cd /home/ashrafa/maven_projects/myrepo/sot-bf &#038;&#038; mvn package exec:java -Dpassword=${password} -DskipTests=true" />
+  </target>
+
+</project>
