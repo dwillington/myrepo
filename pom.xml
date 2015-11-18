@@ -11,9 +11,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-    <module>sot-bf</module>
-    <module>sot-web</module>
-    <module>sot-stripes</module>
+    <module>sample</module>
   </modules>
   <build>
     <plugins>
