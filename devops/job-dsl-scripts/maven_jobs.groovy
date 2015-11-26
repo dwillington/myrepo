@@ -1,4 +1,5 @@
-job('maven-sample') {
+job('maven-sample') 
+{
     scm 
     {
         git
@@ -22,6 +23,7 @@ job('maven-sample') {
             goals('-e clean package')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
             rootPOM('maven-projects/sample/pom.xml')
+            mavenInstallation('apache-maven-3.3.9')
         }
     }
 }
