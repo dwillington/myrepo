@@ -1,5 +1,6 @@
-def branch = 'develop'
-job('maven-sample-$branch') 
+String branch = 'develop'
+
+job("maven-sample-$branch") 
 {
     scm 
     {
@@ -7,7 +8,7 @@ job('maven-sample-$branch')
         {
             remote
             {
-                 branch($branch)
+                 branch(branch)
                  url('https://github.com/dwillington/myrepo.git')
                  credentials('git-dwillington-repo')
             }
