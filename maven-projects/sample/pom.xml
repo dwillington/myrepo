@@ -11,11 +11,11 @@
   </properties>
   <distributionManagement>
     <repository>
-      <id>local-maven-repo</id>
+      <id>bns-maven-repo</id>
       <url>http://localhost:8081/nexus/content/repositories/releases/</url>
     </repository>
     <snapshotRepository>
-      <id>local-maven-repo</id>
+      <id>bns-maven-repo</id>
       <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
     </snapshotRepository>
   </distributionManagement>
