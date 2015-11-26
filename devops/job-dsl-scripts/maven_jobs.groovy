@@ -20,7 +20,7 @@ job('maven-sample-develop')
     {
         maven
 		{
-            goals('-e clean deploy')
+            goals('--batch-mode -e clean deploy')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
             rootPOM('maven-projects/sample/pom.xml')
             mavenInstallation('apache-maven-3.3.9')
