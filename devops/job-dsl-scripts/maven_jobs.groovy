@@ -1,5 +1,3 @@
-String branch = 'develop'
-
 job('maven-sample-develop') 
 {
     scm 
