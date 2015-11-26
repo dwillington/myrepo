@@ -21,7 +21,7 @@ job('maven-sample') {
 		{
             goals('-e clean package')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
-            rootPom('maven-projects/sample/pom.xml')
+            rootPOM('maven-projects/sample/pom.xml')
         }
     }
 }
