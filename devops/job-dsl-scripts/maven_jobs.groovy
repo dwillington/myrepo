@@ -8,7 +8,7 @@ job("maven-sample-$branch")
         {
             remote
             {
-                 branch(branch)
+                 branch('develop')
                  url('https://github.com/dwillington/myrepo.git')
                  credentials('git-dwillington-repo')
             }
