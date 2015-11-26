@@ -1,8 +1,12 @@
 job('maven-sample') {
     scm 
     {
-        branch('develop')
-        git('https://github.com/dwillington/myrepo.git')
+        git
+        {
+            branch('develop')
+            url('https://github.com/dwillington/myrepo.git')
+            credentials('git-dwillington-repo')
+        }
     }
     triggers 
     {
