@@ -3,9 +3,12 @@ job('maven-sample') {
     {
         git
         {
-            branch('develop')
-            url('https://github.com/dwillington/myrepo.git')
-            credentials('git-dwillington-repo')
+            remote
+            {
+                 branch('develop')
+                 url('https://github.com/dwillington/myrepo.git')
+                 credentials('git-dwillington-repo')
+            }
         }
     }
     triggers 
