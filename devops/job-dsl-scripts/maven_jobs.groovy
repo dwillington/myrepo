@@ -27,3 +27,33 @@ job('maven-sample-develop')
         }
     }
 }
+
+job('maven-sample-master') 
+{
+    scm 
+    {
+        git
+        {
+            remote
+            {
+                 branch('master')
+                 url('https://github.com/dwillington/myrepo.git')
+                 credentials('git-dwillington-repo')
+            }
+        }
+    }
+    triggers 
+    {
+        scm('*/15 * * * *')
+    }
+    steps 
+    {
+        maven
+		{
+            goals('--batch-mode -e clean package')
+            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+            rootPOM('maven-projects/sample/pom.xml')
+            mavenInstallation('apache-maven-3.3.9')
+        }
+    }
+}
