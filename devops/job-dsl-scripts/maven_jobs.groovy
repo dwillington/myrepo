@@ -58,6 +58,8 @@ job('maven-sample-master')
     }
 }
 
+def giturl = 'http://tocgnxp1pv.bns.bns:7990'
+
 job('d2drl-develop-build') 
 {
     scm 
@@ -69,6 +71,10 @@ job('d2drl-develop-build')
                  branch('develop')
                  url('http://tocgnxp1pv.bns.bns:7990/scm/d2drl/d2drl.git')
                  credentials('ciad_jenkins_user')
+            }
+            browser
+            {
+                stash('http://tocgnxp1pv.bns.bns:7990/projects/d2drl/repos/d2drl')
             }
         }
     }
