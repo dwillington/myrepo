@@ -74,7 +74,7 @@ job('d2drl-develop-build')
             }
             browser
             {
-                stash('http://tocgnxp1pv.bns.bns:7990/projects/d2drl/repos/d2drl')
+                stash("${giturl}/projects/d2drl/repos/d2drl")
             }
         }
     }
