@@ -57,3 +57,33 @@ job('maven-sample-master')
         }
     }
 }
+
+job('d2drl-develop-build') 
+{
+    scm 
+    {
+        git
+        {
+            remote
+            {
+                 branch('develop')
+                 url('http://tocgnxp1pv.bns.bns:7999/d2drl/d2drl.git')
+                 credentials('ciad_jenkins_user')
+            }
+        }
+    }
+    triggers 
+    {
+        scm('H/2 * * * *')
+    }
+    steps 
+    {
+        maven
+		{
+            goals('--batch-mode -e clean install -P web')
+            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+            rootPOM('DayToDay/pom.xml')
+            mavenInstallation('apache-maven-3.3.9')
+        }
+    }
+}
