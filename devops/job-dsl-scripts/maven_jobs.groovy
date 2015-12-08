@@ -69,7 +69,7 @@ job('d2drl-develop-build')
             remote
             {
                  branch('develop')
-                 url('http://tocgnxp1pv.bns.bns:7990/scm/d2drl/d2drl.git')
+                 url("${giturl}/scm/d2drl/d2drl.git")
                  credentials('ciad_jenkins_user')
             }
             browser
