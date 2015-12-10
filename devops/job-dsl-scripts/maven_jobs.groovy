@@ -86,10 +86,11 @@ job('scrl-develop-build')
     {
         maven
 		{
-            rootPOM('SmallCompaniesOnboard/pom.xml')
+            rootPOM('pom.xml')
             goals('--batch-mode -e clean install -P web')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
             mavenInstallation('apache-maven-3.3.9')
         }
     }
 }
+
