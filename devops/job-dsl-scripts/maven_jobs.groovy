@@ -60,35 +60,35 @@ job('maven-sample-master')
 
 def giturl = 'http://tocgnxp1pv.bns.bns:7990'
 
-job('d2drl-develop-build') 
+job('scrl-develop-build') 
 {
-    scm 
+    scm
     {
         git
         {
             remote
             {
                  branch('develop')
-                 url("${giturl}/scm/d2drl/d2drl.git")
+                 url("${giturl}/scm/scrl/scrl.git")
                  credentials('ciad_jenkins_user')
             }
             browser
             {
-                stash("${giturl}/projects/d2drl/repos/d2drl")
+                stash("${giturl}/projects/scrl/repos/scrl")
             }
         }
     }
-    triggers 
+    triggers
     {
         scm('H/2 * * * *')
     }
-    steps 
+    steps
     {
         maven
 		{
+            rootPOM('SmallCompaniesOnboard/pom.xml')
             goals('--batch-mode -e clean install -P web')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
-            rootPOM('DayToDay/pom.xml')
             mavenInstallation('apache-maven-3.3.9')
         }
     }
