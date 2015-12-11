@@ -12,7 +12,7 @@
   <distributionManagement>
     <repository>
       <id>bns-maven-repo</id>
-      <url>http://172.25.6.240:8081/nexus/content/repositories/snapshots/</url>
+      <url>http://172.25.6.240:8081/nexus/content/repositories/releases/</url>
     </repository>
     <snapshotRepository>
       <id>bns-maven-repo</id>
