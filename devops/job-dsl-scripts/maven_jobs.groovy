@@ -87,6 +87,40 @@ job('scrl-develop-build')
         maven
 		{
             rootPOM('pom.xml')
+            goals('--batch-mode -e clean deploy -P web')
+            localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+            mavenInstallation('apache-maven-3.3.9')
+        }
+    }
+}
+
+job('scrl-develop-sonar') 
+{
+    scm
+    {
+        git
+        {
+            remote
+            {
+                 branch('develop')
+                 url("${giturl}/scm/scrl/scrl.git")
+                 credentials('ciad_jenkins_user')
+            }
+            browser
+            {
+                stash("${giturl}/projects/scrl/repos/scrl")
+            }
+        }
+    }
+    triggers
+    {
+        scm('H/2 * * * *')
+    }
+    steps
+    {
+        maven
+		{
+            rootPOM('pom.xml')
             goals('--batch-mode -e sonar:sonar')
             property('sonar.host.url', 'http://172.25.6.235:9000')
             property('sonar.jdbc.url', 'jdbc:oracle:thin:@172.25.6.241:1521:sonar')
@@ -98,4 +132,3 @@ job('scrl-develop-build')
         }
     }
 }
-
