@@ -87,7 +87,7 @@ job('scrl-develop-build')
         maven
 		{
             rootPOM('pom.xml')
-            goals('--batch-mode -e clean deploy -P web')
+            goals('--batch-mode -e clean install -P web')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
             mavenInstallation('apache-maven-3.3.9')
         }
