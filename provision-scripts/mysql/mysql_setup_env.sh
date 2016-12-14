@@ -7,9 +7,9 @@ yum -y remove MariaDB-common
 
 cd /opt/mysql
 
-rpm -ivh MySQL-shared-5.5.30-1.el6.x86_64.rpm
-rpm -ivh MySQL-client-5.5.30-1.el6.x86_64.rpm
-rpm -ivh MySQL-server-5.5.30-1.el6.x86_64.rpm
+rpm -ivh ~/MySQL-shared-5.5.30-1.el6.x86_64.rpm
+rpm -ivh ~/MySQL-client-5.5.30-1.el6.x86_64.rpm
+rpm -ivh ~/MySQL-server-5.5.30-1.el6.x86_64.rpm
 
 service mysql start
 
