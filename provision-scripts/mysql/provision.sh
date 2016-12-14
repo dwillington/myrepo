@@ -1,4 +1,4 @@
-export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup
+export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/MySQL
 export DESTINATION_HOST=ld4505
 
 scp mysql_setup_base.sh root@$DESTINATION_HOST:/root/.
