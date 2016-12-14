@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<project name="provision" default="all" basedir=".">
+
+<!--
+  call provision targets for each server
+  provision tearget should call configure target
+  
+  
+  hybris configure -> replace local.properties.base mysql server token
+    db.url=jdbc:mysql://ld4505/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8
+
+
+
+-->
+
+</project>

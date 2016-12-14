@@ -29,9 +29,21 @@ echo " "
 echo "End - Extract file"
 echo " "
 
-# TODO
-# change to apache-tomcat-7.0.68
-# cd /opt/solr/solr-home/homedepot 
-# rm -rf ??? so we have a clean install
+mkdir build
+mkdir data
+mkdir solr-home
+mkdir solr-home_backup
+ln -s apache-tomcat-7.0.68 tomcat
 
-ln -s apache-tomcat-7.0.57 tomcat
+# TODO
+
+tar -zcvf /opt/solr/solr-home_backup/bk.`date +%m%d%Y`.tar.gz solr-home/
+cd /opt/solr/build
+tar -zxvf ~/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
+rm -rf /opt/solr/solr-home
+mv /opt/solr/build/solr-home /opt/solr
+sleep 2m
+/root/start_solr.sh
+find /opt/solr/solr-home_backup/ -name "*.tar.gz" -mtime +7 -print -exec rm {} \;
+
+
