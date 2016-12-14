@@ -27,5 +27,5 @@ echo " "
 echo "adding mysql schemas"
 echo " "
 
-mysql -uroot -ppassword < sonar-setup.sql
-mysql -uroot -ppassword < hybris-setup.sql
+mysql -uroot -ppassword < ~/sonar-setup.sql
+mysql -uroot -ppassword < ~/hybris-setup.sql
