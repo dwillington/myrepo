@@ -20,7 +20,7 @@ docker run -d -p 80:80 -i -t --name apache centos:centos6
 docker ps -a
 
 docker cp *.gz apache:~/.
-#docker cp *.gz apache:~/apache_setup_on_docker.sh
+#docker cp apache_setup_on_docker.sh apache:~/
 
 #sudo docker exec -i -t apache /bin/bash 
 
