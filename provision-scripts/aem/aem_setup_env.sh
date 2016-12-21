@@ -2,13 +2,13 @@ echo "                "
 echo "Extracting Java File"
 echo "                "
 
-cd /opt/adobe/publish
+cd /
 
 echo " "
 echo "Start - Extract Jar file"
 echo " "
 
-tar -cvf aem.jar.gz
+tar -zxvf ~/aem.tar.gz
 
 echo " "
 echo "End - Extractjar file"
