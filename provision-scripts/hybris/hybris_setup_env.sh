@@ -29,7 +29,7 @@ echo " "
 echo "End - Extract file"
 echo " "
 
-    cd /opt/hybris/hybris/bin/platform
+cd /opt/hybris/hybris/bin/platform
 chmod 755 *.sh
 . ./setantenv.sh
 printf '\n' | ant clean all
@@ -50,11 +50,6 @@ cp -p ~/QA_PLCC-hdca.jck /opt/hybris/security/
 cp -p ~/HD.ca-BankToken-QA.pfx /opt/hybris/security/
 
 cd /opt/hybris/hybris/bin/platform
-chmod 755 *.sh
-. ./setantenv.sh
-ant clean all
-
-cd /opt/hybris/hybris/bin/platform
 . ./setantenv.sh
 ant initialize > out.txt
 
@@ -62,7 +57,9 @@ cd /opt/hybris/hybris/bin/platform/tomcat/conf
 rm -rf wrapper.conf
 cp -p /root/wrapper.conf.base wrapper.conf
 
-tail -100 console-*.log
+sh ~/start_hybris.sh
+
+tail -100 /opt/hybris/hybris/bin/platform/tomcat/logs/console-*.log
 
 #csrf_token=`curl -b cookie.txt -c cookie.txt -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,/;q=0.8" -H "Content-Type: application/x-www-form-urlencoded" -X POST "http://localhost:9001/j_spring_security_check" --data "j_username=admin&j_password=nimda" | grep X-CSRF | cut -d '"' -f12`
 #curl -v -b cookie.txt -c cookie.txt -H "Accept: application/json" -H "Content-Type: application/json; charset=UTF-8" -H "X-CSRF-TOKEN: ${csrf_token}" -X POST "http://localhost:9001/hac/platform/init/execute" --data-binary ' 
