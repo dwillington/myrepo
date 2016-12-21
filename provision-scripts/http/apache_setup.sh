@@ -4,20 +4,22 @@ echo "                           "
 
 cd /root
 
-echo "                           "
-echo "Install Required Software"
-echo "                           "
-yum -y install mod_ssl openssl httpd curl
+sudo yum install docker -y
 
-echo "                           "
-echo "Creating Required Directories"
-echo "                           "
+echo "HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" >> /etc/sysconfig/docker
+echo "HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" >> /etc/sysconfig/docker
 
-cd /
-mkdir opt
-cd opt
-mkdir apache
+sudo systemctl start docker
 
+#service docker restart
+
+sudo docker pull centos:centos6
+
+docker run -d -p 80:80 -i -t --name apache centos:centos6 
+
+docker ps -a
+
+docker cp *.gz apache:/tmp/.
 
 echo "                           "
 echo "Process Completed"
