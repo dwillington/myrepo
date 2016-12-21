@@ -6,6 +6,8 @@ echo "Setting Environment"
 
 cd /opt/adobe/publish
 
+sed -i -e 's/4096/2048/g' setenv.sh
+
 . ./setenv.sh 
 
 echo $CQ_JVM_OPTS
