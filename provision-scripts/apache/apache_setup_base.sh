@@ -20,9 +20,9 @@ docker run -d -p 80:80 -i -t --name apache centos:centos6
 docker ps -a
 
 docker cp *.gz apache:/tmp/.
-docker cp apache_setup_on_docker.sh apache:~/tmp/.
+docker cp apache_setup_on_docker.sh apache:/tmp/.
 
-#docker exec -i -t apache /bin/bash 
+docker exec apache /bin/sh -c /tmp/apache_setup_on_docker.sh
 
 echo "                           "
 echo "Process Completed"
