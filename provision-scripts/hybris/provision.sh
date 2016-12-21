@@ -1,5 +1,5 @@
 set INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup
-export DESTINATION_HOST=ld4504
+export DESTINATION_HOST=$1
 
 scp *.sh *.base *.pfx *.jck root@$DESTINATION_HOST:~/.
 
