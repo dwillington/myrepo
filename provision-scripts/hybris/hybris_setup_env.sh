@@ -36,9 +36,9 @@ printf '\n' | ant clean all
 
 # this below represents deploy, ant clean all
 rm -rf /opt/hybris/hybris/bin
-/usr/bin/unzip -o /root/build/hybrisServer-Platform.zip -d /opt/hybris/
-/usr/bin/unzip -o /root/build/hybrisServer-AllExtensions.zip -d /opt/hybris/
-/usr/bin/unzip -o /root/build/hybrisServer-Config.zip -d /opt/hybris/
+/usr/bin/unzip -o /root/hybrisServer-Platform.zip -d /opt/hybris/
+/usr/bin/unzip -o /root/hybrisServer-AllExtensions.zip -d /opt/hybris/
+/usr/bin/unzip -o /root/hybrisServer-Config.zip -d /opt/hybris/
 
 cd /opt/hybris/hybris/config
 rm -rf local.properties
