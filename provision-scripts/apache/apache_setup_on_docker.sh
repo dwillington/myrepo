@@ -34,10 +34,7 @@ sed -i 's/:4503/.homedepot.com:4503/g' /opt/apache/scripts/fetch-url-translation
 /bin/bash /opt/apache/scripts/init-apache.sh
 /bin/rm -rf /tmp/etc /tmp/opt /tmp/usr;
 /bin/chown -R root:apache /etc/httpd;
-/bin/chown -R apache:apache /opt/apache/scripts/*;
-/bin/chown -R apache:apache /opt/apache/scripts
-/bin/chown -R apache:apache /opt/apache/dynamicmaps
-/bin/chown -R apache:apache /opt/apache/dynamicmaps/*;    
-/bin/chmod +x /opt/apache/scripts/*;  
+/bin/chown -R apache:apache /opt;
+/bin/chmod +x /opt/apache/scripts/*;
 
 apachectl start
