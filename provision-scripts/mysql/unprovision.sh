@@ -1,10 +1,7 @@
-service mysql stop
-rpm -evv MySQL-server-5.5.30-1.el6.x86_64
-rpm -evv MySQL-client-5.5.30-1.el6.x86_64
-rpm -evv MySQL-shared-5.5.30-1.el6.x86_64
-rm -rf /tmp/mysql
-mv /var/lib/mysql/ /tmp/mysql
-rm -rf ~/MySQL*.rpm
-rm -rf ~/*.sh
-rm -rf ~/*.sql
-rm -rf .mysql_history
+export DESTINATION_HOST=$1
+
+scp unprovision-node.sh root@$DESTINATION_HOST:~/.
+
+ssh root@$DESTINATION_HOST chmod u+x /root/*.sh
+
+ssh root@$DESTINATION_HOST /root/unprovision-node.sh
