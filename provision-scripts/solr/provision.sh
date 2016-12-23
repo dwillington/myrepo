@@ -1,5 +1,6 @@
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup
 export DESTINATION_HOST=$1
+sshpass -p "password" ssh-copy-id root@$1
 
 scp *.sh root@$DESTINATION_HOST:/root/.
 ssh root@$DESTINATION_HOST chmod u+x /root/*.sh

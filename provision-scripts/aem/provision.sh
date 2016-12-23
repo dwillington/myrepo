@@ -1,5 +1,6 @@
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Aem
 export DESTINATION_HOST=$1
+sshpass -p "password" ssh-copy-id root@$1
 
 scp aem_setup_base.sh root@$DESTINATION_HOST:/root/.
 scp aem_setup_env.sh root@$DESTINATION_HOST:/root/.

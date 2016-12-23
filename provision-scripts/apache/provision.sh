@@ -1,5 +1,6 @@
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Apache
 export DESTINATION_HOST=$1
+sshpass -p "password" ssh-copy-id root@$1
 
 scp apache_setup_base.sh root@$DESTINATION_HOST:/root/.
 scp apache_setup_on_docker.sh root@$DESTINATION_HOST:/root/.
