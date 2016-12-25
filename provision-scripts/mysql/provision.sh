@@ -1,4 +1,4 @@
-export SSH_ARGS=-o StrictHostKeyChecking=no
+export SSH_ARGS='-o StrictHostKeyChecking=no'
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/MySQL
 export DESTINATION_HOST=$1
 
