@@ -35,8 +35,6 @@ mkdir solr-home
 mkdir solr-home_backup
 ln -s apache-tomcat-7.0.68 tomcat
 
-# TODO
-
 tar -zcvf /opt/solr/solr-home_backup/bk.`date +%m%d%Y`.tar.gz solr-home/
 cd /opt/solr/build
 tar -zxvf ~/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
