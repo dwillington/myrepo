@@ -1,13 +1,14 @@
+export SSH_ARGS='-o StrictHostKeyChecking=no'
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Hybris
 export DESTINATION_HOST=$1
-sshpass -p "password" ssh-copy-id root@$1
+#sshpass -p "password" ssh-copy-id root@$1
 
-scp *.sh *.base *.pfx *.jck root@$DESTINATION_HOST:~/.
+scp $SSH_ARGS *.sh *.base *.pfx *.jck root@$DESTINATION_HOST:~/.
 
-ssh root@$DESTINATION_HOST chmod u+x /root/*.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 
-scp $INSTALL_REPOSITORY/*.* root@$DESTINATION_HOST:~/.
+scp $SSH_ARGS $INSTALL_REPOSITORY/*.* root@$DESTINATION_HOST:~/.
 
-ssh root@$DESTINATION_HOST /root/hybris_setup_base.sh
-ssh root@$DESTINATION_HOST /root/hybris_setup_env.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_base.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_env.sh
 
