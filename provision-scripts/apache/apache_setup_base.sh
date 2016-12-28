@@ -6,8 +6,8 @@ cd /root
 
 yum install docker -y
 
-echo "HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" >> /etc/sysconfig/docker
-echo "HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" >> /etc/sysconfig/docker
+#echo "HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" >> /etc/sysconfig/docker
+#echo "HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" >> /etc/sysconfig/docker
 
 systemctl start docker
 
