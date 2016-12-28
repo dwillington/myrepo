@@ -44,4 +44,5 @@ sleep 2m
 /root/start_solr.sh
 find /opt/solr/solr-home_backup/ -name "*.tar.gz" -mtime +7 -print -exec rm {} \;
 
+tail -100 /opt/solr/tomcat/logs/catalina.out
 
