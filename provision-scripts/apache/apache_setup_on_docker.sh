@@ -1,5 +1,5 @@
-export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
-export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+#export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+#export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
 
 yum -y install mod_ssl openssl httpd curl
 
