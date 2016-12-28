@@ -11,4 +11,3 @@ scp $SSH_ARGS $INSTALL_REPOSITORY/*.tar.gz root@$DESTINATION_HOST:/root/.
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_env.sh
-
