@@ -2,7 +2,8 @@
 
 provision_vm()
 {
-  /bamboo/data/thdutil/serversetup/myrepo/provision-scripts/$2/provision.sh $1-$2
+  cd /bamboo/data/thdutil/serversetup/myrepo/provision-scripts/$2
+  ./provision.sh $1-$2
 }
 
 if [ -z ${epic_name+x} ]; then 
