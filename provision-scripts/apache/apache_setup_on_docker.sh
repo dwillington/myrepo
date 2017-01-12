@@ -25,7 +25,7 @@ rm -rf /etc/httpd/conf/dispatcher-render-qa*
 rm -rf /etc/httpd/conf/dispatcher-render-dev*
 rm -rf /etc/httpd/conf/dispatcher-render-prod*
 mv /etc/httpd/conf/dispatcher-render-docker-boot2docker.inc /etc/httpd/conf/dispatcher-render-qa-docker.inc
-sed -i 's/${aem.publish.host}/epic1-solr/g' /etc/httpd/conf/dispatcher-render-qa-docker.inc
+sed -i 's/${aem.publish.host}/epic1-aem/g' /etc/httpd/conf/dispatcher-render-qa-docker.inc
 sed -i 's/`hostname -s`/*/g' /opt/apache/scripts/fetch-plp-map.sh
 sed -i 's/`hostname -s`/*/g' /opt/apache/scripts/fetch-url-translation-map.sh
 #sed -i 's/:4503/.homedepot.com:4503/g' /opt/apache/scripts/fetch-plp-map.sh

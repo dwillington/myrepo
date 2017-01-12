@@ -11,13 +11,16 @@ create_vm()
     --metadata-from-file startup-script=./startup.sh
 }
 
-if [ -z ${epic_name+x} ]; then 
-    echo "epic_name is unset";
-else
-    echo "epic-name is set to '$epic_name'";
-    create_vm $epic_name aem
-    create_vm $epic_name apache
-    create_vm $epic_name hybris
-    create_vm $epic_name mysql
-    create_vm $epic_name solr
+if [ $# -lt 1 ]; then
+  echo 1>&2 "$0: missing epic_name"
+  exit 2
 fi
+
+export epic_name=$1
+echo "epic-name is set to '$epic_name'";
+
+create_vm $epic_name aem
+create_vm $epic_name apache
+create_vm $epic_name hybris
+create_vm $epic_name mysql
+create_vm $epic_name solr
