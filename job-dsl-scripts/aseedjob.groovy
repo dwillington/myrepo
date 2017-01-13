@@ -86,14 +86,14 @@ def createPollAndDeployJob(epic_name, project_name) {
         configure { project ->
             project / triggers / "org.jenkinsci.plugins.fstrigger.triggers.FolderContentTrigger" (plugin: "fstrigger@0.39") {
                 spec("* * * * *")
-                path('/mnt/gcs-bucket/ci-builds/epic-builds/${epic_name}/${project_name}')
+                path("/mnt/gcs-bucket/ci-builds/epic-builds/${epic_name}/${project_name}")
                 excludeCheckLastModificationDate('false')
                 excludeCheckContent('true')
                 excludeCheckFewerOrMoreFiles('false')
             }
         }
         steps {
-            shell('deploy-scripts/${project_name}/deploy.sh epic1')
+            shell("deploy-scripts/${project_name}/deploy.sh epic1")
         }
         publishers {
             logRotator {
