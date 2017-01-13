@@ -1,7 +1,11 @@
 export SSH_ARGS='-o StrictHostKeyChecking=no'
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Apache
 export DESTINATION_HOST=$1
-#sshpass -p "password" ssh-copy-id root@$1
+
+/bin/cp -rf apache_setup_on_docker_orig.sh apache_setup_on_docker.sh
+export epic_name=${DESTINATION_HOST%-*}
+sed -i -e "s/aem-hostname/$epic_name-aem/g" local.properties.base
+echo "setting aem hostname to $epic_name-aem in apache_setup_on_docker.sh"
 
 scp $SSH_ARGS apache_setup_base.sh root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS apache_setup_on_docker.sh root@$DESTINATION_HOST:/root/.
