@@ -8,7 +8,7 @@ create_vm()
     --image-family centos-7 \
     --image-project centos-cloud \
     --boot-disk-size 50 \
-    --metadata-from-file startup-script=./startup.sh
+    --metadata-from-file startup-script=./gcloud-scripts/startup.sh
 }
 
 if [ $# -lt 1 ]; then
