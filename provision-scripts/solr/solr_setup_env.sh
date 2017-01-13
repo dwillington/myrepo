@@ -40,7 +40,7 @@ cd /opt/solr/build
 tar -zxvf ~/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
 rm -rf /opt/solr/solr-home
 mv /opt/solr/build/solr-home /opt/solr
-sleep 2m
+#sleep 2m
 /root/start_solr.sh
 find /opt/solr/solr-home_backup/ -name "*.tar.gz" -mtime +7 -print -exec rm {} \;
 
