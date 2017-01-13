@@ -70,31 +70,35 @@ job("tear-down-epic-environment") {
     }
 }
 
-job("poll-and-deploy-epic1-solr") {
-    scm {
-        git {
-            remote {
-                url("https://github.com/dwillington/myrepo.git")
-                credentials('1a678709-ecf9-42a6-b1ea-82acbcab44bb')
-                branch('gcloud')
+createPollAndDeployJob('epic1', 'solr')
+
+def createPollAndDeployJob(epic_name, project_name) {
+    job("poll-and-deploy-${epic_name}-${project_name}") {
+        scm {
+            git {
+                remote {
+                    url("https://github.com/dwillington/myrepo.git")
+                    credentials('1a678709-ecf9-42a6-b1ea-82acbcab44bb')
+                    branch('gcloud')
+                }
             }
         }
-    }
-    configure { project ->
-        project / triggers / "org.jenkinsci.plugins.fstrigger.triggers.FolderContentTrigger" (plugin: "fstrigger@0.39") {
-            spec("* * * * *")
-            path('/mnt/gcs-bucket/ci-builds/epic-builds/epic1/solr')
-            excludeCheckLastModificationDate('false')
-            excludeCheckContent('true')
-            excludeCheckFewerOrMoreFiles('false')
+        configure { project ->
+            project / triggers / "org.jenkinsci.plugins.fstrigger.triggers.FolderContentTrigger" (plugin: "fstrigger@0.39") {
+                spec("* * * * *")
+                path('/mnt/gcs-bucket/ci-builds/epic-builds/${epic_name}/${project_name}')
+                excludeCheckLastModificationDate('false')
+                excludeCheckContent('true')
+                excludeCheckFewerOrMoreFiles('false')
+            }
         }
-    }
-    steps {
-        shell('deploy-scripts/solr/deploy.sh epic1')
-    }
-    publishers {
-        logRotator {
-            numToKeep(10)
+        steps {
+            shell('deploy-scripts/${project_name}/deploy.sh epic1')
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
         }
     }
 }
