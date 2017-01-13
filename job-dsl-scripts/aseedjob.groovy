@@ -3,7 +3,7 @@
 
 job("create-epic-environment") {
     parameters {
-        stringParam('epic-name')
+        stringParam('epic_name')
     }
     scm {
         git {
@@ -15,7 +15,7 @@ job("create-epic-environment") {
         }
     }
     steps {
-        shell('gcloud-scripts/create-epic-environment.sh $epic-name')
+        shell('gcloud-scripts/create-epic-environment.sh $epic_name')
     }
     publishers {
         logRotator {
