@@ -1,7 +1,6 @@
 export SSH_ARGS='-o StrictHostKeyChecking=no'
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Hybris
 export DESTINATION_HOST=$1
-#sshpass -p "password" ssh-copy-id root@$1
 
 /bin/cp -rf local.properties.base.orig local.properties.base
 export epic_name=${DESTINATION_HOST%-*}
