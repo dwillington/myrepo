@@ -90,7 +90,7 @@ job("poll-and-deploy-epic1-solr") {
         }
     }
     steps {
-        shell('deploy-scripts/solr/deploy.sh epic1-solr')
+        shell('deploy-scripts/solr/deploy.sh epic1')
     }
     publishers {
         logRotator {
