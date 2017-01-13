@@ -38,7 +38,7 @@ job("tear-down-epic-environment") {
         }
     }
     steps {
-        shell('gcloud-scripts/create-epic-environment.sh $epic_name')
+        shell('gcloud-scripts/tear-down-epic-environment.sh $epic_name')
     }
     publishers {
         logRotator {
