@@ -15,7 +15,7 @@ export epic_name=$1
 echo "epic_name is set to '$epic_name'";
 
 provision_vm $epic_name mysql
-#provision_vm $epic_name hybris
-#provision_vm $epic_name solr
-#provision_vm $epic_name aem
-#provision_vm $epic_name apache
+provision_vm $epic_name hybris
+provision_vm $epic_name solr
+provision_vm $epic_name aem
+provision_vm $epic_name apache
