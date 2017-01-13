@@ -19,7 +19,7 @@ email.token.expiration=259200
 reset.email.token.expiration=72
 
 ############### MySQL Settings Start ###############
-db.url=jdbc:mysql://epic1-mysql/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8
+db.url=jdbc:mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8
 db.driver=com.mysql.jdbc.Driver
 db.username=hybrisdbuser
 db.password=jasp3r91
