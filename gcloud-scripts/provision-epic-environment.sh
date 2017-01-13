@@ -4,7 +4,7 @@ provision_vm()
 {
   cd provision-scripts/$2
 #  ./provision.sh $1-$2
-  cd ..
+  cd ../../
   pwd
 }
 
