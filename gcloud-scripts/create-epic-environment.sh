@@ -17,7 +17,7 @@ if [ $# -lt 1 ]; then
 fi
 
 export epic_name=$1
-echo "epic-name is set to '$epic_name'";
+echo "epic_name is set to '$epic_name'";
 
 #create_vm $epic_name mysql
 #create_vm $epic_name hybris
