@@ -1,33 +1,37 @@
-echo "                "
+echo "--------------------------------------------------"
 echo "Extracting Java File"
-echo "                "
+echo "--------------------------------------------------"
 
 cd /opt/jdk
 tar xvf ~/jdk1.7.0_75.tar
 
-echo "               "
+echo "--------------------------------------------------"
 echo "Start - Setting Java Base"
-echo "               "
+echo "--------------------------------------------------"
 
 update-alternatives --install "/usr/bin/java" "java" "/opt/jdk/jdk1.7.0_75/bin/java" 1
 update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk/jdk1.7.0_75/bin/javac" 1
 update-alternatives --install "/usr/bin/javaws" "javaws" "/opt/jdk/jdk1.7.0_75/bin/javaws" 1
 
-echo "               "
+echo "--------------------------------------------------"
 echo "End - Setting Java Base"
-echo "               "
+echo "--------------------------------------------------"
 
 cd /opt/hybris
 
-echo " "
+echo "--------------------------------------------------"
 echo "Start - Extract file"
-echo " "
+echo "--------------------------------------------------"
 
 unzip ~/HYBRISCOMM5400_0.ZIP
 
-echo " "
+echo "--------------------------------------------------"
 echo "End - Extract file"
-echo " "
+echo "--------------------------------------------------"
+
+echo "--------------------------------------------------"
+echo "ant clean all..."
+echo "--------------------------------------------------"
 
 cd /opt/hybris/hybris/bin/platform
 chmod 755 *.sh
@@ -49,6 +53,10 @@ cp -p /root/local.properties.base local.properties
 cp -p ~/QA_PLCC-hdca.jck /opt/hybris/security/
 cp -p ~/HD.ca-BankToken-QA.pfx /opt/hybris/security/
 
+echo "--------------------------------------------------"
+echo "Initializing Hybris Database..."
+echo "--------------------------------------------------"
+
 cd /opt/hybris/hybris/bin/platform
 . ./setantenv.sh
 ant initialize > out.txt
@@ -57,6 +65,9 @@ cd /opt/hybris/hybris/bin/platform/tomcat/conf
 rm -rf wrapper.conf
 cp -p /root/wrapper.conf.base wrapper.conf
 
+echo "--------------------------------------------------"
+echo "Starting Hybris..."
+echo "--------------------------------------------------"
 sh ~/start_hybris.sh
 
 ls -al /opt/hybris/hybris/log/tomcat

@@ -1,6 +1,3 @@
-
-
-
 job("create-epic-environment") {
     parameters {
         stringParam('epic_name')
