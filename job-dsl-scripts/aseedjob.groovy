@@ -6,7 +6,7 @@ job("create-epic-environment") {
         stringParam('epic-name')
     }
     steps {
-        shell('/bamboo/data/thdutil/serversetup/myrepo/gcloud-scripts/create-epic-environment.sh $epic-name')
+        shell('/bamboo/data/thdutil/serversetup/myrepo/gcloud-scripts/create-epic-environment.sh ${epic-name}')
     }
     publishers {
         logRotator {
