@@ -4,8 +4,8 @@ provision_vm()
 {
   cd provision-scripts/$2
 #  ./provision.sh $1-$2
-  cd ../../
   pwd
+  cd ../../
 }
 
 if [ $# -lt 1 ]; then
