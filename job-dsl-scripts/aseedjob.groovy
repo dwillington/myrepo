@@ -15,7 +15,7 @@ job("create-epic-environment") {
         }
     }
     steps {
-        shell('gcloud-scripts/create-epic-environment.sh ${epic-name}')
+        shell('gcloud-scripts/create-epic-environment.sh $epic-name')
     }
     publishers {
         logRotator {
