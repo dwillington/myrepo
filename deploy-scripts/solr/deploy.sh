@@ -5,7 +5,8 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-export ARTIFACT_LOCATION=/mnt/gcs-bucket/ci-builds/epic-builds/$1/solr
+gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-builds/ /tmp/epic-builds
+export ARTIFACT_LOCATION=/tmp/epic-builds/$1/solr
 export DESTINATION_HOST=$1-solr
 
 scp $SSH_ARGS $ARTIFACT_LOCATION/homedepot-solr-0.0.1-SNAPSHOT.tar.gz root@$DESTINATION_HOST:/root/.
