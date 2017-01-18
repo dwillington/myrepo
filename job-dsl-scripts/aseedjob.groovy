@@ -67,7 +67,7 @@ job("tear-down-epic-environment") {
     }
 }
 
-job("deploy-${epic_name}-${project_name}") {
+job("deploy-epic-project") {
     scm {
         git {
             remote {
