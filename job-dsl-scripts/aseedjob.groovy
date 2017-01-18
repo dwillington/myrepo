@@ -83,8 +83,7 @@ job("deploy-epic-project") {
         }
     }
     steps {
-        shell('echo deploy-scripts/${project_name}/deploy.sh ${epic_name}')
-        // shell('deploy-scripts/${project_name}/deploy.sh ${epic_name}')
+        shell('deploy-scripts/${project_name}/deploy.sh ${epic_name}')
     }
     publishers {
         logRotator {
