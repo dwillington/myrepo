@@ -68,6 +68,11 @@ job("tear-down-epic-environment") {
 }
 
 job("deploy-epic-project") {
+    parameters {
+        stringParam('epic_name')
+        stringParam('project_name')
+    }
+    authenticationToken('password')
     scm {
         git {
             remote {
