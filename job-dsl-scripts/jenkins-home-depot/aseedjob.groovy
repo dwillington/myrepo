@@ -10,7 +10,7 @@
 // JENKINS_JAVA_OPTIONS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 
 // cp global maven settins.xml (everytime I guess)
-println "/bin/cp -rf job-dsl-scripts/sync-settings/settings.xml /var/lib/jenkins/settings.xml".execute().text
+println "/bin/cp -rf ../sync-settings/settings.xml /var/lib/jenkins/settings.xml".execute().text
 
 job("create-poll-and-build-epic-jobs") {
     parameters {
