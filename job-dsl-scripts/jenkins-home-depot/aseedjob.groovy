@@ -1,3 +1,7 @@
+// credentials
+// dwillington-credentials
+// axa8962-credentials / qa02test!
+
 // a-seed-job
 // https://github.com/dwillington/myrepo.git
 // job-dsl-scripts/jenkins-home-depot/**/*.groovy

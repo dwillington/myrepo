@@ -19,7 +19,7 @@ if(binding.variables.containsKey("epic_name")) {
             maven {
                 rootPOM('pom.xml')
                 goals("clean assembly:assembly -Pbuild-solr-config,dev -Dsolr-type=master")
-                mavenInstallation('apache-maven-3.3.9')
+                // mavenInstallation('apache-maven-3.3.9')
             }
             // shell("")
         }
