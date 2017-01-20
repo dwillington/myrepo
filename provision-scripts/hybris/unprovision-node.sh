@@ -1,0 +1,1 @@
+rm -rf /opt/hybris /root/*.pfx /root/*.jck /root/*.ZIP /root/*.zip /root/*.base /root/*.jar /root/*.sh

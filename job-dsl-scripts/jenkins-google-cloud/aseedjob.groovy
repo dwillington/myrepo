@@ -1,3 +1,7 @@
+#a-seed-job
+#https://github.com/dwillington/myrepo.git
+#job-dsl-scripts/jenkins-google-cloud/**/*.groovy
+
 job("create-epic-environment") {
     parameters {
         stringParam('epic_name')
