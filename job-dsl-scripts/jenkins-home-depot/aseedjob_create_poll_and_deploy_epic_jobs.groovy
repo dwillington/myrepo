@@ -6,7 +6,7 @@ if(binding.variables.containsKey("epic_name")) {
         scm {
             git {
                 remote {
-                    url("http://stash.homedepot.ca/scm/hdca/${project_name}.git")
+                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
                     branch("$epic_name")
                 }
