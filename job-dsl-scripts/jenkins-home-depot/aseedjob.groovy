@@ -16,8 +16,10 @@ job("create-poll-and-build-epic-jobs") {
             }
         }
     }
-    dsl {
-        external('job-dsl-scripts/jenkins-home-depot/aseedjob_create_poll_and_deploy_epic_jobs.groovy')
+    steps {
+        dsl {
+            external('job-dsl-scripts/jenkins-home-depot/aseedjob_create_poll_and_deploy_epic_jobs.groovy')
+        }
     }
     publishers {
         logRotator {
