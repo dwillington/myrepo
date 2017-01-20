@@ -11,7 +11,13 @@
 
 // cp global maven settins.xml (everytime I guess)
 // wow major hard coding below!
-println "/bin/cp -rf /var/lib/jenkins/workspace/a-seed-job/job-dsl-scripts/sync-settings/settings.xml /var/lib/jenkins/settings.xml".execute().text
+//println "/bin/cp -rf /var/lib/jenkins/workspace/a-seed-job/job-dsl-scripts/sync-settings/settings.xml /var/lib/jenkins/settings.xml".execute().text
+
+def sout = new StringBuilder(), serr = new StringBuilder()
+def proc = '/bin/cp -rf /var/lib/jenkins/workspace/a-seed-job/job-dsl-scripts/sync-settings/settings.xml /var/lib/jenkins/settings.xml"'.execute()
+proc.consumeProcessOutput(sout, serr)
+proc.waitForOrKill(1000)
+println "out> $sout err> $serr"
 
 job("create-poll-and-build-epic-jobs") {
     parameters {
