@@ -1,6 +1,6 @@
-#a-seed-job
-#https://github.com/dwillington/myrepo.git
-#job-dsl-scripts/jenkins-google-cloud/**/*.groovy
+// a-seed-job
+// https://github.com/dwillington/myrepo.git
+// job-dsl-scripts/jenkins-google-cloud/**/*.groovy
 
 job("create-epic-environment") {
     parameters {
