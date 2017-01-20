@@ -10,6 +10,7 @@
 // JENKINS_JAVA_OPTIONS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 
 println "ls".execute().text
+println "rm -rf /var/lib/jenkins/settings.xml".execute().text
 
 job("create-poll-and-build-epic-jobs") {
     parameters {
