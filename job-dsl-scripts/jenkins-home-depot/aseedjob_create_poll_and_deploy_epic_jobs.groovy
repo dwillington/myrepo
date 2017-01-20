@@ -1,6 +1,6 @@
 
 // the following check is to allow this to skip when master seed job is run
-if(binding.variables.containsKey("epic_name") && binding.variables.containsKey("project_name") {
+if(binding.variables.containsKey("epic_name") && binding.variables.containsKey("project_name")) {
 
     if(project_name.equals("solr")) {
         job("poll-and-deploy-${epic_name}-${project_name}") {
