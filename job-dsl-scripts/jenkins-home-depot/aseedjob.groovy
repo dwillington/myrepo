@@ -6,6 +6,8 @@
 // https://github.com/dwillington/myrepo.git
 // job-dsl-scripts/jenkins-home-depot/**/*.groovy
 
+// JENKINS_JAVA_OPTIONS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
+
 job("create-poll-and-build-epic-jobs") {
     parameters {
         stringParam('epic_name')
