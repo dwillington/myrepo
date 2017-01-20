@@ -22,10 +22,10 @@ if(binding.variables.containsKey("epic_name")) {
                 mavenInstallation('apache-maven-3.3.9')
             }
             shell(
-                "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" + 
-                "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080" + 
-                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz" + 
-                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 solr"
+                "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
+                "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
+                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz\n" + 
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 solr\n"
                  )
         }
         publishers {
