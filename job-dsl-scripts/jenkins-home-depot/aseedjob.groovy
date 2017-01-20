@@ -9,6 +9,8 @@
 // JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 // JENKINS_JAVA_OPTIONS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 
+println "ls".execute().text
+
 job("create-poll-and-build-epic-jobs") {
     parameters {
         stringParam('epic_name')
