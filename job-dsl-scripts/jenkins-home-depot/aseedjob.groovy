@@ -9,8 +9,8 @@
 // JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 // JENKINS_JAVA_OPTIONS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 
-println "ls".execute().text
-println "rm -rf /var/lib/jenkins/settings.xml".execute().text
+// cp global maven settins.xml (everytime I guess)
+println "/bin/cp -rf job-dsl-scripts/sync-settings/settings.xml /var/lib/jenkins/settings.xml".execute().text
 
 job("create-poll-and-build-epic-jobs") {
     parameters {
