@@ -5,7 +5,6 @@
 job("create-poll-and-build-epic-jobs") {
     parameters {
         stringParam('epic_name')
-        stringParam('project_name')
     }
     scm {
         git {
