@@ -20,7 +20,8 @@ if(binding.variables.containsKey("epic_name")) {
                 rootPOM('pom.xml')
                 goals("clean assembly:assembly -Pbuild-solr-config,dev -Dsolr-type=master")
                 mavenInstallation('apache-maven-3.3.9')
-            }
+                jdk('JDK 8')
+                }
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
@@ -53,6 +54,7 @@ if(binding.variables.containsKey("epic_name")) {
                 rootPOM('pom.xml')
                 goals("clean assembly:assembly -Pbuild-httpd-config,qp -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 mavenInstallation('apache-maven-3.3.9')
+                jdk('JDK 8')
             }
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
