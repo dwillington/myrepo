@@ -12,7 +12,7 @@ export DESTINATION_HOST=$1-apache
 /bin/cp -rf apache_deploy_on_docker_orig.sh apache_deploy_on_docker.sh
 export epic_name=${DESTINATION_HOST%-*}
 sed -i -e "s/epic_name/$epic_name/g" apache_deploy_on_docker.sh
-echo "setting aem hostname to $epic_name-aem in apache_deploy_on_docker.sh"
+echo "setting epic_name to $epic_name-aem in apache_deploy_on_docker.sh"
 
 scp $SSH_ARGS $ARTIFACT_LOCATION/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS deploy-local.sh root@$DESTINATION_HOST:/root/.

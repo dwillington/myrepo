@@ -15,11 +15,11 @@ rm -rf /etc/httpd/conf/dispatcher-render-dev*
 rm -rf /etc/httpd/conf/dispatcher-render-prod*
 mv /etc/httpd/conf/dispatcher-render-docker-boot2docker.inc /etc/httpd/conf/dispatcher-render-dev-docker.inc
 sed -i 's/${aem.publish.host}/epicname-aem/g' /etc/httpd/conf/dispatcher-render-dev-docker.inc
-sed -i 's/ln0a76/epicname-hybris/g' /etc/httpd/conf/vhost-a80.conf
-sed -i 's/ln0a76/epicname-hybris/g' /etc/httpd/conf/vhost-z443.conf
-sed -i 's/ln0a76/epicname-hybris/g' /etc/httpd/conf/vhost-x8888.conf
-sed -i 's/amphdcaservices-dev.homedepot.ca/epicname-hybris/g' /etc/httpd/conf/vhost-a80.conf
-sed -i 's/amphdcaservices-dev.homedepot.ca/epicname-hybris/g' /etc/httpd/conf/vhost-z443.conf
+sed -i 's/ln0a76/epic_name-hybris/g' /etc/httpd/conf/vhost-a80.conf
+sed -i 's/ln0a76/epic_name-hybris/g' /etc/httpd/conf/vhost-z443.conf
+sed -i 's/ln0a76/epic_name-hybris/g' /etc/httpd/conf/vhost-x8888.conf
+sed -i 's/amphdcaservices-dev.homedepot.ca/epic_name-hybris/g' /etc/httpd/conf/vhost-a80.conf
+sed -i 's/amphdcaservices-dev.homedepot.ca/epic_name-hybris/g' /etc/httpd/conf/vhost-z443.conf
 sed -i 's/`hostname -s`/*/g' /opt/apache/scripts/fetch-plp-map.sh
 sed -i 's/`hostname -s`/*/g' /opt/apache/scripts/fetch-url-translation-map.sh
 
