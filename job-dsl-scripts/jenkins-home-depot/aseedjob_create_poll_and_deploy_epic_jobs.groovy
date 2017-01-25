@@ -93,7 +93,7 @@ if(binding.variables.containsKey("epic_name")) {
                     "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
                     "cp -R repo/hybris hybris/.\n" +
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/hybris/config/licence/hybrislicence.jar\n" +
-                    "cd hybris/hybris/bin/platform\n" +
+                    "cd hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
                     "cp -v  hybris/hybris/config/qp/local.properties hybris/hybris/config/localQP.properties\n" +
                     "rm hybris/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
