@@ -71,15 +71,15 @@ if(binding.variables.containsKey("epic_name")) {
     }
 
     job("poll-and-deploy-${epic_name}-hybris") {
-        // parameters {
-            // stringParam('bamboo.build.working.directory', 'target')
-        // }
         scm {
             git {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
                     branch("$epic_name")
+                }
+                extensions {
+                    relativeTargetDirectory('repo')
                 }
             }
         }
@@ -88,16 +88,16 @@ if(binding.variables.containsKey("epic_name")) {
         // }
         steps {
             shell(
-                    "rm -rf target\n" +
-                    "mkdir target\n" +
-                    "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* target\n" +
-                    "cp -R hybris target/.\n" +
-                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar target/hybris/config/licence/hybrislicence.jar\n" +
-                    "cd target/hybris/bin/platform\n" +
+                    "rm -rf hybris\n" +
+                    "mkdir hybris\n" +
+                    "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
+                    "cp -R repo/hybris hybris/.\n" +
+                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/hybris/config/licence/hybrislicence.jar\n" +
+                    "cd hybris/hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
-                    "cp -v  target/hybris/config/qp/local.properties target/hybris/config/localQP.properties\n" +
-                    "rm target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "cp -v  target/hybris/config/qp/solr.impex target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cp -v  hybris/hybris/config/qp/local.properties hybris/hybris/config/localQP.properties\n" +
+                    "rm hybris/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cp -v  hybris/hybris/config/qp/solr.impex hybris/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "ant -Duseconfig=QP clean all\n" +
                     "ant production\n"
                  )
