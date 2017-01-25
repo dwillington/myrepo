@@ -91,15 +91,15 @@ if(binding.variables.containsKey("epic_name")) {
                     "rm -rf target\n" +
                     "mkdir target\n" +
                     "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* target\n" +
-                    "cp -R hybris/. target/." +
-                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar target/hybris/config/license/hybrislicence.jar" +
-                    "cd /hybris/bin/platform" +
-                    ". ./setantenv.sh" +
-                    "cp -v  target/hybris/config/qp/local.properties target/hybris/config/localQP.properties" +
-                    "rm target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex" +
-                    "cp -v  target/hybris/config/qp/solr.impex target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex" +
-                    "ant -Duseconfig=QP clean all" +
-                    "ant production"
+                    "cp -R hybris/. target/.\n" +
+                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar target/hybris/config/license/hybrislicence.jar\n" +
+                    "cd /hybris/bin/platform\n" +
+                    ". ./setantenv.sh\n" +
+                    "cp -v  target/hybris/config/qp/local.properties target/hybris/config/localQP.properties\n" +
+                    "rm target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cp -v  target/hybris/config/qp/solr.impex target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "ant -Duseconfig=QP clean all\n" +
+                    "ant production\n"
                  )
             // shell(
                 // "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
