@@ -92,7 +92,7 @@ if(binding.variables.containsKey("epic_name")) {
                     "mkdir target\n" +
                     "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* target\n" +
                     "cp -R hybris target/.\n" +
-                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar target/hybris/config/license/hybrislicence.jar\n" +
+                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar target/hybris/config/licence/hybrislicence.jar\n" +
                     "cd /hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
                     "cp -v  target/hybris/config/qp/local.properties target/hybris/config/localQP.properties\n" +
