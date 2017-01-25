@@ -77,7 +77,7 @@ if(binding.variables.containsKey("epic_name")) {
         scm {
             git {
                 remote {
-                    url("http://stash.homedepot.ca/scm/hdca/hybris.git")
+                    url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
                     branch("$epic_name")
                 }
