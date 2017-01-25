@@ -52,7 +52,7 @@ if(binding.variables.containsKey("epic_name")) {
         steps {
             maven {
                 rootPOM('pom.xml')
-                goals("clean assembly:assembly -Pbuild-httpd-config,qp -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
+                goals("clean assembly:assembly -Pbuild-httpd-config,dev -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 mavenInstallation('apache-maven-3.3.9')
                 jdk('JDK 8')
             }
