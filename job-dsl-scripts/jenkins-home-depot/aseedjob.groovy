@@ -9,7 +9,7 @@
 // JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 // JENKINS_JAVA_OPTIONS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
 
-// cp global maven settins.xml (everytime I guess)
+// icp global maven settins.xml (everytime I guess)
 // wow major hard coding below!
 //println "/bin/cp -rf /var/lib/jenkins/workspace/a-seed-job/job-dsl-scripts/sync-settings/settings.xml /var/lib/jenkins/settings.xml".execute().text
 
