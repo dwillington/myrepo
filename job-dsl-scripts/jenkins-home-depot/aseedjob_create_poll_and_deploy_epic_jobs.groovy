@@ -72,7 +72,7 @@ if(binding.variables.containsKey("epic_name")) {
 
     job("poll-and-deploy-${epic_name}-hybris") {
         // parameters {
-            // stringParam('bamboo.build.working.directory', './')
+            // stringParam('bamboo.build.working.directory', 'target')
         // }
         scm {
             git {
@@ -86,14 +86,28 @@ if(binding.variables.containsKey("epic_name")) {
         // triggers {
             // scm('H/10 * * * *')
         // }
-        // steps {
+        steps {
+            shell(
+                    "rm -rf target\n" +
+                    "mkdir target\n" +
+                    "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* target\n" +
+                    "cp -R hybris/. target/." +
+                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar target/hybris/config/license/hybrislicence.jar" +
+                    "cd /hybris/bin/platform" +
+                    ". ./setantenv.sh" +
+                    "cp -v  target/hybris/config/qp/local.properties target/hybris/config/localQP.properties" +
+                    "rm target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex" +
+                    "cp -v  target/hybris/config/qp/solr.impex target/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex" +
+                    "ant -Duseconfig=QP clean all" +
+                    "ant production"
+                 )
             // shell(
                 // "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 // "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 // "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/apache/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz\n" + 
                 // "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 apache\n"
                  // )
-        // }
+        }
         publishers {
             logRotator {
                 numToKeep(10)
