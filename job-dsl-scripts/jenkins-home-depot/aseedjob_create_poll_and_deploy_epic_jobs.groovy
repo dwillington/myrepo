@@ -95,10 +95,10 @@ if(binding.variables.containsKey("epic_name")) {
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
                     "cd hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
-                    "cp -v  hybris/config/qp/local.properties hybris/hybris/config/localQP.properties\n" +
+                    "cp -v hybris/config/dev/local.properties hybris/hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "cp -v  hybris/config/qp/solr.impex hybris/hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "ant -Duseconfig=QP clean all\n" +
+                    "cp -v  hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "ant -Duseconfig=DEV clean all\n" +
                     "ant production\n"
                  )
             // shell(
