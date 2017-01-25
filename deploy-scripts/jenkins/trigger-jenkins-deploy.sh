@@ -7,7 +7,7 @@ if [ $# -lt 2 ]; then
 fi
 
 export epic_name=epic2
-export project_name=solr
+export project_name=$2
 
 export JENKINS_SERVER=104.198.103.152
 export CRUMB=$(curl --user admin:76a4a60136ff3f563f7ad5c3fd52552d http://$JENKINS_SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
