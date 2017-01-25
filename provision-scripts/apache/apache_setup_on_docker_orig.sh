@@ -31,6 +31,7 @@ sed -i 's/ln0a76/epic_name-hybris/g' /etc/httpd/conf/vhost-z443.conf
 sed -i 's/ln0a76/epic_name-hybris/g' /etc/httpd/conf/vhost-x8888.conf
 sed -i 's/amphdcaservices-dev.homedepot.ca/epic_name-hybris/g' /etc/httpd/conf/vhost-a80.conf
 sed -i 's/amphdcaservices-dev.homedepot.ca/epic_name-hybris/g' /etc/httpd/conf/vhost-z443.conf
+sed -i 's/-qa-/-dev-/g' /opt/apache/scripts/init-apache.sh
 sed -i 's/`hostname -s`/*/g' /opt/apache/scripts/fetch-plp-map.sh
 sed -i 's/`hostname -s`/*/g' /opt/apache/scripts/fetch-url-translation-map.sh
 
