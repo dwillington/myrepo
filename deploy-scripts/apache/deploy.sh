@@ -18,4 +18,4 @@ scp $SSH_ARGS $ARTIFACT_LOCATION/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz root@$DES
 scp $SSH_ARGS deploy-local.sh root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS apache_deploy_on_docker.sh root@$DESTINATION_HOST:/root/.
 
-# ssh $SSH_ARGS root@$DESTINATION_HOST /root/deploy-local.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/deploy-local.sh
