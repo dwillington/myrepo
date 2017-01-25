@@ -95,17 +95,17 @@ if(binding.variables.containsKey("epic_name")) {
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
                     "cd hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
-                    "cp -v hybris/config/dev/local.properties hybris/hybris/config/localDEV.properties\n" +
+                    "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "cp -v  hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "ant -Duseconfig=DEV clean all\n" +
                     "ant production\n"
                  )
             // shell(
                 // "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 // "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                // "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/apache/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz\n" + 
-                // "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 apache\n"
+                // "/root/google-cloud-sdk/bin/gsutil cp hybris/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz\n" + 
+                // "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 hybris\n"
                  // )
         }
         publishers {
