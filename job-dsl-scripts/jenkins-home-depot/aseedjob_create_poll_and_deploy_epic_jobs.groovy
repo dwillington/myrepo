@@ -91,7 +91,7 @@ if(binding.variables.containsKey("epic_name")) {
                     "rm -rf hybris\n" +
                     "mkdir hybris\n" +
                     "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
-                    "cp -R repo/hybris hybris/.\n" +
+                    "cp -R repo/hybris/* hybris/.\n" +
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
                     "cd hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
