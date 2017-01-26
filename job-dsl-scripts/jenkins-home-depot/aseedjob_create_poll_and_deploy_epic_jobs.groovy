@@ -135,14 +135,14 @@ if(binding.variables.containsKey("epic_name")) {
                     "ant -Duseconfig=DEV clean all\n" +
                     "ant production\n"
                  )
-            // shell(
-                // "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                // "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                // "/root/google-cloud-sdk/bin/gsutil cp hybris/temp/hybris/hybrisServer/hybrisServer/*.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/\n" + 
+            shell(
+                "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
+                "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
+                // "/root/google-cloud-sdk/bin/gsutil cp hybris/temp/hybris/hybrisServer/*.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/\n" + 
                 // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/xxx\n" + 
                 // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/xxx\n" + 
-                // "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 hybris\n"
-                 // )
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 hybris\n"
+                 )
         }
         publishers {
             logRotator {
