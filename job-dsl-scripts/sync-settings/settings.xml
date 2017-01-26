@@ -2,7 +2,7 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-  <proxies>
+    <proxies>
         <proxy>
             <id>homedepot-qa-proxy</id>
             <active>true</active>
@@ -10,5 +10,22 @@
             <host>str-www-proxy2-qa.homedepot.com</host>
             <port>8080</port>
         </proxy>
-  </proxies>
+
+    </proxies>
+<!--
+    <profiles>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <crx.password>voltron1*</crx.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>qp</id>
+            <properties>
+                <crx.password>voltron1*</crx.password>
+            </properties>
+        </profile>
+    </profiles>
+-->
 </settings>
