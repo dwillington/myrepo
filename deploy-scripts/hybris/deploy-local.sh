@@ -23,4 +23,4 @@ cp -p /root/wrapper.conf.base wrapper.conf
 sh /root/start_hybris.sh
 
 ls -al /opt/hybris/hybris/log/tomcat
-tail -100 /opt/hybris/hybris/log/tomcat/console-*.log
+#tail -100 /opt/hybris/hybris/log/tomcat/console-*.log
