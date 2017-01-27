@@ -86,6 +86,10 @@ if(binding.variables.containsKey("epic_name")) {
             // scm('H/10 * * * *')
         // }
         steps {
+            shell(
+                "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml" + 
+                ""
+            )
             maven {
                 rootPOM('pom.xml')
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
