@@ -26,8 +26,8 @@ if(binding.variables.containsKey("epic_name")) {
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz\n" + 
-                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 solr\n"
+                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz\n" + 
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
                  )
         }
         publishers {
@@ -61,8 +61,8 @@ if(binding.variables.containsKey("epic_name")) {
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/apache/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz\n" + 
-                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 apache\n"
+                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/apache/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz\n" + 
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} apache\n"
                  )
         }
         publishers {
@@ -99,9 +99,8 @@ if(binding.variables.containsKey("epic_name")) {
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                // the following will not be necessary since the build itself does the deployment
-                // "/root/google-cloud-sdk/bin/gsutil cp homedepot-apps-0.0.1-SNAPSHOT.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/aem/homedepot-apps-0.0.1-SNAPSHOT.zip\n" + 
-                // "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 aem\n" +
+                "/root/google-cloud-sdk/bin/gsutil cp homedepot-apps/target/homedepot.ca.homedepot-apps.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/aem/homedepot.ca.homedepot-apps.zip\n" + 
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} aem\n" +
                 ""
             )
         }
@@ -147,10 +146,10 @@ if(binding.variables.containsKey("epic_name")) {
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 // commented out since the build creates prod based deployment which is not compatible with local.properties
-                // "/root/google-cloud-sdk/bin/gsutil cp hybris/temp/hybris/hybrisServer/*.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/\n" + 
-                // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/xxx\n" + 
-                // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/hybris/xxx\n" + 
-                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 hybris\n"
+                // "/root/google-cloud-sdk/bin/gsutil cp hybris/temp/hybris/hybrisServer/*.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/\n" + 
+                // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/xxx\n" + 
+                // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/xxx\n" + 
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} hybris\n"
                  )
         }
         publishers {
