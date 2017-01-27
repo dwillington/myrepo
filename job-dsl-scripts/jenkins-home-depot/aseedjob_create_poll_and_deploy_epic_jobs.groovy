@@ -89,7 +89,8 @@ if(binding.variables.containsKey("epic_name")) {
             maven {
                 rootPOM('pom.xml')
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
-                goals("install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='voltron1*' -pl '!homedepot-integration-tests'")
+                // TODO use an environment variable for the ip address
+                goals("install -Pqp -Dcrx.failOnError=false -Dcrx.url=http://104.199.123.125: -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
                 // -pl '!test-content,!integration-tests,!integration-test-runners'
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
@@ -98,7 +99,7 @@ if(binding.variables.containsKey("epic_name")) {
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                // homedepot-apps/target/homedepot.ca.homedepot-apps.zip
+                // the following will not be necessary since the build itself does the deployment
                 // "/root/google-cloud-sdk/bin/gsutil cp homedepot-apps-0.0.1-SNAPSHOT.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/aem/homedepot-apps-0.0.1-SNAPSHOT.zip\n" + 
                 // "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh epic2 aem\n" +
                 ""
