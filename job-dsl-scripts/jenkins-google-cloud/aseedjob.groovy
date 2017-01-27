@@ -98,7 +98,7 @@ job("deploy-epic-project") {
     }
 }
 
-createPollAndDeployJob('epic1', 'solr')
+// createPollAndDeployJob('epic1', 'solr')
 
 def createPollAndDeployJob(epic_name, project_name) {
     job("poll-and-deploy-${epic_name}-${project_name}") {
