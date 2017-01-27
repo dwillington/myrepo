@@ -87,7 +87,7 @@ if(binding.variables.containsKey("epic_name")) {
         // }
         steps {
             shell(
-                "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml" + 
+                // "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml" + 
                 ""
             )
             maven {
