@@ -266,6 +266,7 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(10)
             }
+            downstream('restart-aem-ld4928', 'SUCCESS')
         }
     }
     
