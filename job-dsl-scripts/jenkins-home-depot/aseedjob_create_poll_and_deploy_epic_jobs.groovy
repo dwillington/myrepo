@@ -261,7 +261,7 @@ if(binding.variables.containsKey("epic_name")) {
             )
             maven {
                 rootPOM('pom.xml')
-                goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' sonar:sonar")
+                goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' sonar:sonar -pl '!homedepot-integration-tests/integration-test-runners,!homedepot-integration-tests/integration-tests,!homedepot-integration-tests/test-content'")
                 property("sonar.host.url", "http://104.198.108.236")
                 // property("sonar.host.url", "http://172.24.100.252")
                 mavenInstallation('apache-maven-3.3.9')
