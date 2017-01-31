@@ -100,7 +100,6 @@ if(binding.variables.containsKey("epic_name")) {
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 // TODO use an environment variable for the ip address
                 goals("install -Pqp -Dcrx.failOnError=false -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
-                // -pl '!test-content,!integration-tests,!integration-test-runners'
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -110,6 +109,22 @@ if(binding.variables.containsKey("epic_name")) {
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "/root/google-cloud-sdk/bin/gsutil cp homedepot-apps/target/homedepot.ca.homedepot-apps.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/aem/homedepot.ca.homedepot-apps.zip\n" + 
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} aem\n" +
+                ""
+            )
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
+            downstream('restart-aem-ld4928', 'SUCCESS')
+        }
+    }
+
+    job("restart-aem-ld4928") {
+        steps {
+            shell(
+                "ssh root@ld4928 /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
+                "ssh root@ld4928 /root/aem_setup_publish.sh\n" + 
                 ""
             )
         }
