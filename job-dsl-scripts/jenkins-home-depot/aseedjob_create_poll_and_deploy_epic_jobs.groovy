@@ -87,10 +87,10 @@ if(binding.variables.containsKey("epic_name")) {
         // }
         steps {
             shell(
-                // "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml" + 
-                "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml" + 
-                // "sed -i -e \"s/<useProxy>false<\/useProxy>/<useProxy>true<\/useProxy>/g\" homedepot-apps/pom.xml" + 
-                "grep failOnError homedepot-apps/pom.xml" + 
+                // "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml\n" + 
+                "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml\n" + 
+                // "sed -i -e \"s/<useProxy>false<\/useProxy>/<useProxy>true<\/useProxy>/g\" homedepot-apps/pom.xml\n" + 
+                "grep failOnError homedepot-apps/pom.xml\n" + 
                 ""
             )
             maven {
