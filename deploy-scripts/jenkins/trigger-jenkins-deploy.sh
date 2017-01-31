@@ -6,7 +6,7 @@ if [ $# -lt 2 ]; then
   exit 2
 fi
 
-export epic_name=epic2
+export epic_name=$1
 export project_name=$2
 
 export JENKINS_SERVER=104.198.103.152
