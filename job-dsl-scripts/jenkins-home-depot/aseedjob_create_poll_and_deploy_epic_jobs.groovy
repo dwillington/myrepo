@@ -218,7 +218,7 @@ if(binding.variables.containsKey("epic_name")) {
         scm {
             git {
                 remote {
-                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
+                    url("http://stash.homedepot.ca/scm/hdca/apache.git")
                     credentials('axa8962-credentials')
                     branch("$epic_name")
                 }
@@ -229,7 +229,7 @@ if(binding.variables.containsKey("epic_name")) {
                 rootPOM('pom.xml')
                 goals("assembly:assembly -Pbuild-httpd-config,dev -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 property("sonar.host.url", "http://104.198.108.236")
-//                property("sonar.host.url", "http://172.24.100.252")
+                // property("sonar.host.url", "http://172.24.100.252")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
