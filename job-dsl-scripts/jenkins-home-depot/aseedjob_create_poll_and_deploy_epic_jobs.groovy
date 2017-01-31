@@ -86,13 +86,13 @@ if(binding.variables.containsKey("epic_name")) {
             // scm('H/10 * * * *')
         // }
         steps {
-            // shell(
+            shell(
                 // "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml" + 
                 "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml" + 
                 // "sed -i -e \"s/<useProxy>false<\/useProxy>/<useProxy>true<\/useProxy>/g\" homedepot-apps/pom.xml" + 
                 "grep failOnError homedepot-apps/pom.xml" + 
                 // ""
-            // )
+            )
             maven {
                 rootPOM('pom.xml')
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
