@@ -91,7 +91,7 @@ if(binding.variables.containsKey("epic_name")) {
                 "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml" + 
                 // "sed -i -e \"s/<useProxy>false<\/useProxy>/<useProxy>true<\/useProxy>/g\" homedepot-apps/pom.xml" + 
                 "grep failOnError homedepot-apps/pom.xml" + 
-                // ""
+                ""
             )
             maven {
                 rootPOM('pom.xml')
