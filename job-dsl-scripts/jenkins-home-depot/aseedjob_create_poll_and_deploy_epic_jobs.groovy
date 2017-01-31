@@ -214,7 +214,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    job("sonar-${epic_name}-solr") {
+    job("sonar-${epic_name}-apache") {
         scm {
             git {
                 remote {
