@@ -252,6 +252,13 @@ if(binding.variables.containsKey("epic_name")) {
             }
         }
         steps {
+            shell(
+                "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml\n" + 
+                "sed -i \"27i <failOnError>false</failOnError>\" homedepot-integration-tests/test-content/pom.xml\n" + 
+                "sed -i \"27i <useProxy>false</useProxy>\" homedepot-integration-tests/test-content/pom.xml\n" + 
+                "grep -C 2 failOnError homedepot-apps/pom.xml\n" + 
+                ""
+            )
             maven {
                 rootPOM('pom.xml')
                 goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests' sonar:sonar")
