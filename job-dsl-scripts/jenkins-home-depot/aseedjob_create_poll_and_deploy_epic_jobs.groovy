@@ -172,9 +172,8 @@ if(binding.variables.containsKey("epic_name")) {
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 // commented out since the build creates prod based deployment which is not compatible with local.properties
                 // "/root/google-cloud-sdk/bin/gsutil cp hybris/temp/hybris/hybrisServer/*.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/\n" + 
-                // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/xxx\n" + 
-                // "/root/google-cloud-sdk/bin/gsutil cp hybris/xxx gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/xxx\n" + 
-                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} hybris\n"
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} hybris\n" +
+                ""
                  )
         }
         publishers {
@@ -185,7 +184,8 @@ if(binding.variables.containsKey("epic_name")) {
     }
 
     // sonar job definitions
-
+if(false)
+{
     job("sonar-${epic_name}-solr") {
         scm {
             git {
@@ -201,6 +201,7 @@ if(binding.variables.containsKey("epic_name")) {
                 rootPOM('pom.xml')
                 goals("assembly:assembly sonar:sonar -Pbuild-solr-config,dev -Dsolr-type=master -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 property("sonar.host.url", "http://104.198.108.236")
+                // property("sonar.host.url", "http://172.24.100.252")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -276,7 +277,7 @@ if(binding.variables.containsKey("epic_name")) {
             downstream('restart-aem-ld4928', 'SUCCESS')
         }
     }
-    
+}   
 }
 
 
