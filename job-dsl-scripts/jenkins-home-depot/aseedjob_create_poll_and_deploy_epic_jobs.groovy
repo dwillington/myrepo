@@ -34,6 +34,7 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(10)
             }
+            downstream('sonar-${epic_name}-solr', 'SUCCESS')
         }
     }
 
@@ -183,6 +184,37 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
+    // sonar job definitions
+
+    job("sonar-${epic_name}-solr") {
+        scm {
+            git {
+                remote {
+                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
+                    credentials('axa8962-credentials')
+                    branch("$epic_name")
+                }
+            }
+        }
+        steps {
+            maven {
+                rootPOM('pom.xml')
+                goals("clean assembly:assembly sonar:sonar -Pbuild-solr-config,dev -Dsolr-type=master")
+                property("sonar.host.url", "http://104.198.108.236")
+                mavenInstallation('apache-maven-3.3.9')
+                localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+                jdk('JDK 8')
+            }
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
+        }
+    }
+
+    
+    
 }
 
 
