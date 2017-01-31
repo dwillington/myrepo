@@ -1,3 +1,4 @@
+emailList = 'SAIPRASADH_SEKAR@homedepot.com,AMJAD_ASHRAF@homedepot.com'
 
 // the following check is to allow this to skip when master seed job is run
 if(binding.variables.containsKey("epic_name")) {
@@ -31,6 +32,7 @@ if(binding.variables.containsKey("epic_name")) {
                  )
         }
         publishers {
+            // mailer(emailList, false, false)
             logRotator {
                 numToKeep(10)
             }
