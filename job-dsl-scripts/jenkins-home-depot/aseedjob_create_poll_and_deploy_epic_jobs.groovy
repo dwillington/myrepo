@@ -89,7 +89,6 @@ if(binding.variables.containsKey("epic_name")) {
         // }
         steps {
             shell(
-                // "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml\n" + 
                 "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml\n" + 
                 "sed -i \"27i <failOnError>false</failOnError>\" homedepot-integration-tests/test-content/pom.xml\n" + 
                 "sed -i \"27i <useProxy>false</useProxy>\" homedepot-integration-tests/test-content/pom.xml\n" + 
@@ -101,7 +100,7 @@ if(binding.variables.containsKey("epic_name")) {
                 rootPOM('pom.xml')
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 // TODO use an environment variable for the ip address
-                goals("install -Pqp -Dcrx.failOnError=false -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
+                goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -242,6 +241,33 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
     
+    job("sonar-${epic_name}-aem") {
+        scm {
+            git {
+                remote {
+                    url("http://stash.homedepot.ca/scm/hdca/aem.git")
+                    credentials('axa8962-credentials')
+                    branch("$epic_name")
+                }
+            }
+        }
+        steps {
+            maven {
+                rootPOM('pom.xml')
+                goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests' sonar:sonar")
+                property("sonar.host.url", "http://104.198.108.236")
+                // property("sonar.host.url", "http://172.24.100.252")
+                mavenInstallation('apache-maven-3.3.9')
+                localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+                jdk('JDK 8')
+            }
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
+        }
+    }
     
 }
 
