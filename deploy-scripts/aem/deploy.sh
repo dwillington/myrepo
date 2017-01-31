@@ -7,7 +7,7 @@ fi
 
 gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-builds/ /tmp/epic-builds
 export ARTIFACT_LOCATION=/tmp/epic-builds/$1/aem
-export DESTINATION_HOST=$1-hybris
+export DESTINATION_HOST=$1-aem
 
 scp $SSH_ARGS $ARTIFACT_LOCATION/homedepot.ca.homedepot-apps.zip root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS deploy-local.sh root@$DESTINATION_HOST:/root/.
