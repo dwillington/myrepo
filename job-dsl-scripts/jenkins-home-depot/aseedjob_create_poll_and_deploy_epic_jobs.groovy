@@ -199,7 +199,7 @@ if(binding.variables.containsKey("epic_name")) {
         steps {
             maven {
                 rootPOM('pom.xml')
-                goals("clean assembly:assembly sonar:sonar -Pbuild-solr-config,dev -Dsolr-type=master")
+                goals("assembly:assembly sonar:sonar -Pbuild-solr-config,dev -Dsolr-type=master")
                 property("sonar.host.url", "http://104.198.108.236")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
