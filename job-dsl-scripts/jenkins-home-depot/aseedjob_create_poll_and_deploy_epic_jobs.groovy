@@ -86,15 +86,17 @@ if(binding.variables.containsKey("epic_name")) {
             // scm('H/10 * * * *')
         // }
         steps {
-            shell(
+            // shell(
                 // "cp /tmp/poll-and-deploy-master-aem/pom.xml /var/lib/jenkins/workspace/poll-and-deploy-master-aem/pom.xml" + 
-                ""
-            )
+                // "sed -i -e \"s/<useProxy>false<\/useProxy>/<useProxy>true<\/useProxy>/g\" homedepot-apps/pom.xml" + 
+                // "grep useProxy homedepot-apps/pom.xml" + 
+                // ""
+            // )
             maven {
                 rootPOM('pom.xml')
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 // TODO use an environment variable for the ip address
-                goals("install -Pqp -Dcrx.failOnError=false -Dcrx.url=http://104.199.123.125 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
+                goals("install -Pqp -Dcrx.failOnError=false -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
                 // -pl '!test-content,!integration-tests,!integration-test-runners'
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
