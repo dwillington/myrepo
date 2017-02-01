@@ -120,7 +120,7 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(10)
             }
-            downstream('restart-aem-ld4928', 'SUCCESS')
+            downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
     }
 
@@ -277,7 +277,7 @@ if(false)
             logRotator {
                 numToKeep(10)
             }
-            downstream('restart-aem-ld4928', 'SUCCESS')
+            downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
     }
 }   
