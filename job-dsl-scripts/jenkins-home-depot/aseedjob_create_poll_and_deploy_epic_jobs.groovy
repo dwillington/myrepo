@@ -33,7 +33,7 @@ if(binding.variables.containsKey("epic_name")) {
                  )
         }
         publishers {
-            // mailer(emailList, false, false)
+            mailer(emailList, false, false)
             logRotator {
                 numToKeep(10)
             }
