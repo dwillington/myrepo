@@ -1,4 +1,5 @@
-emailList = 'SAIPRASADH_SEKAR@homedepot.com,AMJAD_ASHRAF@homedepot.com'
+emailList = 'AMJAD_ASHRAF@homedepot.com' //SAIPRASADH_SEKAR@homedepot.com,
+hd_aem_host = '172.24.103.0'
 
 // the following check is to allow this to skip when master seed job is run
 if(binding.variables.containsKey("epic_name")) {
@@ -102,7 +103,7 @@ if(binding.variables.containsKey("epic_name")) {
                 rootPOM('pom.xml')
                 // goals("clean install -Pqp -Dcrx.url=http://ln0bd7.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
                 // TODO use an environment variable for the ip address
-                goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
+                goals("install -Pqp -Dcrx.url=http://${hd_aem_host}:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' -pl '!homedepot-integration-tests'")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -264,7 +265,7 @@ if(false)
             )
             maven {
                 rootPOM('pom.xml')
-                goals("install -Pqp -Dcrx.url=http://172.24.102.175:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' sonar:sonar -pl '!homedepot-integration-tests/integration-test-runners,!homedepot-integration-tests/integration-tests,!homedepot-integration-tests/test-content'")
+                goals("install -Pqp -Dcrx.url=http://${hd_aem_host}:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' sonar:sonar -pl '!homedepot-integration-tests/integration-test-runners,!homedepot-integration-tests/integration-tests,!homedepot-integration-tests/test-content'")
                 property("sonar.host.url", "http://104.198.108.236")
                 // property("sonar.host.url", "http://172.24.100.252")
                 mavenInstallation('apache-maven-3.3.9')
