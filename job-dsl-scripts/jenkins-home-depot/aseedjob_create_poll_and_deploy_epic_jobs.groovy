@@ -124,11 +124,11 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    job("restart-aem-ld4928") {
+    job("restart-aem-${hd_aem_host}") {
         steps {
             shell(
-                "ssh root@ld4928 /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
-                "ssh root@ld4928 /root/aem_setup_publish.sh\n" + 
+                "ssh root@${hd_aem_host} /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
+                "ssh root@${hd_aem_host} /root/aem_setup_publish.sh\n" + 
                 ""
             )
         }
