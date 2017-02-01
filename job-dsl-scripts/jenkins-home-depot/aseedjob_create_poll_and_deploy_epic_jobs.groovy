@@ -34,11 +34,14 @@ if(binding.variables.containsKey("epic_name")) {
                  )
         }
         publishers {
-            mailer(emailList, false, false)
+            extendedEmail {
+                recipientList(emailList)
+                contentType('text/html')
+            }
             logRotator {
                 numToKeep(10)
             }
-            downstream('sonar-${epic_name}-solr', 'SUCCESS')
+            downstream("sonar-${epic_name}-solr", 'SUCCESS')
         }
     }
 
@@ -74,7 +77,7 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(10)
             }
-            downstream('sonar-${epic_name}-apache', 'SUCCESS')
+            downstream("sonar-${epic_name}-apache", 'SUCCESS')
         }
     }
 
@@ -146,7 +149,8 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    // branch("$epic_name")
+                    branch("release/R8-16")
                 }
                 extensions {
                     relativeTargetDirectory('repo')
