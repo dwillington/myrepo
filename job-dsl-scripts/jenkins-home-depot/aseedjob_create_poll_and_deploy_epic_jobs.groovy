@@ -10,7 +10,8 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    // branch("$epic_name")
+                    branch("release/R9-16")
                 }
             }
         }
