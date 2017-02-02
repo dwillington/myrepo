@@ -13,7 +13,7 @@ export JENKINS_SERVER=104.198.103.152
 export CRUMB=$(curl --user admin:76a4a60136ff3f563f7ad5c3fd52552d http://$JENKINS_SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
 curl -H "$CRUMB" \
      --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
-     -X POST http://$JENKINS_SERVER/job/deploy-epic-project/buildWithParameters?delay=0&epic_name=$epic_name\&project_name=$project_name
+     -X POST http://$JENKINS_SERVER/job/deploy-epic-project/buildWithParameters?delay=0\&epic_name=$epic_name\&project_name=$project_name
 
 # the following will not work because $epic_name/$project_name are in '' so they will be taken literally and not substitued
 #curl -X POST http://$JENKINS_SERVER/job/deploy-epic-project/build \
