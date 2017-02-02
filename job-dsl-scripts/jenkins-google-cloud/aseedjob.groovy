@@ -72,6 +72,7 @@ job("tear-down-epic-environment") {
 }
 
 job("deploy-epic-project") {
+    concurrentBuild()
     parameters {
         stringParam('epic_name')
         stringParam('project_name')
