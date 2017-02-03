@@ -285,7 +285,51 @@ if(false)
             downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
     }
+
 }   
+
+    job("sonar-${epic_name}-hybris") {
+        scm {
+            git {
+                remote {
+                    url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
+                    credentials('axa8962-credentials')
+                    // branch("$epic_name")
+                    branch("release/R8-16")
+                }
+                extensions {
+                    relativeTargetDirectory('repo')
+                }
+            }
+        }
+        // triggers {
+            // scm('H/10 * * * *')
+        // }
+        steps {
+            shell(
+                    "rm -rf hybris\n" +
+                    "mkdir hybris\n" +
+                    "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
+                    "cp -R repo/hybris/* hybris/.\n" +
+                    "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
+                    "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
+                    "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cd hybris/bin/platform\n" +
+                    ". ./setantenv.sh\n" +
+                    "ant -Duseconfig=DEV clean all\n" +
+                    "ant production\n" + 
+                    "ant sonar\n" + 
+                    ""
+                 )
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
+        }
+    }
+
 }
 
 
