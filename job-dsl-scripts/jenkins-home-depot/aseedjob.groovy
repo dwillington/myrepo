@@ -20,6 +20,9 @@ proc.waitForOrKill(1000)
 println "out> $sout err> $serr"
 
 job("create-poll-and-build-epic-jobs") {
+    parameters {
+        stringParam('epic_name', 'master')
+    }
     scm {
         git {
             remote {
