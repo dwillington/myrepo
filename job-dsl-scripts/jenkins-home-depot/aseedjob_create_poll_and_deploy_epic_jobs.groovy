@@ -314,9 +314,9 @@ if(false)
                     "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "/bin/cp -vrf /bamboo/data/Jacoco/local.properties hybris/config/local.properties" +
-                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar.xml hybris/bin/platform/resources/ant/sonar.xml" +
-                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar-ant-task-2.2.jar hybris/bin/platform/resources/ant/lib/sonar-ant-task-2.2.jar" +
+                    "/bin/cp -vrf /bamboo/data/Jacoco/local.properties hybris/config/local.properties\n" +
+                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar.xml hybris/bin/platform/resources/ant/sonar.xml\n" +
+                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar-ant-task-2.2.jar hybris/bin/platform/resources/ant/lib/sonar-ant-task-2.2.jar\n" +
                     "cd hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
                     "ant -Duseconfig=DEV clean all\n" +
