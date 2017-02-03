@@ -1,5 +1,7 @@
 emailList = 'AMJAD_ASHRAF@homedepot.com' //SAIPRASADH_SEKAR@homedepot.com,
 hd_aem_host = '172.24.103.0'
+sonar_host = '104.198.108.236'
+// property("sonar.host.url", "http://172.24.100.252")
 
 // the following check is to allow this to skip when master seed job is run
 if(binding.variables.containsKey("epic_name")) {
@@ -208,8 +210,7 @@ if(false)
             maven {
                 rootPOM('pom.xml')
                 goals("assembly:assembly sonar:sonar -Pbuild-solr-config,dev -Dsolr-type=master -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
-                property("sonar.host.url", "http://104.198.108.236")
-                // property("sonar.host.url", "http://172.24.100.252")
+                property("sonar.host.url", "http://${sonar_host}")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -236,8 +237,7 @@ if(false)
             maven {
                 rootPOM('pom.xml')
                 goals("assembly:assembly -Pbuild-httpd-config,dev sonar:sonar -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080")
-                property("sonar.host.url", "http://104.198.108.236")
-                // property("sonar.host.url", "http://172.24.100.252")
+                property("sonar.host.url", "http://${sonar_host}")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -271,8 +271,7 @@ if(false)
             maven {
                 rootPOM('pom.xml')
                 goals("install -Pqp -Dcrx.url=http://${hd_aem_host}:4503 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dcrx.password='admin' sonar:sonar -pl '!homedepot-integration-tests/integration-test-runners,!homedepot-integration-tests/integration-tests,!homedepot-integration-tests/test-content'")
-                property("sonar.host.url", "http://104.198.108.236")
-                // property("sonar.host.url", "http://172.24.100.252")
+                property("sonar.host.url", "http://${sonar_host}")
                 mavenInstallation('apache-maven-3.3.9')
                 localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
                 jdk('JDK 8')
@@ -315,11 +314,15 @@ if(false)
                     "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "/bin/cp -vrf /bamboo/data/Jacoco/local.properties hybris/config/local.properties"
+                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar.xml hybris/bin/platform/resources/ant/sonar.xml"
+                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar-ant-task-2.2.jar hybris/bin/platform/resources/ant/lib/sonar-ant-task-2.2.jar"
                     "cd hybris/bin/platform\n" +
                     ". ./setantenv.sh\n" +
                     "ant -Duseconfig=DEV clean all\n" +
                     "ant production\n" + 
-                    "ant sonar\n" + 
+                    "export ANT_OPTS=\"-Xmx512m -XX:MaxPermSize=128M -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080\"\n" + 
+                    "ant sonar -Dsonar.host.url=http://${sonar_host} -Dsonar.login=admin -Dsonar.password=admin\n" + 
                     ""
                  )
         }
