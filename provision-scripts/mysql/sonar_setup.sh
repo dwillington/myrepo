@@ -6,4 +6,4 @@ sed -i "110i sonar.web.port=80" /opt/sonarqube-6.2/conf/sonar.properties
 grep -in sonar.web.port /opt/sonarqube-6.2/conf/sonar.properties
 /opt/sonarqube-6.2/bin/linux-x86-64/sonar.sh start
 
-tail -100f /opt/sonarqube-6.2/logs/sonar.log 
+tail -100 /opt/sonarqube-6.2/logs/sonar.log 
