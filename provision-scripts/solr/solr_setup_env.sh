@@ -23,7 +23,7 @@ echo " "
 echo "Start - Extract file"
 echo " "
 
-tar -xvf ~/solr.tar
+tar -xvf /root/solr.tar.gz
 
 echo " "
 echo "End - Extract file"

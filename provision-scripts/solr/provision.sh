@@ -12,8 +12,8 @@ export DESTINATION_HOST=$1
 scp $SSH_ARGS *.sh root@$DESTINATION_HOST:/root/.
 ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 
-scp $SSH_ARGS $INSTALL_REPOSITORY/solr.tar root@$DESTINATION_HOST:/root/.
-scp $SSH_ARGS $INSTALL_REPOSITORY/*.tar.gz root@$DESTINATION_HOST:/root/.
+scp $SSH_ARGS $INSTALL_REPOSITORY/solr.tar.gz root@$DESTINATION_HOST:/root/.
+scp $SSH_ARGS $INSTALL_REPOSITORY/jdk1.8.0_111.tar root@$DESTINATION_HOST:/root/.
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_env.sh
