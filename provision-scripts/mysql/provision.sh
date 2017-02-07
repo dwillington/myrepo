@@ -13,3 +13,4 @@ scp $SSH_ARGS $INSTALL_REPOSITORY/*.rpm root@$DESTINATION_HOST:~/.
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/mysql_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/mysql_setup_env.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/sonar_setup.sh
