@@ -1,0 +1,1 @@
+set password for root@localhost = password("Jasp3r9!");

@@ -3,7 +3,7 @@
 create_vm()
 {
     gcloud compute instances create $1-$2 \
-    --zone=us-west1-b \
+    --zone=us-east1-c \
     --tags $2-ca \
     --image-family centos-7 \
     --image-project centos-cloud \

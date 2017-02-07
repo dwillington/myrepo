@@ -2,11 +2,7 @@ echo " "
 echo "Starting MySQL File Setup"
 echo " "
 
-cd /
-
-mkdir opt
-
-cd opt
+cd /opt
 
 mkdir mysql
 
