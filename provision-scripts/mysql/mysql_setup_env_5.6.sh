@@ -8,11 +8,9 @@ yum install libaio net-tools -y
 
 cd /opt/mysql
 
-rpm -ivh ~/MySQL-shared-5.5.30-1.el6.x86_64.rpm
-
-rpm -ivh ~/MySQL-client-5.5.30-1.el6.x86_64.rpm
-
-rpm -ivh ~/MySQL-server-5.5.30-1.el6.x86_64.rpm
+rpm -ivh /root/MySQL-shared-5.6.16-1.el6.x86_64.rpm
+rpm -ivh /root/MySQL-client-5.6.16-1.el6.x86_64.rpm
+rpm -ivh /root/MySQL-server-5.6.16-1.el6.x86_64.rpm
 
 service mysql start
 
@@ -20,7 +18,8 @@ echo " "
 echo "Setting mysql root password"
 echo " "
 
-/usr/bin/mysqladmin -u root password 'password'
+export mysql_password=`cat ~/.mysql_secret |grep random|cut -d: -f4-|sed 's| ||g'|tail -1` 
+mysql -uroot -p$mysql_password --init-command='set password for root@localhost = password("password")'
 
 echo " "
 echo "Ending MySQL Setup"
