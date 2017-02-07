@@ -8,6 +8,8 @@ create_vm()
     --image-family centos-7 \
     --image-project centos-cloud \
     --boot-disk-size 50 \
+    --custom-cpu=1 \
+    --custom-memory=$3 \
     --metadata-from-file startup-script=./gcloud-scripts/startup.sh
 }
 
@@ -19,8 +21,8 @@ fi
 export epic_name=$1
 echo "epic_name is set to '$epic_name'";
 
-create_vm $epic_name mysql
-create_vm $epic_name hybris
-create_vm $epic_name solr
-create_vm $epic_name aem
-create_vm $epic_name apache
+create_vm $epic_name mysql 2
+create_vm $epic_name hybris 2
+create_vm $epic_name solr 2
+create_vm $epic_name aem 3.75
+create_vm $epic_name apache 2
