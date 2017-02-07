@@ -14,7 +14,7 @@ echo "Setting mysql root password"
 echo " "
 
 export mysql_password="`grep 'temporary.*root@localhost' /var/log/mysqld.log | sed 's/.*root@localhost: //'`"
-mysql -uroot -p$mysql_password < /root/set_initial_password.sql
+mysql --connect-expired-password -uroot -p$mysql_password < /root/set_initial_password.sql
 
 echo " "
 echo "Ending MySQL Setup"
