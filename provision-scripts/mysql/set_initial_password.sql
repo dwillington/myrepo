@@ -1,2 +1,2 @@
 SET GLOBAL validate_password_policy=LOW;
-set password for root@localhost = password("Jasp3r9!");
+set password for root@localhost = password("jasp3r91");

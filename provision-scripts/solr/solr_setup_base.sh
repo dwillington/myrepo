@@ -6,19 +6,11 @@ echo " "
 echo "Switch to Base Directory"
 echo " "
 
-cd /
-
-echo " "
-echo "Create opt Directory"
-echo " "
-
-mkdir opt
-
 echo " "
 echo "Switch to the opt Directory"
 echo " "
 
-cd opt
+cd /opt
 
 echo " "
 echo "Create Directory"
@@ -32,7 +24,7 @@ echo " "
 
 cd solr
 
-yum install unzip -y
+mkdir data
 
 iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -i eth0 -p tcp --dport 8080 -j ACCEPT

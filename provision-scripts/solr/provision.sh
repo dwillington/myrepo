@@ -1,5 +1,5 @@
 export SSH_ARGS='-o StrictHostKeyChecking=no'
-export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Solr
+export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Solr-6.1
 
 if [ $# -lt 1 ]; then
   echo 1>&2 "$0: missing hostname"
@@ -7,13 +7,11 @@ if [ $# -lt 1 ]; then
 fi
 
 export DESTINATION_HOST=$1
-#sshpass -p "password" ssh-copy-id root@$1
 
 scp $SSH_ARGS *.sh root@$DESTINATION_HOST:/root/.
 ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 
 scp $SSH_ARGS $INSTALL_REPOSITORY/solr.tar.gz root@$DESTINATION_HOST:/root/.
-scp $SSH_ARGS $INSTALL_REPOSITORY/jdk1.8.0_111.tar root@$DESTINATION_HOST:/root/.
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_env.sh

@@ -24,5 +24,5 @@ echo " "
 echo "adding mysql schemas"
 echo " "
 
-mysql -uroot -pJasp3r9! < /root/sonar-setup.sql
-mysql -uroot -pJasp3r9! < /root/hybris-setup.sql
+mysql -uroot -pjasp3r91 < /roiot/sonar-setup.sql
+mysql -uroot -pjasp3r91 < /root/hybris-setup.sql
