@@ -12,8 +12,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
-                    // branch("$epic_name")
-                    branch("gcloud")
+                    branch("$epic_name")
                 }
             }
         }
@@ -21,17 +20,11 @@ if(binding.variables.containsKey("epic_name")) {
             // scm('H/10 * * * *')
         // }
         steps {
-            maven {
-                rootPOM('pom.xml')
-                goals("clean assembly:assembly -Pbuild-solr-config,dev -Dsolr-type=master")
-                mavenInstallation('apache-maven-3.3.9')
-                localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
-                jdk('JDK 8')
-            }
             shell(
+                "tar -zcvf solr-configsets.tar.gz configsets"
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                "/root/google-cloud-sdk/bin/gsutil cp target/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz\n" + 
+                "/root/google-cloud-sdk/bin/gsutil cp target/solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
                  )
         }
