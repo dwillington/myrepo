@@ -21,10 +21,10 @@ if(binding.variables.containsKey("epic_name")) {
         // }
         steps {
             shell(
-                "tar -zcvf solr-configsets.tar.gz configsets"
+                "tar -zcvf solr-configsets.tar.gz configsets\n" + 
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                "/root/google-cloud-sdk/bin/gsutil cp target/solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
+                "/root/google-cloud-sdk/bin/gsutil cp solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
                  )
         }
