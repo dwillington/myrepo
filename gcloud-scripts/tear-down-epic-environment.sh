@@ -2,7 +2,7 @@
 
 delete_vm()
 {
-    gcloud compute instances delete --zone us-west1-b --quiet $1-$2
+    gcloud compute instances delete --zone us-east1-c --quiet $1-$2
 }
 
 if [ $# -lt 1 ]; then
