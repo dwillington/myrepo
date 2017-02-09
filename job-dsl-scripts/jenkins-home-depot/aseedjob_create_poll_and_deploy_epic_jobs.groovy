@@ -21,6 +21,7 @@ if(binding.variables.containsKey("epic_name")) {
         // }
         steps {
             shell(
+                "cd homedepot-solr/server/solr\n" + 
                 "tar -zcvf solr-configsets.tar.gz configsets\n" + 
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
