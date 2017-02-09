@@ -1,14 +1,18 @@
-/root/stop_solr.sh
-tar -zcvf /opt/solr/solr-home_backup/bk.`date +%m%d%Y`.tar.gz solr-home/
-cd /opt/solr/build
-tar -zxvf /root/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
-rm -rf /opt/solr/solr-home
-mv /opt/solr/build/solr-home /opt/solr
+/etc/init.d/solr stop
+
+cd /opt/solr/solr-configsets_backup
+tar -zcvf bk.`date +%m%d%Y`.tar.gz /opt/solr/solr/server/solr/configsets
+
+mkdir -p /opt/solr/build && cd /opt/solr/build
+tar -zxvf /root/solr-configsets.tar.gz
+rm -rf /opt/solr/solr/server/solr/configsets
+cp -r /opt/solr/build/configsets /opt/solr/solr/server/solr
+#cp <solr-cloud-in.sh> /etc/default/solr.in.sh
+rm -rf /opt/solr/build
+
 echo "--------------------------------------------------"
 echo "sleeping 2m while waiting for solr to stop..."
 echo "--------------------------------------------------"
-sleep 2m
-/root/start_solr.sh
-find /opt/solr/solr-home_backup/ -name "*.tar.gz" -mtime +7 -print -exec rm {} \;
-
-tail -100 /opt/solr/tomcat/logs/catalina.out
+/etc/init.d/solr start
+find /opt/solr/solr-configsets_backup/ -name "*.tar.gz" -mtime +7 -print -exec rm {} \;
+tail -100 /opt/solr/homedepot-solr/server/logs/solr.log
