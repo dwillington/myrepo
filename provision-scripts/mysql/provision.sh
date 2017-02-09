@@ -15,4 +15,4 @@ ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/mysql_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/mysql_setup_env_5.7.sh
-#ssh $SSH_ARGS root@$DESTINATION_HOST /root/sonar_setup.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/sonar_setup.sh
