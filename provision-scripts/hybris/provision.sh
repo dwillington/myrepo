@@ -16,5 +16,5 @@ ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 scp $SSH_ARGS $INSTALL_REPOSITORY/*.* root@$DESTINATION_HOST:~/.
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_base.sh
-ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_env.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_env_6.2.sh
 
