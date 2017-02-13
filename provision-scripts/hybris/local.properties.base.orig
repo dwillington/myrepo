@@ -19,7 +19,7 @@ email.token.expiration=259200
 reset.email.token.expiration=72
 
 ############### MySQL Settings Start ###############
-db.url=jdbc:mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8
+db.url=jdbc:mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8&useSSL=false
 db.driver=com.mysql.jdbc.Driver
 db.username=hybrisdbuser
 db.password=jasp3r91
@@ -81,6 +81,15 @@ userlistvalidation.default.maxretrytime=3
 ############### User List validation for PLCC cards End###############
 
 # Log Settings
+log4j2.config.xml=
+log4j2.logger.defaultComputeOptimizedPricesStrategy.name=ca.homedepot.core.price.strategies.impl.DefaultComputeOptimizedPricesStrategy
+log4j2.logger.defaultComputeOptimizedPricesStrategy.level=debug
+log4j2.logger.defaultComputeOptimizedPricesStrategy.appenderRef.stdout.ref=STDOUT
+
+log4j2.logger.homedepotcaProductStatusValidator.name=ca.homedepot.validator.HomedepotcaProductStatusValidator
+log4j2.logger.homedepotcaProductStatusValidator.level=debug
+log4j2.logger.homedepotcaProductStatusValidator.appenderRef.stdout.ref=STDOUT
+
 log4j.rootLogger=warn, CONSOLE
 log4j.logger.ca.homedepot.core=debug
 log4j.logger.ca.homedepot.core.promotion.service.impl.DefaultHomeDepotcaPromotionService=info
@@ -180,7 +189,7 @@ acceleratorservices.batch.impex.max-threads=8
 ############## Cybersource Settings Start ##############
 cybersource.uri=https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor
 cybersource.merchant_id=cybersource_homedepotca_test
-cybersource.transaction_key=l5qeSuWmge8YNyW0jggWZTPYiPgl18C4PQ5UmTI0cPKRkeCybHUK9XrJU3GKULdi+v7QgiHI7hyZj7caW51qaKk7NBzrwCL7pJfcESByVpTriRqez3tpNtjQ22+CvDItOLh1eWJQ0jTvdXMD+gG2avY3df0m6cFmh02fpmCgpL/VGHGf1ARqPZx3949A8VZvaU+0liHeW8hdunAido4L9RzatMFJGmt7jsK7uSv6DKdclnoGnsL1pleHdxfKMEjrp8K0QsQOBJ54MnbKJSLzUs9KKHqBKk6bpUNEkt5oDEnDrjpEKc6lg2kmKyNx6msl00+JVDoyDZOwcbh6gkHe6w==
+cybersource.transaction_key=YweRwWaTJwyux0/yzc97z6Xn1J2KQlRo4DOXZJiPlbj6vwH4uIoDSfrQqt/dm6bXmibg+IrrikZPmVS5Ur9gtKTvE+Yt5hYOlRTnYbHbJ9utxCDy5ONEpuDyRJCmfrTHFMBn0ecd9YdxDmH3MSxMlJPuLehW2MhYfomwUMfqK98hiVgY0fNcnR2ADW9AdOclWVd2eTCpUbKOrXl1GlrfxPEnOBoTfnd1Y6giO5CHTXUD6Ehhu0mtOb9QIat7lPuncJ8eY3z3uQyQ96bOeUKTylF1mN/o7eCdQFtIu7OL2yMEsgu+exEdYYvyyJ/NAIjuWxX7N0V4uDySkRv/ejT6Ww==
 cybersource.commandFactory.paymentProvider = Cybersource
 ############## Cybersource Settings End ##############
 
@@ -236,6 +245,8 @@ mail.smtp.port=25
 mail.smtp.user=
 mail.smtp.password=
 mail.smtp.auth=false
+email.retry.send.delay=1
+email.retry.send.max=5
 #mail.use.tls=true
 #mail.smtp.starttls.enable=true
 
@@ -251,7 +262,7 @@ homedepotca.store.default_store=7024
 
 # image URL reference
 image.urlPrefix=http://s7is1-preview-staging.scene7.com
-pdf.urlPrefix=http://s7is1-preview-staging.scene7.com/s7/viewer.jsp?company=homedepotcanada&config=Scene7SharedAssets/eCatalog_Flash&locale=en&cache=off&asset=homedepotcanada
+pdf.urlPrefix=http://s7is1-preview-staging.scene7.com/s7viewers/html5/eCatalogViewer.html?config=Scene7SharedAssets/Universal_HTML5_eCatalog&asset=homedepotcanada
 
 #cart items limit
 cart.same.appliance.threshold=6
@@ -278,7 +289,7 @@ homedepotca.pos.onlinestores=7274,9775
 # establish an unsecure connection to a ldap server without supporting some ActiveDirectory features (see: FastBind)
 ldap.server.type=LDAP
  # fill in the related values from your formerr JXplorer session
-ldap.server.url=ldap-corpqa.homedepot.com:389
+ldap.server.url=amer-ldap.amer.homedepot.com:389
 ldap.jndi.principals=DXV6179@amer.qahomedepot.com
 ldap.jndi.credentials=qa02test
 ldap.server.root.dn=dc=amer,dc=homedepot.dc=com,o=homedepot.com,c=us,o=homedepot.com,c=us
@@ -361,12 +372,12 @@ ampProductExport.localXmlArchiveDirectory=${HYBRIS_DATA_DIR}/acceleratorservices
 webroot.export.data =/custom/homedepotca/homedepotampstorefront/web/webroot/_ui/desktop/common/data/export/
 webroot.export.tmp.data =/custom/homedepotca/homedepotampstorefront/web/webroot/_ui/desktop/common/data/export/tmp/
 webroot.import.data =/custom/homedepotca/homedepotampstorefront/web/webroot/_ui/desktop/common/data/import/	
-jsontoExcel.exportlocation=http://amp-dev.homedepot.ca/homedepotampstorefront/_ui/desktop/common/data/export/
-exceltoJson.importlocation=http://amp-dev.homedepot.ca/homedepotampstorefront/_ui/desktop/common/data/import/
+jsontoExcel.exportlocation=https://amp-dev.homedepot.ca/homedepotampstorefront/_ui/desktop/common/data/export/
+exceltoJson.importlocation=https://amp-dev.homedepot.ca/homedepotampstorefront/_ui/desktop/common/data/import/
 
 # AMP-Article Create Request - SAP URL (AD)
 #We have AD XI end-point working at this point. we will replace with PR end-point once it's up.
-sap.amp.articleCreateRequest.uri= http://eai-xi-ad.homedepot.com/HttpAdapter/HttpMessageServlet?interfaceNamespace=http://homedepot.com/xi/Retail/Article&interface=MI_ArticleCreateHybris_oa&senderService=DHDHybris&senderParty=&qos=EO
+sap.amp.articleCreateRequest.uri= https://eai-xi-ad.homedepot.com/HttpAdapter/HttpMessageServlet?interfaceNamespace=http://homedepot.com/xi/Retail/Article&interface=MI_ArticleCreateHybris_oa&senderService=DHDHybris&senderParty=&qos=EO
 
 amp.sap.username =RFCHDCREMOTE
 amp.sap.password =HDC2RETAIL
@@ -375,7 +386,7 @@ amp.productexport.default.connecttimeout=5000
 amp.productexport.default.readtimeout=5000
 amp.productexport.default.maxretrytime=4
 
-sap.upccheck.url = http://sapapps-ad.homedepot.com/s7/sap/bc/yjson_anon/upc/validate/1.0?sap-client=500&sap-language=en&appid=ATOM&upc=
+sap.upccheck.url =http://sapapps-ad.homedepot.com/s7/sap/bc/yjson_anon/upc/validate/1.0?sap-client=500&sap-language=en&appid=ATOM&upc=
 
 amp.MasterDataChangesSummary.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_dashboard/index.html?sap-ui-appCacheBuster=true&sap-client-500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
 amp.retail.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_retailchg/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
@@ -395,7 +406,7 @@ amp.mypassportauthentcation.url=https://webapps-qa.homedepot.com/MYTHDPassport/r
 amp.ThdSSO.callingProgram=hybris-amp
 MYTHDPassport.thdlogout=https://hdapps-qa.homedepot.com/MYTHDPassport/rs/identity/ssologout?logoutUrl=https://amp-dev.homedepot.ca
 # ******** ATOM-257 Hybris SSO Configuration End********
-ampurl=/homedepotampstorefront/amphomedepotca/en/hdca-ampdashboard/amp-ArticleOnboardingSummary
+ampurl=/homedepotampstorefront/amphomedepotca/en/ampsso-redirect/ssosuccessredirect
 amp.sapssosignon.url=https://mysapapps-ad.homedepot.com/sap/bc/ui5_ui5/sap/ydmd_ampdirect/hybrisssocallback.html?sap-client=500
 
 # ******* ATOM-976 Hybris Legacy Support for prettyURL Start*******
@@ -425,10 +436,10 @@ bvExport.localXmlOutputDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export
 bvExport.localXmlArchiveDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export/archive
 
 ############### Bazaar Voice DB Settings Start ###############
-bazaarvoice.feed.db.url =jdbc:oracle:thin:@ln0a7e.homedepot.com:1521/QH7
+bazaarvoice.feed.db.url =jdbc:mysql://epic3-mysql/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8&useSSL=false
 bazaarvoice.feed.db.username =hybrisdbuser
 bazaarvoice.feed.db.password =jasp3r91
-bazaarvoice.feed.db.driver=oracle.jdbc.driver.OracleDriver
+bazaarvoice.feed.db.driver=com.mysql.jdbc.Driver
 ############### Bazaar Voice DB Settings End ###############
 
 #******* ATOM-638 START*****
@@ -436,7 +447,15 @@ amp.upcValidate.url=https://ampservices-dev.homedepot.com/homedepotcacommerceweb
 
 #******* ATOM-638 END*****
 
-amp.scValidate.url=http://sapapps-ad.homedepot.com/s7/sap/bc/yjson_anon/rpprofile/get/1.0?sap-client=500&sap-language=en&appid=ATOM&vendor=
+amp.scValidate.url=https://sapapps-ad.homedepot.com/s7/sap/bc/yjson_anon/rpprofile/get/1.0?sap-client=500&sap-language=en&appid=ATOM&vendor=
 
 amp.importdata.url=/homedepotcacommercewebservices/v2/amphomedepotca/tools/importdata
 oauth.validate.url=https://dev.homedepot.ca/homedepotcacommercewebservices/oauth/token?client_id=amp_app&client_secret=secret&grant_type=client_credentials
+amp.exportdata.url=/homedepotcacommercewebservices/v2/amphomedepotca/tools/exportdata
+certonaservice.default.connecttimeout=10000
+certonaservice.default.readtimeout=10000
+
+commerceservices.default.desktop.ui.experience=desktop
+
+##### Delta & Full Export Headers Path ########
+exportCsv.Header =${HYBRIS_BIN_DIR}/custom/homedepotca/homedepotcacore/resources/homedepotcacore/export/
