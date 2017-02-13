@@ -49,13 +49,13 @@ chmod 755 *.sh
 . ./setantenv.sh
 printf '\n' | ant clean all
 
-cd /opt/hybris/hybris/bin/platform/tomcat/conf
-rm -rf wrapper.conf
-cp -p /root/wrapper.conf.base wrapper.conf
-
 cd /opt/hybris/hybris/bin/platform/
 . ./setantenv.sh
 ant initialize | tee out.txt
+
+cd /opt/hybris/hybris/bin/platform/tomcat/conf
+rm -rf wrapper.conf
+cp -p /root/wrapper.conf.base wrapper.conf
 
 export my_public_ip_address=`curl ipinfo.io/ip`
 printf '\n' | /opt/jdk/jdk1.8.0_111/bin/keytool -genkey \
@@ -74,3 +74,5 @@ tail -100 /opt/hybris/hybris/log/tomcat/console-*.log
 # -alias cloudhybris \
 # -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore \
 # -storepass 123456
+
+
