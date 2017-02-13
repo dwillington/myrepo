@@ -20,6 +20,4 @@ cd /opt/adobe/publish/crx-quickstart/bin
 
 ./start
 
-cd /opt/adobe/publish
-
 tail -100 /opt/adobe/publish/crx-quickstart/logs/stdout.log

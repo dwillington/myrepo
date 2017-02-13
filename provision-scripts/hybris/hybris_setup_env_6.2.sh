@@ -58,12 +58,22 @@ cd /opt/hybris/hybris/bin/platform/
 ant initialize | tee out.txt
 
 export my_public_ip_address=`curl ipinfo.io/ip`
-/opt/jdk/jdk1.8.0_111/bin/keytool -genkey -dname "CN=$my_public_ip_address, OU=I, O=I, L=T, ST=On, C=CA" -alias cloudhybris -validity 3650 -keyalg RSA -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
+printf '\n' | /opt/jdk/jdk1.8.0_111/bin/keytool -genkey \
+-dname "CN=$my_public_ip_address, OU=I, O=I, L=T, ST=On, C=CA" \
+-alias cloudhybris \
+-validity 3650 -keyalg RSA -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
 
+/opt/jdk/jdk1.8.0_111/bin/keytool -list \
+-keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
 
-     # [java] INFO  [main] (00000032) [Importer] Finished 2 pass in 0d 00h:00m:00s:006ms - processed: 3, dumped: 3 (last pass: 3)
-     # [java] ERROR [main] (00000032) [CronJobErrorHandler] de.hybris.platform.impex.jalo.ImpExException: Can not resolve any more lines ... Aborting further passes (at pass 2). Finally could not import 3 lines![HY-123]
-     # [java] ERROR [main] [DefaultImportService] Import has caused an error, see logs of cronjob with code=00000032 for further details
-     # [java] ERROR [main] [DefaultSetupImpexService] Importing [/homedepotcacore/import/common/market.impex]... FAILED
-     # [java] INFO  [main] [DefaultSetupImpexService] Importing [/homedepotcacore/import/common/hd-commodityCodes.impex
+# /opt/jdk/jdk1.8.0_111/bin/keytool -delete \
+# -alias cloudhybris \
+# -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore \
+# -storepass 123456
+
+ # [java] INFO  [main] (00000032) [Importer] Finished 2 pass in 0d 00h:00m:00s:006ms - processed: 3, dumped: 3 (last pass: 3)
+ # [java] ERROR [main] (00000032) [CronJobErrorHandler] de.hybris.platform.impex.jalo.ImpExException: Can not resolve any more lines ... Aborting further passes (at pass 2). Finally could not import 3 lines![HY-123]
+ # [java] ERROR [main] [DefaultImportService] Import has caused an error, see logs of cronjob with code=00000032 for further details
+ # [java] ERROR [main] [DefaultSetupImpexService] Importing [/homedepotcacore/import/common/market.impex]... FAILED
+ # [java] INFO  [main] [DefaultSetupImpexService] Importing [/homedepotcacore/import/common/hd-commodityCodes.impex
 

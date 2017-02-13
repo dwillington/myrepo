@@ -1,5 +1,5 @@
 emailList = 'AMJAD_ASHRAF@homedepot.com' //SAIPRASADH_SEKAR@homedepot.com,
-hd_aem_host = '172.24.103.0'
+hd_aem_host = '172.24.103.213'
 sonar_host = '104.198.108.236'
 // property("sonar.host.url", "http://172.24.100.252")
 
