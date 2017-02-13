@@ -17,7 +17,7 @@ mkdir build
 
 cd /opt/jdk
 
-tar xvf ~/jdk1.8.0_111.tar
+tar xvf /root/jdk1.8.0_111.tar
 
 update-alternatives --install "/usr/bin/java" "java" "/opt/jdk/jdk1.8.0_111/bin/java" 1
 update-alternatives --install "/usr/bin/javac" "javac" "/opt/jdk/jdk1.8.0_111/bin/javac" 1
@@ -29,7 +29,7 @@ mkdir hybris
 
 cd hybris
 
-unzip ~/hybris_6_2_0_0.zip
+unzip /root/hybris_6_2_0_0.zip
 
 rm -rf /opt/hybris/hybris/bin/platform 
 rm -rf /opt/hybris/hybris/bin/custom 
@@ -42,7 +42,7 @@ cd /opt/hybris/hybris/config
 rm -rf local.properties
 cp -p /root/local.properties.base local.properties
 
-/bin/cp -rf ~/mysql-connector-java-5.1.40-bin.jar /opt/hybris/hybris/bin/platform/lib/dbdriver/.
+/bin/cp -rf /root/mysql-connector-java-5.1.40-bin.jar /opt/hybris/hybris/bin/platform/lib/dbdriver/.
 
 cd /opt/hybris/hybris/bin/platform
 chmod 755 *.sh
@@ -55,8 +55,15 @@ cp -p /root/wrapper.conf.base wrapper.conf
 
 cd /opt/hybris/hybris/bin/platform/
 . ./setantenv.sh
-ant initialize
+ant initialize | tee out.txt
 
 export my_public_ip_address=`curl ipinfo.io/ip`
-
 /opt/jdk/jdk1.8.0_111/bin/keytool -genkey -dname "CN=$my_public_ip_address, OU=I, O=I, L=T, ST=On, C=CA" -alias cloudhybris -validity 3650 -keyalg RSA -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
+
+
+     # [java] INFO  [main] (00000032) [Importer] Finished 2 pass in 0d 00h:00m:00s:006ms - processed: 3, dumped: 3 (last pass: 3)
+     # [java] ERROR [main] (00000032) [CronJobErrorHandler] de.hybris.platform.impex.jalo.ImpExException: Can not resolve any more lines ... Aborting further passes (at pass 2). Finally could not import 3 lines![HY-123]
+     # [java] ERROR [main] [DefaultImportService] Import has caused an error, see logs of cronjob with code=00000032 for further details
+     # [java] ERROR [main] [DefaultSetupImpexService] Importing [/homedepotcacore/import/common/market.impex]... FAILED
+     # [java] INFO  [main] [DefaultSetupImpexService] Importing [/homedepotcacore/import/common/hd-commodityCodes.impex
+
