@@ -124,21 +124,6 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    job("restart-aem-${hd_aem_host}") {
-        steps {
-            shell(
-                "ssh root@${hd_aem_host} /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
-                "ssh root@${hd_aem_host} /root/aem_setup_publish.sh\n" + 
-                ""
-            )
-        }
-        publishers {
-            logRotator {
-                numToKeep(10)
-            }
-        }
-    }
-
     job("poll-and-deploy-${epic_name}-hybris") {
         scm {
             git {
@@ -179,6 +164,21 @@ if(binding.variables.containsKey("epic_name")) {
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} hybris\n" +
                 ""
                  )
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
+        }
+    }
+
+    job("restart-aem-${hd_aem_host}") {
+        steps {
+            shell(
+                "ssh root@${hd_aem_host} /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
+                "ssh root@${hd_aem_host} /root/aem_setup_publish.sh\n" + 
+                ""
+            )
         }
         publishers {
             logRotator {
