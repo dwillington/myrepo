@@ -22,7 +22,7 @@ export epic_name=$1
 echo "epic_name is set to '$epic_name'";
 
 create_vm $epic_name mysql 1 2
-create_vm $epic_name hybris 1 8
+create_vm $epic_name hybris 2 8
 create_vm $epic_name solr 1 2
 create_vm $epic_name aem 1 4
 create_vm $epic_name apache 1 2
