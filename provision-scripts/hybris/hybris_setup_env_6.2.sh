@@ -29,14 +29,14 @@ mkdir hybris
 
 cd hybris
 
-unzip /root/hybris_6_2_0_0.zip
+unzip -q /root/hybris_6_2_0_0.zip
 
 rm -rf /opt/hybris/hybris/bin/platform 
 rm -rf /opt/hybris/hybris/bin/custom 
 
-/usr/bin/unzip -o /root/hybrisServer-Platform.zip -d /opt/hybris/
-/usr/bin/unzip -o /root/hybrisServer-AllExtensions.zip hybris/bin/custom/* -d /opt/hybris/
-/usr/bin/unzip -o /root/hybrisServer-Config.zip -d /opt/hybris/
+/usr/bin/unzip -oq /root/hybrisServer-Platform.zip -d /opt/hybris/
+/usr/bin/unzip -oq /root/hybrisServer-AllExtensions.zip hybris/bin/custom/* -d /opt/hybris/
+/usr/bin/unzip -oq /root/hybrisServer-Config.zip -d /opt/hybris/
 
 cd /opt/hybris/hybris/config
 rm -rf local.properties
