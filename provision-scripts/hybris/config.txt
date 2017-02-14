@@ -1,0 +1,65 @@
+{
+  "init": "Go",
+  "homedepotcainitialdata_sample": "true",
+  "lucenesearch_rebuild.indexes": [
+    "true"
+  ],
+  "lucenesearch_update.index.configuration": [
+    "true"
+  ],
+  "basecommerce_create geocoding cron job": [
+    "no"
+  ],
+  "homedepotrelease_runReleaseImpex": [
+    "no"
+  ],
+  "homedepotcacore_accessRights": [
+    "yes"
+  ],
+  "homedepotcacockpits_importCustomReports": [
+    "yes"
+  ],
+  "homedepotcacommercewebservicestest_ImporthomedepotcaTestData": [
+    "yes"
+  ],
+  "homedepotcatest_createTestData": [
+    "no"
+  ],
+  "homedepotcastorefront_updateCmsUserRoles": [
+    "yes"
+  ],
+  "homedepotcastorefront_updateCmsSite": [
+    "yes"
+  ],
+  "homedepotcastorefront_importWcmsComponents": [
+    "yes"
+  ],
+  "homedepotcainitialdata_importCoreData": [
+    "no"
+  ],
+  "homedepotcainitialdata_importSampleData": [
+    "no"
+  ],
+  "homedepotcainitialdata_importSampleFeeds": [
+    "no"
+  ],
+  "homedepotcainitialdata_importSampleProdClassFeed": [
+    "no"
+  ],
+  "homedepotcainitialdata_importSampleMiniFeeds": [
+    "yes"
+  ],
+  "homedepotcainitialdata_importSampleCuratedFeeds": [
+    "no"
+  ],
+  "homedepotcainitialdata_activateSolrCronJobs": [
+    "no"
+  ],
+  "homedepotcainitialdata_importSampleApplianceFeeds": [
+    "no"
+  ],
+  "homedepotcainitialdata_importSampleProductCatalogs": [
+    "no"
+  ],
+  "filteredPatches": "true"
+}
