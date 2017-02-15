@@ -4,7 +4,7 @@
 
 job("create-epic-environment") {
     parameters {
-        stringParam('epic_name')
+        stringParam('epic_name', 'master')
     }
     scm {
         git {
@@ -27,7 +27,7 @@ job("create-epic-environment") {
 
 job("provision-epic-environment") {
     parameters {
-        stringParam('epic_name')
+        stringParam('epic_name', 'master')
     }
     scm {
         git {
@@ -50,7 +50,7 @@ job("provision-epic-environment") {
 
 job("tear-down-epic-environment") {
     parameters {
-        stringParam('epic_name')
+        stringParam('epic_name', 'master')
     }
     scm {
         git {
