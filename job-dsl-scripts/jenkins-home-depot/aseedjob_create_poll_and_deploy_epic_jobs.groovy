@@ -12,7 +12,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    branch("master")
                 }
             }
         }
@@ -47,7 +47,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/apache.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    branch("master")
                 }
             }
         }
@@ -83,7 +83,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/aem.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    branch("master")
                 }
             }
         }
@@ -130,7 +130,8 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    // branch("$epic_name")
+                    branch("master")
                 }
                 extensions {
                     relativeTargetDirectory('repo')
