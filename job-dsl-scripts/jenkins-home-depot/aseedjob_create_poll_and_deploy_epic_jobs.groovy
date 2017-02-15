@@ -130,8 +130,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
-                    // branch("$epic_name")
-                    branch("release/R8-16")
+                    branch("$epic_name")
                 }
                 extensions {
                     relativeTargetDirectory('repo')
@@ -145,16 +144,21 @@ if(binding.variables.containsKey("epic_name")) {
             shell(
                     "rm -rf hybris\n" +
                     "mkdir hybris\n" +
-                    "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
+                    "cp -R /bamboo/data/hybris_platform/hybris_6_2_0_0/hybris_6_2_0_0.zip hybris\n" +
+                    "cd hybris\n" + 
+                    "unzip -o hybris_6_2_0_0.zip\n" + 
+                    "cd -\n" + 
                     "cp -R repo/hybris/* hybris/.\n" +
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
+                    "cd hybris/bin/platform\n" +
+                    ". ./setantenv.sh\n" +
                     "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "cd hybris/bin/platform\n" +
-                    ". ./setantenv.sh\n" +
+                    "export ANT_OPTS=\"-Xmx512m -XX:MaxPermSize=128M -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080\"\n" + 
                     "ant -Duseconfig=DEV clean all\n" +
-                    "ant production\n"
+                    "ant production\n" + 
+                    ""
                  )
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
@@ -302,20 +306,20 @@ if(false)
             shell(
                     "rm -rf hybris\n" +
                     "mkdir hybris\n" +
-                    "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
+                    "cp -R /bamboo/data/hybris_platform/hybris_6_2_0_0/hybris_6_2_0_0.zip hybris\n" +
+                    "cd hybris\n" + 
+                    "unzip -o hybris_6_2_0_0.zip\n" + 
+                    "cd -\n" + 
                     "cp -R repo/hybris/* hybris/.\n" +
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
+                    "cd hybris/bin/platform\n" +
+                    ". ./setantenv.sh\n" +
                     "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    "/bin/cp -vrf /bamboo/data/Jacoco/local.properties hybris/config/local.properties\n" +
-                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar.xml hybris/bin/platform/resources/ant/sonar.xml\n" +
-                    "/bin/cp -vrf /bamboo/data/Jacoco/sonar-ant-task-2.2.jar hybris/bin/platform/resources/ant/lib/sonar-ant-task-2.2.jar\n" +
-                    "cd hybris/bin/platform\n" +
-                    ". ./setantenv.sh\n" +
+                    "export ANT_OPTS=\"-Xmx512m -XX:MaxPermSize=128M -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080\"\n" + 
                     "ant -Duseconfig=DEV clean all\n" +
                     "ant production\n" + 
-                    "export ANT_OPTS=\"-Xmx512m -XX:MaxPermSize=128M -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080\"\n" + 
                     "ant sonar -Dsonar.host.url=http://${sonar_host} -Dsonar.login=admin -Dsonar.password=admin\n" + 
                     ""
                  )

@@ -51,7 +51,7 @@ printf '\n' | ant clean all
 
 cd /opt/hybris/hybris/bin/platform/
 . ./setantenv.sh
-ant initialize | tee out.txt
+ant initialize | tee /root/initialize.txt
 
 cd /opt/hybris/hybris/bin/platform/tomcat/conf
 rm -rf wrapper.conf
@@ -60,7 +60,7 @@ cp -p /root/wrapper.conf.base wrapper.conf
 cd /opt/hybris/hybris/bin/platform
 chmod 755 *.sh
 . ./setantenv.sh
-ant updatesystem -DconfigFile=/root/config.txt | tee out.txt
+ant updatesystem -DconfigFile=/root/config.txt | tee /root/updatesystem.txt
 
 cd /opt/hybris/hybris/bin/platform/tomcat/conf
 rm -rf wrapper.conf
