@@ -150,11 +150,11 @@ if(binding.variables.containsKey("epic_name")) {
                     "cd -\n" + 
                     "cp -R repo/hybris/* hybris/.\n" +
                     "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
-                    "cd hybris/bin/platform\n" +
-                    ". ./setantenv.sh\n" +
                     "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
                     "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
                     "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
+                    "cd hybris/bin/platform\n" +
+                    ". ./setantenv.sh\n" +
                     "export ANT_OPTS=\"-Xmx512m -XX:MaxPermSize=128M -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080\"\n" + 
                     "ant -Duseconfig=DEV clean all\n" +
                     "ant production\n" + 
