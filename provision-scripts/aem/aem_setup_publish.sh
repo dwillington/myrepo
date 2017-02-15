@@ -6,7 +6,7 @@ echo "Setting Environment"
 
 cd /opt/adobe/publish
 
-sed -i -e 's/4096/4096/g' setenv.sh
+sed -i -e 's/3072/4096/g' setenv.sh
 
 . ./setenv.sh 
 
