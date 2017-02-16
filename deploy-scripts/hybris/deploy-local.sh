@@ -21,13 +21,16 @@ chmod 755 *.sh
 . ./setantenv.sh
 printf '\n' | ant clean all
 
-cd /opt/hybris/hybris/config
-rm -rf local.properties
-cp -p /root/local.properties.base local.properties
+/bin/cp -rf /root/local.properties.deploy.base.orig /root/local.properties.deploy.base
+export my_host_name=`hostname`
+export epic_name=${my_host_name%-*}
+sed -i -e "s/mysql-hostname/$epic_name-mysql/g" /root/local.properties.deploy.base
 
-cd /opt/hybris/hybris/bin/platform/tomcat/conf
-rm -rf wrapper.conf
-cp -p /root/wrapper.conf.base wrapper.conf
+rm -rf /opt/hybris/hybris/config/local.properties
+/bin/cp -rf /root/local.properties.deploy.base /opt/hybris/hybris/config/local.properties
+
+rm -rf /opt/hybris/hybris/bin/platform/tomcat/conf/wrapper.conf
+cp -p /root/wrapper.conf.base /opt/hybris/hybris/bin/platform/tomcat/conf/wrapper.conf
 
 export my_public_ip_address=`curl ipinfo.io/ip`
 printf '\n' | /opt/jdk/jdk1.8.0_111/bin/keytool -genkey \

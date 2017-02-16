@@ -1,0 +1,466 @@
+# Dev local.properties, pointing hybris dev to SAP QA (QS7:500)
+
+# place your custom properties into this file instead of modifying the project.properties
+# all properties in this file have higher priority and will overwrite the platform/project.properties settings.
+
+hac.webroot=/hac
+build.parallel=true//use multiple cores
+
+website.homedepotca.http=http://dev.homedepot.ca
+website.homedepotca.https=https://dev.homedepot.ca
+forgotten.password.aem.url=/home/customer-support/forgot-password.html
+reset.password.aem.url=/home/customer-support/forgot-password/reset-password.html
+reset.password.aem.url.en=/home/customer-support/forgot-password/reset-password.html
+reset.password.aem.url.fr=/accueil/service-a-la-clientele/mot-de-passe-oublie/reinitialiser-le-mot-de-passe.html
+
+# forgotten password token expiration
+email.token.expiration=259200
+## -- hour,timeout for Reset Password URL in Email -- ##
+reset.email.token.expiration=72
+
+############### MySQL Settings Start ###############
+db.url=jdbc:mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8&useSSL=false
+db.driver=com.mysql.jdbc.Driver
+db.username=hybrisdbuser
+db.password=jasp3r91
+db.tableprefix=
+mysql.optional.tabledefs=CHARSET=utf8 COLLATE=utf8_bin
+mysql.tabletype=InnoDB
+############### MySQL Settings End ###############
+
+######################## DYNATRACE SETTINGS #####################################
+dynatrace.enabled=true
+dynatrace.agentlib=/opt/dynatrace/agent/lib64/libdtagent.so
+dynatrace.server=ln0c71.homedepot.com:9998
+dynatrace.name=Hybris1_HDCA_DEV
+dynatrace.jvm-opts=-agentpath:${dynatrace.agentlib}=name=${dynatrace.name},server=${dynatrace.server},wait=45
+
+##### --- Tomcat General Settings --- #####
+tomcat.generaloptions=-Xmx6G -XX:MaxPermSize=1024M -XX:+UseG1GC -XX:+UseTLAB -ea -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dorg.tanukisoftware.wrapper.WrapperManager.mbean=true -Djava.endorsed.dirs="%CATALINA_HOME%/lib/endorsed" -Dcatalina.base=%CATALINA_BASE% -Dcatalina.home=%CATALINA_HOME% -Dfile.encoding=UTF-8 -Dlog4j.configuration=log4j_init_tomcat.properties -Djava.util.logging.config.file=jdk_logging.properties ${dynatrace.jvm-opts} -Djava.io.tmpdir="${HYBRIS_TEMP_DIR}" -Dcom.mongodb.updaterIntervalMS=60000 
+
+############### HD Depot Direct Properties Start ###############
+# HDCA Depot Direct (Production)
+#depotdirect.baseuri=https://webapps.homedepot.ca/MMSVAOLCA/rest/
+
+# HDCA Depot Direct (QA)
+depotdirect.baseuri=http://webapps-qa.homedepot.com/MMSVAOLCA/rest/
+depotdirect.default.connecttimeout=5000
+depotdirect.default.readtimeout=5000
+depotdirect.productavailability.path=ProductAvailabilityService/getProductAvailability
+depotdirect.validatepostalcode.path=PostalCodeValidationService/validatePostalCode
+depotdirect.deliverySlots.path=DeliveryCalendarService/getDeliverySlots
+depotdirect.relatedServices.path=RelatedServicesService/getRelatedServices
+depotdirect.reservedeliveryslot.path=DeliveryCalendarService/reserveDeliverySlot
+depotdirect.deliveryAgent.path=http://webapps-qa.homedepot.com/CAAdmsDeliveryVendorServices/services/rest/IHDAByPostalCode/v1/getHDAByPostalCode
+############### HD Depot Direct Properties End ###############
+
+
+############### User List validation for PLCC cards Start###############
+# User List validation (SOAP UI)
+#userlistvalidation.baseuri=http://localhost:8878/MMSVAOLCA/rest/
+#userlistvalidation.lookupAccount.path=UserListValidationService/lookupAccount
+# User List validation (DEV)
+#userlistvalidation.baseuri=https://npf-tandem-ad.homedepot.com/
+#userlistvalidation.lookupAccount.path=ad/acctlkupcomm.ad
+userlistvalidation.baseuri=tandemssl://npf-tandem-qa.homedepot.com/
+userlistvalidation.lookupAccount.path=qa/acctlkupcomm.qa
+
+userlistvalidation.keystore.path=/opt/hybris/security/QA_PLCC-hdca.jck
+userlistvalidation.keystore.password=bcd234
+
+userlistvalidation.default.connecttimeout=5000
+userlistvalidation.default.readtimeout=5000
+userlistvalidation.default.maxretrytime=3
+
+############### User List validation for PLCC cards End###############
+
+# Log Settings
+log4j2.config.xml=
+log4j2.logger.defaultComputeOptimizedPricesStrategy.name=ca.homedepot.core.price.strategies.impl.DefaultComputeOptimizedPricesStrategy
+log4j2.logger.defaultComputeOptimizedPricesStrategy.level=debug
+log4j2.logger.defaultComputeOptimizedPricesStrategy.appenderRef.stdout.ref=STDOUT
+
+log4j2.logger.homedepotcaProductStatusValidator.name=ca.homedepot.validator.HomedepotcaProductStatusValidator
+log4j2.logger.homedepotcaProductStatusValidator.level=debug
+log4j2.logger.homedepotcaProductStatusValidator.appenderRef.stdout.ref=STDOUT
+
+log4j.rootLogger=warn, CONSOLE
+log4j.logger.ca.homedepot.core=debug
+log4j.logger.ca.homedepot.core.promotion.service.impl.DefaultHomeDepotcaPromotionService=info
+log4j.logger.org.springframework.ws.client.MessageTracing.received = all
+log4j.logger.org.springframework.ws.client.MessageTracing.sent = all
+log4j.logger.de.hybris.platform.europe1.jalo.Europe1PriceFactory = off
+log4j.logger.de.hybris.platform.platform.order.strategies.calculation.impl.DefaultFindPaymentCostStrategy = error
+log4j.logger.ca.homedepot.core.webservices.impl.DepotDirectServiceImpl=all
+
+
+# Prevent Maven from updating dbdrivers
+# Missing drivers will fail the build
+maven.update.dbdrivers=false
+
+sap.username = RFCHDCREMOTE
+sap.password = HDC2RETAIL
+
+# HDCA Depot SAP Submit Order URL (DEV)
+#sap.submitorder.url=https://eai-xi-ad.homedepot.com/XISOAPAdapter/MessageServlet?channel=:DHDWCS:Sender_SOAP_WCSOrderCreate
+sap.submitorder.url=https://eai-xi-qa.homedepot.com/XISOAPAdapter/MessageServlet?channel=:QHDWCS:Sender_SOAP_WCSOrderCreate
+
+# HDCA Depot SAP Order Detail URL (Production)
+#sap.orderdetail.url=https://eai-xi-ad.homedepot.com/XISOAPAdapter/MessageServlet?channel=:DHDWCS:Sender_SOAP_WCSOrderDetail
+sap.orderdetail.url=https://eai-xi-qa.homedepot.com/XISOAPAdapter/MessageServlet?channel=:QHDWCS:Sender_SOAP_WCSOrderDetail
+
+# HDCA Depot SAP Order List URL (Production)
+#sap.orderlist.url=https://eai-xi-ad.homedepot.com/XISOAPAdapter/MessageServlet?channel=:DHDWCS:Sender_SOAP_WCSOrderList
+sap.orderlist.url=https://eai-xi-qa.homedepot.com/XISOAPAdapter/MessageServlet?channel=:QHDWCS:Sender_SOAP_WCSOrderList
+
+# HDCA Depot SAP Customer Dashboard URL (SOAP UI)
+sap.proxtra.customer.dashboard.url=https://eai-xi-qa.homedepot.com/XISOAPAdapter/MessageServlet?channel=:RHDCA:Sender_SOAP_CRMGetLoyalty
+
+# HDCA Depot SAP Inventory URL (DEV)
+#sap.ws.inventory.uri=http://eai-xi-ad.homedepot.com/XISOAPAdapter/MessageServlet?channel=:DHDCA:Sender_SOAP_HDCAInventoryLookup
+sap.ws.inventory.uri=http://eai-xi-qa.homedepot.com/XISOAPAdapter/MessageServlet?channel=:QHDCA:Sender_SOAP_HDCAInventoryLookup
+
+# HDCA Depot SAP Inventory URL (SOAP UI)
+#sap.ws.inventory.uri=http://localhost:8088/mockMI_WCSOrderRelated_osBinding
+
+# OrderSAPService
+order.sap.service.source=WCS
+order.sap.service.target=SAPECCUS7
+order.sap.service.type=SAPCUSTHISTIN
+order.sap.service.send_detail=Y
+
+# CRM Complaint Connectivity
+crmComplaint.username = RFCHDCREMOTE
+crmComplaint.password = HDC2RETAIL
+crmComplaint.url = https://eai-xi-ad.homedepot.com/XISOAPAdapter/MessageServlet?channel=:DHDCA:Sender_SOAP_HDCAContactUsCreateComplaint
+
+#backoffice settings
+backoffice.cockpitng.additionalResourceLoader.enabled=true
+backoffice.cockpitng.uifactory.cache.enabled=false
+backoffice.cockpitng.widgetclassloader.resourcecache.enabled=false
+backoffice.cockpitng.resourceloader.resourcecache.enabled=false
+
+# TTL attribute(in millseconds) for FastMovingIndicator type.if left null, it should be set to this default value.
+
+fastMovingIndicator.timeToLive.threshold=10000
+
+############### MongoDB Settings Start ###############
+mongodb.host = ln0a72:27017
+mongodb.username =
+mongodb.password =
+mongodb.prices.database= productprices
+############### MongoDB Settings End ###############
+
+############### OptimizedPriceDB Settings Start ###############
+optimizedprice.db.url =jdbc:oracle:thin:@ln0a71.homedepot.com:1521:DH7
+optimizedprice.db.username =OPTIMIZEDPRICE
+optimizedprice.db.password =hybrisdbuser
+optimizedprice.db.driver=oracle.jdbc.driver.OracleDriver
+############### OptimizedPriceDB Settings End ###############
+
+############### Tandem Settings start###############
+tandem.username = RFCHDCREMOTE
+tandem.password = HDC2RETAIL
+
+# HDCA Depot tandem URL (DEV)
+#tandem.url=https://eai-xi-ad.homedepot.com/XISOAPAdapter/MessageServlet?channel=:DHDWCS:Sender_SOAP_TandemXRef
+tandem.url=https://eai-xi-qa.homedepot.com/XISOAPAdapter/MessageServlet?channel=:QHDWCS:Sender_SOAP_TandemXRef
+# HDCA Depot tandem URL (SOAP UI)
+#tandem.url=http://localhost:8088/mockMI_WCSOrderRelated_osBinding
+############### Tandem Settings End###############
+
+## Bing map ##
+bing.geocoding.url=http://dev.virtualearth.net/REST/v1/Locations
+bingKey=AuqpldZ_2fG4CPVPbpOai0k5GU-NTYboN6Ylvr1cxlYMgdSGPOM4bC-F-i-BTfNw
+
+############## HDCA Geocoding Cronjob Settings Start ##############
+#batch size of location entries that are submitted to geocoding service at a time
+homedepotca.geocode.cronjob.batchsize=100
+#time interval [sec] between two consecutive geocoding requests (to avoid querying 3rd part service to frequently)
+homedepotca.geocode.cronjob.internaldelay=3
+#time interval [min] between two consecutive cron job triggers
+homedepotca.geocode.cronjob.triggerinterval=5
+############## HDCA Geocoding Cronjob Settings End ##############
+acceleratorservices.batch.impex.max-threads=8
+
+############## Cybersource Settings Start ##############
+cybersource.uri=https://ics2wstest.ic3.com/commerce/1.x/transactionProcessor
+cybersource.merchant_id=cybersource_homedepotca_test
+cybersource.transaction_key=YweRwWaTJwyux0/yzc97z6Xn1J2KQlRo4DOXZJiPlbj6vwH4uIoDSfrQqt/dm6bXmibg+IrrikZPmVS5Ur9gtKTvE+Yt5hYOlRTnYbHbJ9utxCDy5ONEpuDyRJCmfrTHFMBn0ecd9YdxDmH3MSxMlJPuLehW2MhYfomwUMfqK98hiVgY0fNcnR2ADW9AdOclWVd2eTCpUbKOrXl1GlrfxPEnOBoTfnd1Y6giO5CHTXUD6Ehhu0mtOb9QIat7lPuncJ8eY3z3uQyQ96bOeUKTylF1mN/o7eCdQFtIu7OL2yMEsgu+exEdYYvyyJ/NAIjuWxX7N0V4uDySkRv/ejT6Ww==
+cybersource.commandFactory.paymentProvider = Cybersource
+############## Cybersource Settings End ##############
+
+############## HDCreditservices Settings Start ##############
+hdcreditservices.username = username
+hdcreditservices.password = password
+hdcreditservices.paymentProvider = HDCreditServices
+
+# HDCA Depot HDCreditservices URL (Production)
+#hdcreditservices.uri=http://pspa.st7274.homedepot.com/RetailAuth/services/PaymentAuthorizationService
+# HDCA Depot HDCreditservices URL (SANDBOX)
+hdcreditservices.uri=http://pspa.st9775.homedepot.com/RetailAuth/services/PaymentAuthorizationService
+# HDCA Depot HDCreditservices URL (SOAP UI)
+#hdcreditservices.uri=http://localhost:8088/mockMI_WCSOrderRelated_osBinding
+
+# HDCA Depot HDCreditservices merchant_id (Production)
+#hdcreditservices.merchant_id = 7274
+# HDCA Depot HDCreditservices merchant_id (Test)
+hdcreditservices.merchant_id = 9775
+############## HDCreditservices Settings End ##############
+
+############## Classification Attribute Translator Fallback ##############
+impex.nonexistend.clsattrvalue.fallback.enabled=true
+
+#retry
+homedepotca.process.task.max_retries=3
+homedepotca.process.task.delay=200000
+homedepotca.process.task.retry_method=LINEAR
+homedepotca.process.task.wait_time=15000
+
+#ecofee
+ecofeerestfulservice.getEcoFeeAmt.path=http://sapapps-ad.homedepot.com/s7/sap/bc/yjson/com/get_ecofee_amt/1.0?
+ecofeerestfulservice.username=RFCHDCREMOTE
+ecofeerestfulservice.password=HDC2RETAIL
+ecofeerestfulservice.default.connecttimeout=5000
+ecofeerestfulservice.default.readtimeout=5000
+
+#acxiom
+public.key.file.path=${HYBRIS_DATA_DIR}/../bin/custom/homedepotca/homedepotcacore/resources/homedepotcacore/acxiom/acxiom.asc
+
+
+# Order number generation
+keygen.order.code.digits=10
+keygen.order.code.start=0230114009
+keygen.order.code.numeric=true
+
+#enable email service
+emailservice.send.enabled=true
+mail.from=service@homedepot.com
+mail.from_display_name=homedepot
+mail.smtp.server=mail2.homedepot.com
+mail.smtp.port=25
+mail.smtp.user=
+mail.smtp.password=
+mail.smtp.auth=false
+email.retry.send.delay=1
+email.retry.send.max=5
+#mail.use.tls=true
+#mail.smtp.starttls.enable=true
+
+
+#Send Notification to admin When retry meet maxRetry
+homedepotca.process.task.send_to_sap_failed_admin_email=
+homedepotca.process.task.send_to_sap_failed_admin_email_display_name=
+
+homedepotca.store.default_online_store=7274
+homedepotca.store.default_store=7024
+
+
+
+# image URL reference
+image.urlPrefix=http://s7is1-preview-staging.scene7.com
+pdf.urlPrefix=http://s7is1-preview-staging.scene7.com/s7viewers/html5/eCatalogViewer.html?config=Scene7SharedAssets/Universal_HTML5_eCatalog&asset=homedepotcanada
+
+#cart items limit
+cart.same.appliance.threshold=6
+cart.total.appliance.threshold=12
+cart.items.threshold=50
+#60*60*12 seconds for test
+cart.recalculate.period.seconds=43200
+
+#global inventory threshold
+global.inventory.threshold=0
+
+orderdetails.default.connecttimeout=10000
+orderdetails.default.readtimeout=10000
+
+#User unlock time
+homedepotca.user.unlockTimeInMinutes=20
+
+# A comma delimited list of online POS
+homedepotca.pos.onlinestores=7274,9775
+
+
+
+######################## LDAP SETTINGS BEGINS#####################################
+# establish an unsecure connection to a ldap server without supporting some ActiveDirectory features (see: FastBind)
+ldap.server.type=LDAP
+ # fill in the related values from your formerr JXplorer session
+ldap.server.url=amer-ldap.amer.homedepot.com:389
+ldap.jndi.principals=DXV6179@amer.qahomedepot.com
+ldap.jndi.credentials=qa02test
+ldap.server.root.dn=dc=amer,dc=homedepot.dc=com,o=homedepot.com,c=us,o=homedepot.com,c=us
+
+
+######################## LDAP SETTINGS ENDS#####################################
+
+#OAuth
+oauth.trusted_client.secret=secret
+
+#Vendor OAuth
+oauth.vendor_client.id=sap_client
+oauth.vendor_client.secret=secret
+
+oauth.vendor_mobile.id=mobile_app
+oauth.vendor_mobile.secret=secret
+
+oauth.vendor_eflyer.id=eflyer_app
+oauth.vendor_eflyer.secret=secret
+
+oauth.vendor_amp.id=amp_app
+oauth.vendor_amp.secret=secret
+
+#Default Origin Country
+defaultOriginCountry=CA
+
+# set read timeout for submit order WebServiceTemplate
+homedepotcaSAPIntegrationService.submitOrderServiceTemplate.readTimeout=120000
+
+# Depot Direct Delivery Slots (interval in days)
+appliance.deliveryDate.interval=60
+
+# appliance deliveryDate buffer
+appliance.deliveryDate.buffer=2
+appliance.deliveryStartDate.productAddon.buffer = 5
+
+# Appliance Delivery timeslots
+appliance.availableDeliverySlots.threshold=5
+
+#Threshold for limiting the calling to Depot Direct Product Availability call (in minutes)
+depotDirect.productAvailability.threshold=30
+
+# Depot Direct Reservation Username
+appliance.deliverySlotReservation.user=QAT620
+
+# Main Appliance Delivery Charge
+applianceDeliveryCharge.main.articleNumber=1000125671
+applianceDeliveryCharge.main.regular.fee=49.98
+applianceDeliveryCharge.main.quebec.fee=0.01
+applianceDeliveryCharge.addon.quebec.fee=0.01
+
+# Addon Appliance Delivery Charge
+applianceDeliveryCharge.addon.articleNumber=1000457629
+applianceDeliveryCharge.addon.regular.fee=0.01
+
+#home depot Qucbec postal Code Setting Start
+homedepotca.quebec.postalCode=G,J,H
+homedepotca.quebec.special.postalCode=K1A0H3,K1A0M3,K1A0G4,K1A0J9,K1A1L4,K1A0J2,K1A0C9,K1A0G3,K1A1K5,K1A1L2,K1A0M5,K1A0M6,K1A1C9,K1A0M7,K1A0S5,K1A1G6,K1A1H3,K1A0H4,K1A1K8,K1A0N2,K1A0N9,K1A0M8
+#home depot Qucbec postal Code Setting end
+
+# set default vendor for the products whose vendor number is null in stibo feed
+default.vendor.code=70001761
+
+# vendor number for MABE(comma separated)
+MABE.vendor.number=0070001360
+
+# Certona
+certona.resonance.appid=HomeDepotCA01
+certona.resonance.url=http://www.res-x.com/ws/r2/resonance.aspx
+certona.resonance.max=16
+certona.feed.localXmlOutputDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export/complete/certona/
+certona.feed.localXmlArchiveDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export/complete/certona/archive/
+
+#AMP-Atricle Export Directory
+ampProductExport.localXmlOutputDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export/complete/amp/
+ampProductExport.localXmlArchiveDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export/complete/amp/archive/
+
+
+#ATOM-551
+webroot.export.data =/custom/homedepotca/homedepotampstorefront/web/webroot/_ui/desktop/common/data/export/
+webroot.export.tmp.data =/custom/homedepotca/homedepotampstorefront/web/webroot/_ui/desktop/common/data/export/tmp/
+webroot.import.data =/custom/homedepotca/homedepotampstorefront/web/webroot/_ui/desktop/common/data/import/	
+jsontoExcel.exportlocation=https://amp-dev.homedepot.ca/homedepotampstorefront/_ui/desktop/common/data/export/
+exceltoJson.importlocation=https://amp-dev.homedepot.ca/homedepotampstorefront/_ui/desktop/common/data/import/
+
+# AMP-Article Create Request - SAP URL (AD)
+#We have AD XI end-point working at this point. we will replace with PR end-point once it's up.
+sap.amp.articleCreateRequest.uri= https://eai-xi-ad.homedepot.com/HttpAdapter/HttpMessageServlet?interfaceNamespace=http://homedepot.com/xi/Retail/Article&interface=MI_ArticleCreateHybris_oa&senderService=DHDHybris&senderParty=&qos=EO
+
+amp.sap.username =RFCHDCREMOTE
+amp.sap.password =HDC2RETAIL
+
+amp.productexport.default.connecttimeout=5000
+amp.productexport.default.readtimeout=5000
+amp.productexport.default.maxretrytime=4
+
+sap.upccheck.url =https://sapapps-ad.homedepot.com/s7/sap/bc/yjson_anon/upc/validate/1.0?sap-client=500&sap-language=en&appid=ATOM&upc=
+
+amp.MasterDataChangesSummary.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_dashboard/index.html?sap-ui-appCacheBuster=true&sap-client-500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.retail.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_retailchg/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.retailmultiplier.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_retailchg/index.html?sap-ui-appCacheBuster=true&sap-client=500&requestType=M&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.rptype.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydsd_rptystatus/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.article.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_articlechg/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.pircost.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_pircost/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.assortments.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_assortment/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+amp.unadvpromo.url=https://sapapps-ad.homedepot.com/g0/sap/bc/ui5_ui5/sap/ydmd_promo/index.html?sap-ui-appCacheBuster=true&sap-client=500&sap-theme=thd_homedepot@/g0/sap/public/bc/themes/~client-500
+
+# ******* ATOM-257 Hybris SSO Configuration Start*******
+amp.servicesURL=https://ampservices-dev.homedepot.com
+MYTHDPassport.getuserprofile=https://webapps-qa.homedepot.com/MYTHDPassport/rs/identity/getUserProfile?callingProgram=hybris-amp		
+MYTHDPassport.thdlogin=https://webapps-qa.homedepot.com/MYTHDPassport/rs/identity/thdLogin	
+MYTHDPassport.isSessionValid=https://webapps-qa.homedepot.com/MYTHDPassport/rs/identity/isSessionValid?callingProgram=hybris-amp	
+amp.mypassportauthentcation.url=https://webapps-qa.homedepot.com/MYTHDPassport/rs/identity/auth
+amp.ThdSSO.callingProgram=hybris-amp
+MYTHDPassport.thdlogout=https://hdapps-qa.homedepot.com/MYTHDPassport/rs/identity/ssologout?logoutUrl=https://amp-dev.homedepot.ca
+# ******** ATOM-257 Hybris SSO Configuration End********
+ampurl=/homedepotampstorefront/amphomedepotca/en/ampsso-redirect/ssosuccessredirect
+amp.sapssosignon.url=https://mysapapps-ad.homedepot.com/sap/bc/ui5_ui5/sap/ydmd_ampdirect/hybrisssocallback.html?sap-client=500
+
+# ******* ATOM-976 Hybris Legacy Support for prettyURL Start*******
+media.legacy.prettyURL=true
+# ******* ATOM-976 Hybris Legacy Support for prettyURL End*******
+
+# ******* ATOM-828 Start*******
+sapampRedirecturl=/homedepotampstorefront
+
+homePageTitleUid=Title
+dashboardPageTitleUid=HdAmpDashboardLink
+vendorInvitationPageTitleUid=HdAmpVendorInvitationLink
+retail=HdSapRetailLink
+retailmultiplier=HdSapRetailMultiplierLink
+pircost=HdSapPirCostMultiplierLink
+article=HdSapArticleChangeLink
+rptype=HdSapRpTypeLink
+assortments=HdSapAssortmentsLink
+unadvpromo=HdSapUnadvPromoLink
+# ******* ATOM-828 End*******
+amp.sender.mail=AMP_Canada_Article_onboarding@homedepot.com
+amp.dist.email=AMP_article_intro@homedepot.com
+amp.partnerProfile.url=https://webapps-qa.homedepot.com/MYTHDPassport/rs/identity/getPartnerProfile?callingProgram=hybris&thdsso=
+
+#Bazzar voicefeed export Directory
+bvExport.localXmlOutputDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export
+bvExport.localXmlArchiveDirectory=${HYBRIS_DATA_DIR}/acceleratorservices/export/archive
+
+############### Bazaar Voice DB Settings Start ###############
+bazaarvoice.feed.db.url =jdbc:oracle:thin:@ln0a7e.homedepot.com:1521/QH7
+bazaarvoice.feed.db.username =hybrisdbuser
+bazaarvoice.feed.db.password =jasp3r91
+bazaarvoice.feed.db.driver=oracle.jdbc.driver.OracleDriver
+############### Bazaar Voice DB Settings End ###############
+
+#******* ATOM-638 START*****
+amp.upcValidate.url=https://ampservices-dev.homedepot.com/homedepotcacommercewebservices/v2/amphomedepotca/catalogs/homedepotMaster/Online/validateUPC/
+
+#******* ATOM-638 END*****
+
+amp.scValidate.url=https://sapapps-ad.homedepot.com/s7/sap/bc/yjson_anon/rpprofile/get/1.0?sap-client=500&sap-language=en&appid=ATOM&vendor=
+
+amp.importdata.url=/homedepotcacommercewebservices/v2/amphomedepotca/tools/importdata
+oauth.validate.url=https://dev.homedepot.ca/homedepotcacommercewebservices/oauth/token?client_id=amp_app&client_secret=secret&grant_type=client_credentials
+amp.exportdata.url=/homedepotcacommercewebservices/v2/amphomedepotca/tools/exportdata
+certonaservice.default.connecttimeout=10000
+certonaservice.default.readtimeout=10000
+
+commerceservices.default.desktop.ui.experience=desktop
+
+##### Delta & Full Export Headers Path ########
+exportCsv.Header =${HYBRIS_BIN_DIR}/custom/homedepotca/homedepotcacore/resources/homedepotcacore/export/
+
+#ProXtra start
+homedepotca.process.createProXtraUserInSapAction.max_retries=10
+#delay is in millisecond
+createProXtraUser.process.task.delay=30000
+createProXtraUser.process.task.retry.method=LINEAR
+proCustomerCreate.sap.crm.url=https://eai-xi-ad.homedepot.com/HttpAdapter/HttpMessageServlet?interfaceNamespace=http://homedepot.com/xi/SAM/Customer&interface=MI_ProCustomerCreateHybris_os&senderService=RHDHybris&senderParty=&qos=BE
+#ProXtra end
