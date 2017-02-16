@@ -40,6 +40,7 @@ job("provision-epic-environment") {
     }
     steps {
         shell('gcloud-scripts/provision-epic-environment.sh $epic_name')
+        shell('gcloud-scripts/epic-server-urls.sh $epic_name')
     }
     publishers {
         logRotator {
