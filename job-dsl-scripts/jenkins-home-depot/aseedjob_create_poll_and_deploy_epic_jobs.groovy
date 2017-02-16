@@ -164,7 +164,6 @@ if(binding.variables.containsKey("epic_name")) {
             shell(
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                // commented out since the build creates prod based deployment which is not compatible with local.properties
                 "/root/google-cloud-sdk/bin/gsutil cp hybris/temp/hybris/hybrisServer/*.zip gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/hybris/\n" + 
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} hybris\n" +
                 ""
