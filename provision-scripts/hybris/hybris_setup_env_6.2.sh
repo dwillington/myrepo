@@ -38,9 +38,15 @@ rm -rf /opt/hybris/hybris/bin/custom
 /usr/bin/unzip -oq /root/hybrisServer-AllExtensions.zip hybris/bin/custom/* -d /opt/hybris/
 /usr/bin/unzip -oq /root/hybrisServer-Config.zip -d /opt/hybris/
 
-cd /opt/hybris/hybris/config
-rm -rf local.properties
-cp -p /root/local.properties.base local.properties
+#http://stackoverflow.com/questions/4168371/how-can-i-remove-all-text-after-a-character-in-bash
+#http://stackoverflow.com/questions/16297052/replace-a-text-with-a-variable-sed
+/bin/cp -rf /root/local.properties.base.orig /root/local.properties.base
+export my_host_name=`hostname`
+export epic_name=${my_host_name%-*}
+sed -i -e "s/mysql-hostname/$epic_name-mysql/g" /root/local.properties.base
+
+rm -rf /opt/hybris/hybris/config/local.properties
+cp -p /root/local.properties.base /opt/hybris/hybris/config/local.properties
 
 /bin/cp -rf /root/mysql-connector-java-5.1.40-bin.jar /opt/hybris/hybris/bin/platform/lib/dbdriver/.
 
@@ -81,8 +87,8 @@ tail -100 /opt/hybris/hybris/log/tomcat/console-*.log
 # export csrf_token=`curl -b cookie.txt -c cookie.txt -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,/;q=0.8" -H "Content-Type: application/x-www-form-urlencoded" -X POST "http://localhost:9001/hac/j_spring_security_check" --data "j_username=admin&j_password=nimda" | grep X-CSRF | cut -d '"' -f12` 
 # curl -v -b cookie.txt -c cookie.txt -H "Accept: application/json" -H "Content-Type: application/json; charset=UTF-8" -H "X-CSRF-TOKEN: ${csrf_token}" -X POST "http://localhost:9001/hac/platform/init/execute" --data-binary '{"dropTables":false,"clearHMC":false,"createEssentialData":false,"localizeTypes":false,"allParameters":{"homedepotcainitialdata_sample":"true","lucenesearch_rebuild.indexes":["true"],"lucenesearch_update.index.configuration":["true"],"basecommerce_create geocoding cron job":["no"],"homedepotrelease_runReleaseImpex":["no"],"homedepotcacore_accessRights":["yes"],"homedepotcacockpits_importCustomReports":["yes"],"homedepotcacommercewebservicestest_ImporthomedepotcaTestData":["yes"],"homedepotcatest_createTestData":["no"],"homedepotcastorefront_updateCmsUserRoles":["yes"],"homedepotcastorefront_updateCmsSite":["yes"],"homedepotcastorefront_importWcmsComponents":["yes"],"homedepotcainitialdata_importCoreData":["no"],"homedepotcainitialdata_importSampleData":["no"],"homedepotcainitialdata_importSampleFeeds":["no"],"homedepotcainitialdata_importSampleProdClassFeed":["no"],"homedepotcainitialdata_importSampleMiniFeeds":["yes"],"homedepotcainitialdata_importSampleCuratedFeeds":["no"],"homedepotcainitialdata_activateSolrCronJobs":["no"],"homedepotcainitialdata_importSampleApplianceFeeds":["no"],"homedepotcainitialdata_importSampleProductCatalogs":["no"]},"patches":{},"createProjectData":false,"initMethod":UPDATE}' 
 
-/opt/jdk/jdk1.8.0_111/bin/keytool -list \
--keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
+# /opt/jdk/jdk1.8.0_111/bin/keytool -list \
+# -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
 
 # /opt/jdk/jdk1.8.0_111/bin/keytool -delete \
 # -alias cloudhybris \

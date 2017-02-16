@@ -1,0 +1,23 @@
+############### MySQL Settings Start ###############
+db.url=jdbc:mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8&useSSL=false
+db.driver=com.mysql.jdbc.Driver
+db.username=hybrisdbuser
+db.password=jasp3r91
+db.tableprefix=
+mysql.optional.tabledefs=CHARSET=utf8 COLLATE=utf8_bin
+mysql.tabletype=InnoDB
+############### MySQL Settings End ###############
+
+############### Bazaar Voice DB Settings Start ###############
+bazaarvoice.feed.db.url=mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8&useSSL=false
+bazaarvoice.feed.db.driver=com.mysql.jdbc.Driver
+bazaarvoice.feed.db.username=hybrisdbuser
+bazaarvoice.feed.db.password=jasp3r91
+############### Bazaar Voice DB Settings End ###############
+
+############### OptimizedPriceDB Settings Start ###############
+optimizedprice.db.url=mysql://mysql-hostname/hybrisdbuser?useConfigs=maxPerformance&characterEncoding=utf8&useSSL=false
+optimizedprice.db.username=OPTIMIZEDPRICE
+optimizedprice.db.password=hybrisdbuser
+optimizedprice.db.driver=com.mysql.jdbc.Driver
+############### OptimizedPriceDB Settings End ###############
