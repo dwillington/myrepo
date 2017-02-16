@@ -9,10 +9,7 @@ gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-builds/ /tmp/epic
 export ARTIFACT_LOCATION=/tmp/epic-builds/$1/hybris
 export DESTINATION_HOST=$1-hybris
 
-scp $SSH_ARGS $ARTIFACT_LOCATION/hybrisServer-Platform.zip root@$DESTINATION_HOST:/root/.
-scp $SSH_ARGS $ARTIFACT_LOCATION/hybrisServer-AllExtensions.zip root@$DESTINATION_HOST:/root/.
-scp $SSH_ARGS $ARTIFACT_LOCATION/hybrisServer-Config.zip root@$DESTINATION_HOST:/root/.
-scp $SSH_ARGS $ARTIFACT_LOCATION/hybrisServer-Licence.zip root@$DESTINATION_HOST:/root/.
+scp $SSH_ARGS $ARTIFACT_LOCATION/*.zip root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS deploy-local.sh root@$DESTINATION_HOST:/root/.
 
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/deploy-local.sh
