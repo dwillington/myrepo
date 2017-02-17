@@ -36,7 +36,7 @@ export my_host_name=`hostname`
 export epic_name=${my_host_name%-*}
 sed -i -e "s/mysql-hostname/$epic_name-mysql/g" /root/local.properties.db.base
 
-cat local.properties.db.base >> /root/local.properties
+cat /root/local.properties.db.base >> /root/local.properties
 /bin/cp -rf /root/local.properties /opt/hybris/hybris/config/local.properties
 #### fix local.properties ####
 
