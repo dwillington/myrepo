@@ -52,4 +52,6 @@ printf '\n' | /opt/jdk/jdk1.8.0_111/bin/keytool -genkey \
 sh /root/start_hybris.sh
 
 ls -al /opt/hybris/hybris/log/tomcat
-tail -100 /opt/hybris/hybris/log/tomcat/console-*.log
+tail -100 `/bin/ls -1td /opt/hybris/hybris/log/tomcat/*| /usr/bin/head -n1`
+
+

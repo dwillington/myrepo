@@ -88,8 +88,7 @@ printf '\n' | /opt/jdk/jdk1.8.0_111/bin/keytool -genkey \
     -validity 3650 -keyalg RSA -keystore /opt/hybris/hybris/bin/platform/tomcat/lib/keystore -storepass 123456 
 
 sh /root/start_hybris.sh
-ls -al /opt/hybris/hybris/log/tomcat
-tail -100 /opt/hybris/hybris/log/tomcat/console-*.log
+tail -100 `/bin/ls -1td /opt/hybris/hybris/log/tomcat/*| /usr/bin/head -n1`
 
 #timeout 420 sed '/Server startup/q' <(tail -n 0 -f /opt/hybris/hybris/log/tomcat/console-*.log)
 
