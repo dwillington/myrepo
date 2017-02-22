@@ -35,7 +35,7 @@ if(binding.variables.containsKey("epic_name")) {
                 contentType('text/html')
             }
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
             downstream("sonar-${epic_name}-solr", 'SUCCESS')
         }
@@ -71,8 +71,8 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                numToKeep(10)
-            }
+                 numToKeep(1)
+           }
             downstream("sonar-${epic_name}-apache", 'SUCCESS')
         }
     }
@@ -118,7 +118,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
             downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
@@ -171,7 +171,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
         }
     }
@@ -216,7 +216,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
         }
     }
@@ -243,7 +243,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
         }
     }
@@ -277,7 +277,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
             downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
@@ -346,7 +346,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(1)
             }
         }
     }
