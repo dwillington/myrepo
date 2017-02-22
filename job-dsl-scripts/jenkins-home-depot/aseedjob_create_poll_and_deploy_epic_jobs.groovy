@@ -6,7 +6,7 @@ sonar_host = '104.198.108.236'
 // the following check is to allow this to skip when master seed job is run
 if(binding.variables.containsKey("epic_name")) {
 
-    job("poll-and-deploy-${epic_name}-solr") {
+    job("poll-and-build-deploy-${epic_name}-solr") {
         scm {
             git {
                 remote {
@@ -41,7 +41,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    job("poll-and-deploy-${epic_name}-apache") {
+    job("poll-and-build-deploy-${epic_name}-apache") {
         scm {
             git {
                 remote {
@@ -77,7 +77,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    job("poll-and-deploy-${epic_name}-aem") {
+    job("poll-and-build-deploy-${epic_name}-aem") {
         scm {
             git {
                 remote {
@@ -124,7 +124,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    job("poll-and-deploy-${epic_name}-hybris") {
+    job("poll-and-build-deploy-${epic_name}-hybris") {
         scm {
             git {
                 remote {

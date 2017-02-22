@@ -19,7 +19,7 @@ proc.consumeProcessOutput(sout, serr)
 proc.waitForOrKill(1000)
 println "out> $sout err> $serr"
 
-job("create-poll-and-build-epic-jobs") {
+job("create-poll-and-build-deploy-epic-jobs") {
     parameters {
         stringParam('epic_name', 'master')
     }
