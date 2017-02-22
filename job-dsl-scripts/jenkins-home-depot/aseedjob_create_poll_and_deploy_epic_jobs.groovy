@@ -35,7 +35,7 @@ if(binding.variables.containsKey("epic_name")) {
                 contentType('text/html')
             }
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
             downstream("sonar-${epic_name}-solr", 'SUCCESS')
         }
@@ -71,7 +71,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                 numToKeep(1)
+                numToKeep(5)
            }
             downstream("sonar-${epic_name}-apache", 'SUCCESS')
         }
@@ -118,7 +118,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
             downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
@@ -171,7 +171,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
         }
     }
@@ -186,7 +186,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         publishers {
             logRotator {
-                numToKeep(10)
+                numToKeep(5)
             }
         }
     }
@@ -216,7 +216,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
         }
     }
@@ -243,7 +243,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
         }
     }
@@ -277,7 +277,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
             downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
@@ -325,7 +325,7 @@ if(false)
         }
         publishers {
             logRotator {
-                numToKeep(1)
+                numToKeep(5)
             }
         }
     }
