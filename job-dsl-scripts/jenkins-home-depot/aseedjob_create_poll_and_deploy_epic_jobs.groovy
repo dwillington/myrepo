@@ -200,7 +200,7 @@ if(false)
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    branch("master")
                 }
             }
         }
@@ -227,7 +227,7 @@ if(false)
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/apache.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    branch("master")
                 }
             }
         }
@@ -254,7 +254,7 @@ if(false)
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/aem.git")
                     credentials('axa8962-credentials')
-                    branch("$epic_name")
+                    branch("master")
                 }
             }
         }
@@ -291,8 +291,7 @@ if(false)
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
-                    // branch("$epic_name")
-                    branch("release/R8-16")
+                    branch("master")
                 }
                 extensions {
                     relativeTargetDirectory('repo')
@@ -323,26 +322,6 @@ if(false)
                     "ant sonar -Dsonar.host.url=http://${sonar_host} -Dsonar.login=admin -Dsonar.password=admin\n" + 
                     ""
                  )
-            // shell(
-                    // "rm -rf hybris\n" +
-                    // "mkdir hybris\n" +
-                    // "cp -R /bamboo/data/hybris_platform/hybris_5_4_0_0/* hybris\n" +
-                    // "cp -R repo/hybris/* hybris/.\n" +
-                    // "cp -p /bamboo/data/hybris_platform/hybrislicence.jar hybris/config/licence/hybrislicence.jar\n" +
-                    // "cp -v hybris/config/dev/local.properties hybris/config/localDEV.properties\n" +
-                    // "rm hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    // "cp -v hybris/config/dev/solr.impex hybris/bin/custom/homedepotca/homedepotcainitialdata/resources/homedepotcainitialdata/import/coredata/stores/homedepotca/solr.impex\n" +
-                    // "/bin/cp -vrf /bamboo/data/Jacoco/local.properties hybris/config/local.properties\n" +
-                    // "/bin/cp -vrf /bamboo/data/Jacoco/sonar.xml hybris/bin/platform/resources/ant/sonar.xml\n" +
-                    // "/bin/cp -vrf /bamboo/data/Jacoco/sonar-ant-task-2.2.jar hybris/bin/platform/resources/ant/lib/sonar-ant-task-2.2.jar\n" +
-                    // "cd hybris/bin/platform\n" +
-                    // ". ./setantenv.sh\n" +
-                    // "ant -Duseconfig=DEV clean all\n" +
-                    // "ant production\n" + 
-                    // "export ANT_OPTS=\"-Xmx512m -XX:MaxPermSize=128M -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080\"\n" + 
-                    // "ant sonar -Dsonar.host.url=http://${sonar_host} -Dsonar.login=admin -Dsonar.password=admin\n" + 
-                    // ""
-                 // )
         }
         publishers {
             logRotator {
