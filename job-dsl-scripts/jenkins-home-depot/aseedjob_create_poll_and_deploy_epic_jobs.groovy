@@ -18,7 +18,7 @@ if(binding.variables.containsKey("epic_name")) {
                     "} finally {}" + "\n" +
                 "stage 'Deploy'" + "\n" +
                     "try {" + "\n" +
-                        "def build = build job: deploy-${epic_name}-solr, wait: true" + "\n" +
+                        "def build = build job: 'deploy-" + "${epic_name}" + "-solr', wait: true" + "\n" +
                     "} finally {}" + "\n" +
             "" + "\n" +
             "" + "\n" +
