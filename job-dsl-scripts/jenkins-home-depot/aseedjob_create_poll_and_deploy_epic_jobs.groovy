@@ -14,7 +14,7 @@ if(binding.variables.containsKey("epic_name")) {
             "node() {" + "\n" +
                 "stage 'Build'" + "\n" + 
                     "try {" + "\n" +
-                        "def build = build job: poll-and-build-deploy-${epic_name}-solr, wait: true" + "\n" +
+                        "def build = build job: 'build-" + ${epic_name} + "-solr', wait: true" + "\n" +
                     "} finally {}" + "\n" +
                 "stage 'Deploy'" + "\n" +
                     "try {" + "\n" +
