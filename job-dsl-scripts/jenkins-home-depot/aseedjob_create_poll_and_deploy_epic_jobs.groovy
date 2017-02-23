@@ -9,13 +9,14 @@ if(binding.variables.containsKey("epic_name")) {
     pipelineJob("build-deploy-${epic_name}-solr-pipeline") {
         definition {
             cps {
+                sandbox()
                 script (
             "node() {" + "\n" +
-                "stage Build" + "\n" + 
+                "stage 'Build'" + "\n" + 
                     "try {" + "\n" +
                         "def build = build job: poll-and-build-deploy-${epic_name}-solr, wait: true" + "\n" +
                     "} finally {}" + "\n" +
-                "stage Deploy" + "\n" +
+                "stage 'Deploy'" + "\n" +
                     "try {" + "\n" +
                         "def build = build job: deploy-${epic_name}-solr, wait: true" + "\n" +
                     "} finally {}" + "\n" +
