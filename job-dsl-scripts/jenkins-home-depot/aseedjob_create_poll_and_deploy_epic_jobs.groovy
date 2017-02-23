@@ -6,6 +6,98 @@ sonar_host = '104.198.108.236'
 // the following check is to allow this to skip when master seed job is run
 if(binding.variables.containsKey("epic_name")) {
 
+    pipelineJob("build-deploy-${epic_name}-solr-pipeline") {
+        definition {
+            script (
+                "node() {" + "\n" +
+                    "stage Build" + "\n" + 
+                        "try {" + "\n" +
+                            "def build = build job: poll-and-build-deploy-${epic_name}-solr, wait: true" + "\n" +
+                        "} finally {}" + "\n" +
+                    "stage Deploy" + "\n" +
+                        "try {" + "\n" +
+                            "def build = build job: deploy-${epic_name}-solr, wait: true" + "\n" +
+                        "} finally {}" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "}" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                "" + "\n" +
+                ""
+            )
+        }
+    }
+
+    job("build-${epic_name}-solr") {
+        scm {
+            git {
+                remote {
+                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
+                    credentials('axa8962-credentials')
+                    branch("master")
+                }
+            }
+        }
+        // triggers {
+            // scm('H/10 * * * *')
+        // }
+        steps {
+            shell(
+                "cd homedepot-solr/server/solr\n" + 
+                "tar -zcvf solr-configsets.tar.gz configsets\n" + 
+                "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
+                "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
+                "/root/google-cloud-sdk/bin/gsutil cp solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
+                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
+                 )
+        }
+        publishers {
+            extendedEmail {
+                recipientList(emailList)
+                contentType('text/html')
+            }
+            logRotator {
+                numToKeep(5)
+            }
+            // downstream("sonar-${epic_name}-solr", 'SUCCESS')
+        }
+    }
+
+        job("deploy-${epic_name}-solr") {
+        scm {
+            git {
+                remote {
+                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
+                    credentials('axa8962-credentials')
+                    branch("master")
+                }
+            }
+        }
+        steps {
+            shell(
+                    "" + 
+                    ""
+                 )
+        }
+        publishers {
+            extendedEmail {
+                recipientList(emailList)
+                contentType('text/html')
+            }
+            logRotator {
+                numToKeep(5)
+            }
+        }
+    }
+
     job("poll-and-build-deploy-${epic_name}-solr") {
         scm {
             git {
