@@ -10,6 +10,7 @@ export DESTINATION_HOST=$1
 scp $SSH_ARGS mysql_setup_base.sh root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS mysql_setup_env_5.7.sh root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS sonar_setup.sh root@$DESTINATION_HOST:/root/.
+scp $SSH_ARGS phpmyadmin_setup.sh root@$DESTINATION_HOST:/root/.
 scp $SSH_ARGS *.sql root@$DESTINATION_HOST:/root/.
 ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 
