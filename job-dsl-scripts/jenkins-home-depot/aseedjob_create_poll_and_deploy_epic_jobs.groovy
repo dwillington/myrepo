@@ -8,8 +8,8 @@ if(binding.variables.containsKey("epic_name")) {
 
     pipelineJob("build-deploy-${epic_name}-solr-pipeline") {
         definition {
-            script (
-                cps {
+            cps {
+                script (
             "node() {" + "\n" +
                 "stage Build" + "\n" + 
                     "try {" + "\n" +
@@ -33,8 +33,8 @@ if(binding.variables.containsKey("epic_name")) {
             "" + "\n" +
             "" + "\n" +
             ""
-                }
-            )
+                )
+            }
         }
     }
 
