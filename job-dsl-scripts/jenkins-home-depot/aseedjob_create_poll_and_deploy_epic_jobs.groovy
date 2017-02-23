@@ -12,26 +12,15 @@ if(binding.variables.containsKey("epic_name")) {
                 sandbox()
                 script (
             "node() {" + "\n" +
-                "stage 'Build'" + "\n" + 
-                    "try {" + "\n" +
-                        "def build = build job: 'build-" + "${epic_name}" + "-solr', wait: true" + "\n" +
-                    "} finally {}" + "\n" +
-                "stage 'Deploy'" + "\n" +
-                    "try {" + "\n" +
-                        "def build = build job: 'deploy-" + "${epic_name}" + "-solr', wait: true" + "\n" +
-                    "} finally {}" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
+            "  stage 'Build'" + "\n" + 
+            "    try {" + "\n" +
+            "      def build = build job: 'build-" + "${epic_name}" + "-solr', wait: true" + "\n" +
+            "    } finally {}" + "\n" +
+            "  stage 'Deploy'" + "\n" +
+            "    try {" + "\n" +
+            "      def build = build job: 'deploy-" + "${epic_name}" + "-solr', wait: true" + "\n" +
+            "    } finally {}" + "\n" +
             "}" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
-            "" + "\n" +
             "" + "\n" +
             ""
                 )
@@ -49,11 +38,9 @@ if(binding.variables.containsKey("epic_name")) {
                 }
             }
         }
-        // triggers {
-            // scm('H/10 * * * *')
-        // }
         steps {
             shell(
+                "sleep 30\n" + 
                 "cd homedepot-solr/server/solr\n" + 
                 "tar -zcvf solr-configsets.tar.gz configsets\n" + 
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
