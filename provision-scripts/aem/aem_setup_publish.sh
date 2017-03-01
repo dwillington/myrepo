@@ -22,8 +22,9 @@ cd /opt/adobe/publish/crx-quickstart/bin
 
 tail -100 /opt/adobe/publish/crx-quickstart/logs/stdout.log
 
-timeout 120 sed '/Server completed/q' <(tail -n 0 -f /opt/adobe/publish/crx-quickstart/logs/stdout.log)
+timeout 120 sed '/Startup completed/q' <(tail -n 0 -f /opt/adobe/publish/crx-quickstart/logs/stdout.log)
 
+# the following should only execute if the server 'Startup completed'...
 curl -u admin:admin "http://localhost:4503/system/console/configMgr/ca.homedepot.aem.services.impl.SceneSevenServiceImpl" --data "apply=true&action=ajaxConfigManager&homedepot.s7.base-url=https%3A%2F%2Fimages.homedepot.ca&homedepot.s7.image-server=is%2Fimage&homedepot.s7.account-name=homedepotcanada&propertylist=homedepot.s7.base-url%2Chomedepot.s7.image-server%2Chomedepot.s7.account-name"
 
 export my_host_name=`hostname`
