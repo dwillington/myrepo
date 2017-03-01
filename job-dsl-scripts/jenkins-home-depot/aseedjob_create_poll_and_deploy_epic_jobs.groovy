@@ -61,7 +61,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-        job("deploy-${epic_name}-solr") {
+    job("deploy-${epic_name}-solr") {
         steps {
             shell(
                     "" + // use gsutil to poll whether the deployment was a success or not...
