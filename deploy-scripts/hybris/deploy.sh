@@ -1,7 +1,7 @@
 export SSH_ARGS='-o StrictHostKeyChecking=no'
 
 if [ $# -lt 1 ]; then
-  echo 1>&2 "$0: missing epic name"
+  echo 1>&2 "$0: missing epic_name"
   exit 2
 fi
 
