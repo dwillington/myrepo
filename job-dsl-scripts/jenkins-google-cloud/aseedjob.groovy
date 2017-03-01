@@ -129,7 +129,7 @@ job("deploy-epic-project") {
         stringParam('epic_name')
         stringParam('project_name')
     }
-    authenticationToken('password')
+    // authenticationToken('password')
     scm {
         git {
             remote {
