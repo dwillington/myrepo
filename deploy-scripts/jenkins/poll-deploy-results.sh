@@ -1,5 +1,7 @@
 #/bin/sh
 #yum install inotify-tools -y
+export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
 
 if [ $# -lt 2 ]; then
   echo 1>&2 "$0: must provide epic_name and project_name"
