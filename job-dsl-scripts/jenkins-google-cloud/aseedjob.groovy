@@ -130,7 +130,7 @@ job("deploy-epic-project") {
             postSuccessfulBuildSteps {
                 shell('echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')                
             }
-            postSFailureBuildSteps {
+            postFailedBuildSteps {
                 shell('echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')                
             }
         }
