@@ -8,11 +8,11 @@ yum install libaio net-tools -y
 
 cd /opt/mysql
 
-rpm -ivh ~/MySQL-shared-5.5.30-1.el6.x86_64.rpm
+rpm -ivh /root/MySQL-shared-5.5.30-1.el6.x86_64.rpm
 
-rpm -ivh ~/MySQL-client-5.5.30-1.el6.x86_64.rpm
+rpm -ivh /root/MySQL-client-5.5.30-1.el6.x86_64.rpm
 
-rpm -ivh ~/MySQL-server-5.5.30-1.el6.x86_64.rpm
+rpm -ivh /root/MySQL-server-5.5.30-1.el6.x86_64.rpm
 
 service mysql start
 
@@ -30,5 +30,5 @@ echo " "
 echo "adding mysql schemas"
 echo " "
 
-mysql -uroot -ppassword < ~/sonar-setup.sql
-mysql -uroot -ppassword < ~/hybris-setup.sql
+mysql -uroot -ppassword < /root/sonar-setup.sql
+mysql -uroot -ppassword < /root/hybris-setup.sql
