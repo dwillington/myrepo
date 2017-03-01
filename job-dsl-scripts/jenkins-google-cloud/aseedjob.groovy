@@ -53,6 +53,8 @@ job("create-provision-epic-project") {
     parameters {
         stringParam('epic_name')
         stringParam('project_name')
+        stringParam('cpu', '2')
+        stringParam('memory', '8')
     }
     scm {
         git {
@@ -64,8 +66,8 @@ job("create-provision-epic-project") {
         }
     }
     steps {
-        shell('gcloud-scripts/create-vm.sh $epic_name $project_name')
-        shell('gcloud-scripts/provision-vm.sh $epic_name $project_name')
+        shell('gcloud-scripts/create-vm.sh $epic_name $project_name $cpu $memory')
+        shell('gcloud-scripts/provision-vm.sh $epic_name $project_name $cpu $memory')
     }
     publishers {
         logRotator {
