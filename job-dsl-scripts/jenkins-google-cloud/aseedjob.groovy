@@ -152,7 +152,7 @@ job("deploy-epic-project") {
             // task('Finished: SUCCESS', 'echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')
             // task('Finished: FAILURE', 'echo deploy ${epic_name} ${project_name} FAILURE (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')
         // }
-     // }
+     }
     // wrappers {
         // release {
             // postSuccessfulBuildSteps {
