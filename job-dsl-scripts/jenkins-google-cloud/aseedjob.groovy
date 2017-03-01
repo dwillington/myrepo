@@ -49,6 +49,31 @@ job("provision-epic-environment") {
     }
 }
 
+job("create-provision-epic-project") {
+    parameters {
+        stringParam('epic_name')
+        stringParam('project_name')
+    }
+    scm {
+        git {
+            remote {
+                url("https://github.com/dwillington/myrepo.git")
+                credentials('dwillington-credentials')
+                branch('gcloud')
+            }
+        }
+    }
+    steps {
+        shell('gcloud-scripts/create-vm.sh $epic_name $project_name')
+        shell('gcloud-scripts/provision-vm.sh $epic_name $project_name')
+    }
+    publishers {
+        logRotator {
+            numToKeep(10)
+        }
+    }
+}
+
 job("tear-down-epic-environment") {
     parameters {
         stringParam('epic_name', 'master')
@@ -96,6 +121,10 @@ job("deploy-epic-project") {
     publishers {
         logRotator {
             numToKeep(10)
+        }
+        postBuildTask {
+            task('Finished: SUCCESS', 'echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER})')
+            task('Finished: FAILURE', 'echo deploy ${epic_name} ${project_name} FAILURE (${BUILD_NUMBER})')
         }
     }
 }

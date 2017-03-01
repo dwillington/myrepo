@@ -62,18 +62,9 @@ if(binding.variables.containsKey("epic_name")) {
     }
 
         job("deploy-${epic_name}-solr") {
-        scm {
-            git {
-                remote {
-                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
-                    credentials('axa8962-credentials')
-                    branch("master")
-                }
-            }
-        }
         steps {
             shell(
-                    "" + 
+                    "" + // use gsutil to poll whether the deployment was a success or not...
                     ""
                  )
         }
