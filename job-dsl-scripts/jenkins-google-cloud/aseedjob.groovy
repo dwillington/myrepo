@@ -124,9 +124,15 @@ job("deploy-epic-project") {
         logRotator {
             numToKeep(10)
         }
-        postBuildTask {
-            task('Finished: SUCCESS', 'echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')
-            task('Finished: FAILURE', 'echo deploy ${epic_name} ${project_name} FAILURE (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')
+    }
+    wrappers {
+        release {
+            postSuccessfulBuildSteps {
+                shell('echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')                
+            }
+            postSFailureBuildSteps {
+                shell('echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')                
+            }
         }
     }
 }
