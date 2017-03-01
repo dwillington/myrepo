@@ -5,7 +5,7 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-builds/ /tmp/epic-builds
+gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/ /tmp/epic-builds
 export ARTIFACT_LOCATION=/tmp/epic-builds/$1/solr
 export DESTINATION_HOST=$1-solr
 

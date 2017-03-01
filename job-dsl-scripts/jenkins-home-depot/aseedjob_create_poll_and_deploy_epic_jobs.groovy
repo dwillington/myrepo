@@ -46,6 +46,7 @@ if(binding.variables.containsKey("epic_name")) {
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "/root/google-cloud-sdk/bin/gsutil cp solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
+                "/root/google-cloud-sdk/bin/gsutil rm gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/solr/deploy.result\n" + 
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
                  )
         }
@@ -62,9 +63,18 @@ if(binding.variables.containsKey("epic_name")) {
     }
 
     job("deploy-${epic_name}-solr") {
+        scm {
+            git {
+                remote {
+                    url("https://github.com/dwillington/myrepo.git")
+                    credentials('dwillington-credentials')
+                    branch('gcloud')
+                }
+            }
+        }
         steps {
             shell(
-                    "" + // use gsutil to poll whether the deployment was a success or not...
+                    "deploy-scripts/jenkins/poll-deploy-results.sh ${epic_name} solr" +
                     ""
                  )
         }
