@@ -13,7 +13,7 @@ ssh $SSH_ARGS root@$DESTINATION_HOST chmod u+x /root/*.sh
 
 scp $SSH_ARGS $INSTALL_REPOSITORY/*.* root@$DESTINATION_HOST:/root/.
 
-# the following will stage a pre built hybrisServer-{AllExtensions, Config, Licence, Platform}.zip
+# stage a pre built deployment artifact from cloud storage to DESTINATION_HOST
 gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-builds/ /tmp/epic-builds
 export epic_name=${DESTINATION_HOST%-*}
 export ARTIFACT_LOCATION=/tmp/epic-builds/$epic_name/hybris
