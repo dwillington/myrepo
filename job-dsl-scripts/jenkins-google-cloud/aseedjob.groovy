@@ -22,6 +22,7 @@ job("create-epic-environment") {
         logRotator {
             numToKeep(10)
         }
+        downstream("provision-epic-environment", 'SUCCESS')
     }
 }
 
@@ -68,6 +69,29 @@ job("create-provision-epic-project") {
     steps {
         shell('gcloud-scripts/create-vm.sh $epic_name $project_name $cpu $memory')
         shell('gcloud-scripts/provision-vm.sh $epic_name $project_name')
+    }
+    publishers {
+        logRotator {
+            numToKeep(10)
+        }
+    }
+}
+
+job("show-epic-urls") {
+    parameters {
+        stringParam('epic_name')
+    }
+    scm {
+        git {
+            remote {
+                url("https://github.com/dwillington/myrepo.git")
+                credentials('dwillington-credentials')
+                branch('gcloud')
+            }
+        }
+    }
+    steps {
+        shell('gcloud-scripts/epic-server-urls.sh $epic_name')
     }
     publishers {
         logRotator {
