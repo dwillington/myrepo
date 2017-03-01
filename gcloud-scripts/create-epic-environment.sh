@@ -14,15 +14,12 @@ create_vm()
 }
 
 if [ $# -lt 1 ]; then
-  echo 1>&2 "$0: missing epic_name"
+  echo 1>&2 "$0: epic_name"
   exit 2
 fi
 
-export epic_name=$1
-echo "epic_name is set to '$epic_name'";
-
-create_vm $epic_name mysql 2 8
-create_vm $epic_name hybris 4 8
-create_vm $epic_name solr 4 8
-create_vm $epic_name aem 2 8
-create_vm $epic_name apache 2 8
+create_vm $1 mysql 2 8
+create_vm $1 hybris 4 8
+create_vm $1 solr 4 8
+create_vm $1 aem 2 8
+create_vm $1 apache 2 8

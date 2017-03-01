@@ -213,7 +213,6 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
-                    // branch("$epic_name")
                     branch("develop")
                 }
                 extensions {

@@ -8,15 +8,12 @@ provision_vm()
 }
 
 if [ $# -lt 1 ]; then
-  echo 1>&2 "$0: missing epic_name"
+  echo 1>&2 "$0: epic_name"
   exit 2
 fi
 
-export epic_name=$1
-echo "epic_name is set to '$epic_name'";
-
-provision_vm $epic_name mysql
-provision_vm $epic_name hybris
-provision_vm $epic_name solr
-provision_vm $epic_name aem
-provision_vm $epic_name apache
+provision_vm $1 mysql
+provision_vm $1 hybris
+provision_vm $1 solr
+provision_vm $1 aem
+provision_vm $1 apache
