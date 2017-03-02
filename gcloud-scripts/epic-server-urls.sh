@@ -12,7 +12,7 @@ export random_folder=$RANDOM
 mkdir -p /tmp/$random_folder
 
 gcloud compute instances list --regexp=$epic_name.* > /tmp/$random_folder/out.txt
-sed -ie '1d' out.txt # remove line 1
+sed -ie '1d' /tmp/$random_folder/out.txt # remove line 1
 awk '{print $9}' /tmp/$random_folder/out.txt > /tmp/$random_folder/out1.txt # only keep column 9, which is the ip address
 mv -f /tmp/$random_folder/out1.txt /tmp/$random_folder/out.txt
 sed -i -e 's/^/http:\/\//' /tmp/$random_folder/out.txt
