@@ -8,7 +8,7 @@ fi
 export epic_name=$1
 #echo "epic_name is set to '$epic_name'";
 
-export random_folder=$RANDOM
+export random_folder=delete-me-$RANDOM
 mkdir -p /tmp/$random_folder
 
 if [[ $(hostname) = ln0a7b.* ]]; then
