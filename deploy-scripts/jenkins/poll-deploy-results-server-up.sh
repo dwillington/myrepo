@@ -13,15 +13,7 @@ export project_name=$2
 export SLEEP_PERIOD=2
 export server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 
-# export http_code=000
-
-# we may wish to change this to ! -eq 200
-# while [ "$x" -lt 30 -a ! "$http_code" -eq "000" ]; do
-    # export http_code=`curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" $server_url`
-    # x=$((x+1))
-    # sleep $SLEEP_PERIOD
-# done
-
+#https://coderwall.com/p/taqiyg/use-http-status-codes-from-curl
 while true
 do
   http_code=`curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" $server_url`
