@@ -7,7 +7,7 @@ mkdir -p /opt/solr/build && cd /opt/solr/build
 tar -zxvf /root/solr-configsets.tar.gz
 rm -rf /opt/solr/solr/server/solr/configsets
 cp -r /opt/solr/build/configsets /opt/solr/solr/server/solr
-#cp <solr-cloud-in.sh> /etc/default/solr.in.sh
+#mv /opt/solr/solr.in.sh /etc/default/.
 rm -rf /opt/solr/build
 
 echo "--------------------------------------------------"
