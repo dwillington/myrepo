@@ -33,7 +33,7 @@ do
     echo "Giving up!"
     break
   else
-    echo "Got $STATUS :( Not done yet..."
+    echo "Got $http_code :( Not done yet..."
   fi
   sleep $SLEEP_PERIOD
 done
