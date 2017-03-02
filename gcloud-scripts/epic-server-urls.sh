@@ -11,6 +11,10 @@ export epic_name=$1
 export random_folder=$RANDOM
 mkdir -p /tmp/$random_folder
 
+if [[ $(hostname) = ln0a7b.* ]]; then
+  PATH=/bamboo/data/thdutil/serversetup/google-cloud-sdk/bin:$PATH
+fi
+
 gcloud compute instances list --regexp=$epic_name.* > /tmp/$random_folder/out.txt
 sed -ie '1d' /tmp/$random_folder/out.txt # remove line 1
 awk '{print $9}' /tmp/$random_folder/out.txt > /tmp/$random_folder/out1.txt # only keep column 9, which is the ip address
