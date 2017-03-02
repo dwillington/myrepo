@@ -43,3 +43,5 @@ else
     echo "File $file not found within time limit!"
     exit 1
 fi
+
+#                "/root/google-cloud-sdk/bin/gsutil rm gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/solr/deploy.result\n" + 

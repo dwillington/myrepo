@@ -40,13 +40,11 @@ if(binding.variables.containsKey("epic_name")) {
         }
         steps {
             shell(
-                "sleep 30\n" + 
                 "cd homedepot-solr/server/solr\n" + 
                 "tar -zcvf solr-configsets.tar.gz configsets\n" + 
                 "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
                 "/root/google-cloud-sdk/bin/gsutil cp solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
-                "/root/google-cloud-sdk/bin/gsutil rm gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/solr/deploy.result\n" + 
                 "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
                  )
         }
@@ -74,7 +72,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
         steps {
             shell(
-                    "deploy-scripts/jenkins/poll-deploy-results.sh ${epic_name} solr" +
+                    "deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${epic_name} solr" +
                     ""
                  )
         }
