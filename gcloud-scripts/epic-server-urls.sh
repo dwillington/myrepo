@@ -18,7 +18,8 @@ sed -i '3s/$/\/hmc\/hybris/' out.txt
 sed -i '4s/$/\/phpmyadmin/' out.txt
 sed -i '5s/$/\/solr/' out.txt
 
-if [ $# -lt 2 ]; then
+if [ $# -lt 2 ]
+then
   cat out.txt
 else
   export project_name=$2
