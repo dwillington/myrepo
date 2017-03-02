@@ -11,9 +11,9 @@ export epic_name=$1
 export random_folder=delete-me-$RANDOM
 mkdir -p /tmp/$random_folder
 
-if [[ $(hostname) = ln.* ]]; then
+if [[ $(hostname) = ln0a7b.* ]]; then
   PATH=/bamboo/data/thdutil/serversetup/google-cloud-sdk/bin:$PATH
-elif [[ $(hostname) = ld.* ]]; then
+elif [[ $(hostname) = ld5717* ]]; then
   PATH=/root/google-cloud-sdk/bin:$PATH
 fi
 
