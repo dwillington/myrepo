@@ -11,5 +11,11 @@ export epic_name=$1
 export project_name=$2
 
 export server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
-export http_code =`curl -s -o /dev/null -I -w "%{http_code}" $server_url`
-echo $http_code
+export http_code=`curl -s -o /dev/null -I -w "%{http_code}" $server_url`
+
+if [ "$http_code" -eq "200" ]; then
+   exit 0;
+else
+   echo "http_code: $http_code";
+   exit 1;
+fi
