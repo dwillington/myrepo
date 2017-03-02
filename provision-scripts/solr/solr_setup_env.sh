@@ -39,4 +39,4 @@ cd /opt/solr
 chmod a+x install_solr_service.sh 
 ./install_solr_service.sh homedepot-solr.tgz -f -i /opt/solr -d /opt/solr -u root -s solr -p 8080
 
-tail -100 /opt/solr/homedepot-solr/server/logs/solr.log
+tail /opt/solr/homedepot-solr/server/logs/solr.log
