@@ -8,32 +8,37 @@ fi
 export epic_name=$1
 #echo "epic_name is set to '$epic_name'";
 
-gcloud compute instances list --regexp=$epic_name.* > out.txt
+export random_folder=$RANDOM
+mkdir -p /tmp/$random_folder
+
+gcloud compute instances list --regexp=$epic_name.* > /tmp/$random_folder/out.txt
 sed -ie '1d' out.txt # remove line 1
-awk '{print $9}' out.txt > out1.txt # only keep column 9, which is the ip address
-mv -f out1.txt out.txt
-sed -i -e 's/^/http:\/\//' out.txt
-sed -i '1s/$/\/libs\/granite\/core\/content\/login.html/' out.txt
-sed -i '2s/$/\/en\/home.html/' out.txt
-sed -i '3s/$/\/hmc\/hybris/' out.txt
-sed -i '4s/$/\/phpmyadmin\//' out.txt
-sed -i '5s/$/\/solr\//' out.txt
+awk '{print $9}' /tmp/$random_folder/out.txt > /tmp/$random_folder/out1.txt # only keep column 9, which is the ip address
+mv -f /tmp/$random_folder/out1.txt /tmp/$random_folder/out.txt
+sed -i -e 's/^/http:\/\//' /tmp/$random_folder/out.txt
+sed -i '1s/$/\/libs\/granite\/core\/content\/login.html/' /tmp/$random_folder/out.txt
+sed -i '2s/$/\/en\/home.html/' /tmp/$random_folder/out.txt
+sed -i '3s/$/\/hmc\/hybris/' /tmp/$random_folder/out.txt
+sed -i '4s/$/\/phpmyadmin\//' /tmp/$random_folder/out.txt
+sed -i '5s/$/\/solr\//' /tmp/$random_folder/out.txt
 
 if [ $# -lt 2 ]
 then
-  cat out.txt
+  cat /tmp/$random_folder/out.txt
 else
   export project_name=$2
   case $project_name in
     "aem" )
-        sed -n 1p out.txt;;
+        sed -n 1p /tmp/$random_folder/out.txt;;
     "apache" )
-        sed -n 2p out.txt;;
+        sed -n 2p /tmp/$random_folder/out.txt;;
     "hybris" )
-        sed -n 3p out.txt;;
+        sed -n 3p /tmp/$random_folder/out.txt;;
     "mysql" )
-        sed -n 4p out.txt;;
+        sed -n 4p /tmp/$random_folder/out.txt;;
     "solr" )
-        sed -n 5p out.txt;;
+        sed -n 5p /tmp/$random_folder/out.txt;;
   esac
 fi
+
+rm -rf /tmp/$random_folder/
