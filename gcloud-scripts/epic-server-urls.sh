@@ -13,6 +13,8 @@ mkdir -p /tmp/$random_folder
 
 if [[ $(hostname) = ln0a7b.* ]]; then
   PATH=/bamboo/data/thdutil/serversetup/google-cloud-sdk/bin:$PATH
+elif [[ $(hostname) = ld5717.* ]]; then
+  PATH=/root/google-cloud-sdk/bin:$PATH
 fi
 
 gcloud compute instances list --regexp=$epic_name.* > /tmp/$random_folder/out.txt
