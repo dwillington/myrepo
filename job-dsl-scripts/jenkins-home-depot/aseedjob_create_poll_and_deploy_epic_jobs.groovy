@@ -42,7 +42,7 @@ if(binding.variables.containsKey("epic_name")) {
                 }
             }
             steps {
-                shell("deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${project_names[i]} ${project_name_num_attempts[i]}")
+                shell("deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${epic_name} ${project_names[i]} ${project_name_num_attempts[i]}")
             }
             publishers {
                 logRotator {
@@ -58,7 +58,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
-                    branch("master")
+                    branch("develop")
                 }
             }
         }
