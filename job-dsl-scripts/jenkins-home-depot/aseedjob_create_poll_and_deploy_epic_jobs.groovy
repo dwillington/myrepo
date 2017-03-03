@@ -6,29 +6,30 @@ sonar_host = '104.198.108.236'
 // the following check is to allow this to skip when master seed job is run
 if(binding.variables.containsKey("epic_name")) {
 
-    pipelineJob("build-deploy-${epic_name}-solr-pipeline") {
-        definition {
-            cps {
-                sandbox()
-                script (
-            "node() {" + "\n" +
-            "  stage 'Build'" + "\n" + 
-            "    try {" + "\n" +
-            "      def build = build job: 'build-" + "${epic_name}" + "-solr', wait: true" + "\n" +
-            "    } finally {}" + "\n" +
-            "  stage 'Deploy'" + "\n" +
-            "    try {" + "\n" +
-            "      def build = build job: 'deploy-" + "${epic_name}" + "-solr', wait: true" + "\n" +
-            "    } finally {}" + "\n" +
-            "}" + "\n" +
-            "" + "\n" +
-            ""
-                )
-            }
-        }
-    }
+    // pipelineJob("build-deploy-${epic_name}-solr-pipeline") {
+        // definition {
+            // cps {
+                // sandbox()
+                // script (
+            // "node() {" + "\n" +
+            // "  stage 'Build'" + "\n" + 
+            // "    try {" + "\n" +
+            // "      def build = build job: 'build-" + "${epic_name}" + "-solr', wait: true" + "\n" +
+            // "    } finally {}" + "\n" +
+            // "  stage 'Deploy'" + "\n" +
+            // "    try {" + "\n" +
+            // "      def build = build job: 'deploy-" + "${epic_name}" + "-solr', wait: true" + "\n" +
+            // "    } finally {}" + "\n" +
+            // "}" + "\n" +
+            // "" + "\n" +
+            // ""
+                // )
+            // }
+        // }
+    // }
 
-    String[] project_names = ["apache", "aem", "hybris", "mysql", "solr"];
+    String[] project_names = ["apache", "aem", "hybris", "solr"];
+    String[] project_name_num_attempts = ["5", "5", "60", "5"];
     for (int i = 0; i < project_names.length; i++) {
         job("deploy-${epic_name}-${project_names[i]}") {
             scm {
@@ -41,7 +42,7 @@ if(binding.variables.containsKey("epic_name")) {
                 }
             }
             steps {
-                shell("deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${project_names[i]} 5")
+                shell("deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${project_names[i]} ${project_name_num_attempts[i]}")
             }
             publishers {
                 logRotator {
@@ -79,10 +80,11 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(5)
             }
+            downstream("deploy-${epic_name}-solr", 'SUCCESS')
         }
     }
 
-    job("poll-and-build-deploy-${epic_name}-apache") {
+    job("build-${epic_name}-apache") {
         scm {
             git {
                 remote {
@@ -92,9 +94,6 @@ if(binding.variables.containsKey("epic_name")) {
                 }
             }
         }
-        // triggers {
-            // scm('H/10 * * * *')
-        // }
         steps {
             maven {
                 rootPOM('pom.xml')
@@ -113,12 +112,12 @@ if(binding.variables.containsKey("epic_name")) {
         publishers {
             logRotator {
                 numToKeep(5)
-           }
-            downstream("sonar-${epic_name}-apache", 'SUCCESS')
+            }
+            downstream("deploy-${epic_name}-apache", 'SUCCESS')
         }
     }
 
-    job("poll-and-build-deploy-${epic_name}-aem") {
+    job("build-${epic_name}-aem") {
         scm {
             git {
                 remote {
@@ -128,9 +127,6 @@ if(binding.variables.containsKey("epic_name")) {
                 }
             }
         }
-        // triggers {
-            // scm('H/10 * * * *')
-        // }
         steps {
             shell(
                 "sed -i \"342i <failOnError>false</failOnError>\" homedepot-apps/pom.xml\n" + 
@@ -161,11 +157,12 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(5)
             }
+            downstream("deploy-${epic_name}-aem", 'SUCCESS')
             downstream("restart-aem-${hd_aem_host}", 'SUCCESS')
         }
     }
 
-    job("poll-and-build-deploy-${epic_name}-hybris") {
+    job("build-${epic_name}-hybris") {
         scm {
             git {
                 remote {
@@ -178,9 +175,6 @@ if(binding.variables.containsKey("epic_name")) {
                 }
             }
         }
-        // triggers {
-            // scm('H/10 * * * *')
-        // }
         steps {
             shell(
                     "rm -rf hybris\n" +
@@ -213,6 +207,7 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(5)
             }
+            downstream("deploy-${epic_name}-hybris", 'SUCCESS')
         }
     }
 
@@ -323,8 +318,6 @@ if(false)
         }
     }
 
-}   
-
     job("sonar-${epic_name}-hybris") {
         scm {
             git {
@@ -369,6 +362,7 @@ if(false)
             }
         }
     }
+}   
 
 }
 

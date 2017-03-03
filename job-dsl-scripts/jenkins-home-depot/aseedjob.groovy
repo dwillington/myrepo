@@ -21,7 +21,7 @@ println "out> $sout err> $serr"
 
 job("a-create-poll-build-deploy-epic-jobs") {
     parameters {
-        stringParam('epic_name', 'master')
+        stringParam('epic_name', 'epic1')
     }
     scm {
         git {
