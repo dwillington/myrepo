@@ -18,8 +18,8 @@ elif [[ $(hostname) = ld5717* ]]; then
 fi
 
 gcloud --format="value(networkInterfaces[0].accessConfigs[0].natIP)" compute instances list --regexp=$epic_name.* > /tmp/$random_folder/out.txt
-#gcloud compute instances list --format='value(name, networkInterfaces[0].accessConfigs[0].natIP)' --regexp=$epic_name.*
-sed -ie '1d' /tmp/$random_folder/out.txt # remove line 1
+# gcloud compute instances list --format='value(name, networkInterfaces[0].accessConfigs[0].natIP)' --regexp=$epic_name.*
+# sed -ie '1d' /tmp/$random_folder/out.txt # remove line 1
 # awk '{print $9}' /tmp/$random_folder/out.txt > /tmp/$random_folder/out1.txt # only keep column 9, which is the ip address
 #mv -f /tmp/$random_folder/out1.txt /tmp/$random_folder/out.txt
 sed -i -e 's/^/http:\/\//' /tmp/$random_folder/out.txt
