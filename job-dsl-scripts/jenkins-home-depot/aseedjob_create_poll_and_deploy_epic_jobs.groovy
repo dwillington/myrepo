@@ -56,7 +56,6 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(5)
             }
-            // downstream("sonar-${epic_name}-solr", 'SUCCESS')
         }
     }
 

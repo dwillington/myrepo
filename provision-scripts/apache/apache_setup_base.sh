@@ -27,3 +27,6 @@ docker exec apache /bin/sh -c /tmp/apache_setup_on_docker.sh
 echo "                           "
 echo "Process Completed"
 echo "                           "
+
+#http://stackoverflow.com/questions/21928691/how-to-continue-a-docker-which-is-exited
+# docker start  `docker ps -q -l` # restart it in the background

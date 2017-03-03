@@ -29,12 +29,6 @@ echo "               "
 
 mv /opt/solr/solr.in.sh /etc/default/.
 
-mkdir -p /opt/solr/build && cd /opt/solr/build
-tar -zxvf /root/solr-configsets.tar.gz
-rm -rf /opt/solr/solr/server/solr/configsets
-cp -r /opt/solr/build/configsets /opt/solr/solr/server/solr
-rm -rf /opt/solr/build
-
 cd /opt/solr
 chmod a+x install_solr_service.sh 
 ./install_solr_service.sh homedepot-solr.tgz -f -i /opt/solr -d /opt/solr -u root -s solr -p 8080
