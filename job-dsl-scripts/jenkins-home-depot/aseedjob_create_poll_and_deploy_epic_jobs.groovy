@@ -28,7 +28,7 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
-    def project_names = ['apache', 'aem', 'hybris', 'mysql', 'solr']
+    String[] project_names = ["apache", "aem", "hybris", "mysql", "solr"];
     for (int i = 0; i < project_names.length; i++) {
         job("deploy-${epic_name}-${project_names[i]}") {
             scm {
