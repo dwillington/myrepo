@@ -12,10 +12,9 @@ export project_name=$2
 
 export SLEEP_PERIOD=5
 export NUM_ATTEMPTS=5
-if [ $# -gt 2 ];
-then
+if [ $# -gt 2 ]; then
     export NUM_ATTEMPTS=$3
-else
+fi
 
 export server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 
