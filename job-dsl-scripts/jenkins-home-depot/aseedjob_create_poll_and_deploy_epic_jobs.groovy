@@ -28,6 +28,29 @@ if(binding.variables.containsKey("epic_name")) {
         }
     }
 
+    def project_names = ['apache', 'aem', 'hybris', 'mysql', 'solr']
+    for (int i = 0; i < project_names.length; i++) {
+        job("deploy-${epic_name}-${project_names[i]}") {
+            scm {
+                git {
+                    remote {
+                        url("https://github.com/dwillington/myrepo.git")
+                        credentials('dwillington-credentials')
+                        branch('gcloud')
+                    }
+                }
+            }
+            steps {
+                shell("deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${project_names[i]} 5")
+            }
+            publishers {
+                logRotator {
+                    numToKeep(5)
+                }
+            }
+        }
+    }
+
     job("build-${epic_name}-solr") {
         scm {
             git {
@@ -56,68 +79,6 @@ if(binding.variables.containsKey("epic_name")) {
             logRotator {
                 numToKeep(5)
             }
-        }
-    }
-
-    job("deploy-${epic_name}-solr") {
-        scm {
-            git {
-                remote {
-                    url("https://github.com/dwillington/myrepo.git")
-                    credentials('dwillington-credentials')
-                    branch('gcloud')
-                }
-            }
-        }
-        steps {
-            shell(
-                    "deploy-scripts/jenkins/poll-deploy-results-server-up.sh ${epic_name} solr" +
-                    ""
-                 )
-        }
-        publishers {
-            extendedEmail {
-                recipientList(emailList)
-                contentType('text/html')
-            }
-            logRotator {
-                numToKeep(5)
-            }
-        }
-    }
-
-    job("poll-and-build-deploy-${epic_name}-solr") {
-        scm {
-            git {
-                remote {
-                    url("http://stash.homedepot.ca/scm/hdca/solr.git")
-                    credentials('axa8962-credentials')
-                    branch("master")
-                }
-            }
-        }
-        // triggers {
-            // scm('H/10 * * * *')
-        // }
-        steps {
-            shell(
-                "cd homedepot-solr/server/solr\n" + 
-                "tar -zcvf solr-configsets.tar.gz configsets\n" + 
-                "export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                "export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080\n" + 
-                "/root/google-cloud-sdk/bin/gsutil cp solr-configsets.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/${epic_name}/solr/solr-configsets.tar.gz\n" + 
-                "/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-deploy.sh ${epic_name} solr\n"
-                 )
-        }
-        publishers {
-            extendedEmail {
-                recipientList(emailList)
-                contentType('text/html')
-            }
-            logRotator {
-                numToKeep(5)
-            }
-            downstream("sonar-${epic_name}-solr", 'SUCCESS')
         }
     }
 
