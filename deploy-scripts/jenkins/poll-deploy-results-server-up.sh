@@ -26,11 +26,12 @@ do
   if [ "$http_code" -eq "200" ]; then
     echo "Got 200! All done!"
     break
-  elif [ "$x" -gt "$NUM_ATTEMPTS" ]; then
-    echo "Giving up!"
-    break
   else
     echo "Got $http_code :( Not done yet..."
+  fi
+  if [ "$x" -gt "$NUM_ATTEMPTS" ]; then
+    echo "Giving up!"
+    break
   fi
   sleep $SLEEP_PERIOD
 done
