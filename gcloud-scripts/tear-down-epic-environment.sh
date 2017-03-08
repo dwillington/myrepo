@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 delete_vm()
 {
@@ -16,7 +16,8 @@ echo "epic_name is set to '$epic_name'";
 delete_vm $epic_name solr
 delete_vm $epic_name mysql
 delete_vm $epic_name hybris
-delete_vm $epic_name apache
+#delete_vm $epic_name apache
+./gcloud-scripts/tear-down-apache.sh $epic_name-apache
 delete_vm $epic_name aem
 
 
