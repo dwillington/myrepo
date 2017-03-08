@@ -58,7 +58,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/solr.git")
                     credentials('axa8962-credentials')
-                    branch("develop")
+                    branch("master")
                 }
             }
         }
@@ -168,7 +168,7 @@ if(binding.variables.containsKey("epic_name")) {
                 remote {
                     url("http://stash.homedepot.ca/scm/hdca/hybris-suite.git")
                     credentials('axa8962-credentials')
-                    branch("develop")
+                    branch("master")
                 }
                 extensions {
                     relativeTargetDirectory('repo')
