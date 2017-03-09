@@ -10,7 +10,6 @@ fi
 export SLEEP_PERIOD=5
 #export random_folder=delete-me-$RANDOM
 export random_folder=$1
-mkdir -p /tmp/$random_folder
 
 grep Location /tmp/$random_folder/out.txt.orig > /tmp/$random_folder/out.txt
 sed -i 's/Location: //' /tmp/$random_folder/out.txt
@@ -34,10 +33,10 @@ while [ "$x" -lt 30]; do
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
         -X POST $deploy_job_url > /tmp/$random_folder/deploy_job.txt
     deploy_job_result=`cat /tmp/$random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
-    if ["deploy_job_result" -eq "SUCCESS"] then
-        
+    if ["$deploy_job_result" -eq "SUCCESS"] then
+       break
     fi
-    if ["deploy_job_result" -eq "FAILURE"] then
+    if ["$deploy_job_result" -eq "FAILURE"] then
        break
     fi
     sleep $SLEEP_PERIOD
