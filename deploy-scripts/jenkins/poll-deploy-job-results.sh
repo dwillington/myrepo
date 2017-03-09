@@ -10,6 +10,7 @@ fi
 export SLEEP_PERIOD=5
 #export random_folder=delete-me-$RANDOM
 export random_folder=$1
+mkdir -p /tmp/$random_folder
 
 grep Location /tmp/$random_folder/out.txt.orig > /tmp/$random_folder/out.txt
 sed -i 's/Location: //' /tmp/$random_folder/out.txt
