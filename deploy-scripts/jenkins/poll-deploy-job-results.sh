@@ -28,18 +28,27 @@ sed -i 's/$/api\/json?pretty=true/' /tmp/$random_folder/out.txt
 deploy_job_url=`cat /tmp/$random_folder/out.txt`
 echo $deploy_job_url
 
-while [ "$x" -lt 30]; do
+while [ "$x" -lt 30 ]; do
     curl -H "$CRUMB" \
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
         -X POST $deploy_job_url > /tmp/$random_folder/deploy_job.txt
     deploy_job_result=`cat /tmp/$random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
-    if ["$deploy_job_result" -eq "SUCCESS"]; then
+    echo $deploy_job_result
+    if [ "$deploy_job_result" == "SUCCESS" ]; then
+       echo "success"
        break
     fi
-    if ["$deploy_job_result" -eq "FAILURE"]; then
+    if [ "$deploy_job_result" == "FAILURE" ]; then
+       echo "failure"
        break
     fi
     sleep $SLEEP_PERIOD
     x=$((x+1))
 done
 
+if [ "$deploy_job_result" == "SUCCESS" ]; then
+   exit 0;
+else
+   echo "failure / gave up"
+   exit 1;
+fi
