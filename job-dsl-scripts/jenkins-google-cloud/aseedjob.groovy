@@ -167,6 +167,17 @@ job("deploy-epic-project") {
 
 // createPollAndDeployJob('epic1', 'solr')
 
+job("test") {
+    steps {
+        shell('/tmp/test.sh')
+    }
+    publishers {
+        logRotator {
+            numToKeep(10)
+        }
+    }
+}
+
 def createPollAndDeployJob(epic_name, project_name) {
     job("poll-and-deploy-${epic_name}-${project_name}") {
         scm {
