@@ -47,8 +47,8 @@ job("a-create-poll-build-deploy-epic-jobs") {
 job("test-deploy-epic-project") {
     concurrentBuild()
     parameters {
-        stringParam('epic_name')
-        stringParam('project_name')
+        stringParam('epic_name', 'epic1')
+        stringParam('project_name', 'solr')
     }
     scm {
         git {
