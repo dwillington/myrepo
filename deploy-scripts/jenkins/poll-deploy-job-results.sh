@@ -32,6 +32,7 @@ sed -i 's/$/api\/json?pretty=true/' $random_folder/out.txt
 deploy_job_url=`cat $random_folder/out.txt`
 echo $deploy_job_url
 
+x=0
 while [ $x -lt 30 ]; do
     curl -H "$CRUMB" \
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
