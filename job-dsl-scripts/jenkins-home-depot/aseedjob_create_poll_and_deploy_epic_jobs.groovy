@@ -1,5 +1,4 @@
 emailList = 'AMJAD_ASHRAF@homedepot.com' //SAIPRASADH_SEKAR@homedepot.com,
-hd_aem_host = '172.24.103.213'
 sonar_host = '104.198.108.236'
 // property("sonar.host.url", "http://172.24.100.252")
 
@@ -27,23 +26,6 @@ if(binding.variables.containsKey("epic_name")) {
             // }
         // }
     // }
-
-    job("test-deploy-epic-project") {
-        concurrentBuild()
-        parameters {
-            stringParam('epic_name')
-            stringParam('project_name')
-        }
-        steps {
-            shell("deploy-scripts/jenkins/trigger-jenkins-job.sh test-deploy-epic-project ${epic_name} ${project_name}")
-            shell("deploy-scripts/jenkins/poll-deploy-job-results.sh ${epic_name} ${project_names}")
-        }
-        publishers {
-            logRotator {
-                numToKeep(10)
-            }
-        }
-    }
 
     String[] project_names = ["apache", "aem", "hybris", "solr"];
     String[] project_name_num_attempts = ["5", "5", "60", "5"];
@@ -225,21 +207,6 @@ if(binding.variables.containsKey("epic_name")) {
                 numToKeep(5)
             }
             downstream("deploy-${epic_name}-hybris", 'SUCCESS')
-        }
-    }
-
-    job("restart-aem-${hd_aem_host}") {
-        steps {
-            shell(
-                "ssh root@${hd_aem_host} /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
-                "ssh root@${hd_aem_host} /root/aem_setup_publish.sh\n" + 
-                ""
-            )
-        }
-        publishers {
-            logRotator {
-                numToKeep(5)
-            }
         }
     }
 

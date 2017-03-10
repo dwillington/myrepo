@@ -44,3 +44,36 @@ job("a-create-poll-build-deploy-epic-jobs") {
     }
 }
 
+job("test-deploy-epic-project") {
+    concurrentBuild()
+    parameters {
+        stringParam('epic_name')
+        stringParam('project_name')
+    }
+    steps {
+        shell("deploy-scripts/jenkins/trigger-jenkins-job.sh test-deploy-epic-project ${epic_name} ${project_name}")
+        shell("deploy-scripts/jenkins/poll-deploy-job-results.sh ${epic_name} ${project_names}")
+    }
+    publishers {
+        logRotator {
+            numToKeep(10)
+        }
+    }
+}
+
+hd_aem_host = '172.24.103.213'
+job("restart-aem-${hd_aem_host}") {
+    steps {
+        shell(
+            "ssh root@${hd_aem_host} /opt/adobe/publish/crx-quickstart/bin/stop\n" + 
+            "ssh root@${hd_aem_host} /root/aem_setup_publish.sh\n" + 
+            ""
+        )
+    }
+    publishers {
+        logRotator {
+            numToKeep(5)
+        }
+    }
+}
+
