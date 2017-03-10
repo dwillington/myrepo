@@ -14,30 +14,30 @@ export SLEEP_PERIOD=5
 random_folder=/tmp/delete-me-test-deploy-epic-project-$epic_name-$project_name
 
 # get queue_item_url
-grep Location $random_folder/out.txt.orig > $random_folder/out.txt
-sed -i 's/Location: //' $random_folder/out.txt
-dos2unix $random_folder/out.txt
-sed -i 's/$/api\/json?pretty=true/' $random_folder/out.txt
-export queue_item_url=`cat $random_folder/out.txt`
+grep Location $random_folder/out.txt.orig > $random_folder/queue_item_url.txt
+sed -i 's/Location: //' $random_folder/queue_item_url.txt
+dos2unix $random_folder/queue_item_url.txt
+sed -i 's/$/api\/json?pretty=true/' $random_folder/queue_item_url.txt
+export queue_item_url=`cat $random_folder/queue_item_url.txt`
 
 # get queue_item_json
 curl -H "$CRUMB" \
      --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
-     -X POST $queue_item_url > $random_folder/queue_item.txt
+     -X POST $queue_item_url > $random_folder/queue_item_json.txt
 
 # parse out deploy_job-url
 export PYTHONIOENCODING=utf8
-cat $random_folder/queue_item.txt | python -c "import sys, json; print json.load(sys.stdin)['executable']['url']" > $random_folder/out.txt
-sed -i 's/$/api\/json?pretty=true/' $random_folder/out.txt
-deploy_job_url=`cat $random_folder/out.txt`
+cat $random_folder/queue_item_json.txt | python -c "import sys, json; print json.load(sys.stdin)['executable']['url']" > $random_folder/deploy_job_url.txt
+sed -i 's/$/api\/json?pretty=true/' $random_folder/deploy_job_url.txt
+deploy_job_url=`cat $random_folder/deploy_job_url.txt`
 echo $deploy_job_url
 
 x=0
 while [ $x -lt 30 ]; do
     curl -H "$CRUMB" \
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
-        -X POST $deploy_job_url > $random_folder/deploy_job.txt
-    deploy_job_result=`cat $random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
+        -X POST $deploy_job_url > $random_folder/deploy_job_json.txt
+    deploy_job_result=`cat $random_folder/deploy_job_json.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
     echo "result=$deploy_job_result"
     if [ "$deploy_job_result" == "SUCCESS" ]; then
        echo "result=success"
