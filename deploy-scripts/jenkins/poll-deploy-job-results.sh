@@ -3,36 +3,40 @@ export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
 export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
 
 if [ $# -lt 2 ]; then
-  echo 1>&2 "$0: provide random_folder"
+  echo 1>&2 "$0: must provide epic_name and project_name"
   exit 2
 fi
 
+export epic_name=$1
+export project_name=$2
+
 export SLEEP_PERIOD=5
-#export random_folder=delete-me-$RANDOM
-export random_folder=$1
+random_folder=/tmp/delete-me-$epic_name-$project_name
 
-grep Location /tmp/$random_folder/out.txt.orig > /tmp/$random_folder/out.txt
-sed -i 's/Location: //' /tmp/$random_folder/out.txt
+# get queue_item_url
+grep Location $random_folder/out.txt.orig > $random_folder/out.txt
+sed -i 's/Location: //' $random_folder/out.txt
 dos2unix /tmp/$random_folder/out.txt
-sed -i 's/$/api\/json?pretty=true/' /tmp/$random_folder/out.txt
-export queue_item_url=`cat /tmp/$random_folder/out.txt`
+sed -i 's/$/api\/json?pretty=true/' $random_folder/out.txt
+export queue_item_url=`cat $random_folder/out.txt`
 
+# get queue_item_json
 curl -H "$CRUMB" \
      --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
-     -X POST $queue_item_url > /tmp/$random_folder/queue_item.txt
+     -X POST $queue_item_url > $random_folder/queue_item.txt
 
-# from here you can parse out url, see output below
+# parse out deploy_job-url
 export PYTHONIOENCODING=utf8
-cat /tmp/$random_folder/queue_item.txt | python -c "import sys, json; print json.load(sys.stdin)['executable']['url']" > /tmp/$random_folder/out.txt
-sed -i 's/$/api\/json?pretty=true/' /tmp/$random_folder/out.txt
-deploy_job_url=`cat /tmp/$random_folder/out.txt`
+cat $random_folder/queue_item.txt | python -c "import sys, json; print json.load(sys.stdin)['executable']['url']" > $random_folder/out.txt
+sed -i 's/$/api\/json?pretty=true/' $random_folder/out.txt
+deploy_job_url=`cat $random_folder/out.txt`
 echo $deploy_job_url
 
 while [ "$x" -lt 30 ]; do
     curl -H "$CRUMB" \
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
-        -X POST $deploy_job_url > /tmp/$random_folder/deploy_job.txt
-    deploy_job_result=`cat /tmp/$random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
+        -X POST $deploy_job_url > $random_folder/deploy_job.txt
+    deploy_job_result=`cat $random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
     echo $deploy_job_result
     if [ "$deploy_job_result" == "SUCCESS" ]; then
        echo "success"
@@ -45,6 +49,8 @@ while [ "$x" -lt 30 ]; do
     sleep $SLEEP_PERIOD
     x=$((x+1))
 done
+
+rm -rf $random_folder
 
 if [ "$deploy_job_result" == "SUCCESS" ]; then
    exit 0;
