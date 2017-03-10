@@ -28,6 +28,23 @@ if(binding.variables.containsKey("epic_name")) {
         // }
     // }
 
+    job("test-deploy-epic-project") {
+        concurrentBuild()
+        parameters {
+            stringParam('epic_name')
+            stringParam('project_name')
+        }
+        steps {
+            shell("deploy-scripts/jenkins/trigger-jenkins-job.sh test-deploy-epic-project ${epic_name} ${project_name}")
+            shell("deploy-scripts/jenkins/poll-deploy-job-results.sh ${epic_name} ${project_names}")
+        }
+        publishers {
+            logRotator {
+                numToKeep(10)
+            }
+        }
+    }
+
     String[] project_names = ["apache", "aem", "hybris", "solr"];
     String[] project_name_num_attempts = ["5", "5", "60", "5"];
     for (int i = 0; i < project_names.length; i++) {

@@ -11,7 +11,7 @@ export epic_name=$1
 export project_name=$2
 
 export SLEEP_PERIOD=5
-random_folder=/tmp/delete-me-$epic_name-$project_name
+random_folder=/tmp/delete-me-test-deploy-epic-project-$epic_name-$project_name
 
 # get queue_item_url
 grep Location $random_folder/out.txt.orig > $random_folder/out.txt
