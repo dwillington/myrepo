@@ -22,7 +22,6 @@ export server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 while true
 do
   http_code=`curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" $server_url`
-  x=$((x+1))
   if [ "$http_code" -eq "200" ]; then
     echo "Got 200! All done!"
     break
@@ -34,6 +33,7 @@ do
     break
   fi
   sleep $SLEEP_PERIOD
+  x=$((x+1))
 done
 
 if [ "$http_code" -eq "200" ]; then
