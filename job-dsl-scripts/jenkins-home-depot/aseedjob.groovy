@@ -44,7 +44,7 @@ job("a-create-poll-build-deploy-epic-jobs") {
     }
 }
 
-job("test-deploy-epic-project") {
+job("test-from-hd-deploy-epic-project") {
     concurrentBuild()
     parameters {
         stringParam('epic_name', 'epic1')
