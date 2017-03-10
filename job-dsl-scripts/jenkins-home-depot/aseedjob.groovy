@@ -51,8 +51,8 @@ job("test-deploy-epic-project") {
         stringParam('project_name')
     }
     steps {
-        shell("deploy-scripts/jenkins/trigger-jenkins-job.sh test-deploy-epic-project $epic_name $project_name")
-        shell("deploy-scripts/jenkins/poll-deploy-job-results.sh $epic_name $project_name")
+        shell('deploy-scripts/jenkins/trigger-jenkins-job.sh test-deploy-epic-project $epic_name $project_name')
+        shell('deploy-scripts/jenkins/poll-deploy-job-results.sh $epic_name $project_name')
     }
     publishers {
         logRotator {
