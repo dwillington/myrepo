@@ -129,7 +129,6 @@ job("deploy-epic-project") {
         stringParam('epic_name')
         stringParam('project_name')
     }
-    // authenticationToken('password')
     scm {
         git {
             remote {
@@ -167,7 +166,12 @@ job("deploy-epic-project") {
 
 // createPollAndDeployJob('epic1', 'solr')
 
-job("test") {
+job("test-deploy-epic-project") {
+    concurrentBuild()
+    parameters {
+        stringParam('epic_name')
+        stringParam('project_name')
+    }
     steps {
         shell('/tmp/test.sh')
     }
