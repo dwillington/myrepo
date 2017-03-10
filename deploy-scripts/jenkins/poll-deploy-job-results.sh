@@ -40,11 +40,11 @@ while [ $x -lt 30 ]; do
     deploy_job_result=`cat $random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
     echo $deploy_job_result
     if [ "$deploy_job_result" == "SUCCESS" ]; then
-       echo "success"
+       echo "result=success"
        break
     fi
     if [ "$deploy_job_result" == "FAILURE" ]; then
-       echo "failure"
+       echo "result=failure"
        break
     fi
     sleep $SLEEP_PERIOD
@@ -56,6 +56,6 @@ done
 if [ "$deploy_job_result" == "SUCCESS" ]; then
    exit 0;
 else
-   echo "failure / gave up"
+   echo "result=failure / gave up"
    exit 1;
 fi
