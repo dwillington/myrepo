@@ -50,7 +50,7 @@ while [ "$x" -lt 30 ]; do
     x=$((x+1))
 done
 
-rm -rf $random_folder
+#rm -rf $random_folder
 
 if [ "$deploy_job_result" == "SUCCESS" ]; then
    exit 0;
