@@ -16,7 +16,7 @@ random_folder=/tmp/delete-me-$epic_name-$project_name
 # get queue_item_url
 grep Location $random_folder/out.txt.orig > $random_folder/out.txt
 sed -i 's/Location: //' $random_folder/out.txt
-dos2unix /tmp/$random_folder/out.txt
+dos2unix $random_folder/out.txt
 sed -i 's/$/api\/json?pretty=true/' $random_folder/out.txt
 export queue_item_url=`cat $random_folder/out.txt`
 
