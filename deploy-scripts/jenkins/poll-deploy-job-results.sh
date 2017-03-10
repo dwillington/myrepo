@@ -2,16 +2,17 @@
 export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
 export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
 
-if [ $# -lt 2 ]; then
-  echo 1>&2 "$0: must provide epic_name and project_name"
+if [ $# -lt 3 ]; then
+  echo 1>&2 "$0: job_name epic_name project_name"
   exit 2
 fi
 
-export epic_name=$1
-export project_name=$2
+export job_name=$1
+export epic_name=$2
+export project_name=$3
 
 export SLEEP_PERIOD=5
-random_folder=/tmp/delete-me-test-deploy-epic-project-$epic_name-$project_name
+random_folder=/tmp/delete-me-$job_name-$epic_name-$project_name
 
 # get queue_item_url
 grep Location $random_folder/out.txt.orig > $random_folder/queue_item_url.txt
