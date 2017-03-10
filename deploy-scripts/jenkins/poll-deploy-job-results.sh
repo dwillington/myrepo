@@ -20,6 +20,7 @@ dos2unix $random_folder/queue_item_url.txt
 sed -i 's/$/api\/json?pretty=true/' $random_folder/queue_item_url.txt
 export queue_item_url=`cat $random_folder/queue_item_url.txt`
 
+export JENKINS_SERVER=104.198.103.152
 export CRUMB=$(curl --user admin:76a4a60136ff3f563f7ad5c3fd52552d http://$JENKINS_SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
 
 # get queue_item_json
