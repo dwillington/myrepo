@@ -38,7 +38,7 @@ while [ $x -lt 30 ]; do
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
         -X POST $deploy_job_url > $random_folder/deploy_job.txt
     deploy_job_result=`cat $random_folder/deploy_job.txt | python -c "import sys, json; print json.load(sys.stdin)['result']"`
-    echo $deploy_job_result
+    echo "result=$deploy_job_result"
     if [ "$deploy_job_result" == "SUCCESS" ]; then
        echo "result=success"
        break
