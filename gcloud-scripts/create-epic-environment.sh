@@ -2,10 +2,8 @@
 
 create_vm()
 {
-    arr=(us-east1-a us-east1-b us-east1-c)
-    zone=build-epic1-${arr[$(( ( RANDOM % 3 ) ))]}
-    echo $zone
 
+    echo $zone
     # gcloud compute instances create $1-$2 \
     # --zone=$zone \
     # --tags $2-ca \
@@ -21,6 +19,9 @@ if [ $# -lt 1 ]; then
   echo 1>&2 "$0: epic_name"
   exit 2
 fi
+
+arr=(us-east1-a us-east1-b us-east1-c)
+zone=build-epic1-${arr[$(( ( RANDOM % 3 ) ))]}
 
 create_vm $1 mysql 2 8
 create_vm $1 hybris 4 8
