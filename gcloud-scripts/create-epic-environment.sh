@@ -2,17 +2,15 @@
 
 create_vm()
 {
-
-    echo $zone
-    # gcloud compute instances create $1-$2 \
-    # --zone=$zone \
-    # --tags $2-ca \
-    # --image-family centos-7 \
-    # --image-project centos-cloud \
-    # --boot-disk-size 50 \
-    # --custom-cpu=$3 \
-    # --custom-memory=$4 \
-    # --metadata-from-file startup-script=./gcloud-scripts/startup.sh
+    gcloud compute instances create $1-$2 \
+    --zone=$zone \
+    --tags $2-ca \
+    --image-family centos-7 \
+    --image-project centos-cloud \
+    --boot-disk-size 50 \
+    --custom-cpu=$3 \
+    --custom-memory=$4 \
+    --metadata-from-file startup-script=./gcloud-scripts/startup.sh
 }
 
 if [ $# -lt 1 ]; then
@@ -20,7 +18,9 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-arr=(us-east1-a us-east1-b us-east1-c)
+# randomly choose a zone to for geographically distributed vm's to support failover
+# gcloud compute zones list
+arr=(us-east1-b us-east1-c us-east1-d)
 zone=${arr[$(( ( RANDOM % 3 ) ))]}
 
 create_vm $1 mysql 2 8
