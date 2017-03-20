@@ -2,7 +2,7 @@
 
 delete_vm()
 {
-    gcloud compute instances delete --zone us-east1-c --quiet $1-$2
+    gcloud compute instances delete --zone $zone --quiet $1-$2
 }
 
 if [ $# -lt 1 ]; then
@@ -10,8 +10,10 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-export epic_name=$1
-echo "epic_name is set to '$epic_name'";
+epic_name=$1
+
+# parse out the zone
+zone=`gcloud --format="value(zone)" compute instances list --regexp=$epic_name-mysql`
 
 delete_vm $epic_name solr
 delete_vm $epic_name mysql
