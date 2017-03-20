@@ -30,3 +30,6 @@ echo "                           "
 
 #http://stackoverflow.com/questions/21928691/how-to-continue-a-docker-which-is-exited
 # docker start  `docker ps -q -l` # restart it in the background
+
+# connect
+# docker exec -it apache bash

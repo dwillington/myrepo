@@ -2,15 +2,19 @@
 
 create_vm()
 {
-    gcloud compute instances create $1-$2 \
-    --zone=us-east1-c \
-    --tags $2-ca \
-    --image-family centos-7 \
-    --image-project centos-cloud \
-    --boot-disk-size 50 \
-    --custom-cpu=$3 \
-    --custom-memory=$4 \
-    --metadata-from-file startup-script=./gcloud-scripts/startup.sh
+    arr=(us-east1-a us-east1-b us-east1-c)
+    zone=build-epic1-${arr[$(( ( RANDOM % 3 ) ))]}
+    echo $zone
+
+    # gcloud compute instances create $1-$2 \
+    # --zone=$zone \
+    # --tags $2-ca \
+    # --image-family centos-7 \
+    # --image-project centos-cloud \
+    # --boot-disk-size 50 \
+    # --custom-cpu=$3 \
+    # --custom-memory=$4 \
+    # --metadata-from-file startup-script=./gcloud-scripts/startup.sh
 }
 
 if [ $# -lt 1 ]; then
