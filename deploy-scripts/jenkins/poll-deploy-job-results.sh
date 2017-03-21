@@ -12,6 +12,10 @@ export epic_name=$2
 export project_name=$3
 
 export SLEEP_PERIOD=5
+export NUM_ATTEMPTS=30
+if [ $# -gt 3 ]; then
+    export NUM_ATTEMPTS=$3
+fi
 random_folder=/tmp/delete-me-$job_name-$epic_name-$project_name
 
 # get queue_item_url
@@ -37,7 +41,8 @@ deploy_job_url=`cat $random_folder/deploy_job_url.txt`
 echo $deploy_job_url
 
 x=0
-while [ $x -lt 30 ]; do
+while true
+do
     curl -H "$CRUMB" \
         --user admin:76a4a60136ff3f563f7ad5c3fd52552d \
         -X POST $deploy_job_url > $random_folder/deploy_job_json.txt
@@ -50,6 +55,10 @@ while [ $x -lt 30 ]; do
     if [ "$deploy_job_result" == "FAILURE" ]; then
        echo "result=failure"
        break
+    fi
+    if [ "$x" -gt "$NUM_ATTEMPTS" ]; then
+      echo "Giving up!"
+      break
     fi
     sleep $SLEEP_PERIOD
     x=$((x+1))
