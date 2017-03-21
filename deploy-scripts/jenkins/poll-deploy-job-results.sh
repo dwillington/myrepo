@@ -14,7 +14,7 @@ export project_name=$3
 export SLEEP_PERIOD=5
 export NUM_ATTEMPTS=30
 if [ $# -gt 3 ]; then
-    export NUM_ATTEMPTS=$3
+    export NUM_ATTEMPTS=$4
 fi
 random_folder=/tmp/delete-me-$job_name-$epic_name-$project_name
 
