@@ -23,7 +23,7 @@ else
   server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 fi
 
-#https://coderwall.com/p/taqiyg/use-http-status-codes-from-curl
+# https://coderwall.com/p/taqiyg/use-http-status-codes-from-curl
 while true
 do
   http_code=`curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" $server_url`
