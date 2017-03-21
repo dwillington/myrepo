@@ -23,8 +23,8 @@ fi
 arr=(us-east1-b us-east1-c us-east1-d)
 zone=${arr[$(( ( RANDOM % 3 ) ))]}
 
-create_vm $1 mysql 2 8
-create_vm $1 hybris 4 8
-create_vm $1 solr 4 8
-create_vm $1 aem 2 8
-create_vm $1 apache 2 8
+# create_vm $1 mysql 2 8
+# create_vm $1 hybris 4 8
+# create_vm $1 solr 4 8
+# create_vm $1 aem 2 8
+# create_vm $1 apache 2 8
