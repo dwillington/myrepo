@@ -17,7 +17,7 @@ if [ $# -gt 2 ]; then
 fi
 
 if [[ $(hostname) = ln0a7b.* ]]; then
-  server_url=`/bamboo/data/thdutil/serversetup/gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
+  server_url=`/bamboo/data/thdutil/serversetup/myrepo/gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 #elif [[ $(hostname) = ld5717* ]]; then
 else
   server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
