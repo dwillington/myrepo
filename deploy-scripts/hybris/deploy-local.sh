@@ -22,22 +22,7 @@ chmod 755 *.sh
 printf '\n' | ant clean all
 
 #### fix local.properties ####
-rm -rf /root/local.properties
-mv /opt/hybris/hybris/config/local.properties /root/local.properties
-sed -i -e "s/bazaarvoice.feed.db.*//g" /root/local.properties
-sed -i -e "s/optimizedprice.db.*//g" /root/local.properties
-sed -i -e "s/db.url.*//g" /root/local.properties
-sed -i -e "s/db.username.*//g" /root/local.properties
-sed -i -e "s/db.password.*//g" /root/local.properties
-sed -i -e "s/db.driver.*//g" /root/local.properties
-
-/bin/cp -rf /root/local.properties.db.base.orig /root/local.properties.db.base
-export my_host_name=`hostname`
-export epic_name=${my_host_name%-*}
-sed -i -e "s/mysql-hostname/$epic_name-mysql/g" /root/local.properties.db.base
-
-cat /root/local.properties.db.base >> /root/local.properties
-/bin/cp -rf /root/local.properties /opt/hybris/hybris/config/local.properties
+/root/configure_local_properties.sh
 #### fix local.properties ####
 
 rm -rf /opt/hybris/hybris/bin/platform/tomcat/conf/wrapper.conf
