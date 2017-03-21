@@ -18,7 +18,7 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-# randomly choose a zone to for geographically distributed vm's to support failover
+# randomly choose a zone for geographically distributed vm's to support failover
 # gcloud compute zones list
 arr=(us-east1-b us-east1-c us-east1-d)
 zone=${arr[$(( ( RANDOM % 3 ) ))]}
