@@ -10,5 +10,5 @@ Apache
 - apache_setup_on_docker.sh: replace below with epic1-aem
   sed -i 's/${aem.publish.host}/solr-host/g' /etc/httpd/conf/dispatcher-render-qa-docker.inc
 --------------------------------------------------------------------------------
-
+aai
 
