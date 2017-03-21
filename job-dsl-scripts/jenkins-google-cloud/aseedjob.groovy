@@ -22,7 +22,14 @@ job("create-epic-environment") {
         logRotator {
             numToKeep(10)
         }
-        downstream("provision-epic-environment", 'SUCCESS')
+        downstreamParameterized {
+            trigger("provision-epic-environment") {
+                condition('SUCCESS')                
+                parameters {
+                    currentBuild()
+                }
+            }
+        }
     }
 }
 
