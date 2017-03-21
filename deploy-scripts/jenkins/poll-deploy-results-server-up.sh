@@ -16,7 +16,12 @@ if [ $# -gt 2 ]; then
     export NUM_ATTEMPTS=$3
 fi
 
-export server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
+if [[ $(hostname) = ln0a7b.* ]]; then
+  server_url=`/bamboo/data/thdutil/serversetup/gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
+#elif [[ $(hostname) = ld5717* ]]; then
+else
+  server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
+fi
 
 #https://coderwall.com/p/taqiyg/use-http-status-codes-from-curl
 while true
