@@ -19,7 +19,7 @@ export epic_name=${DESTINATION_HOST%-*}
 export ARTIFACT_LOCATION=/tmp/epic-builds/$epic_name/hybris
 scp $SSH_ARGS $ARTIFACT_LOCATION/*.zip root@$DESTINATION_HOST:/root/.
 
-ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_base.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/ip_tables_setup.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/hybris_setup_env_6.2.sh
 
 scp $SSH_ARGS mysql_post_setup.sh root@$epic_name-mysql:/root/.
