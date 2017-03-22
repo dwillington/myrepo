@@ -27,8 +27,8 @@ fi
 while true
 do
   http_code=`curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" $server_url`
-  if [ "$http_code" -eq "200" ]; then
-    echo "Got 200! All done!"
+  if [ "$http_code" -eq "200" || "$project_name" -eq "hybris" && "$http_code" -eq "302" ]; then
+    echo "$project_name got $http_code! All done!"
     break
   else
     echo "Got $http_code :( Not done yet..."
@@ -41,7 +41,7 @@ do
   x=$((x+1))
 done
 
-if [ "$http_code" -eq "200" ]; then
+if [ "$http_code" -eq "200" || "$project_name" -eq "hybris" && "$http_code" -eq "302" ]; then
    exit 0;
 else
    exit 1;
