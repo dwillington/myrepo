@@ -20,8 +20,9 @@ fi
 
 # randomly choose a zone for geographically distributed vm's to support failover
 # gcloud compute zones list
-arr=(us-east1-b us-east1-c us-east1-d)
-zone=${arr[$(( ( RANDOM % 3 ) ))]}
+# arr=(us-east1-b us-east1-c us-east1-d)
+# zone=${arr[$(( ( RANDOM % 3 ) ))]}
+zone=us-east1-c
 
 create_vm $1 mysql 2 8
 create_vm $1 hybris 4 8
