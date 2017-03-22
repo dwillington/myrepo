@@ -18,7 +18,7 @@ elif [[ $(hostname) = ld5717* ]]; then
 fi
 
 # https://cloud.google.com/sdk/gcloud/reference/topic/projections
-gcloud --format="value(networkInterfaces[0].accessConfigs[0].natIP)" compute instances list --regexp=$epic_name.* > /tmp/$random_folder/out.txt
+gcloud --format="value(networkInterfaces[0].accessConfigs[0].natIP)" compute instances list --regexp=$epic_name-.* > /tmp/$random_folder/out.txt
 sed -i -e 's/^/http:\/\//' /tmp/$random_folder/out.txt
 sed -i '1s/$/\/libs\/granite\/core\/content\/login.html/' /tmp/$random_folder/out.txt
 sed -i '2s/$/\/en\/home.html/' /tmp/$random_folder/out.txt
