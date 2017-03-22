@@ -20,5 +20,6 @@ export epic_name=${DESTINATION_HOST%-*}
 export ARTIFACT_LOCATION=/tmp/epic-builds/$epic_name/solr
 scp $SSH_ARGS $ARTIFACT_LOCATION/solr-configsets.tar.gz root@$DESTINATION_HOST:/root/.
 
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/ip_tables_setup.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/solr_setup_env.sh
