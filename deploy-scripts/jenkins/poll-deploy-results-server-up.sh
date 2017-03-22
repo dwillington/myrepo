@@ -24,14 +24,15 @@ else
 fi
 
 # https://coderwall.com/p/taqiyg/use-http-status-codes-from-curl
+x=0
 while true
 do
   http_code=`curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" $server_url`
-  if [ "$http_code" -eq "200" ] || [ "$project_name" -eq "hybris" && "$http_code" -eq "302" ]; then
+  if [ "$http_code" == "200" ] || [ "$project_name" == "hybris" && "$http_code" == "302" ]; then
     echo "$project_name got $http_code! All done!"
     break
   else
-    echo "Got $http_code :( Not done yet..."
+    echo "$project_name got $http_code :( Not done yet..."
   fi
   if [ "$x" -gt "$NUM_ATTEMPTS" ]; then
     echo "Giving up!"
@@ -41,7 +42,7 @@ do
   x=$((x+1))
 done
 
-if [ "$http_code" -eq "200" ] || [ "$project_name" -eq "hybris" && "$http_code" -eq "302" ]; then
+  if [ "$http_code" == "200" ] || [ "$project_name" == "hybris" && "$http_code" == "302" ]; then
    exit 0;
 else
    exit 1;
