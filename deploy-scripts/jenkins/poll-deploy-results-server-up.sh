@@ -32,10 +32,10 @@ do
     echo "$project_name got $http_code! All done!"
     break
   else
-    echo "$project_name got $http_code :( Not done yet..."
+    echo "$project_name got $http_code :( Not done yet ($x)..."
   fi
   if [ "$x" -gt "$NUM_ATTEMPTS" ]; then
-    echo "Giving up!"
+    echo "Giving up after $NUM_ATTEMPTS attempts!"
     break
   fi
   sleep $SLEEP_PERIOD
