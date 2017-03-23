@@ -1,17 +1,15 @@
 #!/bin/bash
 
-rsync_logs()
-{
-  SSH_ARGS='-o StrictHostKeyChecking=no'
-  ssh $SSH_ARGS root@log-server "mkdir -p $4"
-  ssh $SSH_ARGS root@log-server "rsync -chavzP $SSH_ARGS --delete --stats root@$1-$2:$3 $4"
-}
-
 if [ $# -lt 1 ]; then
   echo 1>&2 "$0: missing epic_name"
   exit 2
 fi
 
-rsync_logs $1 solr /opt/solr/homedepot-solr/server/logs root@log-server:/root/log-server/$1-solr
-rsync_logs $1 aem /opt/adobe/publish/crx-quickstart/logs/ root@log-server:/root/log-server/$1-aem
-rsync_logs $1 hybris /opt/hybris/hybris/log/tomcat/ root@log-server:/root/log-server/$1-hybris
+SSH_ARGS='-o StrictHostKeyChecking=no'
+scp $SSH_ARGS gcloud-scripts/rsync-logs-local.sh root@log-server:/root/rsync-logs-local.sh
+ssh $SSH_ARGS root@log-server "/root/rsync-logs-local.sh $1"
+
+# ssh $SSH_ARGS root@log-server "mkdir -p /root/log-server/epic1-solr"
+# ssh $SSH_ARGS root@log-server "mkdir -p /root/log-server/epic1-solr rsync -chavzPe \"ssh -o StrictHostKeyChecking=no\" --delete --stats root@epic1-solr:/opt/solr/homedepot-solr/server/logs /root/log-server/epic1-solr"
+
+
