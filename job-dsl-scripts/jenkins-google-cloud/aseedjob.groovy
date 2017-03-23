@@ -173,6 +173,7 @@ job("rsync-epic-logs") {
     }
     steps {
         shell('./gcloud-scripts/rsync-logs.sh ${epic_name}')
+        // shell('echo find logs here: http://35.185.47.97/')
     }
     publishers {
         logRotator {
