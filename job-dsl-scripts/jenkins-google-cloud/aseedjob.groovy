@@ -158,7 +158,7 @@ job("deploy-epic-project") {
      }
 }
 
-job("deploy-epic-logs") {
+job("rsync-epic-logs") {
     parameters {
         stringParam('epic_name')
     }
