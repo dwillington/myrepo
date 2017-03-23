@@ -3,7 +3,7 @@
 rsync_logs()
 {
   mkdir -p $4
-  rsync -chavzeP "ssh -o StrictHostKeyChecking=no" --delete --stats root@$1-$2:$3 $4
+  rsync -chavzPe "ssh -o StrictHostKeyChecking=no" --delete --stats root@$1-$2:$3 $4
 }
 
 if [ $# -lt 1 ]; then
