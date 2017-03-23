@@ -13,9 +13,7 @@ fi
 zone=`gcloud --format="value(zone)" compute instances list --regexp=$1-$2`
 
 if [ "$2" == "apache" ]; then
-  # ./gcloud-scripts/tear-down-apache.sh $epic_name-apache
-  echo apache
+  ./gcloud-scripts/tear-down-apache.sh $1-$2
 else
-  # delete_vm $1 $2
-  echo $1-$2
+  delete_vm $1 $2
 fi
