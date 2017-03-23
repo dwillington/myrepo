@@ -10,12 +10,12 @@ if [ $# -lt 2 ]; then
   exit 2
 fi
 
-zone=`gcloud --format="value(zone)" compute instances list --regexp=$epic_name-$project_name`
+zone=`gcloud --format="value(zone)" compute instances list --regexp=$1-$2`
 
-if [ "$project_name" == "apache" ]; then
+if [ "$2" == "apache" ]; then
   # ./gcloud-scripts/tear-down-apache.sh $epic_name-apache
-  echo $epic_name-apache
+  echo $1-apache
 else
   # delete_vm $1 $2
-  echo $epic_name-$project_name
+  echo $1-$2
 fi
