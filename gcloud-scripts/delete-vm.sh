@@ -1,0 +1,21 @@
+#!/bin/bash
+
+delete_vm()
+{
+    gcloud compute instances delete --zone $zone --quiet $1-$2
+}
+
+if [ $# -lt 4 ]; then
+  echo 1>&2 "$0: epic_name project_name"
+  exit 2
+fi
+
+zone=`gcloud --format="value(zone)" compute instances list --regexp=$epic_name-$project_name`
+
+if [ "$project_name" == "apache" ]; then
+  # ./gcloud-scripts/tear-down-apache.sh $epic_name-apache
+  echo $epic_name-apache
+else
+  # delete_vm $1 $2
+  echo $epic_name-$project_name
+fi

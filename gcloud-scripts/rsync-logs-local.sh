@@ -3,6 +3,7 @@
 rsync_logs()
 {
   mkdir -p $4
+  # http://www.manpagez.com/man/1/rsync/
   rsync -chavzPe "ssh -o StrictHostKeyChecking=no" --delete --stats root@$1-$2:$3 $4
 }
 
