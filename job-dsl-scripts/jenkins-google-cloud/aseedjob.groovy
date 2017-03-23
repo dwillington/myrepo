@@ -74,6 +74,7 @@ job("create-provision-epic-project") {
         }
     }
     steps {
+        shell('gcloud-scripts/delete-vm.sh $epic_name $project_name')
         shell('gcloud-scripts/create-vm.sh $epic_name $project_name $cpu $memory')
         shell('gcloud-scripts/provision-vm.sh $epic_name $project_name')
     }
@@ -154,21 +155,30 @@ job("deploy-epic-project") {
         logRotator {
             numToKeep(10)
         }
-        // postBuildTask {
-            // task('Finished: SUCCESS', 'echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')
-            // task('Finished: FAILURE', 'echo deploy ${epic_name} ${project_name} FAILURE (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')
-        // }
      }
-    // wrappers {
-        // release {
-            // postSuccessfulBuildSteps {
-                // shell('echo deploy ${epic_name} ${project_name} SUCCESS (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')                
-            // }
-            // postFailedBuildSteps {
-                // shell('echo deploy ${epic_name} ${project_name} FAILURE (${BUILD_NUMBER}) | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/${epic_name}/${project_name}/deploy.result')                
-            // }
-        // }
-    // }
+}
+
+job("deploy-epic-logs") {
+    parameters {
+        stringParam('epic_name')
+    }
+    scm {
+        git {
+            remote {
+                url("https://github.com/dwillington/myrepo.git")
+                credentials('dwillington-credentials')
+                branch('gcloud')
+            }
+        }
+    }
+    steps {
+        shell('./gcloud-scripts/rsync-logs.sh ${epic_name}')
+    }
+    publishers {
+        logRotator {
+            numToKeep(10)
+        }
+     }
 }
 
 // createPollAndDeployJob('epic1', 'solr')
