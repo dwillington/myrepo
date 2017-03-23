@@ -5,7 +5,7 @@ delete_vm()
     gcloud compute instances delete --zone $zone --quiet $1-$2
 }
 
-if [ $# -lt 4 ]; then
+if [ $# -lt 2 ]; then
   echo 1>&2 "$0: epic_name project_name"
   exit 2
 fi
