@@ -11,6 +11,6 @@ if [ $# -lt 1 ]; then
   exit 2
 fi
 
-rsync_logs $1 solr /opt/solr/homedepot-solr/server/logs /root/log-server/$1-solr
+rsync_logs $1 solr /opt/solr/homedepot-solr/server/logs/logs /root/log-server/$1-solr
 rsync_logs $1 aem /opt/adobe/publish/crx-quickstart/logs/ /root/log-server/$1-aem
 rsync_logs $1 hybris /opt/hybris/hybris/log/tomcat/ /root/log-server/$1-hybris
