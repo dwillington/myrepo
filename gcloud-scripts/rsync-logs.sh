@@ -2,8 +2,9 @@
 
 rsync_logs()
 {
-  ssh root@log-server "mkdir -p $4"
-  ssh root@log-server "rsync -chavzP --delete --stats root@$1-$2:$3 $4"
+  SSH_ARGS='-o StrictHostKeyChecking=no'
+  ssh $SSH_ARGS root@log-server "mkdir -p $4"
+  ssh $SSH_ARGS root@log-server "rsync -chavzP $SSH_ARGS --delete --stats root@$1-$2:$3 $4"
 }
 
 if [ $# -lt 1 ]; then
