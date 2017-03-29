@@ -1,7 +1,7 @@
 /root/stop_hybris.sh
 
 rm -rf /opt/hybris/hybris/bin/platform 
-rm -rf /opt/hybris/hybris/bin/custom 
+rm -rf /opt/hybris/hybris/bin/custom
 
 echo "Unzipping Hybris Platform.zip"
 /usr/bin/unzip -o /root/hybrisServer-Platform.zip -d /opt/hybris/
