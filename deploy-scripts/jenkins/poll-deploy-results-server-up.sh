@@ -19,7 +19,7 @@ fi
 if [[ $(hostname) = ln0a7b.* ]]; then
   server_url=`/bamboo/data/thdutil/serversetup/myrepo/gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 elif [[ $(hostname) = ld8139* ]]; then
-  PATH=/bamboo/data/thdutil/serversetup/google-cloud-sdk/bin:$PATH
+  server_url=`/bamboo/data/thdutil/serversetup/myrepo/gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 else
   server_url=`gcloud-scripts/epic-server-urls.sh $epic_name $project_name`
 fi
