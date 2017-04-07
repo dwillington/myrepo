@@ -1,8 +1,8 @@
 /etc/init.d/solr stop
 echo "--------------------------------------------------"
-echo "sleeping 2m while waiting for solr to stop..."
+echo "waiting for solr to stop..."
 echo "--------------------------------------------------"
-sleep 2m
+/root/solr-wait-until-stop.sh
 
 cd /opt/solr/solr-configsets_backup
 tar -zcvf bk.`date +%m%d%Y`.tar.gz /opt/solr/solr/server/solr/configsets
