@@ -8,7 +8,7 @@ echo " "
 echo "Start - Extract Jar file"
 echo " "
 
-tar -zxvf ~/aem.tar.gz
+tar -zxvf /root/aem.tar.gz
 
 echo " "
 echo "End - Extractjar file"
