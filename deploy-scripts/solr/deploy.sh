@@ -10,6 +10,6 @@ export ARTIFACT_LOCATION=/tmp/epic-builds/$1/solr
 export DESTINATION_HOST=$1-solr
 
 scp $SSH_ARGS $ARTIFACT_LOCATION/solr-configsets.tar.gz root@$DESTINATION_HOST:/root/.
-scp $SSH_ARGS deploy-local.sh root@$DESTINATION_HOST:/root/.
+scp $SSH_ARGS *.sh root@$DESTINATION_HOST:/root/.
 
-ssh $SSH_ARGS root@$DESTINATION_HOST /root/*.sh
+ssh $SSH_ARGS root@$DESTINATION_HOST /root/deploy-local.sh
