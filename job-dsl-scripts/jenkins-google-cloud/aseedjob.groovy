@@ -172,7 +172,7 @@ job("rsync-epic-logs-automated") {
         }
     }
     steps {
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 7; i++) {
             shell("./gcloud-scripts/rsync-logs.sh epic${i}")
         }
     }
