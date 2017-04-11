@@ -1,3 +1,8 @@
+if [ $# -lt 1 ]; then
+  echo 1>&2 "$0: missing hostname"
+  exit 2
+fi
+
 export SSH_ARGS='-o StrictHostKeyChecking=no'
 export INSTALL_REPOSITORY=/bamboo/data/thdutil/serversetup/Apache
 export DESTINATION_HOST=$1
