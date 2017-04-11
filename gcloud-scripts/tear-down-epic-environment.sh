@@ -13,7 +13,7 @@ fi
 epic_name=$1
 
 # parse out the zone
-zone=`gcloud --format="value(zone)" compute instances list --regexp=$epic_name-mysql`
+zone=`gcloud --format="value(zone)" compute instances list --regexp=$epic_name-apache`
 
 delete_vm $epic_name solr
 delete_vm $epic_name mysql
