@@ -173,7 +173,7 @@ job("rsync-epic-logs-automated") {
     }
     steps {
         for (int i = 1; i <= 9; i++) {
-            shell('./gcloud-scripts/rsync-logs.sh epic${i}')
+            shell("./gcloud-scripts/rsync-logs.sh epic${i}")
         }
     }
     publishers {
