@@ -159,9 +159,6 @@ job("deploy-epic-project") {
 }
 
 job("rsync-epic-logs-automated") {
-    parameters {
-        stringParam('epic_name')
-    }
     triggers {
         cron('@daily')
     }
