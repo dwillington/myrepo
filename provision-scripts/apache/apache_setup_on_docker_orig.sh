@@ -1,5 +1,6 @@
-#export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
-#export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+# fix time zone
+mv /etc/localtime /etc/localtime.bak
+ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 
 yum -y install mod_ssl openssl httpd curl
 
