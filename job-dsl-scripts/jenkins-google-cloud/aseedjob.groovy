@@ -158,7 +158,35 @@ job("deploy-epic-project") {
      }
 }
 
-job("rsync-epic-logs") {
+job("rsync-epic-logs-automated") {
+    parameters {
+        stringParam('epic_name')
+    }
+    triggers {
+        cron('@daily')
+    }
+    scm {
+        git {
+            remote {
+                url("https://github.com/dwillington/myrepo.git")
+                credentials('dwillington-credentials')
+                branch('gcloud')
+            }
+        }
+    }
+    steps {
+        for (int i = 1; i <= 9; i++) {
+            shell('./gcloud-scripts/rsync-logs.sh epic${i}')
+        }
+    }
+    publishers {
+        logRotator {
+            numToKeep(10)
+        }
+     }
+}
+
+job("rsync-epic-logs-manual") {
     parameters {
         stringParam('epic_name')
     }
@@ -173,7 +201,6 @@ job("rsync-epic-logs") {
     }
     steps {
         shell('./gcloud-scripts/rsync-logs.sh ${epic_name}')
-        // shell('echo find logs here: http://35.185.47.97/')
     }
     publishers {
         logRotator {

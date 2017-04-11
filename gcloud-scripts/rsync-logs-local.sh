@@ -2,9 +2,11 @@
 
 rsync_logs()
 {
-  mkdir -p $4
-  # http://www.manpagez.com/man/1/rsync/
-  rsync -chavzPe "ssh -o StrictHostKeyChecking=no" --delete --stats root@$1-$2:$3 $4
+  vm_ip=`gcloud --format="value(networkInterfaces[0].accessConfigs[0].natIP)" compute instances list --regexp=$1-$2`
+  if [[ ! -z $vm_ip ]]; then
+    mkdir -p $4
+    rsync -chavzPe "ssh -o StrictHostKeyChecking=no" --delete --stats root@$1-$2:$3 $4 # http://www.manpagez.com/man/1/rsync/
+  fi
 }
 
 export SSH_ARGS='-o StrictHostKeyChecking=no'
