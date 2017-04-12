@@ -160,7 +160,7 @@ job("deploy-epic-project") {
 
 job("rsync-epic-logs-automated") {
     triggers {
-        cron('@daily')
+        cron('@hourly')
     }
     scm {
         git {
