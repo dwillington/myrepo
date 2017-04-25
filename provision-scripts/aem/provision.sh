@@ -19,6 +19,3 @@ ssh $SSH_ARGS root@$DESTINATION_HOST /root/ip_tables_setup.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/aem_setup_base.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/aem_setup_env.sh
 ssh $SSH_ARGS root@$DESTINATION_HOST /root/aem_setup_publish.sh
-
-
-# rm -rf /opt/adobe/publish/crx-quickstart/repository/segmentstore/data00013a.tar.bak
