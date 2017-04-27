@@ -1,0 +1,185 @@
+sudo yum install jdk -y
+--------------------------------------------------------------------------------
+#https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions
+export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+
+sudo wget -e use_proxy=yes -e http_proxy=str-www-proxy2-qa.homedepot.com:8080 -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --httpproxy str-www-proxy2-qa.homedepot.com --httpport 8080 --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins dos2unix -y
+--------------------------------------------------------------------------------
+How to run Jenkins under a different user in Linux
+#http://blog.manula.org/2013/03/running-jenkins-under-different-user-in.html
+#vi /etc/sysconfig/jenkins
+
+sed -i -e 's/JENKINS_USER="jenkins"/JENKINS_USER="root"/g' /etc/sysconfig/jenkins
+more /etc/sysconfig/jenkins
+
+sudo service jenkins start
+tail -100f /var/log/jenkins/jenkins.log
+cat /var/lib/jenkins/secrets/initialAdminPassword
+--------------------------------------------------------------------------------
+cd /bamboo/data/thdutil/serversetup/
+scp google-cloud-sdk-123.0.0-linux-x86_64.tar.gz root@ld5717:/root/.
+
+tar -zxvf google-cloud-sdk-123.0.0-linux-x86_64.tar.gz
+cd google-cloud-sdk/bin/
+export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+./gcloud init
+--------------------------------------------------------------------------------
+cd /root
+git clone https://github.com/dwillington/myrepo.git
+cd myrepo
+git checkout gcloud
+--------------------------------------------------------------------------------
+iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --dport 8080 -j ACCEPT
+iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+iptables -D INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+iptables -D INPUT -i eth0 -p tcp --dport 8080 -j ACCEPT
+iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+--------------------------------------------------------------------------------
+on ln0a7b:
+cd /bamboo/data/hybris_platform/
+scp -r hybris_5_4_0_0/ root@ld5717:/tmp/.
+scp -r hybrislicence.jar root@ld5717:/tmp/.
+cd /bamboo/data
+scp -r Jacoco/ root@ld5717:/tmp/.
+scp -r sonar-scanner-2.5/ root@ld5717:/tmp/.
+
+on ld5717:
+yum intstall unzip -y
+cd /
+mkdir bamboo/
+cd bamboo
+mkdir data/
+cd data
+cp -R /tmp/Jacoco .
+cp -R /tmp/sonar-scanner-2.5 .
+mkdir hybris_platform/
+cd hybris_platform
+cp -R /tmp/hybris_5_4_0_0 .
+cp /tmp/hybrislicence.jar .
+--------------------------------------------------------------------------------
+#http://stackoverflow.com/questions/23497819/trigger-parameterized-build-with-curl-and-crumb/23660988#23660988
+SERVER=http://localhost:8080
+CRUMB=$(curl --user $USER:$APITOKEN \
+    $SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+
+curl --user $USER:$APITOKEN -H "$CRUMB" 
+--------------------------------------------------------------------------------
+#http://www.technowise.in/2016/10/fix-no-valid-crumb-was-included-in.html
+/etc/sysconfig/jenkins
+JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhudson.security.csrf.requestfield=crumb"
+--------------------------------------------------------------------------------
+#https://issues.jenkins-ci.org/browse/JENKINS-31915
+sed -i -e 's/JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true"/JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080 -Dhttps.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttps.proxyPort=8080"/g' /etc/sysconfig/jenkins
+JENKINS_JAVA_OPTIONS="-Djava.awt.headless=true -Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080 -Dhttps.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttps.proxyPort=8080"
+-Dhttp.proxyHost= 
+-Dhttp.proxyPort= 
+-Dhttp.nonProxyHosts=
+--------------------------------------------------------------------------------
+# http://ld5717:8080/user/admin/configure -> show api token
+export JENKINS_SERVER=172.24.103.89:8080
+export arr=(aem apache hybris solr)
+export job_name=build-epic1-${arr[$(( ( RANDOM % 4 ) ))]}
+export CRUMB=$(curl --user admin:419f5085ad9a835cc95b8dc8fc88a86c http://$JENKINS_SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+curl -H "$CRUMB" \
+--user admin:419f5085ad9a835cc95b8dc8fc88a86c \
+     -X POST http://$JENKINS_SERVER/job/$job_name/build?delay=0
+--------------------------------------------------------------------------------
+#http://stackoverflow.com/questions/24507262/retrieve-id-of-remotely-triggered-jenkins-job
+export job_name=deploy-epic-project
+export epic_name=epic5
+export project_name=hybris
+
+# http://stackoverflow.com/questions/2379829/while-loop-to-test-if-a-file-exists-in-bash
+# on bamboo
+./deploy-scripts/jenkins/trigger-jenkins-job.sh $job_name $epic_name $project_name
+./deploy-scripts/jenkins/poll-deploy-job-results.sh $job_name $epic_name $project_name 30
+./deploy-scripts/jenkins/poll-deploy-results-server-up.sh $epic_name $project_name 30
+
+# on hd-jenkins (ld5717)
+/root/myrepo/deploy-scripts/jenkins/trigger-jenkins-job.sh $job_name $epic_name $project_name
+/root/myrepo/deploy-scripts/jenkins/poll-deploy-job-results.sh $job_name $epic_name $project_name
+
+rm -rf /tmp/delete-me*
+
+http://104.198.103.152/job/a-seed-job/37/api/json?pretty=true
+--------------------------------------------------------------------------------
+/root/myrepo/deploy-scripts/jenkins/poll-deploy-job-results.sh epic1 solr
+--------------------------------------------------------------------------------
+# on hd-jenkins (ld5717), trigger test-from-hd-deploy-epic-project, multiple times, changing epic name
+export epic_name=epic${RANDOM}
+export project_name=solr
+export job_name=test-from-hd-deploy-epic-project
+export JENKINS_SERVER=172.24.103.89:8080
+export CRUMB=$(curl --user admin:419f5085ad9a835cc95b8dc8fc88a86c http://$JENKINS_SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+curl -H "$CRUMB" \
+--user admin:419f5085ad9a835cc95b8dc8fc88a86c \
+     -X POST http://$JENKINS_SERVER/job/$job_name/buildWithParameters?delay=0\&epic_name=$epic_name\&project_name=$project_name
+--------------------------------------------------------------------------------
+HTTP/1.1 201 Created
+Date: Thu, 09 Mar 2017 00:29:51 GMT
+Server: Jetty(9.2.z-SNAPSHOT)
+Location: http://104.198.103.152/queue/item/167/
+Content-Length: 0
+Proxy-Connection: Keep-Alive
+X-Content-Type-Options: nosniff
+--------------------------------------------------------------------------------
+ln0a7b:tmp $ more queue_item.txt
+{
+  "_class" : "hudson.model.Queue$LeftItem",
+  "actions" : [
+    {
+      "_class" : "hudson.model.CauseAction",
+      "causes" : [
+        {
+          "_class" : "hudson.model.Cause$UserIdCause",
+          "shortDescription" : "Started by user admin",
+          "userId" : "admin",
+          "userName" : "admin"
+        }
+      ]
+    }
+  ],
+  "blocked" : false,
+  "buildable" : false,
+  "id" : 167,
+  "inQueueSince" : 1489019391015,
+  "params" : "",
+  "stuck" : false,
+  "task" : {
+    "_class" : "hudson.model.FreeStyleProject",
+    "name" : "a-seed-job",
+    "url" : "http://104.198.103.152/job/a-seed-job/",
+    "color" : "blue_anime"
+  },
+  "url" : "queue/item/167/",
+  "why" : null,
+  "cancelled" : false,
+  "executable" : {
+    "_class" : "hudson.model.FreeStyleBuild",
+    "number" : 37,
+    "url" : "http://104.198.103.152/job/a-seed-job/37/"
+  }
+}
+ln0a7b:tmp $ grep numuber queue_item.txt
+ln0a7b:tmp $ grep number queue_item.txt
+    "number" : 37,
+ln0a7b:tmp $ grep url queue_item.txt
+    "url" : "http://104.198.103.152/job/a-seed-job/",
+  "url" : "queue/item/167/",
+    "url" : "http://104.198.103.152/job/a-seed-job/37/"
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+for(j in jenkins.model.Jenkins.getInstance().getProjects()) {
+  if(!j.name.equals("a-seed-job"))
+  {
+    println(j.name);
+    //j.delete();
+  }
+}
+

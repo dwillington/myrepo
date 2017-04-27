@@ -1,0 +1,257 @@
+--------------------------------------------------------------------------------
+https://server.homedepot.com
+Services->Catalog
+Docker
+50GB,small,password
+wait for email
+--------------------------------------------------------------------------------
+SOLR
+--------------------------------------------------------------------------------
+create /opt/solr
+inside there place solr.tar
+unzip solr.tar you will get /opt/solr/solr-home
+
+unzip tomcat in this directory
+create /opt/solr/tomcat soft link see screenshot
+
+create sym link to 68
+rm build
+remove solr-home-backup
+remove solr-home
+
+start solr, check localhost:8080
+--------------------------------------------------------------------------------
+- convert apache provision to use centos-6 without docker
+  - rename provision.sh -> provision-docker.sh
+  - redo provision.sh to provision on centos-6 image
+
+- create a provision-epic-environment script
+  - takes epic name as environment
+  - creates epic-name-{aem, apache, hybris, mysql, solr}
+  - provisions all
+  
+--------------------------------------------------------------------------------
+Apache
+wget http://www.apache.org/dist/httpd/httpd-2.2.26.tar.gz
+wget http://www.apache.org/dist/httpd/httpd-2.2.31.tar.gz
+tar xvfz httpd-2.2.31.tar.gz
+cd httpd-2.2.31
+./configure --help
+yum groupinstall "Development Tools"
+#sudo yum install mod_ssl openssl
+sudo yum install openssl-devel
+./configure --prefix=/etc/httpd
+./configure --enable-ssl --enable-so
+make
+make install
+link /root/httpd-2.2.31/support/httxt2dbm /usr/sbin/httxt2dbm
+
+./httpd -k restart
+
+-------------------------------------------------------------------------------
+AEM
+http://ld4443:4503/libs/granite/core/content/login.html
+
+curl -u admin:admin -F file=@"header.zip" -F name="header" -F force=true -F install=true http://localhost:4503/crx/packmgr/service.jsp 
+
+
+/opt/adobe/publish/crx-quickstart/bin/stop
+/opt/adobe/publish/crx-quickstart/bin/start
+tail -100f /opt/adobe/publish/crx-quickstart/logs/error.log
+--------------------------------------------------------------------------------
+HYBRIS
+--------------------------------------------------------------------------------
+cd /bamboo/data/thdutil/serversetup/Hybris
+scp HYBRISCOMM5400_0.ZIP root@ld4504:~/.
+scp mysql-connector-java-5.1.35-bin.jar root@ld4504:~/.
+scp jdk1.7.0_75.tar root@ld4504:~/.
+scp jdk1.7.0_75.tar root@ld4504:~/.
+
+# from git-bash
+scp *.sh *.base *.pfx *.jck root@ld4504:~/.
+
+create /opt/hybris
+upzip hybris in here
+find catalina1/catalina.sh
+edit local.properties to point to mysql
+you will need mysql driver for hybris
+you will need java 1.7 for hybris 5.4
+
+cd /opt/hybris/hybris/bin/platform
+chmod 755 *.sh
+. ./setantenv.sh
+ant clean all
+
+http://ld4504:9001/platform/init
+
+DEPLOY
+
+unzip zip files in /opt/hybriz
+cp local.properties rom root
+
+. ./setantenv.sh
+yes | ant clean all
+
+new local.properties
+
+cp below from ~/ into /opt/hybris/security
+QA_PLCC-hdca.jck
+HD.ca-BankToken-QA.pfx
+
+configure hybris to point to solr
+using impex statement
+--------------------------------------------------------------------------------
+MySQL
+--------------------------------------------------------------------------------
+****- create mysql-setup.sh with these commands...
+yum -y remove mariadb-libs
+yum -y remove MariaDB-common
+rpm -ivh MySQL-shared-5.5.30-1.el6.x86_64.rpm
+rpm -ivh MySQL-client-5.5.30-1.el6.x86_64.rpm
+rpm -ivh MySQL-server-5.5.30-1.el6.x86_64.rpm
+service mysql start
+/usr/bin/mysqladmin -u root password 'password'
+mysql -uroot -ppassword
+
+service mysql stop
+rpm -evv MySQL-server-5.5.30-1.el6.x86_64
+rpm -evv MySQL-client-5.5.30-1.el6.x86_64
+rpm -evv MySQL-shared-5.5.30-1.el6.x86_64
+rm -rf /tmp/mysql
+mv /var/lib/mysql/ /tmp/mysql
+rm -rf ~/MySQL*.rpm
+rm -rf ~/*.sh
+rm -rf ~/*.sql
+rm -rf .mysql_history
+rpm -qa --last | more
+--------------------------------------------------------------------------------
+- setup epic based servers in HD cloud
+  - create scripts to automate installation
+    - automate provisioning of apache
+      - install httpd 2.2
+    - automate provisioning of aem
+      - manaully upload/install packages
+      - create zip of fully installed aem
+    - automate provisioning of mysql
+    - automate provisioning of hybris
+    - automate provisioning of solr
+  - test provisioning of hosts from a clean slate, use snapshots method below for clean slate
+    - https://server.homedepot.com/static-5a60e18/docs/servers.html#reverting-to-a-previous-snapshot
+  - configure each server instance
+    - configure mysql to create hybris database/user
+    - configure hybris to connect to mysql and create schema (local.properties); hybris -> solr using impex statement
+    - configure solr
+    - configure aem
+    - configure apache
+  - create epic-provision repository in stash and run provision scripts from repository on bamboo
+  - create bamboo plans to execute scripts
+    - apache, aem, mysql, hybris, solr
+
+  - create scheme to store hostnames/ip-address of 'epic' servers
+    - a file with ip-addresses, git branch names per project
+    - various projects that need to communicate with each other will need to be configured with these ip-addresses
+
+- setup bamboo plans to build for epic X
+  - create generic seed job to create build jobs for project / branch epic X
+  - configure epic X branches with hostnames/ip-addresses
+- setup bamboo plans to deploy for epic X
+  - create generic seed job to create deploy jobs for project / branch epic X
+  - use scheme for determining hostname/ip-address of deployment destination
+--------------------------------------------------------------------------------
+#http://stackoverflow.com/questions/17138477/best-way-to-install-mysql-5-6-on-centos-6-4
+yum install 'perl(Data::Dumper)' libaio net-tools -y
+yum -y remove mariadb-libs
+yum -y remove MariaDB-common
+rpm -ivh ~/MySQL-shared-5.6.16-1.el6.x86_64.rpm
+rpm -ivh ~/MySQL-client-5.6.16-1.el6.x86_64.rpm
+rpm -ivh ~/MySQL-server-5.6.16-1.el6.x86_64.rpm
+service mysql start
+
+more /root/.mysql_secret
+mysql -uroot -p password
+
+export mysql_password=`cat ~/.mysql_secret |grep random|cut -d: -f4-|sed 's| ||g'|tail -1` 
+mysql -uroot -p$mysql_password --init-command='set password for root@localhost = password("password")'
+
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('password');
+FLUSH PRIVILEGES;
+quit;
+--------------------------------------------------------------------------------
+https://dev.mysql.com/doc/refman/5.6/en/mysqldump-copying-database.html
+--------------------------------------------------------------------------------
+sonarqube-6.1
+#https://www.mkyong.com/java/how-to-install-oracle-jdk-8-on-centos/
+wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u102-b14/jdk-8u102-linux-x64.rpm
+sudo yum localinstall jdk-8u102-linux-x64.rpm -y
+
+vi /opt/sonarqube-6.1/bin/linux.../sonar.sh
+#add at top
+export JAVA_HOME=/usr/java/jdk1.8.0_102/
+export JRE_HOME=/usr/java/jdk1.8.0_102/jre
+
+http.proxyHost=str-www-proxy2-qa.homedepot.com
+http.proxyPort=8080
+
+alternatives --display java
+update-alternatives --install "/usr/bin/java" "java" "/usr/java/jdk1.8.0_102/bin/java" 1
+
+--------------------------------------------------------------------------------
+mvn sonar:sonar -Dsonar.host.url=http://ld4928:9000/
+
+mvn install -Dcrx.url=http://ln0a77.homedepot.com:4502 -DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 -Dhttp.nonProxyHosts=*.homedepot.com -DnonProxyHosts=*.homdepot.com
+mvn clean assembly:assembly -Pbuild-solr-config,dev -Dsolr-type=master
+--------------------------------------------------------------------------------
+perform AEM sonar build
+- check out all the code
+- fix long file name: git config core.longpaths true
+- get on bambooo to figure out the build command, determine which task/step is enabled
+- 
+--------------------------------------------------------------------------------
+wget -e use_proxy=yes -e http_proxy=str-www-proxy2-qa.homedepot.com:8080 http://dev.mysql.com/get/mysql-community-release-el6-3.noarch.rpm/from/http://repo.mysql.com/
+mkdir MySQL
+cd MySQL
+wget http://dev.mysql.com/get/Downloads/MySQL-5.6/MySQL-5.6.16-1.el6.x86_64.rpm-bundle.tar
+tar -xvf MySQL-5.6.16-1.el6.x86_64.rpm-bundle.tar
+yum install MySQL*rpm
+mysql_upgrade --port=3306 --user=root --password=password
+--------------------------------------------------------------------------------
+one thing that can't take from you is your desire to learn and get amazing at devops
+that has international appeal, online, borderless
+--------------------------------------------------------------------------------
+Docker
+https://wiki.centos.org/Cloud/Docker
+vi /etc/sysconfig/docker
+HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080
+HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080
+
+service docker restart
+sudo docker pull centos:centos6
+sudo docker images centos
+
+docker run -d -p 80:80 -i -t centos:centos6
+
+docker ps -a
+
+docker cp <containerId>:/file/path/within/container /host/path/target
+
+docker cp *.gz sharp_torvalds:/tmp/.
+
+yum --showduplicates list httpd | expand
+
+docker exec -it apache bash
+
+# https://gist.github.com/evanscottgray/8571828
+docker kill $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+
+
+
+
+
+
+
+
+
+
+

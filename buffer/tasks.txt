@@ -1,0 +1,113 @@
+--------------------------------------------------------------------------------
+- jenkins jobs to sync every 10 minutes for all epics
+  - see how long it takes to serve up hybris files, 50mb, 100mb, etc
+  - clean up job of logs older than 1 week
+
+- request Jeffrey to give permission to reserve public ip addresses
+
+- add deploy-local error checking and script failure
+    ls -al $ARTIFACT_LOCATION/hybrisServer-Platform.zip
+    ret=$? && if [ $ret -ne 0 ]; then exit $ret; fi
+
+- create a GC jenkins job to restart a vm
+
+- ip tables should persist after restart
+  - # http://stackoverflow.com/questions/24756240/how-can-i-use-iptables-on-centos-7
+  - call ip_tables_setup.sh after server restart (/etc/init.d)?
+
+- instead of upgrading bamboo, set up latest bamboo (5.13) separately
+  - either on own machine or parallel to current on new port
+  - https://www.atlassian.com/software/bamboo/download
+
+- can we capture deploy status at the Jenkins pipeline level
+  - use deploy job to simply curl server and wait for 200 status
+    - create script to provide ip address given epic/project name
+    - how to trigger jenkins deploy and get build number
+**      - how to get job status (success/fail) based on build number
+
+- look into creating load test, kicking of build/deploys via rest calls to home-depot-jenkins
+  - randomize epic_name, project_name
+
+WAITING ON DISCUSSION WITH JEFFREY:
+- test reusing a public ip against a new VM
+  - https://cloud.google.com/compute/docs/configure-instance-ip-addresses#reserve_new_static
+  - or for apache can we change create epic to only change docker image
+
+- sonar on cloud
+http://104.198.108.236/batch/file?name=sonar-scanner-engine-shaded-6.2.jar] is not valid
+- ask Sai for each source repo where is the code that needs to be scanned?
+- hybris sonar:
+- http://bamboo.homedepot.ca/build/admin/edit/editBuildTasks.action?buildKey=DA-DH6-JOB1
+- /bamboo/data/thdutil/javancss-33.54/bin/CNNShell.sh 
+
+- figure out email via Jenkins for GC Jenkins
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+DONE
+--------------------------------------------------------------------------------
+- centrally expose logs
+  - poor mans solution user http-server and rsync (apache?)
+  - add a manully triggered jenkins job which will rsync all project logs for a specific epic
+  - http://http://35.185.47.97/
+# - round robin choose different zones; zone:sort=1
+- figure out publishing to aem via maven
+  - disable auth and restart ?
+    http://stackoverflow.com/questions/33273080/aem-cq5-package-upload-and-deploy-on-remote-server-authentication-issue-aem-6
+- create an aem server on HD cloud
+- test sending failed email from bamboo
+- sai will provide provision instructions for service virtualization
+  - waiting for local.properties search and replace
+- create/provision/teardown should not destroy apache vm
+- have ALL provision deploy from gc://epic-builds
+  - if epic does not exist, fall back to /bamboo
+Sai, I’ve created a job to individually create/provision an epic-project vm, it takes some paramters:
+http://104.198.103.152/job/create-provision-epic-project/build?delay=0sec
+- implement and test automated phpmyadmin install  
+- deploy to master-hybris and run ant initialize and update
+- Sai, have you finished data dictionary import?
+  - create a new aem, stop it, and email Sai
+- install mysql-5.7 after Sai provides the version and starting instructions
+- need a new AEM server setup on homedepot cloud; done on ld6120
+- figure out email via Jenkins for HD Jenkins
+- move internal aem to new more beefed up server on internal cloud
+provision epic environment
+  - input epic-name
+  - create vm's
+  - provision.sh on vm's
+  - gsutil mkdir gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic-name/{aem, apache, mysql, hybris, solr}
+
+tear down epic environment
+  - input epic-name
+  - delete vm's
+  - gsutil rm gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic-name
+
+- download and install job dsl plub in
+seed job creates
+  - job to create epic environment
+  - job to provision epic environment
+  - job to tear down epic environment
+  - epic project poll and deployment jobs
+
+fix apache and hybris provision to configure mysql and aem hostnames respectively
+add ip table routing of port 80 to provision scripts
+
+- waiting for Sai to provide Apache installation commands
+- automate AEM installation
+- automate Docker installation
+
+using gcloud command line to script the creation/starting of VM’s.
+- specifying image, disk size, etc as parameters
+
+preparing images with ssh keys (i.e ssh-copy-id) in advance.
+
+provisioning the other servers: mysql, hybris, aem, apache
+
+adding firewall rules to allow public access to application server ports
+
+
+
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------

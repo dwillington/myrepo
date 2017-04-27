@@ -1,0 +1,113 @@
+ANV634CM2
+--------------------------------------------------------------------------------
+cisco vpn url:
+remote.homedepot.com/corp
+--------------------------------------------------------------------------------
+confluence.homedepot.ca
+axa8962/qa02test!
+--------------------------------------------------------------------------------
+export JAVA_HOME=/c/jdk1.8.0_111
+set PATH=$JAVA_HOME/bin:$PATH
+
+set M2_HOME=C:\apache-maven-3.3.9
+set PATH=$M2_HOME\bin;%PATH%
+--------------------------------------------------------------------------------
+http://bamboo.homedepot.ca
+axa8962/qa02test
+I need ADMIN access to Bamboo to create jobs
+--------------------------------------------------------------------------------
+hybris:
+ssh axa8962@hdca_supt@ln0bf0.homedepot.com@pimssh-qa.homedepot.com
+TestMe124!
+--------------------------------------------------------------------------------
+solr:
+ssh axa8962@hdca_supt@ln0bdc.homedepot.com@pimssh-qa.homedepot.com
+TestMe124!
+--------------------------------------------------------------------------------
+ssh axa8962@hdca_supt@ln0bd7.homedepot.com@pimssh-qa.homedepot.com 
+TestMe124!
+--------------------------------------------------------------------------------
+sonar:
+ssh axa8962@hdca_supt@ln0a72.homedepot.com@pimssh-qa.homedepot.com
+TestMe124!
+cd /usr/sap/install/
+--------------------------------------------------------------------------------
+bamboo:
+ssh axa8962@hdca_supt@ln0a7b.homedepot.com@pimssh-qa.homedepot.com
+TestMe124!
+su - bamadm
+jasp3r91
+cd /bamboo/data/thdutil/serversetup/
+--------------------------------------------------------------------------------
+export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+git pull origin gcloud
+--------------------------------------------------------------------------------
+TODO
+- get individual server applications (apache, aem, solr, hybris) to talk to each other
+  - configure to point to each other
+  - create builds to deploy on to
+--------------------------------------------------------------------------------
+my vm's:
+ssh-copy-id root@ld4504
+
+- aem
+ssh root@ld5145
+
+- mysql
+ssh root@ld4505 
+- hybris
+ssh root@ld4504
+- apache docker
+ssh root@ld5051
+- solr
+ssh root@ld5108
+
+- sonar
+ssh root@ld4928
+
+- 
+ssh root@ld4931
+- http
+ssh root@ld4442
+ssh root@ld4443
+- aem
+--------------------------------------------------------------------------------
+qa http new deployment
+--------------------------------------------------------------------------------
+Sonar
+http://ln0a72.homedepot.com:9000/
+should I perform an upgrade to 6.1, latest?
+--------------------------------------------------------------------------------
+sudo vi /etc/ssh/sshd_config
+sudo systemctl restart ssh
+--------------------------------------------------------------------------------
+HD Google Cloud, instance-1
+nc 104.198.8.204 22
+--------------------------------------------------------------------------------
+# troubleshoot gcloud ssh
+https://cloud.google.com/compute/docs/troubleshooting
+nc 35.185.12.134 22
+nc 104.196.182.140 22
+
+netstat -ab | find ":22"
+
+ssh -v -i /drives/c/Users/AXA8962/.ssh/google_compute_engine amjada@104.196.149.144 -p 443
+ssh -v -i /drives/c/Users/AXA8962/.ssh/google_compute_engine amjada@104.196.182.140
+--------------------------------------------------------------------------------
+ssh bamadm@ln0a7b.homedepot.com
+ssh -i .ssh/id_rsa bamadm@ln0a7b.homedepot.com
+ssh -v -i /drives/c/Users/AXA8962/.ssh/google_compute_engine -o "ProxyCommand=nc -X 5 -x str-www-proxy2-qa.homedepot.com:8080 %h %p" amjada@104.196.149.144
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+sed -i 's/access="/access="PERMIT_ALL, /g' spring-security-config.xml
+
+find . -name keystore -print0 | xargs -0 /opt/jdk/jdk1.8.0_111/bin/keytool -v -list -keystore | grep ""
+
+
+
+
+
+
+

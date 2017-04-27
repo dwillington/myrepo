@@ -1,0 +1,31 @@
+cp ~/homedepot-httpd-0.0.1-SNAPSHOT.tar.gz /tmp/.
+cd /tmp
+/bin/tar -zxvf homedepot-httpd-0.0.1-SNAPSHOT.tar.gz
+#/bin/find /tmp/etc/httpd/conf/ -maxdepth 1 -name 'dispatcher-render*.inc' | grep -v `hostname -s` | xargs rm
+#sudo /bin/rm /etc/httpd/conf/dispatcher-render*
+sudo /bin/cp -r etc/* /etc/;
+sudo /bin/cp -r opt/apache/* /opt/apache/;
+sudo /bin/cp -r opt/dynatrace/* /opt/dynatrace/;
+sudo /bin/cp -r usr/lib64/httpd/modules/dispatcher-apache2.2-4.1.8.so  /usr/lib64/httpd/modules/dispatcher-apache2.2-4.1.8.so;
+sudo /bin/bash /opt/apache/scripts/init-apache.sh
+sudo /bin/rm -rf /tmp/etc /tmp/opt /tmp/usr;
+sudo /bin/chown -R root:apache /etc/httpd;
+sudo /bin/chown -R apache:apache /opt/apache/scripts/*;
+sudo /bin/chown -R apache:apache /opt/apache/scripts
+sudo /bin/chown -R apache:apache /opt/apache/dynamicmaps
+sudo /bin/chown -R apache:apache /opt/apache/dynamicmaps/*;    
+sudo /bin/chmod +x /opt/apache/scripts/*;  
+sudo /etc/init.d/httpd restart
+
+
+
+link /usr/lib64/libpcre.so.1 /lib64/libpcre.so.0
+
+
+
+curl -s -o /dev/null -I -w "%{http_code}" http://35.185.42.154/libs/granite/core/content/login.html
+curl -s -o /dev/null -I -w "%{http_code}" http://104.196.101.158/en/home.html
+curl -s -o /dev/null -I -w "%{http_code}" http://104.196.66.154/phpmyadmin/
+curl -s -o /dev/null -I -w "%{http_code}" http://104.196.13.77/solr/
+curl -s -o /dev/null -I -w "%{http_code}" https://35.185.30.33/hmc/hybris
+

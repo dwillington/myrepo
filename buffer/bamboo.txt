@@ -1,0 +1,138 @@
+--------------------------------------------------------------------------------
+# install bamboo
+yum install wget java maven dos2unix -y
+wget https://www.atlassian.com/software/bamboo/downloads/binary/atlassian-bamboo-5.15.3.tar.gz
+
+cd /opt
+tar -zxvf /root/atlassian-bamboo-5.15.3.tar.gz
+
+mkdir bamboo
+echo "bamboo.home=/opt/bamboo" > /opt/atlassian-bamboo-5.15.3/atlassian-bamboo/WEB-INF/classes/bamboo-init.properties
+
+# change 8085 to 80
+vi /opt/atlassian-bamboo-5.15.3/conf/server.xml
+
+# 
+vi /opt/atlassian-bamboo-5.15.3/bin/setenv.sh
+JVM_SUPPORT_RECOMMENDED_ARGS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080 -Dhttps.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttps.proxyPort=8080 -Dhttp.nonProxyHosts=localhost"
+
+/opt/atlassian-bamboo-5.15.3/bin/start-bamboo.sh
+tail -100f /opt/atlassian-bamboo-5.15.3/logs/catalina.out
+--------------------------------------------------------------------------------
+grep "action addRepository" /root/atlassian-cli-6.2.0/createplan.txt
+sed -i -e 's/ln0a73:7990/stash.homedepot.ca/' /root/atlassian-cli-6.2.0/createplan.txt
+./bamboo.sh --action run --file "createplan.txt" --findReplace "%EPIC%:1,%BRANCH%:develop"
+
+./bamboo.sh --action run --file "tearplan.txt" --findReplace "%EPIC%:1"
+--------------------------------------------------------------------------------
+mkdir -p /bamboo/data/thdutil/serversetup
+cd /bamboo/data/thdutil/serversetup
+unzip /root/atlassian-cli-6.3.0-distribution.zip
+mv atlassian-cli-6.3.0 cli
+cd cli
+vi bamboo.sh
+java -jar `dirname $0`/lib/bamboo-cli-6.3.0.jar --server http://localhost --user root --password qa02test "$@"
+--------------------------------------------------------------------------------
+cd /bamboo/data/thdutil/serversetup
+--------------------------------------------------------------------------------
+call bamboo job via rest call
+# https://confluence.atlassian.com/bamkb/resetting-variables-via-a-rest-api-call-and-dynamic-release-versioning-408453406.html
+export BAMBOO_USER=bamcli
+export BAMBOO_PASS=jasp3r91
+export PROJECT_NAME=CI6
+export arr=(AEMHDC6 APACHEHDC6 HYBRISHDC6 SOLRHDC6)
+export job_name=${arr[$(( ( RANDOM % 4 ) ))]}
+export PLAN_NAME=$job_name
+curl --user $BAMBOO_USER:$BAMBOO_PASS -X POST "http://bamboo.homedepot.ca/rest/api/latest/queue/$PROJECT_NAME-$PLAN_NAME?executeAllStages=true"
+
+curl --user $BAMBOO_USER:$BAMBOO_PASS -X POST "http://bamboo.homedepot.ca/rest/api/latest/queue/$PROJECT_NAME-$PLAN_NAME?executeAllStages=true&bamboo.variable.epic_name=epic1&bamboo.variable.project_name=solr"
+--------------------------------------------------------------------------------
+export BAMBOO_USER=admin
+export BAMBOO_PASS=password
+curl --user $BAMBOO_USER:$BAMBOO_PASS -X POST "http://localhost/job/deploy-epic-project/buildWithParameters?token=password&epic_name=epic1&project_name=solr"
+curl -X POST "http://localhost/job/deploy-epic-project/buildWithParametersepic_name=epic1&project_name=solr"
+curl -X POST "http://admin:password@localhost/buildByToken/buildWithParameters?job=deploy-epic-project&token=password&epic_name=epic1&project_name=solr"
+curl -X POST "http://localhost/buildByToken/buildWithParameters?job=deploy-epic-project&token=password&epic_name=epic1&project_name=solr&cause=Cause+Text"
+curl -X POST "http://localhost/buildByToken/buildWithParameters?job=deploy-epic-project&token=password"
+curl -X POST "http://admin:76a4a60136ff3f563f7ad5c3fd52552d@localhost/job/deploy-epic-project/buildWithParameters?token=password&epic_name=epic1&project_name=solr"
+
+--------------------------------------------------------------------------------
+license:
+AAABPw0ODAoPeNp1kM1uwjAQhO9+Cku9tAdXtikgkHyAJIegECAJ/ZF6MWELlhInchxU3r4hgbZU5
+bizmt1v5i6pAc+kxoxiNhjT/vhpgJ04wZyyIdrIfFMUj4FKQVfgbZVVhRZemHjRMvJjD4V1vgGz+
+FhXYCrB+/RiuSym7RgUqcwmO9C2EoShZW3SvazAlRbE6RGhjDCGLn8+S2WOv5acMIpiMAcwvium6
+ygmq1VvSGbcfyVv/OUbVKZWHUBYU8P/IBHkhYUzyU3cZSZ1C3qdPzmWEMochLOYz73I8ScBmkulL
+Wip0xvYZ2/DHfhu7IUkGDFKe5yjZhBXwsLspFaVbEveFzlsoSwscgy00t+2su7yc9P8ycCRC1VqV
+NnauyD4vmvtATdZcRced+nfx9g7yKxuT+MzJfqRuhK/ACb2sg0wLAIUX85owHo6lbTdA23GcVUvC
+9T/+MYCFGzqVgbAeEpN8AI6WxGNZl4L4SsCX02fr
+--------------------------------------------------------------------------------
+
+export MAVEN_OPTS="-Dhttp.proxyHost=str-www-proxy2-qa.homedepot.com -Dhttp.proxyPort=8080"
+
+/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.3.9/bin/mvn \
+-gs /var/lib/jenkins/settings.xml \
+-Dmaven.repo.local=/var/lib/jenkins/workspace/poll-and-deploy-master-aem/.repository \
+com.day.jcr.vault:content-package-maven-plugin:0.5.1:install \
+-Dcrx.url=http://104.199.123.125:80 \
+-Dcrx.user=admin -Dcrx.password=admin \
+-Dhttp.proxySet=true -Dhttp.proxyHost=str-www-proxy2-qa -Dhttp.proxyPort=8080 \
+-DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 \
+-rf :homedepot-apps 
+
+curl http://104.199.123.125:80/crx/packmgr/service.jsp
+
+#https://github.com/Adobe-Marketing-Cloud/aem-samples/issues/1    
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.3.9/bin/mvn -f pom.xml \
+-gs /var/lib/jenkins/settings.xml \
+-Dmaven.repo.local=/var/lib/jenkins/workspace/poll-and-deploy-master-aem/.repository install -Pqp \
+-Dcrx.url=http://104.199.123.125:4503 \
+-Dcrx.user=admin -Dcrx.password=admin \
+-pl '!homedepot-integration-tests' \
+-rf :homedepot-apps
+
+/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.3.9/bin/mvn \
+-gs /var/lib/jenkins/settings.xml \
+-Dmaven.repo.local=/var/lib/jenkins/workspace/poll-and-deploy-master-aem/.repository \
+com.day.jcr.vault:content-package-maven-plugin:0.5.1:install \
+-Dcrx.url=http://172.24.102.175:4503 \
+-Dcrx.user=admin -Dcrx.password=admin \
+-rf :homedepot-apps
+
+/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.3.9/bin/mvn \
+-gs /var/lib/jenkins/settings.xml \
+-Dmaven.repo.local=/var/lib/jenkins/workspace/poll-and-deploy-master-aem/.repository \
+com.day.jcr.vault:content-package-maven-plugin:0.5.1:install \
+-DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 \
+-Dcrx.url=http://104.199.123.125:80 -Dcrx.user=admin -Dcrx.password=admin \
+-rf :homedepot-apps -e
+--------------------------------------------------------------------------------
+<cfx.failOnError>true</crx.failOnError>
+<failOnError>${cfx.failOnError}</failOnError>
+
+sed -i -e "s/<useProxy>false<\/useProxy>/<useProxy>true<\/useProxy>/g" homedepot-apps/pom.xml
+grep useProxy homedepot-apps/pom.xml
+
+sed -i "342i <failOnError>false</failOnError>" homedepot-apps/pom.xml
+
+export JAVA_HOME=/var/lib/jenkins/tools/hudson.model.JDK/JDK_8
+/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.3.9/bin/mvn \
+-gs /var/lib/jenkins/settings.xml \
+-DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 \
+-Dmaven.repo.local=/var/lib/jenkins/workspace/sonar-master-aem/.repository \
+-f pom.xml -Dsonar.host.url=http://104.198.108.236 \
+sonar:sonar -pl '!homedepot-integration-tests/integration-test-runners,!homedepot-integration-tests/integration-tests,!homedepot-integration-tests/test-content'
+
+install -Pqp -Dcrx.password=admin -Dcrx.url=http://172.24.102.175:4503 \
+-Pbuild-solr-config,dev -Dsolr-type=master
+
+-gs /var/lib/jenkins/settings.xml \
+-DproxySet=true -DproxyHost=str-www-proxy2-qa -DproxyPort=8080 \
+-Dhttps.proxyHost=str-www-proxy2-qa -Dhttps.proxyPort=8080 \
+
+
+
+
+

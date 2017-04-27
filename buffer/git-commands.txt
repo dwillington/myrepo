@@ -1,0 +1,43 @@
+git add -A
+git commit -m "commit"
+git push
+--------------------------------------------------------------------------------
+git update-index --chmod=+x *.sh
+find . -name *.sh | xargs git update-index --chmod=+x
+--------------------------------------------------------------------------------
+git clone ssh://AXA8962@stash.homedepot.ca/scm/hdca/aem.git
+git clone ssh://AXA8962@stash.homedepot.ca/scm/hdca/apache.git
+
+git clone http://AXA8962@stash.homedepot.ca/scm/hdca/aem.git
+git clone http://AXA8962@stash.homedepot.ca/scm/hdca/apache.git
+password: qa02test!
+
+git clone http://ln0a73:7990/scm/hdca/apache.git
+password: jasp3r91
+
+git clone https://github.com/dwillington/myrepo.git
+
+git clone https://github.com/HomedepotCanada/myrepo.git
+password: qa02test
+
+git clone https://axa8962@github.homedepot.com/axa8962/epic-provision.git
+git clone ssh://git@github.homedepot.com/axa8962/epic-provision.git
+
+git@github.homedepot.com:axa8962/epic-provision.git
+
+git remote set-url origin https://axa8962@github.homedepot.com/axa8962/epic-provision.git
+
+--------------------------------------------------------------------------------
+git reset --hard origin/gcloud
+--------------------------------------------------------------------------------
+export HTTP_PROXY=http://str-www-proxy2-qa.homedepot.com:8080
+export HTTPS_PROXY=http://str-www-proxy2-qa.homedepot.com:8080
+export http_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+export https_proxy=http://str-www-proxy2-qa.homedepot.com:8080
+export no_proxy=*.homedepot.com,*.homedepot.ca
+--------------------------------------------------------------------------------
+git config --global user.name "dwillington@yahoo.com"
+--------------------------------------------------------------------------------
+DO NOT DO THIS FOR BAMBOO USER, AFFECTS ALL OTHER BUILDS:
+git config --global http.proxy http://str-www-proxy2-qa.homedepot.com:8080
+

@@ -1,0 +1,49 @@
+rm -rf /var/log/mysqld.log 
+systemctl stop mysqld
+systemctl start mysqld
+vi /var/log/mysqld.log
+systemctl status mysqld.service
+
+vi /usr/lib/systemd/system/mysqld.service
+systemctl daemon-reload
+
+vi /etc/my.cnf
+
+vi /etc/sysconfig/mysql
+
+lsof -i TCP:80
+
+export MYSQLD_OPTS="--user=root --port=80"
+
+mysql --host=epic1-mysql --port=80 --user=hybrisdbuser -pjasp3r91 hybrisdbuser
+
+GRANT ALL PRIVILEGES ON *.* TO 'hybrisdbuser'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* to 'hyrbisdbuser'@'%' IDENTIFIED BY 'jasp3r91' WITH GRANT OPTION;
+
+mysql --host=35.185.30.33 --port=80 --user=hybrisdbuser -pjasp3r91 hybrisdbuser
+--------------------------------------------------------------------------------
+#https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-a-centos-6-4-vps
+yum install httpd -y
+yum install epel-release -y
+yum install phpmyadmin -y
+yum install php -y
+
+sed -i '17s/^/#/' /etc/httpd/conf.d/phpMyAdmin.conf
+sed -i '18s/^/#/' /etc/httpd/conf.d/phpMyAdmin.conf
+sed -i '19i        Require all granted' /etc/httpd/conf.d/phpMyAdmin.conf
+
+#http://stackoverflow.com/questions/23235363/forbidden-you-dont-have-permission-to-access-phpmyadmin-on-this-server
+#       Require ip 127.0.0.1
+#       Require ip ::1
+        Require all granted
+
+service httpd restart
+http://xxx/phpmyadmin
+--------------------------------------------------------------------------------
+iptables -D INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+iptables -D INPUT -i eth0 -p tcp --dport 3306 -j ACCEPT
+iptables -D PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3306
+
+iptables -A INPUT -i eth0 -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -i eth0 -p tcp --dport 3306 -j ACCEPT
+iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3306

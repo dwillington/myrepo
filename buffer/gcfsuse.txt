@@ -1,0 +1,68 @@
+https://cloud.google.com/compute/docs/disks/gcs-buckets
+
+gcloud init
+
+sudo tee /etc/yum.repos.d/gcsfuse.repo > /dev/null <<EOF
+[gcsfuse]
+name=gcsfuse (packages.cloud.google.com)
+baseurl=https://packages.cloud.google.com/yum/repos/gcsfuse-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+       https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+Install gcsfuse:
+
+sudo yum install gcsfuse -y
+
+--------------------------------------------------------------------------------
+umount /mnt/gcs-bucket
+sudo mkdir /mnt/gcs-bucket
+sudo chmod a+w /mnt/gcs-bucket
+gcsfuse np-cadotcom.appspot.com /mnt/gcs-bucket
+
+--------------------------------------------------------------------------------
+gsutil help crcmod
+To compile and install crcmod:
+sudo yum install gcc python-devel python-setuptools redhat-rpm-config -y
+sudo easy_install -U pip
+sudo pip uninstall crcmod
+sudo pip install -U crcmod
+--------------------------------------------------------------------------------
+touch a file
+cd /bamboo/data/thdutil/serversetup/Solr
+ls -al /mnt/gcs-bucket/ci-builds/epic-builds/epic1/solr
+touch /bamboo/data/thdutil/serversetup/Solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
+gsutil rm gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic1/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
+gsutil cp /bamboo/data/thdutil/serversetup/Solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic1/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
+ls -al /mnt/gcs-bucket/ci-builds/epic-builds/epic1/solr
+--------------------------------------------------------------------------------
+echo "" > initial.txt
+gsutil cp initial.txt gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic2/solr/
+gsutil ls gs://np-cadotcom.appspot.com/ci-builds/epic-builds/
+--------------------------------------------------------------------------------
+# hd bamboo server copies file to non existent destination, directories are automatically created
+gsutil cp /bamboo/data/thdutil/serversetup/Solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz gs://np-cadotcom.appspot.com/ci-builds/epic-builds/epic3/solr/homedepot-solr-0.0.1-SNAPSHOT.tar.gz
+
+# deploy script uses gsutil to rsync and picks any changes to a local directory
+gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-builds/ /tmp/epic-builds
+
+google-cloud-sdk/bin/gsutil cp -r Solr gs://np-cadotcom.appspot.com/serversetup/
+
+cd /tmp
+gsutil rsync -d -r gs://np-cadotcom.appspot.com/serversetup/Solr .
+--------------------------------------------------------------------------------
+export epic_name=epic1
+export project_name=solr
+export BUILD_NUMBER=57
+gsutil rm gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/$epic_name/$project_name/deploy.result
+echo "deploy $epic_name $project_name SUCCESS (${BUILD_NUMBER})" | gsutil cp - gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/$epic_name/$project_name/deploy.result
+
+gsutil stat gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/$epic_name/$project_name/deploy.result
+
+gsutil cat gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/$epic_name/$project_name/deploy.result
+/root/google-cloud-sdk/bin/gsutil rsync -d -r gs://np-cadotcom.appspot.com/ci-builds/epic-deploy-results/ /tmp/epic-deploy-results
+--------------------------------------------------------------------------------
+google-cloud-sdk/bin/gsutil cp -r mountebank-v1.8.0/ gs://np-cadotcom.appspot.com/serversetup/
+gsutil cp -r gs://np-cadotcom.appspot.com/serversetup/mountebank-v1.8.0 .

@@ -1,0 +1,18 @@
+wget http://bootstrap.pypa.io/get-pip.py
+sudo -E python get-pip.py
+sudo pip install requests --proxy=http://str-www-proxy2-qa.homedepot.com:8080
+
+
+from api_client import CloudBoltAPIClient
+username = "amer.homedepot.com\AXA8962"
+password = "October12!@"
+hostname = "server.homedepot.com"
+c = CloudBoltAPIClient(username, password, host=hostname, port=443, protocol="https")
+c.get()
+{
+    "actions": "/api/v2/actions/"
+}
+
+./prov_server.py --username axa8962 --password October12\!@ --host server.homedepot.com --protocol https
+
+

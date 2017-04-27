@@ -1,0 +1,45 @@
+more /usr/sap/install/sonarqube-5.3/conf/sonar.properties
+
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.0.zip
+
+wget -e use_proxy=yes -e https_proxy=str-www-proxy2-qa.homedepot.com:8080 https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.1.zip
+
+-rwxrwxrwx 1 slradm slradm 2902102 Oct 20 13:20 sonar-java-plugin-3.8.jar
+-rwxrwxrwx 1 slradm slradm 1342058 May 13  2016 sonar-javascript-plugin-2.12.jar
+-rw-r--r-- 1 slradm slradm 5530982 Jun 27 20:12 sonar-jira.jar
+-rw-r--r-- 1 slradm slradm 4366424 Jun 10 01:37 sonar-pmd-plugin-2.5.jar
+-rw-r--r-- 1 slradm slradm 2680676 Dec 11  2015 sonar-scm-git-plugin-1.0.jar
+-rw-r--r-- 1 slradm slradm 6556136 Dec 11  2015 sonar-scm-svn-plugin-1.2.jar
+-rwxrwxrwx 1 slradm slradm  854081 May 13  2016 sonar-web-plugin-2.4.jar
+-rwxrwxrwx 1 slradm slradm 5030691 May 13  2016 sonar-xml-plugin-1.4.1.jar
+--------------------------------------------------------------------------------
+gcloud compute instances delete --zone us-east1-c --quiet epic3-mysql
+gcloud compute instances create log-server \
+--zone=us-east1-c \
+--image-family centos-7 \
+--image-project centos-cloud \
+--boot-disk-size 50 \
+--custom-cpu=2 \
+--custom-memory=4 \
+--metadata-from-file startup-script=/bamboo/data/thdutil/serversetup/myrepo/gcloud-scripts/startup.sh 
+--------------------------------------------------------------------------------
+yum install java wget unzip -y
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.2.zip
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.6.5.zip
+
+#sonar.web.port=9000
+sed -i "110i sonar.web.port=80" /opt/sonarqube-6.2/conf/sonar.properties
+grep -in sonar.web.port /opt/sonarqube-6.2/conf/sonar.properties
+
+/opt/sonarqube-6.2/bin/linux-x86-64/sonar.sh start
+
+tail -100f /opt/sonarqube-6.2/logs/sonar.log 
+
+
+# https://github.com/indexzero/http-server
+yum install npm -y
+npm install http-server -g
+http-server /root/log-server -p 80 -s &
+
+
+
