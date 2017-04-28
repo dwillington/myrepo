@@ -1,8 +1,4 @@
 --------------------------------------------------------------------------------
-- jenkins jobs to sync every 10 minutes for all epics
-  - see how long it takes to serve up hybris files, 50mb, 100mb, etc
-  - clean up job of logs older than 1 week
-
 - request Jeffrey to give permission to reserve public ip addresses
 
 - add deploy-local error checking and script failure
@@ -47,6 +43,9 @@ http://104.198.108.236/batch/file?name=sonar-scanner-engine-shaded-6.2.jar] is n
 --------------------------------------------------------------------------------
 DONE
 --------------------------------------------------------------------------------
+- jenkins jobs to sync every 10 minutes for all epics
+  - see how long it takes to serve up hybris files, 50mb, 100mb, etc
+  - clean up job of logs older than 1 week
 - centrally expose logs
   - poor mans solution user http-server and rsync (apache?)
   - add a manully triggered jenkins job which will rsync all project logs for a specific epic
