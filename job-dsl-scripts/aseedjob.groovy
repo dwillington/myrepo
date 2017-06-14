@@ -6,6 +6,7 @@ job('ASSETMGR') {
 				buildTypeStr 'buildStream'
 				buildStream 'AssetMgr_Dev'
 			}
+			buildDefinition('AssetMgr_PL_Jenkins_BD_DEV')
         }
     }
     steps {
