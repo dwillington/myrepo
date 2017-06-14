@@ -1,12 +1,12 @@
-job('ASSETMGR') {
+job('AssetMgr') {
     scm {
         rtc {
             configure { node ->
                 // node represents <com.ibm.team.build.internal.hjplugin.RTCScm>
 				buildTypeStr 'buildStream'
 				buildStream 'AssetMgr_Dev'
-			}
-			buildDefinition('AssetMgr_PL_Jenkins_BD_DEV')
+            }
+            buildDefinition('AssetMgr_PL_Jenkins_BD_DEV')
         }
     }
     steps {
