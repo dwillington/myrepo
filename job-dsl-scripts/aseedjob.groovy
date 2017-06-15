@@ -15,9 +15,7 @@ job('AssetMgr_Dev') {
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
         }
     }
-    publishers {
-        logRotator {
-            numToKepp(5)
-        }
+    logRotator {
+        numToKepp(5)
     }
 }
