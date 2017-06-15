@@ -1,4 +1,4 @@
-job('AssetMgr') {
+job('AssetMgr_Dev') {
     configure { project ->
         project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
             overrideGlobal 'false'
@@ -14,6 +14,10 @@ job('AssetMgr') {
             providedGlobalSettings('maven-settings.xml')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
         }
-
+    }
+    publishers {
+        logRotator {
+            numToKepp(5)
+        }
     }
 }
