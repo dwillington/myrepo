@@ -16,6 +16,6 @@ job('AssetMgr_Dev') {
         }
     }
     logRotator {
-        numToKepp(5)
+        numToKeep(5)
     }
 }
