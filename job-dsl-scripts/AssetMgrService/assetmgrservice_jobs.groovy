@@ -11,7 +11,7 @@ job("${rtc_stream_name}") {
     }
     steps {
         maven {
-            rootPOM("AssetMgrService/pom.xml")
+            rootPOM("AssetMgrServices/pom.xml")
             goals('--batch-mode package')
             mavenInstallation('apache-maven-3.2.1')
             providedGlobalSettings('maven-settings.xml')
