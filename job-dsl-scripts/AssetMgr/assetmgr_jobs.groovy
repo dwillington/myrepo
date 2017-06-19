@@ -12,7 +12,7 @@ job("${rtc_stream_name}") {
     steps {
         maven {
             rootPOM("${rtc_project_name}/pom.xml")
-            goals('--batch-mode package')
+            goals('--batch-mode deploy')
             mavenInstallation('apache-maven-3.2.1')
             providedGlobalSettings('maven-settings.xml')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
