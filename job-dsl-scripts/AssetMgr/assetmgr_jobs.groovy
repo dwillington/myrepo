@@ -16,6 +16,7 @@ job("${rtc_stream_name}") {
             mavenInstallation('apache-maven-3.2.1')
             providedGlobalSettings('maven-settings.xml')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
+            property('altDeploymentRepository', 'maven-repo::default::http://maven-repo.fmr.com:8081/artifactory/libs-snapshot-local/')
         }
     }
     logRotator {
