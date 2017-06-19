@@ -1,7 +1,7 @@
 rtc_project_name = 'AssetMgrService'
 rtc_stream_name = "${rtc_project_name}_Dev"
 
-job("${rtc_project_name}") {
+job("${rtc_stream_name}") {
     configure { project ->
         project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
             overrideGlobal 'false'
