@@ -6,7 +6,7 @@ job("${rtc_project_name}") {
         project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
             overrideGlobal 'false'
             buildTypeStr 'buildStream'
-            buildStream "${rtc_project_name}"
+            buildStream "${rtc_stream_name}"
         }
     }
     steps {
