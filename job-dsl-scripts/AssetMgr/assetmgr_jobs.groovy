@@ -19,7 +19,14 @@ job("${rtc_stream_name}") {
             property('altDeploymentRepository', 'maven-repo::default::http://maven-repo.fmr.com:8081/artifactory/libs-snapshot-local/')
         }
     }
+    publishers {
+        archiveArtifacts {
+            pattern('**/target/*.war')
+            onlyIfSuccessful()
+        }
+    }
     logRotator {
         numToKeep(5)
+        artifactNumToKeep(1)
     }
 }
