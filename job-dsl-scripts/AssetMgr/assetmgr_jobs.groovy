@@ -1,7 +1,7 @@
 rtc_project_name = 'AssetMgr'
 rtc_stream_name = "${rtc_project_name}_Dev"
 
-job("${rtc_stream_name}") {
+job("${rtc_stream_name}-build") {
     configure { project ->
         project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
             overrideGlobal 'false'
@@ -21,12 +21,40 @@ job("${rtc_stream_name}") {
     }
     publishers {
         archiveArtifacts {
-            pattern('**/target/*.war')
+            pattern('**/*.war')
             onlyIfSuccessful()
         }
     }
     logRotator {
         numToKeep(5)
         artifactNumToKeep(1)
+    }
+}
+
+job("${rtc_stream_name}-deploy") {
+    scm {
+        git {
+            branch('master')
+            url('https://dwillington@github.com/dwillington/myrepo.git')
+            credentials('dwillington@yahoo.com')
+        }
+    }
+    steps {
+        copyArtifacts("${rtc_stream_name}-build") {
+            includePatterns('**/*.war')
+            buildSelector {
+                latestSuccessful(true)
+            }
+        }
+        shell ("" +
+               "deploy-scripts/docker/create-tcserver.sh 9080" + "\n" + 
+               "" + "\n" + 
+               "" + "\n" + 
+               "" + "\n" + 
+               "" + "\n" + 
+               "")
+    }
+    logRotator {
+        numToKeep(5)
     }
 }
