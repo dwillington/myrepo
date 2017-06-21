@@ -1,6 +1,7 @@
 #!/bin/sh
 
-if [ $# lt 1 ]; then
+if [ $# -lt 1 ] 
+then
     echo "create-tcserver.sh port"
     exit 1
 fi
