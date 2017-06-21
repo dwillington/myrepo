@@ -35,8 +35,10 @@ job("${rtc_stream_name}-deploy") {
     scm {
         git {
             branch('master')
-            url('https://dwillington@github.com/dwillington/myrepo.git')
-            credentials('dwillington@yahoo.com')
+            remote {
+                url('https://dwillington@github.com/dwillington/myrepo.git')
+                credentials('dwillington@yahoo.com')
+            }
         }
     }
     steps {
