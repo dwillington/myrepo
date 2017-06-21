@@ -50,10 +50,10 @@ job("${rtc_stream_name}-deploy") {
         }
         shell ("" +
                "deploy-scripts/docker/create-tcserver.sh 9080" + "\n" + 
-               "" + "\n" + 
-               "" + "\n" + 
-               "" + "\n" + 
-               "" + "\n" + 
+               "cid=$(docker ps -a | grep 9080 | sed 's/|/ /' | awk '{print $1}')" + "\n" + 
+               "docker cp AssetMgr/target/AssetMgr.war $cid:/tmp/." + "\n" + 
+               "docker cp deploy-scripts/AssetMgr/bin/deploy.sh $cid:/tmp/." + "\n" + 
+               "docker exec $cid /tmp/deploy.sh" + "\n" + 
                "")
     }
     logRotator {
