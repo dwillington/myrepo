@@ -21,7 +21,7 @@ job("${rtc_stream_name}-build") {
     }
     publishers {
         archiveArtifacts {
-            pattern('**/*.war')
+            pattern('**/target/*.war')
             onlyIfSuccessful()
         }
     }
