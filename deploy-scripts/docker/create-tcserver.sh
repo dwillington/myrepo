@@ -13,5 +13,5 @@ then
   echo "$cid tcserver already running on $port"
 else
   echo "creating tcserver running on $port"
-  cid=$(docker run -dit -p $port:8080)
+  cid=$(docker run -dit -p $port:8080 tcserver-centos)
 fi
