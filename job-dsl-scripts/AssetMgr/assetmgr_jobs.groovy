@@ -32,6 +32,7 @@ job("${rtc_stream_name}-build") {
 }
 
 job("${rtc_stream_name}-deploy") {
+    label('docker')
     scm {
         git {
             branch('master')
