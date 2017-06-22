@@ -51,7 +51,7 @@ job("${rtc_stream_name}-deploy") {
         }
         shell ("" +
                "deploy-scripts/docker/create-tcserver.sh 9080" + "\n" + 
-               "deploy-scripts/AssetMgr/bin/deploy.sh" + "\n" + 
+               "deploy-scripts/AssetMgr/bin/deploy.sh 9080" + "\n" + 
                "")
     }
     logRotator {
