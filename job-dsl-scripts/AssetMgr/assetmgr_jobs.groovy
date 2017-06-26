@@ -28,14 +28,17 @@ pipeline {
         }
         stage('sonar scan') {
             steps {
+                echo ''
             }
         }
         stage('fortify scan') {
             steps {
+                echo ''
             }
         }
         stage('deploy') {
             steps {
+                echo ''
             }
         }
     }
