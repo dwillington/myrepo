@@ -16,19 +16,19 @@ pipelineJob("${rtc_stream_name}-pipeline") {
             // scriptPath("pipeline-scripts/${rtc_project_name}/jenkinsfile_dev")
         // }
         cps {
-            script("""
+            script
+("""
 pipeline {
-    node {
-        stages {
-            stage('build') {
-                steps {
-                    build "${rtc_stream_name}-build"
-                }
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                build "${rtc_stream_name}-build"
             }
         }
     }
 }
-                   """)
+""")
             sandbox()
         }
     }
