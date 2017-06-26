@@ -23,5 +23,10 @@ pipeline {
                 build "${rtc_stream_name}-deploy"
             }
         }
+        stage('acceptance-test') {
+            steps {
+                echo ''
+            }
+        }
     }
 }
