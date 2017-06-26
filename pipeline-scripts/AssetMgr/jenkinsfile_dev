@@ -1,3 +1,5 @@
+rtc_project_name = 'AssetMgr'
+rtc_stream_name = "${rtc_project_name}_Dev"
 pipeline {
     agent any
     stages {
