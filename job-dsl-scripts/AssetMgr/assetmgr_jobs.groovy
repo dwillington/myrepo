@@ -3,49 +3,25 @@ rtc_stream_name = "${rtc_project_name}_Dev"
 
 pipelineJob("${rtc_stream_name}-pipeline") {
     definition {
-        // cpsScm {
-            // scm {
-                // git {
-                    // branch('master')
-                    // remote {
-                        // url('https://dwillington@github.com/dwillington/myrepo.git')
-                        // credentials('dwillington@yahoo.com')
-                    // }
-                // }
-            // }
-            // scriptPath("pipeline-scripts/${rtc_project_name}/jenkinsfile_dev")
-        // }
-        cps {
-            script(
-"""
-pipeline {
-    agent any
-    stages {
-        stage('build') {
-            steps {
-                build "${rtc_stream_name}-build"
+        cpsScm {
+            scm {
+                git {
+                    branch('master')
+                    remote {
+                        url('https://dwillington@github.com/dwillington/myrepo.git')
+                        credentials('dwillington@yahoo.com')
+                    }
+                }
             }
-        }
-        stage('sonar scan') {
-            steps {
-                echo ''
-            }
-        }
-        stage('fortify scan') {
-            steps {
-                echo ''
-            }
-        }
-        stage('deploy') {
-            steps {
-                build "${rtc_stream_name}-deploy"
-            }
-        }
-    }
-}
-""")
+            scriptPath("pipeline-scripts/${rtc_project_name}/jenkinsfile_dev")
             sandbox()
         }
+        // cps {
+            // script(
+// """
+// """)
+            // sandbox()
+        // }
     }
 }
 
