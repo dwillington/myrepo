@@ -17,14 +17,15 @@ pipelineJob("${rtc_stream_name}-pipeline") {
         // }
         cps {
             script("""
-                    pipeline {
-                        stages {
-                            stage('build') {
-                                build "${rtc_stream_name}-build"
-                            }
-                        }
-                    }
+pipeline {
+    stages {
+        stage('build') {
+            build "${rtc_stream_name}-build"
+        }
+    }
+}
                    """)
+            sandbox()
         }
     }
 }
