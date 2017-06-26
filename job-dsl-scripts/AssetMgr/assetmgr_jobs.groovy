@@ -25,6 +25,17 @@ pipeline {
             steps {
                 build "${rtc_stream_name}-build"
             }
+        stage('sonar scan') {
+            steps {
+            }
+        }
+        stage('fortify scan') {
+            steps {
+            }
+        }
+        stage('deploy') {
+            steps {
+            }
         }
     }
 }
