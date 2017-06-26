@@ -1,7 +1,25 @@
 pipeline {
+    agent any
     stages {
         stage('build') {
-            build ""
+            steps {
+                build "${rtc_stream_name}-build"
+            }
+        }
+        stage('sonar scan') {
+            steps {
+                echo ''
+            }
+        }
+        stage('fortify scan') {
+            steps {
+                echo ''
+            }
+        }
+        stage('deploy') {
+            steps {
+                build "${rtc_stream_name}-deploy"
+            }
         }
     }
 }
