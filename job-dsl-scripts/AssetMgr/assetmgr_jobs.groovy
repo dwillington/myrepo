@@ -22,6 +22,10 @@ pipelineJob("${rtc_stream_name}-pipeline") {
             // sandbox()
         // }
     }
+    logRotator {
+        numToKeep(5)
+        artifactNumToKeep(1)
+    }
 }
 
 job("${rtc_stream_name}-build") {
