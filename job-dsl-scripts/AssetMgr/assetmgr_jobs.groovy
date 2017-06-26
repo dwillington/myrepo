@@ -2,11 +2,19 @@ rtc_project_name = 'AssetMgr'
 rtc_stream_name = "${rtc_project_name}_Dev"
 
 job("${rtc_stream_name}-build") {
-    configure { project ->
-        project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
-            overrideGlobal 'false'
-            buildTypeStr 'buildStream'
-            buildStream "${rtc_stream_name}"
+    parameters {
+        stringParam('buildResultUUID')
+    }
+    // configure { project ->
+        // project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
+            // overrideGlobal 'false'
+            // buildTypeStr 'buildStream'
+            // buildStream "${rtc_stream_name}"
+        // }
+    // }
+    scm {
+        rtc {
+            buildDefinition('AssetMgr_DEV_BD_POC')
         }
     }
     steps {
