@@ -14,7 +14,6 @@ pipelineJob("${rtc_stream_name}-pipeline") {
                 }
             }
             scriptPath("pipeline-scripts/${rtc_project_name}/jenkinsfile_dev")
-            sandbox()
         }
         // cps {
             // script(
