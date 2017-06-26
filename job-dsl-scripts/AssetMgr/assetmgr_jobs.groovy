@@ -38,7 +38,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                echo ''
+                build "${rtc_stream_name}-deploy"
             }
         }
     }
