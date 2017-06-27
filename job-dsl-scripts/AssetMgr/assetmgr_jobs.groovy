@@ -15,12 +15,6 @@ pipelineJob("${rtc_stream_name}-pipeline") {
             }
             scriptPath("pipeline-scripts/${rtc_project_name}/jenkinsfile_dev")
         }
-        // cps {
-            // script(
-// """
-// """)
-            // sandbox()
-        // }
     }
     logRotator {
         numToKeep(5)
@@ -32,13 +26,6 @@ job("${rtc_stream_name}-build") {
     parameters {
         stringParam('buildResultUUID')
     }
-    // configure { project ->
-        // project / scm(class: 'com.ibm.team.build.internal.hjplugin.RTCScm') {
-            // overrideGlobal 'false'
-            // buildTypeStr 'buildStream'
-            // buildStream "${rtc_stream_name}"
-        // }
-    // }
     scm {
         rtc {
             buildDefinition('AssetMgr_DEV_BD_POC')
@@ -47,7 +34,7 @@ job("${rtc_stream_name}-build") {
     steps {
         maven {
             rootPOM("${rtc_project_name}/pom.xml")
-            goals('--batch-mode deploy')
+            goals('--batch-mode clean deploy')
             mavenInstallation('apache-maven-3.2.1')
             providedGlobalSettings('maven-settings.xml')
             localRepository(LocalRepositoryLocation.LOCAL_TO_WORKSPACE)
