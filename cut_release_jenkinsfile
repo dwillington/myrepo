@@ -1,0 +1,76 @@
+node ('linux') {
+    // Environment setup
+    def nodeHome = tool(name: 'nodejs-6.2.2')
+    def javaHome = tool(name: '8u74')
+    def mavenHome = tool(name: 'apache-maven-3.3.9')
+    def buildEnv = [
+            "PATH+JDK=${javaHome}/bin",
+            "PATH+MAVEN=${mavenHome}/bin",
+            "PATH+NPM=${nodeHome}/bin",
+            "JAVA_HOME=${javaHome}",
+            "M2_HOME=${mavenHome}"
+    ]
+
+    def bb_project_name = "gfx"
+    def repo_name = "rate-lynx"
+    def currentVersion = ""
+    def nextVersion = ""
+
+    stage ('pull develop') {
+        git url: "ssh://git@bitbucket.agile.bns:7999/${bb_project_name}/${repo_name}.git", branch: 'develop', credentialsId : 'jenkins'
+        sh 'git pull origin develop'
+        sh 'git fetch --all'
+        sh 'git remote prune origin'
+        sh "git remote prune ssh://git@bitbucket.agile.bns:7999/${bb_project_name}/${repo_name}.git"
+        sh 'git config user.email "ciad@scotiabank.com"'
+        sh 'git config user.name  "Jenkins Agent"'
+    }
+
+    stage ('find current version') {
+        pom = readMavenPom file: 'pom.xml'
+        // println pom.version
+        currentVersion=pom.version.replaceAll("-SNAPSHOT", "")
+        nextVersion = bumpVersion(currentVersion)
+    }
+
+    stage ('confirm') {
+        timeout(time:5, unit:'MINUTES') {
+            input "Continue with creating branch release/${currentVersion}"
+        }
+    }
+
+    // stage ('tag develop branch') {
+        // sh "git tag -a release/${currentVersion} -m \"release candidate ${currentVersion}\""
+        // sh "git push origin release/${currentVersion}"
+    // }
+
+    stage ('push release') {
+        sh "git checkout -b release/${currentVersion}"
+        sh "git push -u origin release/${currentVersion}"
+    }
+
+    stage ('update version in release and push') {
+        withMaven(maven: 'apache-maven-3.3.9', globalMavenSettingsConfig: 'artifactory-settings.xml', mavenLocalRepo: '.repository') {
+            sh "mvn --batch-mode versions:set -DnewVersion=${currentVersion} -DgenerateBackupPoms=false versions:commit"
+        }
+        sh 'find . -name "pom.xml" | xargs git add -u'
+        sh "git commit -m \"Jenkins removed SNAPSHOT\""
+        sh "git push origin release/${currentVersion}"
+    }
+
+    stage ('update version in develop and push') {
+        sh "git checkout develop"
+        withMaven(maven: 'apache-maven-3.3.9', globalMavenSettingsConfig: 'artifactory-settings.xml', mavenLocalRepo: '.repository') {
+            sh("mvn --batch-mode versions:set -DnewVersion=${nextVersion}-SNAPSHOT -DgenerateBackupPoms=false versions:commit")
+        }
+        sh 'find . -name "pom.xml" | xargs git add -u'
+        sh "git commit -m \"Jenkins bumped the version to ${nextVersion}\""
+        sh 'git push origin develop'
+    }
+}
+
+def bumpVersion(String currentVersion) {
+     String[] semver = currentVersion.split('\\.')
+     def nextver = semver[0] + "." + (semver[1].toInteger() + 1) + "." + "0"
+     nextver
+}
