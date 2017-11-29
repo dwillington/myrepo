@@ -59,3 +59,50 @@ sudo -u jenkins -s
 docker login af.cds.bns:5002
 Username: jenkins_svc_ci
 Password: AP6UkSD47ZR2fcMpyJCwXAyysVY
+--------------------------------------------------------------------------------
+OLD INSTRUCTIONS
+--------------------------------------------------------------------------------
+install docker on DEV Jenkins 1
+# https://docs.docker.com/engine/installation/linux/rhel/
+# make sure no proxy is set
+yum install yum-utils -y
+export http_proxy=gateway.bns:8000
+export https_proxy=gateway.bns:8000
+yum-config-manager \
+    --add-repo \
+    https://docs.docker.com/engine/installation/linux/repo_files/centos/docker.repo
+yum makecache fast
+unset http_proxy
+unset https_proxy
+yum update -y
+
+#docker_engine=docker-engine-1.13.0-1.el7.centos.x86_64.rpm
+#docker_engine_selinux=docker-engine-selinux-1.13.0-1.el7.centos.noarch.rpm
+
+docker_engine=docker-engine-17.05.0.ce-1.el7.centos.x86_64.rpm
+docker_engine_selinux=docker-engine-selinux-17.05.0.ce-1.el7.centos.noarch.rpm
+wget -e use_proxy=yes -e https_proxy=gateway.bns:8000 https://yum.dockerproject.org/repo/main/centos/7/Packages/$docker_engine
+wget -e use_proxy=yes -e https_proxy=gateway.bns:8000 https://yum.dockerproject.org/repo/main/centos/7/Packages/$docker_engine_selinux
+yum install device-mapper device-mapper-libs libtalloc libtdb libtevent systemd-libs -y
+yum install $docker_engine_selinux -y
+yum install $docker_engine -y
+systemctl start docker
+systemctl enable docker
+--------------------------------------------------------------------------------
+configure proxy 
+# https://docs.docker.com/engine/admin/systemd/
+
+mkdir -p /etc/systemd/system/docker.service.d
+vi /etc/systemd/system/docker.service.d/http-proxy.conf
+>>>
+[Service]
+Environment="HTTP_PROXY=http://gateway.bns:8000"
+ExecStart=
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock
+<<<
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+sudo systemctl show
+
+curl http://localhost:4243/version
+--------------------------------------------------------------------------------
