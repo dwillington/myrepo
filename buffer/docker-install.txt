@@ -1,0 +1,61 @@
+** Ensure there is no previous docker installaiton on the box. Stop, remove and clean up all, if needed.
+   Remove any users/groups created for docker
+**
+
+As root do the following steps
+1- Add the following to /etc/yum.repos.d/docker.repo
+[dockerrepo]
+name=dockerrepo
+baseurl=https://yum.dockerproject.org/repo/main/centos/7
+enabled=1
+gpgcheck=1
+gpgkey=https://yum.dockerproject.org/gpg
+proxy=http://proxyprd.scotia-capital.com:8080
+
+2- install docker
+yum install docker-engine.x86_64
+
+3- create artifactory folder
+mkdir -p /etc/docker/certs.d/af.cds.bns:5002
+chmod -R 755 /etc/docker/certs.d/af.cds.bns\:5002
+4- Edit the file /etc/docker/certs.d/af.cds.bns:5002/ca.crt
+vi /etc/docker/certs.d/af.cds.bns\:5002/ca.crt
+
+-----BEGIN CERTIFICATE-----
+MIIC2DCCAkGgAwIBAgIEM4TITzANBgkqhkiG9w0BAQUFADArMQswCQYDVQQGEwJD
+QTEcMBoGA1UEChMTQmFuayBvZiBOb3ZhIFNjb3RpYTAeFw05ODEyMTQxODQ4MDZa
+Fw0xODEyMTQxOTE4MDZaMCsxCzAJBgNVBAYTAkNBMRwwGgYDVQQKExNCYW5rIG9m
+IE5vdmEgU2NvdGlhMIGdMA0GCSqGSIb3DQEBAQUAA4GLADCBhwKBgQC7ov+X8OSQ
+RKmpUeo1ArxonzjWbk2XX1YgRtX7mm7xxy/WNwa0SIpR3FcE7wEDChzv4y1EXLvo
+dD5r6r3ix7AjnSs8WgypzI1TfnlsioS7ZnW7jXT/8zFvmFdn5mnGK7GK4n4puzGL
+tcrzC81yQd93jFF43erG2AS3qx+hvNHDHwIBA6OCAQkwggEFMBEGCWCGSAGG+EIB
+AQQEAwIABzBNBgNVHR8ERjBEMEKgQKA+pDwwOjELMAkGA1UEBhMCQ0ExHDAaBgNV
+BAoTE0Jhbmsgb2YgTm92YSBTY290aWExDTALBgNVBAMTBENSTDEwKwYDVR0QBCQw
+IoAPMTk5ODEyMTQxODQ4MDZagQ8yMDE4MTIxNDE4NDgwNlowCwYDVR0PBAQDAgEG
+MB8GA1UdIwQYMBaAFA8oZ30eNuXUpAa7mbSLJzLOKmrxMB0GA1UdDgQWBBQPKGd9
+Hjbl1KQGu5m0iycyzipq8TAMBgNVHRMEBTADAQH/MBkGCSqGSIb2fQdBAAQMMAob
+BFY0LjADAgSQMA0GCSqGSIb3DQEBBQUAA4GBADfN9lNZsbqAokB8zdMUDbAZoj/3
+DGfM+B2iVdATsNgFSucLXKJ/SvR+u5GDK8H7zMH9HNHH1t3zOrXk4U1vX+6jEfYW
+QynrWta4vXjRWaTWaX5zmAIUkzNaEGhK0uhdIiuMKbAo5LIXgRjkktJpMMp2JGl0
+fMINUvDAsqO6yss3
+-----END CERTIFICATE-----
+
+5- add proxy
+mkdir -p /etc/systemd/system/docker.service.d
+vi /etc/systemd/system/docker.service.d/http-proxy.conf
+[Service]
+Environment="HTTP_PROXY=http://proxyprd.scotia-capital.com:8080/" "HTTPS_PROXY=http://gateway.bns:8000" "NO_PROXY=localhost,127.0.0.0/8,af.cds.bns"
+
+6- restart
+systemctl enable docker
+systemctl daemon-reload
+systemctl start docker
+
+7- add jenkins userto docker group
+usermod -aG docker jenkins
+
+8- log into docker/artifactory
+sudo -u jenkins -s
+docker login af.cds.bns:5002
+Username: jenkins_svc_ci
+Password: AP6UkSD47ZR2fcMpyJCwXAyysVY
