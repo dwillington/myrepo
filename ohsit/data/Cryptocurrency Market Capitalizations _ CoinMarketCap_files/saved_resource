@@ -1,0 +1,76 @@
+
+/* Cointraffic.io | Load Slide */
+
+if(typeof(Storage) !== "undefined") {
+
+if (sessionStorage.ct_ss_chk_70unrF) {
+
+sessionStorage.ct_ss_chk_70unrF = Number(sessionStorage.ct_ss_chk_70unrF) + 1;
+
+} else {
+
+var css_70unrF = document.createElement('link');
+css_70unrF.rel = "stylesheet";
+css_70unrF.type = "text/css";
+css_70unrF.href = "//lacerta.space/css/slide/?key=70unrF";
+document.getElementsByTagName('head')[0].appendChild(css_70unrF);
+
+// document.body.innerHTML += '<span id="ct_70unrF"></span>';
+
+
+var btn = document.createElement('span');
+btn.id = "ct_70unrF";
+
+document.body.appendChild(btn);
+
+function ct_sl_70unrF() {
+
+document.getElementById('ct_70unrF').innerHTML = '\
+<div class="ct_70unrFr ct_70unrFbnc">\
+    <div class="ct_70unrFcrs" onclick="cls_ct_bn()">\
+        <img src="//ctnet2.in/images/close-icon-s.png">\
+    </div>\
+    <div style="display: none;" class="ct_70unrFlg">\
+        <img src="//ctnet2.in/images/ct_icon.jpg" border="0" class="ct_70unrFimg">\
+        <div class="ct_70unrFtx">\
+            <a href="https://cointraffic.io" target="_blank" class="ct_70unrFlnk">Ads by CoinTraffic</a>\
+        </div>\
+    </div>\
+    <a rel="nofollow" href="//lacerta.space/clk?key=70unrF&bid=6237" target="blank">\
+                    <div style="position: absolute; height: 100%; width: 100%; z-index: 1;"></div>\
+            <iframe src="//ctnet2.in/pub/3179/bf087d/index.html" width="300" height="250" frameBorder="0" scrolling="no" style="margin: 0 !important; padding: 0 !important;"></iframe>\
+            </a>\
+</div>';
+
+
+load_cr_70unrF();
+
+}
+
+setTimeout(function() {
+ct_sl_70unrF();
+}, 2500);
+
+function load_cr_70unrF() {
+
+var rn = Math.random()*1000000000000;
+
+var css_copyright = document.createElement('link');
+css_copyright.rel = "stylesheet";
+css_copyright.type = "text/css";
+css_copyright.href = "//lacerta.space/css_cr/slide/?key=70unrF&b=6237&rn=" + rn;
+
+document.getElementsByTagName('head')[0].appendChild(css_copyright);
+}
+
+function cls_ct_bn() {
+
+document.getElementById('ct_70unrF').style.display = 'none';
+sessionStorage.ct_ss_chk_70unrF = true;
+
+}
+
+}
+}
+
+        /* Time:  0.0173 Seconds */
