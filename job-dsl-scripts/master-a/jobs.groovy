@@ -1,5 +1,5 @@
 //println System.getProperty("PWD");
-println ${PWD};
+println $PWD;
 
 evaluate(new File("job-dsl-scripts/tools.groovy"))
 
