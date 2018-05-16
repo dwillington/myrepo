@@ -10,6 +10,7 @@ def call(body) {
         stages {
             stage('checkout git') {
                 steps {
+					input message: "Proceed?"
                     git branch: pipelineParams.branch, url: pipelineParams.scmUrl
                 }
             }
