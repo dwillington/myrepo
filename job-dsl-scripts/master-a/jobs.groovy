@@ -1,4 +1,4 @@
-println new File(System.getProperty("PWD")).name;
+println System.getProperty("PWD");
 println ${WORKSPACE};
 
 evaluate(new File("job-dsl-scripts/tools.groovy"))
