@@ -2,7 +2,7 @@ package com;
 
 class JobUtils {
 
-	static void createPipelineJobs(jobs) { 
+	static void createPipelineJobs(jobs[][]) { 
 		for(int i=0; i<jobs.size(); i++)
 		{
 			pipelineJob(jobs[i][0]) {
