@@ -7,12 +7,12 @@ def jobs = [
 	["java-hello-world-with-maven", "https://github.com/jabedhasan21/java-hello-world-with-maven"]
 	]
 
-createPipelineJobs(jobs)
+printJobs(jobs)
 
+createPipelineJobs(jobs)
 def createPipelineJobs(jobs) { 
 	for(int i=0; i<jobs.size(); i++)
 	{
-		println jobs[i][0]
 		pipelineJob(jobs[i][0]) {
 			definition {
 				cps {
