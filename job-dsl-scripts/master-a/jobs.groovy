@@ -1,4 +1,4 @@
-println System.getProperty("user.dir");
+println new File(System.getProperty("user.dir")).name;
 println ${WORKSPACE};
 
 evaluate(new File("job-dsl-scripts/tools.groovy"))
