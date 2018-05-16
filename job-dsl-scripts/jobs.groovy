@@ -5,7 +5,7 @@ pipelineJob("java-hello-world-maven") {
 			script("""
 mavenPipeline {
 	branch = "master"
-	url = "https://github.com/dantheman213/java-hello-world-maven.git"
+	url = "https://github.com/jabedhasan21/java-hello-world-with-maven"
 }""".stripIndent())
 		}
 	}
