@@ -6,7 +6,7 @@ def call(body) {
     body()
 
     pipeline {
-        agent any
+        agent 'docker-agent'
         stages {
             stage('checkout git') {
                 steps {
