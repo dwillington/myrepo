@@ -1,3 +1,5 @@
+package com;
+
 class JobUtils {
 
 	static void createPipelineJobs(jobs) { 
