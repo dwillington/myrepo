@@ -23,8 +23,7 @@ def call(body) {
             stage ('test') {
                 steps {
 					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-10.0.1') {
-                        "unit tests": { sh 'mvn test ' },
-                        "integration tests": { sh 'mvn integration-test' }
+                        sh 'mvn test '
 					}
                 }
             }
