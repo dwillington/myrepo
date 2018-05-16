@@ -9,4 +9,9 @@ mavenPipeline {
 }""".stripIndent())
 		}
 	}
+    publishers {
+        logRotator {
+            numToKeep(5)
+        }
+    }
 }
