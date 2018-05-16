@@ -1,3 +1,5 @@
+println System.getProperty("user.dir");
+
 evaluate(new File("job-dsl-scripts/tools.groovy"))
 
 def jobs = [
