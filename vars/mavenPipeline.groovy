@@ -6,12 +6,11 @@ def call(body) {
     body()
 
     pipeline {
-        agent { label 'docker-agent' }
+        agent { label 'master' }
         stages {
             stage('checkout git') {
                 steps {
 					sh "echo $pipelineParams.scmUrl"
-					sh "echo $scmUrl"
                     // git branch: pipelineParams.branch, url: pipelineParams.scmUrl
                 }
             }
