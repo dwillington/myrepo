@@ -1,11 +1,11 @@
-pipelineJob("java-hello-world-with-maven") {
+pipelineJob("spring3-mvc-maven-xml-hello-world") {
     definition {
         cps {
 			sandbox()
 			script("""
 mavenPipeline {
 	branch = "master"
-	scmUrl = "https://github.com/jabedhasan21/java-hello-world-with-maven"
+	scmUrl = "https://github.com/mkyong/spring3-mvc-maven-xml-hello-world"
 }""".stripIndent())
 		}
 	}
