@@ -1,17 +1,24 @@
-pipelineJob("java-hello-world-with-maven") {
-    definition {
-        cps {
-			sandbox()
-			script("""
+def jobs = [
+	["java-hello-world-with-maven", "https://github.com/jabedhasan21/java-hello-world-with-maven"]
+	]
+
+for(int i=0; i<jobs.size(); i++)
+{
+	pipelineJob(jobs[i][0]) {
+		definition {
+			cps {
+				sandbox()
+				script("""
 mavenPipeline {
 	branch = "master"
-	scmUrl = "https://github.com/jabedhasan21/java-hello-world-with-maven"
+	scmUrl = jobs[i][1]
 }""".stripIndent())
+			}
+		}
+		publishers {
+			logRotator {
+				numToKeep(5)
+			}
 		}
 	}
-    publishers {
-        logRotator {
-            numToKeep(5)
-        }
-    }
 }
