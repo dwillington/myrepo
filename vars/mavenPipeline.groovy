@@ -13,6 +13,13 @@ def call(body) {
                     git branch: pipelineParams.branch, url: pipelineParams.scmUrl
                 }
             }
+            stage('build') {
+                steps {
+					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-10.0.1') {
+						sh 'mvn clean package -DskipTests=true'
+					}
+				}
+            }
 		}
     }
 }
