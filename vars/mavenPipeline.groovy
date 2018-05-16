@@ -10,8 +10,7 @@ def call(body) {
         stages {
             stage('checkout git') {
                 steps {
-					sh "echo $pipelineParams.scmUrl"
-                    // git branch: pipelineParams.branch, url: pipelineParams.scmUrl
+                    git branch: pipelineParams.branch, url: pipelineParams.scmUrl
                 }
             }
             stage('build') {

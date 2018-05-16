@@ -5,7 +5,7 @@ pipelineJob("java-hello-world-maven") {
 			script("""
 mavenPipeline {
 	branch = "master"
-	url = "https://github.com/jabedhasan21/java-hello-world-with-maven"
+	scmUrl = "https://github.com/jabedhasan21/java-hello-world-with-maven"
 }""".stripIndent())
 		}
 	}
