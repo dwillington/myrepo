@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+ssh aashraf@blxblddev4
+-------------------------------------------------------------------------------
+
+/opt/sonar/bin/linux-x86-64/sonar.sh stop
+
+tail -100f /opt/sonar/logs/sonar.log
+
+grep "^[^#;]" /opt/sonar/conf/sonar.properties
+

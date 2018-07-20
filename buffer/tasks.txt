@@ -1,0 +1,45 @@
+-------------------------------------------------------------------------------
+- seed job which builds jobs from within project repo
+https://github.com/jenkinsci/job-dsl-plugin/wiki/User-Power-Moves#use-job-dsl-in-pipeline-scripts
+-------------------------------------------------------------------------------
+- create documentation for installation and upgrade of rhodecode
+-------------------------------------------------------------------------------
+- proof out ssh communication to a windows box via openssh
+  - waiting for Justin to provide scripts for other horizon projects to be added to Jenkins
+  - depending on the deploy job, I can set ENV=QC*; call deploy.bat
+  - need to use a service account for ssh aashraf@transunion0, will simply add jenkins user public key to home folder
+  - http://bwnhzqc2.transunion.ca:8180/horizon-services/status
+
+- ask Justin why deployment server is not coming up; is it timing?
+
+- create deployment jobs to QC3
+
+- allow for providing a version in job parameter, release or snapshot
+* - script fetch-artifact.sh to check for snapshot vs release, going to the right repository
+  - send email to Paul to try new parameter
+
+
+-------------------------------------------------------------------------------
+- here is where horizon is built and then published to Artifactory (http://blxmrcprd1:8080/view/Consumer/job/HorizonApp-Trunk/)
+  - you must create a job to download the versioned jars and scp to bwnhzqc2 for deploy.bat
+-------------------------------------------------------------------------------
+- demo use of shared libraries for as pipeline templates
+  - show how new jobs can be defined minimally, i.e just a github url
+  - all customizations can be externalized to a build.properties within project repository (i.e build-sonar=true/false, mavenAdditional=-P dev)
+    - how to parse build.properties, still needs to be determined
+  - still need to create documentation
+  - useful links:
+    - https://jenkins.io/blog/2017/10/02/pipeline-templates-with-shared-libraries/
+	- https://github.com/fabric8io/fabric8-pipeline-library/blob/master/vars/mavenCI.groovy
+
+
+
+
+-------------------------------------------------------------------------------
+DONE
+-------------------------------------------------------------------------------
+- send new script to Milan in case he wishes to use new fetch artifactory script
+- waiting for Justin to add improved logic to task kill service stop
+- need to create job in Jenkins to perform deploy.cmd
+
+

@@ -1,0 +1,57 @@
+ssh -l aashraf@transunion0 bwnhzqc2
+
+
+scp /c/Users/aashraf/Downloads/standalone-c2postprocess.zip aashraf@transunion0@bwnhzqc2:standalone-c2postprocess.zip
+scp -r aashraf@transunion0@bwnhzqc2:c2postprocess /c/Users/aashraf/Downloads
+-------------------------------------------------------------------------------
+scp -r aashraf@transunion0@bwnhzqc2: .
+-------------------------------------------------------------------------------
+cd /var/lib/jenkins/workspace/horizon/HorizonApp/Horizon-Trunk/Horizon-Trunk-deploy-DEV
+
+cd deployment-scripts/horizon/HorizonApp/HorizonApp-Trunk
+find . -name "tuc*.war" -type f -delete
+find . -name "tuc*.jar" -type f -delete
+
+cd distribution
+chmod u+x fetch-artifact-artifactory.sh
+dos2unix fetch-artifact-artifactory.sh
+./fetch-artifact-artifactory.sh
+mv *.war ../deployment/.
+mv *.jar ../deployment/modules/tuc/logging/main/.
+cd ..
+
+name=`basename deployment/modules/tuc/logging/main/*.jar`; echo $name
+sed -i -e 's/tuc-horizon-logging-version.jar/'"$name"'/g' deployment/modules/tuc/logging/main/module.xml
+
+ssh -l aashraf@transunion0 bwnhzqc2 rmdir /S /Q "C:\\opt\\deploy\\staging\\horizon"
+ssh -l aashraf@transunion0 bwnhzqc2 mkdir "C:\\opt\\deploy\\staging\\horizon"
+scp -r deployment/* aashraf@transunion0@bwnhzqc2:/opt/deploy/staging/horizon
+
+ssh -l aashraf@transunion0 bwnhzqc2 "C:\opt\deploy\staging\horizon\deploy.bat"
+-------------------------------------------------------------------------------
+cd /var/lib/jenkins/workspace/core_pod/tuc-ocs-web-secure/tuc-ocs-web-secure-deploy-DEV/deployment-scripts/core_pod/tuc-ocs-web-secure
+
+# the latest versions in artifactory do not work right now, use the war stored in C:\opt\deploy\c2postprocess.bk
+# cd distribution
+# chmod u+x fetch-artifact-artifactory.sh
+# dos2unix fetch-artifact-artifactory.sh
+# ./fetch-artifact-artifactory.sh
+# mv *.war ../deployment/.
+# cd ..
+
+ssh -l aashraf@transunion0 bwnhzqc2 rmdir /S /Q "C:\opt\deploy\c2postprocess"
+ssh -l aashraf@transunion0 bwnhzqc2 rmdir /S /Q "C:\Users\aashraf\deployment"
+scp -r deployment aashraf@transunion0@bwnhzqc2:
+ssh -l aashraf@transunion0 bwnhzqc2 "xcopy /s /e /y /i C:\Users\aashraf\deployment C:\opt\deploy\c2postprocess"
+ssh -l aashraf@transunion0 bwnhzqc2 "copy /Y C:\opt\deploy\c2postprocess.bk\tuc-ocs-web-secure-1.2.7-SNAPSHOT.war C:\opt\deploy\c2postprocess\."
+ssh -l aashraf@transunion0 bwnhzqc2 "C:\opt\deploy\c2postprocess\deploy.bat"
+
+
+netstat -aon | find "8080" | find "LISTENING"
+sc queryex JBossEAP6HorizonApp
+taskkill /pid XXX /f
+
+tasklist | findstr java
+taskkill /F /FI "IMAGENAME eq java*"
+
+

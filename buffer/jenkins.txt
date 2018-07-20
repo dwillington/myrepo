@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+ssh aashraf@blxblddev2
+-------------------------------------------------------------------------------
+sudo -i
+su - jenkins
+cd /var/lib/jenkins
+-------------------------------------------------------------------------------
+cd /usr/lib/jenkins
+wget http://updates.jenkins-ci.org/download/war/2.120/jenkins.war
+tail -100f /var/log/jenkins/jenkins.log
+-------------------------------------------------------------------------------
+curl -O https://repo.jenkins-ci.org/public/org/jenkins-ci/plugins/job-dsl-core/1.68/job-dsl-core-1.68-standalone.jar
+
+java -jar /c/temp/job-dsl-core-1.68-standalone.jar /c/temp/hg-repos/CIAD/job-dsl-scripts/commons/commons_services/jobs.groovy
+
+rm -rf /c/temp/hg-repos/CIAD/job-dsl-scripts-support/src/main/groovy/commons /c/temp/hg-repos/CIAD/job-dsl-scripts-support/src/main/groovy/commons.xml
+-------------------------------------------------------------------------------
+

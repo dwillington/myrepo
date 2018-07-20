@@ -1,0 +1,43 @@
+can1sid1 password:
+https://thehub.transunion.com/ResourceCenter/TechnologyProjectRollout/Pages/7-Wonders-Guest-Wireless.aspx
+
+Help Desk:
+800-973-9801
+
+rsa pin:904968
+
+rhodecode original:
+http://blxmrcprd1:5000/CIAD/CIAD
+
+jenkins
+http://blxblddev2.transunion.ca:8080/
+
+http://blxblddev4.transunion.ca:9000/
+
+https://idmart.transunion.com
+
+https://vpnenroll.transunion.com
+
+https://thehub.transunion.com
+
+
+-------------------------------------------------------------------------------
+sharepoint site:
+https://connect.transunion.com/sites/CDN/ITC/AB/SitePages/Home.aspx?RootFolder=%2Fsites%2FCDN%2FITC%2FAB%2FTeam%2FCIAD&FolderCTID=0x0120002BA7676C1695B84192CDA3B1CFED9590&View=%7BC2A10E9A-8E71-447F-B666-D0345459AD92%7D
+-------------------------------------------------------------------------------
+http://blxmrcprd1.transunion.ca:5000/
+aashraf/60Bashir
+-------------------------------------------------------------------------------
+ssh aashraf@blxblddev2
+ssh aashraf@blxblddev4
+????
+-------------------------------------------------------------------------------
+ssh aashraf@blxblddev3
+ssh aashraf@blxblddev5
+aashraf/63Bashir
+-------------------------------------------------------------------------------
+nc 35.227.89.53 8545
+
+ticket: adhoc0199563
+
+

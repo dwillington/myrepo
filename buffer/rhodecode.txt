@@ -1,0 +1,94 @@
+scp /c/Users/aashraf/Downloads/rhodecode-tools-0.14.1.zip aashraf@blxblddev3:/tmp/.
+
+ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no aashraf@blxblddev5
+
+ssh aashraf@blxblddev3
+sudo -i
+cd /tmp
+unzip rhodecode-tools-0.14.1.zip
+
+-------------------------------------------------------------------------------
+curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+python get-pip.py
+-------------------------------------------------------------------------------
+https://developers.redhat.com/blog/2013/02/14/setting-up-django-and-python-2-7-on-red-hat-enterprise-6-the-easy-way/
+wget -qO- http://people.redhat.com/bkabrda/scl_python27.repo >> /etc/yum.repos.d/scl.repo
+yum install python27
+scl enable python27 bash
+python -V
+-------------------------------------------------------------------------------
+cd /root
+pip install virtualenv
+virtualenv venv
+-------------------------------------------------------------------------------
+pip install --upgrade flex
+pip install -U pip
+-------------------------------------------------------------------------------
+cd /root
+. venv/bin/activate
+cd /tmp/rhodecode-tools-ce-be1e0a02c7c2
+python setup.py install
+
+
+export PYTHONPATH=/usr/lib/python2.7
+
+
+-------------------------------------------------------------------------------
+https://docs.rhodecode.com/RhodeCode-Enterprise/admin/indexing.html
+
+http://10.103.141.121:10002/_admin/my_account/auth_tokens
+# create auth token with 'all' access
+
+rccontrol status
+vi .rhoderc
+>>>
+[instance:community-1]
+api_host = http://10.103.141.121:10002
+api_key = d0d1844e5e9f210b8be7542e5c4314da0b88bdec
+repo_dir = /opt/repos
+<<<
+-------------------------------------------------------------------------------
+https://stackoverflow.com/questions/20842732/libpython2-7-so-1-0-cannot-open-shared-object-file-no-such-file-or-directory
+(venv)[root@blxblddev3 ~]# locate libpython2.7.so.1.0
+/opt/rhodecode/store/g7qzsl3a8sb23daxgs3gin4j22dhs3sw-python-2.7.12/lib/libpython2.7.so.1.0
+vi /etc/ld.so.conf.d/libpython2.7.conf
+ldconfig
+-------------------------------------------------------------------------------
+cd /root
+. venv/bin/activate
+rhodecode-index --instance-name=community-1
+-------------------------------------------------------------------------------
+wget http://mirror.centos.org/centos/6/os/x86_64/Packages/mpfr-2.4.1-6.el6.x86_64.rpm
+rpm -ivh mpfr-2.4.1-6.el6.x86_64.rpm
+wget https://rpmfind.net/linux/centos/6.9/os/x86_64/Packages/kernel-devel-2.6.32-696.el6.x86_64.rpm
+rpm -ivh kernel-devel-2.6.32-696.el6.x86_64.rpm
+-------------------------------------------------------------------------------
+yum --nogpgcheck install devtoolset-1.1
+-------------------------------------------------------------------------------
+https://stackoverflow.com/questions/35616650/how-to-upgrade-glibc-from-version-2-12-to-2-14-on-centos
+source /opt/rh/devtoolset-1.1/enable
+mkdir ~/glibc_install; cd ~/glibc_install
+wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz
+tar zxvf glibc-2.14.tar.gz
+cd glibc-2.14
+mkdir build
+cd build
+../configure --prefix=/opt/glibc-2.14
+make -j4
+make install
+export LD_LIBRARY_PATH=/opt/glibc-2.14/lib:$LD_LIBRARY_PATH
+-------------------------------------------------------------------------------
+https://docs.rhodecode.com/RhodeCode-Enterprise/admin/indexing.html#schedule-the-indexer
+-------------------------------------------------------------------------------
+ssh aashraf@blxblddev3
+sudo -i
+cd /root
+. venv/bin/activate
+export LD_LIBRARY_PATH=/opt/glibc-2.14/lib:$LD_LIBRARY_PATH
+rhodecode-index --instance-name=community-1
+-------------------------------------------------------------------------------
+~/.rccontrol-profile/bin/rccontrol self-update
+~/.rccontrol-profile/bin/rccontrol upgrade '*'
+-------------------------------------------------------------------------------
+rhodecode-extensions --instance-name=community-1 \
+--ini-file=.rccontrol/community-1/rhodecode.ini --plugins

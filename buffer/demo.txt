@@ -1,0 +1,25 @@
+- demo jenkins deployment of horizon app to windows
+  - jenkins will check out configuration and scripts from rhodecode;
+    download latest war/jar files;
+	stage all to windows box;
+    remotely execute deploy.bat
+  - what is needed for a deployment in jboss:
+    - standalone-horizon folder
+	  - standalone.xml in env/QC2
+	- modules folder for configuration and jar
+	- service folder for service stop / start scripts
+	- war files
+  - deploy.bat will (open deploy.bat in editor):
+    - stage a new standalone-horizon folder
+	- stage modules folder
+	- use jboss-cli to deploy war files
+	- use run-horizon.bat to stop / start service
+  - store all configuration and scripts in Horizon-Trunk/deployment
+  - jenkins will check out from rhodecode and stage all configuration and scripts to windows box; 
+    stage latest war/jar files from artifactory to windows box; 
+    remotely execute deploy.bat
+  - jenkins is consistent in using ssh to communicate with linux / windows 
+
+send milan script for fetch latest
+add a parameter to input version to deploy
+can I get access to QC1 admin

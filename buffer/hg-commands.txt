@@ -1,0 +1,27 @@
+-------------------------------------------------------------------------------
+password=60Bashir
+hg_url=http://aashraf:$password@blxmrcprd1.transunion.ca:5000/CIAD/CIAD
+#-------------------------------------------------------------------------------
+hg pull $hg_url
+hg update
+-------------------------------------------------------------------------------
+hg commit -m "commit #6105"
+hg push $hg_url
+
+
+
+-------------------------------------------------------------------------------
+hg clone $hg_url
+-------------------------------------------------------------------------------
+POC rhodecode:
+http://10.103.141.121:10002/
+ssh aashraf@blxblddev3
+-------------------------------------------------------------------------------
+~/.rccontrol-profile/bin/rccontrol restart community-1
+tail -100f ~/.rccontrol/supervisor/supervisord.log
+-------------------------------------------------------------------------------
+.rccontrol/enterprise-4/profile/bin/rhodecode-extensions --plugins \
+  --instance-name=community-1 --ini-file=rhodecode.ini
+-------------------------------------------------------------------------------
+password=password
+hg_url=http://admin:$password@10.103.141.121:10002/CIAD

@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+ssh aashraf@blxblddev3
+-------------------------------------------------------------------------------
+http://blxmrcprd1:8081/artifactory
+username=aashraf
+password={DESede}AJu9Aw57MOag/nf/Mq08Fg==
+-------------------------------------------------------------------------------
+
+sudo -i
+
+service artifactory restart
+
+tail -100f /var/opt/jfrog/artifactory/logs/artifactory.log
+
