@@ -6,14 +6,14 @@ class JobUtils {
 		context.with {
 			for(int i=0; i<jobs.size(); i++)
 			{
+				jobScmUrl = jobs[i][1];
 				pipelineJob(jobs[i][0]) {
 					definition {
 						cps {
 							sandbox()
-							script("""
-mavenPipeline {
+							script("""mavenPipeline {
 	branch = "master"
-	scmUrl = $jobs[i][1]
+	scmUrl = $jobScmUrl
 }""".stripIndent())
 						}
 					}
