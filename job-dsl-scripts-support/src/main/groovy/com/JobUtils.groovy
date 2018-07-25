@@ -13,7 +13,7 @@ class JobUtils {
 							script("""
 mavenPipeline {
 	branch = "master"
-	scmUrl = jobs[i][1]
+	scmUrl = $jobs[i][1]
 }""".stripIndent())
 						}
 					}
