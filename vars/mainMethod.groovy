@@ -6,4 +6,7 @@ def call(body) {
     body.delegate = pipelineParams
     body()
 
+	def instance = this.class.classLoader.loadClass( "mavenPipeline", true, false )?.newInstance()
+	instance( pipelineParams )
+
 }
