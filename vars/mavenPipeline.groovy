@@ -15,14 +15,14 @@ def call(body) {
             }
             stage('build') {
                 steps {
-					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-10.0.2') {
+					withMaven(maven:'mvn-3.5.3') {
 						sh 'mvn clean package -DskipTests=true -Dmaven.compiler.source=1.6 -Dmaven.compiler.target=1.6'
 					}
 				}
             }
             stage ('test') {
                 steps {
-					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-10.0.2') {
+					withMaven(maven:'mvn-3.5.3') {
                         sh 'mvn test '
 					}
                 }
