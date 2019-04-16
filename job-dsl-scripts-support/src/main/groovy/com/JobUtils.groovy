@@ -17,10 +17,8 @@ class JobUtils {
 }""".stripIndent())
 						}
 					}
-					publishers {
-						logRotator {
-							numToKeep(5)
-						}
+					logRotator {
+						numToKeep(5)
 					}
 				}
 			}
