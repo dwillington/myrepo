@@ -28,12 +28,12 @@ def call(body) {
                         sh 'mvn test '
 					}
                 }
-            }
-			post {
-				always {
-					junit 'target/reports/**/*.xml'
+				post {
+					always {
+						junit 'target/reports/**/*.xml'
+					}
 				}
-			}
+            }
             stage('sonar scan') {
                 steps {
 					sh "echo empty"
