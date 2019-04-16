@@ -29,14 +29,24 @@ def call(body) {
                 }
             }
             stage('sonar scan') {
+                steps {
+                }
             }
             stage('static security scan') {
+                steps {
+                }
             }
             stage('publish to repository') {
+                steps {
+                }
             }
             stage('deploy') {
+                steps {
+                }
             }
             stage('acceptance-testing') {
+                steps {
+                }
             }
 		}
     }
