@@ -9,7 +9,7 @@ def call(body) {
 		//agent any
         agent { label 'docker-agent' }
         stages {
-            stage('checkout git') {
+            stage('git checkout') {
                 steps {
                     git branch: pipelineParams.branch, url: pipelineParams.scmUrl
                 }
@@ -27,6 +27,12 @@ def call(body) {
                         sh 'mvn test '
 					}
                 }
+            }
+            stage('sonar scan') {
+            }
+            stage('static security scan') {
+            }
+            stage('publish to repository') {
             }
 		}
     }
