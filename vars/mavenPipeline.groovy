@@ -21,7 +21,7 @@ def call(body) {
 					}
 				}
             }
-            stage ('test') {
+            stage ('unit test') {
                 steps {
 					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
                         sh 'mvn test '
@@ -33,6 +33,10 @@ def call(body) {
             stage('static security scan') {
             }
             stage('publish to repository') {
+            }
+            stage('deploy') {
+            }
+            stage('acceptance-testing') {
             }
 		}
     }
