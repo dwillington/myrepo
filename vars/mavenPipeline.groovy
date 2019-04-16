@@ -17,7 +17,8 @@ def call(body) {
             stage('build') {
                 steps {
 					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-						sh 'mvn clean package -DskipTests=true -Dmaven.compiler.source=1.6 -Dmaven.compiler.target=1.6'
+						// sh 'mvn clean package -DskipTests=true -Dmaven.compiler.source=1.6 -Dmaven.compiler.target=1.6'
+						sh 'mvn --version'
 					}
 				}
             }
@@ -28,6 +29,11 @@ def call(body) {
 					}
                 }
             }
+			post {
+				always {
+					junit 'target/reports/**/*.xml'
+				}
+			}
             stage('sonar scan') {
                 steps {
 					sh "echo empty"
