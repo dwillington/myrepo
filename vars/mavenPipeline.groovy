@@ -36,7 +36,11 @@ def call(body) {
             }
             stage('sonar scan') {
                 steps {
-					sh "echo empty"
+					withSonarQubeEnv('sonarqube') {
+						withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
+							sh 'mvn soanr:sonar -Dmaven.compiler.source=1.6 -Dmaven.compiler.target=1.6'
+						}
+					}
                 }
             }
             stage('static security scan') {
