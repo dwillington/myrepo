@@ -1,9 +1,14 @@
-  </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.9.0">
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.9.3">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/dwillington/myrepo</url>
+        <url>https://github.com/dwillington/myrepo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -22,7 +27,7 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <javaposse.jobdsl.plugin.ExecuteDslScripts plugin="job-dsl@1.69">
+    <javaposse.jobdsl.plugin.ExecuteDslScripts plugin="job-dsl@1.72">
       <targets>job-dsl-scripts/master-a/**/*.groovy</targets>
       <usingScriptText>false</usingScriptText>
       <sandbox>false</sandbox>
@@ -34,6 +39,7 @@
       <removedViewAction>IGNORE</removedViewAction>
       <removedConfigFilesAction>IGNORE</removedConfigFilesAction>
       <lookupStrategy>JENKINS_ROOT</lookupStrategy>
+      <additionalClasspath>job-dsl-scripts-support/src/main/groovy</additionalClasspath>
     </javaposse.jobdsl.plugin.ExecuteDslScripts>
   </builders>
   <publishers/>
