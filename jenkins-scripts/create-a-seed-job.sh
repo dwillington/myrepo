@@ -1,4 +1,5 @@
 username=admin
-password=1196942d9836374d0f56331fcf24480c01
-CRUMB=$(curl -u $username:$password -s 'http://localhost:8080/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
-curl -u $username:$password -H "$CRUMB" -s -XPOST 'http://localhost:8080/createItem?name=a-seed-job' --data-binary @config.xml -H "Content-Type:text/xml"
+password=119bae1e944363287dae0b69ada2fedee7
+HOST=35.236.201.124:8080
+CRUMB=$(curl -u $username:$password -s 'http://$HOST/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)')
+curl -u $username:$password -H "$CRUMB" -s -XPOST 'http://$HOST/createItem?name=a-seed-job' --data-binary @config.xml -H "Content-Type:text/xml"
