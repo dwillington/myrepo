@@ -30,22 +30,27 @@ def call(body) {
             }
             stage('sonar scan') {
                 steps {
+					sh "echo empty"
                 }
             }
             stage('static security scan') {
                 steps {
+					sh "echo empty"
                 }
             }
             stage('publish to repository') {
                 steps {
+					sh "echo empty"
                 }
             }
             stage('deploy') {
                 steps {
+					sh "echo empty"
                 }
             }
             stage('acceptance-testing') {
                 steps {
+					sh "echo empty"
                 }
             }
 		}
