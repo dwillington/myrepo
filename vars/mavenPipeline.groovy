@@ -25,7 +25,8 @@ def call(body) {
             stage ('unit test') {
                 steps {
 					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
-                        sh 'mvn test '
+                        // sh 'mvn test '
+						sh 'mvn --version'
 					}
                 }
 				// post {
@@ -38,7 +39,8 @@ def call(body) {
                 steps {
 					withSonarQubeEnv('sonarqube') {
 						withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-							sh 'mvn sonar:sonar'
+							// sh 'mvn sonar:sonar'
+							sh 'mvn --version'
 						}
 					}
                 }
