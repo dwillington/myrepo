@@ -58,11 +58,11 @@ def call(body) {
 					   """
                 }
             }
-            stage('acceptance-testing') {
-                steps {
-					sh "echo empty"
-                }
-            }
+            // stage('acceptance-testing') {
+                // steps {
+					// sh "echo empty"
+                // }
+            // }
 		}
     }
 }
