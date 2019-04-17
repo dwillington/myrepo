@@ -58,7 +58,7 @@ def call(body) {
             stage('deploy') {
                 steps {
 					sh """
-						if [ ! -f bin/stage.sh ]; then
+						if [[ -e "bin/stage.sh" ]] then
 							./bin/stage.sh
 						fi
 					   """
