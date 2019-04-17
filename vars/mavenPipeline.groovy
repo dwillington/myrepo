@@ -25,19 +25,19 @@ def call(body) {
             stage ('unit test') {
                 steps {
 					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
-						sh 'mvn --version'
+                        sh 'mvn test '
 					}
                 }
             }
-            // stage('sonar scan') {
-                // steps {
-					// withSonarQubeEnv('sonarqube') {
-						// withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-							// sh 'mvn --version'
-						// }
-					// }
-                // }
-            // }
+            stage('sonar scan') {
+                steps {
+					withSonarQubeEnv('sonarqube') {
+						withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
+							sh 'mvn --version'
+						}
+					}
+                }
+            }
             // stage('static security scan') {
                 // steps {
 					// sh "echo empty"
