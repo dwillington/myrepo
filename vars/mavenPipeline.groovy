@@ -55,7 +55,11 @@ def call(body) {
             }
             stage('deploy') {
                 steps {
-					sh "echo empty"
+					sh """
+						if [ ! -f bin/deploy.sh ]; then
+							./bin/deploy.sh
+						fi
+					   """
                 }
             }
             stage('acceptance-testing') {
