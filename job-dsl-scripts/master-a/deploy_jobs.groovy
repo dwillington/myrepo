@@ -11,7 +11,6 @@ pipelineJob('hello-world-war/DEV/hello-world-war-deploy') {
 	branch = "master"
 	scmUrl = "$jobScmUrl"
 }""".stripIndent()
-            sandbox()
         }
     }
 }
