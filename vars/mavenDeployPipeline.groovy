@@ -21,20 +21,14 @@ def call(body) {
             }
             stage('deploy') {
                 steps {
-					// step([  $class: 'CopyArtifact',
-							// filter: 'hellow-world-war-*.war',
-							// projectName: 'hellow-world-war-build',
-							// target: 'target'
-					// ])
 					copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'hello-world-war-build', target: 'target', flatten: 'true'
 					sh "ls -al target"
-
-					// sh """
-						// if [[ -e bin/stage.sh ]] 
-						// then
-							// ./bin/stage.sh
-						// fi
-					   // """
+					sh """
+						if [[ -e bin/stage.sh ]] 
+						then
+							./bin/stage.sh
+						fi
+					   """
                 }
             }
             stage('acceptance-testing') {
