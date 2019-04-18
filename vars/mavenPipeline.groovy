@@ -38,26 +38,26 @@ def call(body) {
 					}
                 }
             }
-            // stage('static security scan') {
-                // steps {
-					// sh "echo empty"
-                // }
-            // }
-            // stage('publish to repository') {
-                // steps {
-					// sh "echo empty"
-                // }
-            // }
-            stage('deploy') {
+            stage('static security scan') {
                 steps {
-					sh """
-						if [[ -e bin/stage.sh ]] 
-						then
-							./bin/stage.sh
-						fi
-					   """
+					sh "echo empty"
                 }
             }
+            stage('publish to repository') {
+                steps {
+					sh "echo empty"
+                }
+            }
+            // stage('deploy') {
+                // steps {
+					// sh """
+						// if [[ -e bin/stage.sh ]] 
+						// then
+							// ./bin/stage.sh
+						// fi
+					   // """
+                // }
+            // }
             // stage('acceptance-testing') {
                 // steps {
 					// sh "echo empty"
