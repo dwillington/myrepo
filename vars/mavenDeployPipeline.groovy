@@ -21,7 +21,12 @@ def call(body) {
             }
             stage('deploy') {
                 steps {
-					copyArtifacts filter: 'hellow-world-war-*.war', projectName: 'hellow-world-war-build', target: 'target'
+					step([  $class: 'CopyArtifact',
+							filter: 'hellow-world-war-*.war',
+							projectName: 'hellow-world-war-build',
+							target: 'target'
+					])
+					// copyArtifacts filter: 'hellow-world-war-*.war', projectName: 'hellow-world-war-build', target: 'target'
 					sh "ls -al target"
 
 					// sh """
