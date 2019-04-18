@@ -26,7 +26,7 @@ def call(body) {
 							// projectName: 'hellow-world-war-build',
 							// target: 'target'
 					// ])
-					copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'hello-world-war-build', target: 'target'
+					copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'hello-world-war-build', target: 'target', flatten: 'true'
 					sh "ls -al target"
 
 					// sh """
