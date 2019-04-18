@@ -10,7 +10,7 @@ pipelineJob('hello-world-war/DEV/hello-world-war-deploy') {
 			sandbox()
             script("""mavenDeployPipeline {
 	branch = "master"
-	scmUrl = "$jobScmUrl"
+	scmUrl = "https://github.com/dwillington/hello-world-war.git"
 }""".stripIndent())
 		}
 	}
