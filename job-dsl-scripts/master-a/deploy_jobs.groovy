@@ -11,9 +11,9 @@ pipelineJob('hello-world-war/DEV/hello-world-war-deploy') {
             script("""mavenDeployPipeline {
 	branch = "master"
 	scmUrl = "$jobScmUrl"
-}""".stripIndent()
-        }
-    }
+}""".stripIndent())
+		}
+	}
 	logRotator {
 		numToKeep(5)
 	}
