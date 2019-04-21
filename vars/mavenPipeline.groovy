@@ -29,16 +29,16 @@ def call(body) {
 					}
                 }
             }
-            stage('sonar scan') {
-                steps {
-					withSonarQubeEnv('sonarqube') {
-						withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
+            // stage('sonar scan') {
+                // steps {
+					// withSonarQubeEnv('sonarqube') {
+						// withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
 							// sh 'mvn sonar:sonar'
-							sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-						}
-					}
-                }
-            }
+							// sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+						// }
+					// }
+                // }
+            // }
             stage('static security scan') {
                 steps {
 					sh "echo empty"
