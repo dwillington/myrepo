@@ -6,8 +6,8 @@ def call(body) {
     body()
 
     pipeline {
-		agent any
-        // agent { label 'docker-agent' }
+		// agent any
+        agent { label 'master' }
         stages {
             stage('git checkout') {
                 steps {
