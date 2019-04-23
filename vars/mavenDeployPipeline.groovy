@@ -21,7 +21,7 @@ def call(body) {
             }
             stage('deploy') {
                 steps {
-					copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'hello-world-war-build', target: 'target', flatten: 'true'
+					copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'devops-war-build', target: 'target', flatten: 'true'
 					sh "ls -al target"
 					sh """
 						if [[ -e bin/stage.sh ]] 
