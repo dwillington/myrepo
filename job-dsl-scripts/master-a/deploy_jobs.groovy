@@ -4,7 +4,7 @@ import com.JobUtils
 def jobs = [
 	]
 
-pipelineJob('hello-world-war/DEV/hello-world-war-deploy') {
+pipelineJob('devops-war/DEV/devops-war-deploy') {
     definition {
         cps {
 			sandbox()
