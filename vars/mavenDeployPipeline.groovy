@@ -16,7 +16,7 @@ def call(body) {
             }
             stage('prepare database') {
                 steps {
-					sh "echo empty"
+					sh "echo prepare database"
                 }
             }
             stage('deploy') {
@@ -31,9 +31,9 @@ def call(body) {
 					   """
                 }
             }
-            stage('acceptance-testing') {
+            stage('selenium integration testing') {
                 steps {
-					sh "echo empty"
+					sh "echo selenium integration testing"
                 }
             }
 		}
