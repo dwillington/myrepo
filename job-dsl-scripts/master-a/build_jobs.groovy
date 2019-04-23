@@ -7,10 +7,10 @@ folder("hello-world/SIT")
 folder("devops-war")
 folder("devops-war/DEV")
 
-def jobs = [
+def maven_jobs = [
 	["hello-world/DEV/java-hello-world-with-maven", "https://github.com/LableOrg/java-maven-junit-helloworld"],
 	["devops-war/DEV/devops-war-build", "https://github.com/dwillington/hello-world-war.git"],
 	]
 
 
-JobUtils.createPipelineJobs(this, jobs)
+JobUtils.createPipelineJobs(this, maven_jobs)

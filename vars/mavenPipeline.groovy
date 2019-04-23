@@ -33,7 +33,6 @@ def call(body) {
                 steps {
 					withSonarQubeEnv('sonarqube') {
 						withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-							// sh 'mvn sonar:sonar'
 							sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
 						}
 					}
@@ -41,29 +40,14 @@ def call(body) {
             }
             stage('static security scan') {
                 steps {
-					sh "echo empty"
+					sh "echo fority.sh"
                 }
             }
             stage('publish to repository') {
                 steps {
-					sh "echo empty"
+					sh "echo mvn deploy"
                 }
             }
-            // stage('deploy') {
-                // steps {
-					// sh """
-						// if [[ -e bin/stage.sh ]] 
-						// then
-							// ./bin/stage.sh
-						// fi
-					   // """
-                // }
-            // }
-            // stage('acceptance-testing') {
-                // steps {
-					// sh "echo empty"
-                // }
-            // }
 		}
     }
 }
