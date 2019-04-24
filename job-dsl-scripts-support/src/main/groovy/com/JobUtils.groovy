@@ -26,6 +26,6 @@ class JobUtils {
 	}
 	
 	static void createMavenPipelineJobs(context, java.util.ArrayList jobs) { 
-		createPipelineJobs(this, "mavenPipeline", jobs)
+		createPipelineJobs(context, "mavenPipeline", jobs)
 	}
 }
