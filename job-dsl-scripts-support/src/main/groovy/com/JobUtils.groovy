@@ -28,4 +28,9 @@ class JobUtils {
 	static void createMavenPipelineJobs(context, java.util.ArrayList jobs) { 
 		createPipelineJobs(context, "mavenPipeline", jobs)
 	}
+
+	static void createMavenDeployPipelineJobs(context, java.util.ArrayList jobs) { 
+		createPipelineJobs(context, "mavenDeployPipeline", jobs)
+	}
+
 }

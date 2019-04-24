@@ -1,20 +1,8 @@
 import com.JobUtils
 
 
-def jobs = [
+def maven_deploy_jobs = [
+	["devops-war/DEV/devops-war-build", "https://github.com/dwillington/hello-world-war.git"],
 	]
 
-pipelineJob('devops-war/DEV/devops-war-deploy') {
-    definition {
-        cps {
-			sandbox()
-            script("""mavenDeployPipeline {
-	branch = "master"
-	scmUrl = "https://github.com/dwillington/hello-world-war.git"
-}""".stripIndent())
-		}
-	}
-	logRotator {
-		numToKeep(5)
-	}
-}
+JobUtils.createMavenPipelineJobs(this, maven_jobs)

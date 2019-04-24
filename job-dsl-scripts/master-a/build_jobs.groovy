@@ -12,5 +12,4 @@ def maven_jobs = [
 	["devops-war/DEV/devops-war-build", "https://github.com/dwillington/hello-world-war.git"],
 	]
 
-
-JobUtils.createMavenPipelineJobs(this, maven_jobs)
+JobUtils.createMavenDeployPipelineJobs(this, maven_jobs)
