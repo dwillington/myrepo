@@ -2,7 +2,7 @@ package com;
 
 class JobUtils {
 
-	static void createPipelineJobs(context, java.util.ArrayList jobs) { 
+	static void createPipelineJobs(context, pipelineType, java.util.ArrayList jobs) { 
 		context.with {
 			for(int i=0; i<jobs.size(); i++)
 			{
@@ -11,7 +11,7 @@ class JobUtils {
 					definition {
 						cps {
 							sandbox()
-							script("""mavenPipeline {
+							script("""$pipelineType {
 	branch = "master"
 	scmUrl = "$jobScmUrl"
 }""".stripIndent())
@@ -23,5 +23,9 @@ class JobUtils {
 				}
 			}
 		}
+	}
+	
+	static void createMavenPipelineJobs(context, java.util.ArrayList jobs) { 
+		createPipelineJobs(this, "mavenPipeline", maven_jobs)
 	}
 }

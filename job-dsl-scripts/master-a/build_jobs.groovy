@@ -13,4 +13,4 @@ def maven_jobs = [
 	]
 
 
-JobUtils.createPipelineJobs(this, maven_jobs)
+JobUtils.createMavenPipelineJobs(this, maven_jobs)
