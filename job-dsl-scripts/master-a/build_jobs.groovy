@@ -4,7 +4,7 @@ folder("hello-world")
 folder("hello-world/DEV")
 folder("hello-world/SIT")
 
-folder("devops-war")
+folder("devops")
 folder("devops/devops-war")
 folder("devops/devops-war/DEV/")
 
