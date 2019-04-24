@@ -6,7 +6,7 @@ folder("hello-world/SIT")
 
 folder("devops")
 folder("devops/devops-war")
-folder("devops/devops-war/DEV/")
+folder("devops/devops-war/DEV")
 
 def maven_jobs = [
 	["hello-world/DEV/java-hello-world-with-maven", "https://github.com/LableOrg/java-maven-junit-helloworld"],
