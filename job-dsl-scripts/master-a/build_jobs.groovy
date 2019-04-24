@@ -5,11 +5,12 @@ folder("hello-world/DEV")
 folder("hello-world/SIT")
 
 folder("devops-war")
-folder("devops-war/DEV")
+folder("devops/devops-war")
+folder("devops/devops-war/DEV/")
 
 def maven_jobs = [
 	["hello-world/DEV/java-hello-world-with-maven", "https://github.com/LableOrg/java-maven-junit-helloworld"],
-	["devops-war/DEV/devops-war-build", "https://github.com/dwillington/hello-world-war.git"],
+	["devops/devops-war/DEV/devops-war-build", "https://github.com/dwillington/hello-world-war.git"],
 	]
 
 JobUtils.createMavenDeployPipelineJobs(this, maven_jobs)
