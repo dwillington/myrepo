@@ -20,11 +20,11 @@ def project_repo = [
                      ["doc-project", "doc-repo"],
                    ]
 
-// for(int i=0; i<project_repo.size(); i++)
-// {
-    // folder("$project_repo[i][0]")
-    // folder("$project_repo[i][0]/$project_repo[i][1]")
-    // folder("project_repo[i][0]/$project_repo[i][1]/DEV")
-    // folder("project_repo[i][0]/$project_repo[i][1]/RELEASE")
-// }
+for(int i=0; i<project_repo.size(); i++)
+{
+    folder("$project_repo[i][0]")
+    folder("$project_repo[i][0]/$project_repo[i][1]")
+    folder("$project_repo[i][0]/$project_repo[i][1]/DEV")
+    folder("$project_repo[i][0]/$project_repo[i][1]/RELEASE")
+}
 
