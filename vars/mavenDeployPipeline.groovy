@@ -6,7 +6,7 @@ def call(body) {
     body()
 
     pipeline {
-		// agent any
+        // agent any
         agent { label 'master' }
         stages {
             stage('git checkout') {
@@ -16,26 +16,26 @@ def call(body) {
             }
             stage('prepare database') {
                 steps {
-					sh "echo prepare database"
+                    sh "echo prepare database"
                 }
             }
             stage('deploy') {
                 steps {
-					copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'devops-war-build', target: 'target', flatten: 'true'
-					sh "ls -al target"
-					sh """
-						if [[ -e bin/stage.sh ]] 
-						then
-							./bin/stage.sh
-						fi
-					   """
+                    copyArtifacts filter: '**/hello-world-war-*.war', projectName: 'devops-war-build', target: 'target', flatten: 'true'
+                    sh "ls -al target"
+                    sh """
+                        if [[ -e bin/stage.sh ]] 
+                        then
+                            ./bin/stage.sh
+                        fi
+                       """
                 }
             }
             stage('selenium integration testing') {
                 steps {
-					sh "echo selenium integration testing"
+                    sh "echo selenium integration testing"
                 }
             }
-		}
+        }
     }
 }

@@ -6,7 +6,7 @@ def call(body) {
     body()
 
     pipeline {
-		// agent any
+        // agent any
         agent { label 'docker-agent' }
         stages {
             stage('git checkout') {
@@ -16,38 +16,38 @@ def call(body) {
             }
             stage('build') {
                 steps {
-					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-						sh 'mvn clean package -DskipTests=true'
-						// sh 'mvn --version'
-					}
-				}
+                    withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
+                        sh 'mvn clean package -DskipTests=true'
+                        // sh 'mvn --version'
+                    }
+                }
             }
             stage ('unit test') {
                 steps {
-					withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
+                    withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
                         sh 'mvn test'
-					}
+                    }
                 }
             }
             stage('sonar scan') {
                 steps {
-					withSonarQubeEnv('sonarqube') {
-						withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-							sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-						}
-					}
+                    withSonarQubeEnv('sonarqube') {
+                        withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
+                            sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+                        }
+                    }
                 }
             }
             stage('static security scan') {
                 steps {
-					sh "echo fority.sh"
+                    sh "echo fority.sh"
                 }
             }
             stage('publish to repository') {
                 steps {
-					sh "echo mvn deploy"
+                    sh "echo mvn deploy"
                 }
             }
-		}
+        }
     }
 }

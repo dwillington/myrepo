@@ -5,8 +5,8 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
-	
-	def instance = this.class.classLoader.loadClass( "mavenPipeline", true, false )?.newInstance()
-	instance( body )
+    
+    def instance = this.class.classLoader.loadClass( "mavenPipeline", true, false )?.newInstance()
+    instance( body )
 
 }
