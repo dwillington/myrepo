@@ -16,9 +16,9 @@ def maven_jobs = [
 
 JobUtils.createMavenPipelineJobs(this, maven_jobs)
 
-project_repo = [
-                 ["doc-project", "doc-repo"],
-               ]
+def project_repo = [
+                     ["doc-project", "doc-repo"],
+                   ]
 
 for(int i=0; i<project_repo.size(); i++)
 {
