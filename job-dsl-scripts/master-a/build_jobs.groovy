@@ -8,17 +8,17 @@ folder("devops-project/devops-war-repo/RELEASE")
 folder("devops-project/devops-common-jar-repo")
 folder("devops-project/devops-common-jar-repo/DEV")
 
-def project_repo = [
-                     ["doc-project", "doc-repo"]
-                   ]
+// def project_repo = [
+                     // ["doc-project", "doc-repo"]
+                   // ]
 
-for(int i=0; i<project_repo.size(); i++)
-{
-    folder("$project_repo[i][0]")
-    folder("$project_repo[i][0]/$project_repo[i][1]")
-    folder("project_repo[i][0]/$project_repo[i][1]/DEV")
-    folder("project_repo[i][0]/$project_repo[i][1]/RELEASE")
-}
+// for(int i=0; i<project_repo.size(); i++)
+// {
+    // folder("$project_repo[i][0]")
+    // folder("$project_repo[i][0]/$project_repo[i][1]")
+    // folder("project_repo[i][0]/$project_repo[i][1]/DEV")
+    // folder("project_repo[i][0]/$project_repo[i][1]/RELEASE")
+// }
 
 def maven_jobs = [
     ["devops-project/devops-common-jar-repo/DEV/devops-common-jar-build", "https://github.com/LableOrg/java-maven-junit-helloworld"],
