@@ -4,3 +4,7 @@
     - name: Hello Message
       debug:
         msg: "{{ my_var }}"
+    - name: Clone hello-world-war repo
+      git:
+        repo: https://github.com/dwillington/hello-world-war.git
+        dest: /tmp/
