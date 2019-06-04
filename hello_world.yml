@@ -7,4 +7,4 @@
     - name: Clone hello-world-war repo
       git:
         repo: https://github.com/dwillington/hello-world-war.git
-        dest: /tmp/
+        dest: /tmp/hello-world-war
