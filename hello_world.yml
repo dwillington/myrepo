@@ -9,8 +9,9 @@
       debug:
         msg: "{{ Jenkins_password }}"
     - name: secret stuff
-        shell: ls -al
-        # hg clone -u https://user:pass@host/path
+        shell: "ls -al"
+        # hg clone -u
+        # curl -k https://github.com/dwillington/hello-world-war
         # no_log: true
     - name: Clone hello-world-war repo
       git:
