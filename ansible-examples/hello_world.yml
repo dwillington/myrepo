@@ -1,9 +1,9 @@
 - name: Deploy JBoss
   hosts: all
   tasks:
-    - name: Capture my_var from Jenkins
-      debug:
-        msg: "{{ my_var }}"
+    # - name: Capture my_var from Jenkins
+      # debug:
+        # msg: "{{ my_var }}"
     #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
     - name: Capture Jenkins_password as new Credential Type
       debug:
