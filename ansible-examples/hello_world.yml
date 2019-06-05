@@ -28,6 +28,6 @@
     - name: Deploy HelloWorld to JBoss
       jboss:
         deploy_path: /usr/share/jboss-as/standalone/deployments/
-        src: /tmp/jboss-helloworld.war
-        deployment: helloworld.war
+        src: /tmp/hello-world-war.war
+        deployment: hello-world-war.war
         state: present
