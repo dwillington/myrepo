@@ -11,8 +11,8 @@
         path: /tmp/hello-world-war/pom.xml
         namespaces:
           ns: http://maven.apache.org/POM/4.0.0
+        xpath: /ns:/project/ns:/groupId
         content: text
-        xpath: /ns:/project/groupId
       # register: project
     # - name: Show attribute value
       # debug:
