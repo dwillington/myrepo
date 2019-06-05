@@ -10,7 +10,7 @@
         msg: "{{ Jenkins_password }}"
     - name: secret stuff
       command: "hg clone -u https://user:{{ Jenkins_password }}@host/path"
-      no_log: true
+      # no_log: true
     - name: Clone hello-world-war repo
       git:
         repo: https://github.com/dwillington/hello-world-war.git
