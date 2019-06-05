@@ -6,6 +6,7 @@
         msg: "{{ my_var }}"
     #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
     - name: Capture Jenkins_password as new Credential Type
+      debug:
         msg: "{{ Jenkins_password }}"
     - name: secret stuff
         command: "hg pull -u https://{{ Jenkins_password }}:pass@host/path"
