@@ -9,12 +9,14 @@
     - name: Read attribute value
       xml:
         path: /tmp/hello-world-war/pom.xml
-        xpath: /project/groupId
+        namespaces:
+          ns: http://maven.apache.org/POM/4.0.0
         content: text
-      register: project
-    - name: Show attribute value
-      debug:
-        var: project.matches[0].groupId
+        xpath: /project/groupId
+      # register: project
+    # - name: Show attribute value
+      # debug:
+        # var: project.matches[0].groupId
     - name: Remove hello-world-war.war
       file:
         path: "{{ item }}"
