@@ -24,9 +24,9 @@
         repository_url: "http://35.245.107.238:8081/artifactory/libs-snapshot-local"
         # username: user
         # password: pass
-    # - name: Deploy HelloWorld to JBoss
-      # jboss:
-        # deploy_path: /usr/share/jboss-as/standalone/deployments/
-        # src: /tmp/jboss-helloworld.war
-        # deployment: helloworld.war
-        # state: present
+    - name: Deploy HelloWorld to JBoss
+      jboss:
+        deploy_path: /usr/share/jboss-as/standalone/deployments/
+        src: /tmp/jboss-helloworld.war
+        deployment: helloworld.war
+        state: present
