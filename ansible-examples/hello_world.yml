@@ -21,7 +21,7 @@
         artifact_id: "hello-world-war"
         version: latest
         dest: /tmp/hello-world-war.jar
-        repository_url: "http://35.245.107.238:8081/artifactory/libs-snapshot-local"
+        repository_url: "http://jenkins-master:8081/artifactory/libs-snapshot-local"
         # username: user
         # password: pass
     - name: Deploy HelloWorld to JBoss
