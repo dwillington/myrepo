@@ -6,6 +6,11 @@
       # debug:
         # msg: "{{ my_var }}"
     #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
+    - name: get module version
+      command: xmllint --xpath "/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='project']/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='version']/text()" /tmp/hello-world-war/pom.xml
+      register: pomVersion
+    - debug:
+        var: pomVersion.stdout
     - name: Read attribute value
       xml:
         path: /tmp/hello-world-war/pom.xml
