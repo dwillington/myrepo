@@ -25,11 +25,17 @@
         repo: https://github.com/dwillington/hello-world-war.git
         dest: /tmp/hello-world-war
     #https://webcache.googleusercontent.com/search?q=cache:W8wvMriZ-xAJ:https://rickosborne.org/blog/2019/01/extract-a-maven-module-version-with-xpath-and-ansible/+&cd=7&hl=en&ct=clnk&gl=ca
-    - name: get module version
-      command: xmllint --xpath "/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='project']/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='version']/text()" /tmp/hello-world-war/pom.xml
-      register: pomVersion
-    - debug:
-        var: pomVersion.stdout
+    - name: get pom version
+      command: pom{{ item }} = xmllint --xpath "/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='project']/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='{{ item }}']/text()" /tmp/hello-world-war/pom.xml
+      with_items:
+        - version
+      # register: pomVersion
+    # - debug:
+        # var: pomVersion.stdout
+    - name: get pom version
+      command: echo pom{{ item }}
+      with_items:
+        - version
     #http://www.mydailytutorials.com/ansible-delete-multiple-files-directories-ansible/
     - name: Download deployment artifact from Artifactory
       maven_artifact:
