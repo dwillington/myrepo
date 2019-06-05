@@ -7,7 +7,9 @@
     #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
     - name: Capture Jenkins_password as new Credential Type
         msg: "{{ Jenkins_password }}"
-        no_log: true
+    - name: secret stuff
+        command: hg pull -u https://{{ Jenkins_password }}:pass@host/path"
+        # no_log: true
     - name: Clone hello-world-war repo
       git:
         repo: https://github.com/dwillington/hello-world-war.git
