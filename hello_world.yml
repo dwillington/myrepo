@@ -9,7 +9,7 @@
       debug:
         msg: "{{ Jenkins_password }}"
     - name: secret stuff
-        command: hg pull -u https://user:pass@host/path
+        command: "hg pull -u https://user:pass@host/path"
         # no_log: true
     - name: Clone hello-world-war repo
       git:
