@@ -46,7 +46,7 @@ def call(body) {
             stage('publish to repository') {
                 steps {
                     withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4', globalMavenSettingsConfig: 'settings.xml') {
-                        sh "mvn deploy -DaltDeploymentRepository=deploymentRepo"
+                        sh "mvn deploy"
                     }
                 }
             }
