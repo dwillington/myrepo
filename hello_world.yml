@@ -8,9 +8,9 @@
     - name: Capture Jenkins_password as new Credential Type
       debug:
         msg: "{{ Jenkins_password }}"
-    # - name: secret stuff
-        # command: hg clone -u 
-        # https://user:pass@host/path
+    - name: secret stuff
+        shell: hg clone -u https://user:pass@host/path
+        # hg clone -u https://user:pass@host/path
         # no_log: true
     - name: Clone hello-world-war repo
       git:
