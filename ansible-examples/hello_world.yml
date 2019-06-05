@@ -5,23 +5,6 @@
     # - name: Capture my_var from Jenkins
       # debug:
         # msg: "{{ my_var }}"
-    #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
-    - name: get module version
-      command: xmllint --xpath "/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='project']/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='version']/text()" /tmp/hello-world-war/pom.xml
-      register: pomVersion
-    - debug:
-        var: pomVersion.stdout
-    - name: Read attribute value
-      xml:
-        path: /tmp/hello-world-war/pom.xml
-        namespaces:
-          ns: http://maven.apache.org/POM/4.0.0
-        xpath: /ns:/project/ns:/groupId
-        content: text
-      # register: project
-    # - name: Show attribute value
-      # debug:
-        # var: project.matches[0].groupId
     - name: Remove hello-world-war.war
       file:
         path: "{{ item }}"
@@ -29,24 +12,31 @@
       with_items:
         - /usr/share/jboss-as/standalone/deployments/hello-world-war.war
         - /tmp/hello-world-war.war
-        # - /tmp/hello-world-war
+        - /tmp/hello-world-war
+    #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
     # - name: Capture Jenkins_password as new Credential Type
       # debug:
         # msg: "{{ Jenkins_password }}"
     # - name: Clone hello-world-war repo with Jenkins_password as new Credential Type 
       # command: "git clone https://dwillington:{{ Jenkins_password }}@github.com/dwillington/hello-world-war"
       # no_log: true
-    # - name: Clone hello-world-war repo
-      # git:
-        # repo: https://github.com/dwillington/hello-world-war.git
-        # dest: /tmp/hello-world-war
+    - name: Clone hello-world-war repo
+      git:
+        repo: https://github.com/dwillington/hello-world-war.git
+        dest: /tmp/hello-world-war
+    #https://webcache.googleusercontent.com/search?q=cache:W8wvMriZ-xAJ:https://rickosborne.org/blog/2019/01/extract-a-maven-module-version-with-xpath-and-ansible/+&cd=7&hl=en&ct=clnk&gl=ca
+    - name: get module version
+      command: xmllint --xpath "/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='project']/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='version']/text()" /tmp/hello-world-war/pom.xml
+      register: pomVersion
+    - debug:
+        var: pomVersion.stdout
     #http://www.mydailytutorials.com/ansible-delete-multiple-files-directories-ansible/
     - name: Download deployment artifact from Artifactory
       maven_artifact:
         group_id: "com.efsavage"
         artifact_id: "hello-world-war"
         extension: war
-        version: latest
+        version: {{ pomVersion.stdout }}
         dest: /tmp/hello-world-war.war
         repository_url: "http://jenkins-master:8081/artifactory/libs-snapshot-local"
         # username: user
