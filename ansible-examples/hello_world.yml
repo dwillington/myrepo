@@ -36,7 +36,7 @@
         group_id: "com.efsavage"
         artifact_id: "hello-world-war"
         extension: war
-        version: {{ pomVersion.stdout }}
+        version: "{{ pomVersion.stdout }}"
         dest: /tmp/hello-world-war.war
         repository_url: "http://jenkins-master:8081/artifactory/libs-snapshot-local"
         # username: user
