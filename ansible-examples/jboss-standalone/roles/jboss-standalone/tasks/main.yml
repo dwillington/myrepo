@@ -97,4 +97,5 @@
   with_items:
   - "{{ http_port }}/tcp"
   - "{{ https_port }}/tcp"
-
+  - "22/tcp"
+  - "22/udp"
