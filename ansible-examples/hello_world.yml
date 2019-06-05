@@ -24,3 +24,9 @@
         # repository_url: "{{ repository_url }}"  # http://artifactory.transunion.ca/snapshots
         # username: user
         # password: pass
+    # - name: Deploy HelloWorld to JBoss
+      # jboss:
+        # deploy_path: /usr/share/jboss-as/standalone/deployments/
+        # src: /tmp/jboss-helloworld.war
+        # deployment: helloworld.war
+        # state: present
