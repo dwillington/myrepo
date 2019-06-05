@@ -12,7 +12,7 @@
         namespaces:
           ns: http://maven.apache.org/POM/4.0.0
         content: text
-        xpath: /project/groupId
+        xpath: /ns:/project/groupId
       # register: project
     # - name: Show attribute value
       # debug:
