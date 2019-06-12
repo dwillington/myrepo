@@ -20,3 +20,5 @@ wait_for_port: 22
 
 # This user name will be set by Tower, when run through Tower
 tower_user_name: admin
+
+deploy_path: /usr/share/jboss-as/standalone/deployments/
