@@ -6,7 +6,7 @@
 
 - name: Deploy HelloWorld to JBoss
   jboss:
-    deploy_path: {{ deploy_path }}
+    deploy_path: "{{ deploy_path }}"
     src: /tmp/jboss-helloworld.war
     deployment: helloworld.war
     state: present
