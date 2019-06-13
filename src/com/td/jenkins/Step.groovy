@@ -63,7 +63,7 @@ public abstract class Step implements Serializable {
                 // scope.checkout(scope.scm)
 				
 				// scope.git url: scope.scm.remote, branch: scope.scm.branch
-				scope.git([url: scope.scm.remote, branch: scope.scm.branch])
+				scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: currentBranch])
 
                 getSourceBranchInfo(config)
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
