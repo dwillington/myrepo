@@ -13,9 +13,12 @@ def call(body) {
 		// String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		// echo scmName
 
+		String scmUrl = pipelineParams.scmUrl
 		echo pipelineParams.scmUrl
 		echo pipelineParams.branch
 
+		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
+		echo scmName
 
 		// Reading pipeline configuration. This step will be performed by a default agent or master
 		node {	
