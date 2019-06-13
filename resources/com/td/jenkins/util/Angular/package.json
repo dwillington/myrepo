@@ -1,0 +1,27 @@
+{
+  "name": "angular-deployer",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "deploy:prod": "gulp deploy --pod=prod",
+    "deploy": "gulp deploy:jsforce --pod=prod"
+  },
+  "private": true,
+  "dependencies": {
+    "jsforce": "1.8.4",
+    "jsforce-ajax-proxy": "1.0.0"
+  },
+  "devDependencies": {
+    "dirty-json": "0.6.0",
+    "gulp": "4.0.0",
+    "gulp-archiver": "1.0.0",
+    "gulp-file": "0.4.0",
+    "gulp-jsforce-deploy": "1.1.2",
+    "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "2.6.4",
+    "gulp-template": "5.0.0",
+    "pxml": "0.2.3",
+    "merge-stream": "1.0.1",
+    "del": "3.0.0"
+  }
+}

@@ -1,0 +1,86 @@
+##--PROJECT SETTINGS
+mal_code: ''
+agent: ''
+tools: ['jdk_8_rhel6', 'maven_3_rhel6', 'npm_8_rhel6', 'sonar-scanner_3.0.3_rhel6']
+checkout_scm: false
+clean_up_workspace: false
+default_branch: ''
+workspace: ''
+
+##--REPORT SETTING
+group_id: 'com.td.flxa.report'
+artifact_id: ''
+version: '1.0-SNAPSHOT'
+packaging: 'html'
+repository: 'snapshots'
+release_repository: 'releases'
+nexus_url: 'http://nexus.tdct.tdbank.ca:8081/nexus/content/repositories'
+
+##--OTHER SETTING
+check_jenkins_job_status_wait_period: '300' # In seconds
+feature_branch_name_pattern: 'feature'
+develop_branch_name_pattern: 'develop'
+release_branch_name_pattern: 'release'
+main_branches: ['develop', 'master']
+additional_branches: ['feature', 'scan', 'soatestdev', 'release', 'soatestsit', 'soatestpat']
+all_branches: ['feature', 'develop', 'scan', 'soatestdev', 'release', 'soatestsit', 'soatestpat', 'master']
+time_report_branches: ['feature', 'develop', 'release', 'master']
+git_clone_timeout: '5' # In minutes
+git_clone_stage_name: 'GIT CLONE AND SETUP REPORT'
+report_file: 'report.html'
+
+##--MAVEN SETTINGS
+maven: 'maven_3_rhel6'
+global_maven_setting: 'nexus-maven-settings'
+
+##--PUBLISH SETTINGS
+auto_tag: true
+generate_bom: true
+maven_publish_upload_pattern: 'target/*'
+
+##--NOTIFICATION SETTINGS
+notification_cases: ["ABORTED", "FAILURE", "UNSTABLE", "SUCCESS"]
+notification_email_sender: 'jenkins@hoj.td.com'
+notification_scm_account_id: 'CBDC-BITBUCKET-PIPELINE-CREDENTIAL'
+
+##--VM DEPLOYMENT SETTINGS
+deployment_dev_credentials: 'CBDC-DEV-PIPELINE-CREDENTIAL'
+deployment_sit_credentials: 'CBDC-SIT-PIPELINE-CREDENTIAL'
+jboss_cli_path: '/usr/share/jbossas/bin/jboss-cli.sh'
+ 
+##--SONARQUBE SETTINGS
+sonarqube_environment: 'CBAW-SonarQube'
+sonarqube_maven_plugin_version: '3.3.0.603'
+sonarqube_nodejs_tool_name: ''
+sonarqube_gating_standard: 'PASS_ON_ERROR'
+
+##--VERACODE SETTINGS
+veracode_wait_for_completion: 'false'
+veracode_perform_scan: 'true'
+veracode_scan_timeout: '3600000' # In seconds
+veracode_scan_wait_period: '300' # In seconds
+veracode_scan_credentials: 'CBDC-VERACODE-PIPELINE-CREDENTIAL'
+veracode_criticality: 'VeryHigh'
+veracode_gating_standard: 'PASS_ON_ERROR'
+
+##--SONATYPE SETTINGS
+sonatype_stage: 'build'
+sonatype_job_credential_id: ''
+sonatype_gating_standard: 'PASS_ON_ERROR'
+
+##--RUN JENKINS JOB SETTINGS
+job_wait_for_completion: true
+job_ignore_exceptions: true
+
+##--SOA TEST SETTINGS
+soa_test_location: "C:\\Program Files\\Parasoft\\SOAtest & Virtualize\\9.10"
+soa_gating_standard: 'PASS_ON_ERROR'
+
+##--STORM SETTINGS
+storm_account_id: 'CBDC-DEV-PIPELINE-CREDENTIAL'
+
+##--CONFLUENCE SETTINGS
+confluence_url: 'https://collaborate.td.com/rest/api/content'
+confluence_space: 'OSS'
+confluence_credential: 'CBDC-BITBUCKET-PIPELINE-CREDENTIAL'
+confluence_parent_id: ''
