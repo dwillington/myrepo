@@ -19,14 +19,14 @@ def call(config) {
 				def mavenBuild = new com.td.jenkins.build.java.MavenBuild(this, config.stage_name)
 				currentBuild.result = mavenBuild.run(config)
 				break
-			case "PUBLISH":
-				def mavenPublish = new com.td.jenkins.publish.java.MavenPublish(this, config.stage_name)
-				currentBuild.result = mavenPublish.run(config)
-				break
-			case "RELEASE":
-				def mavenRelease = new com.td.jenkins.publish.java.MavenRelease(this, config.stage_name)
-				currentBuild.result = mavenRelease.run(config)
-				break
+			// case "PUBLISH":
+				// def mavenPublish = new com.td.jenkins.publish.java.MavenPublish(this, config.stage_name)
+				// currentBuild.result = mavenPublish.run(config)
+				// break
+			// case "RELEASE":
+				// def mavenRelease = new com.td.jenkins.publish.java.MavenRelease(this, config.stage_name)
+				// currentBuild.result = mavenRelease.run(config)
+				// break
 			default:
 				com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "maven_operation_type cannot be found"])
 				currentBuild.result = "FAILURE"
