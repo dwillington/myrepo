@@ -65,14 +65,14 @@ public abstract class Step implements Serializable {
 				// scope.git url: scope.scm.remote, branch: scope.scm.branch
 				scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: 'master'])
 
-                getSourceBranchInfo(config)
-                Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
-                if (isLastCommitterJenkins(scope, config)) {
-                    return "ABORTED"
-                }
-                else {
-                    return "SUCCESS"
-                }
+                // getSourceBranchInfo(config)
+                // Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
+                // if (isLastCommitterJenkins(scope, config)) {
+                    // return "ABORTED"
+                // }
+                // else {
+                    // return "SUCCESS"
+                // }
             }
         }
         else {
