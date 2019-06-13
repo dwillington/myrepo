@@ -10,9 +10,10 @@ pipelineJob('CIAD-TEST/hello-world-war/DEV/hello-world-war-pipeline') {
     definition {
         cps {
             script("""@Library('myrepo') _
+mainMethod(
     scmUrl = "https://github.com/dwillington/hello-world-war.git"
     branch = "master"
-mainMethod()"""
+)"""
 			)
             sandbox()
         }
