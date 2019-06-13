@@ -3,10 +3,10 @@ import groovy.json.*
 def call(body) {
 		Map config = null // stores entire job configuration
 
-		echo params.REPO_URL
+		String scmUrl = params.REPO_URL
+		echo scmUrl
 
-		String scmName = params.REPO_URL.split("/")[scmUrl.split("/").size()-1].replace(".git", "")
-		
+		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		echo scmName
 
 }
