@@ -7,6 +7,7 @@ workflow:
           stage_name: 'INITIAL SCM NOTIFICATION'
           checkout_scm: true
           clean_up_workspace: false
+          notification_type: 'PUBLISH_REPORT'
           in_progress: true
       - maven:
           stage_name: 'MAVEN BUILD'
