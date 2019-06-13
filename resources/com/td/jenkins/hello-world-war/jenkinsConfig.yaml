@@ -1,27 +1,21 @@
-mal_code: 'COAPP'
-agent: 'HOJ-LINUX-AGENT2' # This will be the default agent
+agent: 'master' # This will be the default agent
 
 workflow:
-  - branch: 'feature'
-  
- 
+  - branch: 'master' 
     steps: 
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'INITIAL SCM NOTIFICATION'
           checkout_scm: true
           clean_up_workspace: false
           notification_type: 'SCM'
           in_progress: true
       - maven:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'MAVEN BUILD'
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
           maven_command: 'mvn clean install'
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'EMAIL NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: false
@@ -29,7 +23,6 @@ workflow:
           notification_email_sender: dwillington@yahoo.com'
           notification_email_recipients: dwillington@yahoo.com'
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: true
@@ -39,35 +32,30 @@ workflow:
   - branch: 'develop'
     steps: 
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'INITIAL SCM NOTIFICATION'
           checkout_scm: true
           clean_up_workspace: false
           notification_type: 'SCM'
           in_progress: true
       - maven:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'MAVEN BUILD'
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
           maven_command: 'mvn clean install'
       - scan:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'SONARQUBE SCAN'
           checkout_scm: false
           clean_up_workspace: false
           scan_type: 'SONARQUBE'
           sonarqube_strategy: 'MAVEN'
       - scan:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'SONATYPE SCAN'
           checkout_scm: false
           clean_up_workspace: false
           scan_type: 'SONATYPE'
           sonatype_application_id: 'CFP'
       - scan:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'VERACODE SCAN'
           checkout_scm: false
           clean_up_workspace: false
@@ -77,7 +65,6 @@ workflow:
           veracode_upload_pattern: '**/target/**.war' 
           veracode_wait_for_completion: false
       - maven:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'MAVEN PUBLISH'
           checkout_scm: false
           clean_up_workspace: false
@@ -85,7 +72,6 @@ workflow:
           maven_command: 'mvn deploy -DskipTests -B'  
           version_strategy: 'PATCH'              
       #- deploy:
-          #agent: 'HOJ-LINUX-AGENT2'
           #stage_name: 'JBOSS DEPLOY - DEV'
           #checkout_scm: false
           #clean_up_workspace: false
@@ -94,7 +80,6 @@ workflow:
           #deployment_target: '10.106.176.189'
           #deployment_artifact: 'target/com.td.cfp.api.war'
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'EMAIL NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: false
@@ -102,7 +87,6 @@ workflow:
           notification_email_sender: dwillington@yahoo.com'
           notification_email_recipients: dwillington@yahoo.com'
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: true
@@ -112,24 +96,18 @@ workflow:
   - branch: 'release'
     steps:
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'INITIAL SCM NOTIFICATION'
           checkout_scm: true
           clean_up_workspace: false
           notification_type: 'SCM'
-          in_progress: true
-
-          
+          in_progress: true          
       - maven:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'MAVEN BUILD'
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
-          maven_command: 'mvn clean deploy -P jar-build'
-          
+          maven_command: 'mvn clean deploy -P jar-build'          
       - utility:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'COAPP UI'
           checkout_scm: false
           clean_up_workspace: false
@@ -137,47 +115,36 @@ workflow:
           job_path: '/COAPP/UI/release%2F19.march'
           job_parameter_map: ""
           #job_parameter_map: "[[$class: 'StringParameterValue', name: 'GIT_BRANCH', value: 'release/19.march'], [$class: 'StringParameterValue', name: 'ANGULAR_VERSION', value: 'RELEASE'], [$class: 'StringParameterValue', name: 'ARTIFACT_ID', value: 'release/19.march']]"
-          job_wait_for_completion: true
-          
+          job_wait_for_completion: true          
       - scan:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'SONARQUBE SCAN'
           checkout_scm: false
           clean_up_workspace: false
           scan_type: 'SONARQUBE'
-          sonarqube_strategy: 'MAVEN'
-          
+          sonarqube_strategy: 'MAVEN'          
       #- deploy:
-          #agent: 'HOJ-LINUX-AGENT2'
           #stage_name: 'JBOSS DEPLOY - DEV'
           #checkout_scm: false
           #clean_up_workspace: false
           #deploy_type: 'JBOSS'
           #deployment_env: 'DEV'
           #deployment_target: '10.155.57.96'
-          #deployment_artifact: 'target/hoj-ui-war-1.0-SNAPSHOT.war'
-          
-          
-      # - maven:  
-          # agent: 'HOJ-LINUX-AGENT22'
+          #deployment_artifact: 'target/hoj-ui-war-1.0-SNAPSHOT.war'          
+      # - maven: 
           # stage_name: 'MAVEN RELEASE'
           # checkout_scm: false
           # clean_up_workspace: false
           # maven_operation_type: 'RELEASE'
           # maven_command: 'mvn -B release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true"'     
           # version_strategy: 'PATCH'
-
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'EMAIL NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: false
           notification_type: 'EMAIL'
           notification_email_sender: dwillington@yahoo.com'
-          notification_email_recipients: dwillington@yahoo.com'
-          
+          notification_email_recipients: dwillington@yahoo.com'          
       - notification:
-          agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: true
