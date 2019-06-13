@@ -31,7 +31,7 @@ report_file: 'report.html'
 
 ##--MAVEN SETTINGS
 maven: 'maven_3_rhel6'
-global_maven_setting: 'nexus-maven-settings'
+global_maven_setting: 'artifactory-maven-settings.xml'
 
 ##--PUBLISH SETTINGS
 auto_tag: true
