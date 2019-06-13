@@ -30,7 +30,7 @@ git_clone_stage_name: 'GIT CLONE AND SETUP REPORT'
 report_file: 'report.html'
 
 ##--MAVEN SETTINGS
-maven: 'maven_3_rhel6'
+maven: 'apache-maven-3.0.3'
 global_maven_setting: 'artifactory-maven-settings.xml'
 
 ##--PUBLISH SETTINGS
