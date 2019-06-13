@@ -1,6 +1,5 @@
 package com.td.jenkins.notify.scm
 
-import com.td.jenkins.util.Reporter
 import com.td.jenkins.util.Utilities
 import groovy.json.*
 
