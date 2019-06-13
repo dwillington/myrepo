@@ -30,7 +30,9 @@ public class EmailNotification extends com.td.jenkins.notify.Notifier {
     private void sendEmail(Map config) throws Exception {
         scope.stage(name) {
             scope.dir(currentDirectory+config.workspace) {
-                if (sendNotification(config)) {
+				if(true) {
+				}
+                else if (sendNotification(config)) {
                     String emailReport = null
                     String duration = ""
                     if (config.email_type == "CONSOLIDATED") {
