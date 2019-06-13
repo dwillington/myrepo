@@ -1,6 +1,5 @@
 package com.td.jenkins.notify.email
 
-import com.td.jenkins.util.Reporter
 import com.td.jenkins.util.Utilities
 
 public class EmailNotification extends com.td.jenkins.notify.Notifier {
@@ -94,9 +93,6 @@ public class EmailNotification extends com.td.jenkins.notify.Notifier {
                         // Store the consolidated report in Nexus
                         publishArtifactToNexus(config)
                         emailReport = scope.readFile file: "consolidated_report"
-                    }
-                    else {// (config.email_type == "REGULAR") {
-                        emailReport = Reporter.consolidateReport(scope, config)
                     }
                     // else {
                         // Utilities.printToConsoleOutput(scope, ["RED", "Cannot determine email type"])
