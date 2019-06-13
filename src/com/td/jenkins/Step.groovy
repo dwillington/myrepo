@@ -71,7 +71,7 @@ public abstract class Step implements Serializable {
                     // return "ABORTED"
                 // }
                 // else {
-                    // return "SUCCESS"
+				return "SUCCESS"
                 // }
             }
         }
