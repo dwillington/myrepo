@@ -1,6 +1,5 @@
 package com.td.jenkins
 
-import com.td.jenkins.util.Reporter
 import com.td.jenkins.util.Utilities
 
 public abstract class Step implements Serializable {
@@ -40,7 +39,6 @@ public abstract class Step implements Serializable {
         }
         finally {
             report = report(config, status)
-            Reporter.addToReport(scope, config, report, config.agent)
             cleanUpWorkspace(config)
             return status
         }
@@ -65,7 +63,6 @@ public abstract class Step implements Serializable {
                 scope.checkout(scope.scm)
                 getSourceBranchInfo(config)
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
-                Reporter.setupReporting(scope, config)
                 if (isLastCommitterJenkins(scope, config)) {
                     return "ABORTED"
                 }
