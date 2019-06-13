@@ -8,7 +8,8 @@ pipelineJob('CIAD-TEST/hello-world-war/DEV/hello-world-war-pipeline') {
     }
     definition {
         cps {
-            script("""@Library('myrepo') _"""
+            script("""@Library('myrepo') _
+mainMethod()"""
 			)
             sandbox()
         }
