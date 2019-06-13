@@ -8,6 +8,8 @@ def call(body) {
 		body()
 
 		Map config = null // stores entire job configuration
+	    Map workflow = null // stores steps for current branch 
+		Map defaultWorkflow = null // stores steps for the default branch
 
 		// String scmUrl = params.REPO_URL
 		// String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
