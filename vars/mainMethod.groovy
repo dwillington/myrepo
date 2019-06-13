@@ -65,7 +65,56 @@ def call(body) {
 		 		workflow = defaultWorkflow
 		 	}
 		}
+	}
 
+		// Reading Jenkins master on which pipeline is triggered
+    	String internalHostname = InetAddress.localHost.canonicalHostName
+		if(true) {
+			properties([buildDiscarder(logRotator(numToKeepStr: '10'))])
+			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
+				["CYAN", "using pipeline v2"]], " : ")
+			config.pipeline_version = "v2"
+			com.td.jenkins.util.Utilities.startTimer()
+			node(config.agent) {
+				for (step in workflow.steps) {
+					step.each { stepName, stepConfig ->
+						runStep(config, stepName, stepConfig)
+					}
+				}	
+			}
+		}
+		else {
+			com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "Cannot recongzie this Jenkins master"])
+			currentBuild.result = "ABORTED"
+			return // exit pipeline prematurely
+		}
 
+}
+
+def runStep(config, stepName, stepConfig) {
+	if (currentBuild.result == "SUCCESS" || currentBuild.result == "UNSTABLE") {
+		def instance = this.class.classLoader.loadClass(stepName, true, false)?.newInstance()
+		stepConfig = com.td.jenkins.util.Utilities.reconcileConfig(stepConfig, config)
+		com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "STAGE"], ["YELLOW", stepConfig.stage_name]], " : ")
+		instance(stepConfig)
+	}
+	else if (currentBuild.result == "FAILURE") {
+		if (stepName == "notification") {
+			def instance = this.class.classLoader.loadClass(stepName, true, false)?.newInstance()
+			stepConfig = com.td.jenkins.util.Utilities.reconcileConfig(stepConfig, config)
+			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "STAGE"], ["YELLOW", stepConfig.stage_name]], " : ")
+			instance(stepConfig)
+		}
+		else {
+			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "Skipping"],
+				["YELLOW", stepConfig.stage_name], ["BLUE", "due to previous step failing"]], " ")
+		}
+	}
+	else if (currentBuild.result == "ABORTED") {
+		com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "Skipping"],
+			["YELLOW", stepConfig.stage_name], ["BLUE", "due to previous step aborting"]], " ")
+	}
+	else {
+		com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "FATAL: cannot recognize " + currentBuild.result])
 	}
 }
