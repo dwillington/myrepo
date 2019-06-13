@@ -60,7 +60,13 @@ public abstract class Step implements Serializable {
         if (config.checkout_scm) {
             scope.stage(config.git_clone_stage_name) {
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Checking out scm"])
-                scope.checkout(scope.scm)
+                // scope.checkout(scope.scm)
+
+				checkout([
+                    $class: 'GitSCM',
+                    branches: scope.scm.branches,
+					])
+
                 getSourceBranchInfo(config)
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
                 if (isLastCommitterJenkins(scope, config)) {
