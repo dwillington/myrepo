@@ -1,7 +1,7 @@
 ##--PROJECT SETTINGS
 mal_code: ''
 agent: ''
-tools: ['jdk_8_rhel6', 'maven_3_rhel6', 'npm_8_rhel6', 'sonar-scanner_3.0.3_rhel6']
+tools: ['jdk8u144', 'apache-maven-3.0.3', 'jdk7u80',]
 checkout_scm: false
 clean_up_workspace: false
 default_branch: ''
