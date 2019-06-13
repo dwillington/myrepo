@@ -1,0 +1,12 @@
+#https://wiki.jenkins.io/display/JENKINS/UpdateSites+Manager+plugin
+#https://github.com/ikedam/backend-update-center2/wiki
+#https://github.com/jenkins-infra/update-center2
+----------------------------------------------------------------------
+git clone https://github.com/jenkins-infra/update-center2.git
+cd update-center2/
+M2_HOME=/tmp/apache-maven-3.6.0
+PATH=$M2_HOME/bin:$PATH
+mvn package appassembler:assemble -Dmaven.test.skip=true -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.i
+gnore.validity.dates=true
+sh target/appassembler/bin/app -id com.example.jenkins -www www
+ls -al ~/.m2/repository/jenkins/plugins/

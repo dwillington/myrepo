@@ -1,0 +1,65 @@
+help desk: 866.523.4357
+----------------------------------------------------------------------
+Clarity
+task id: 00109377
+----------------------------------------------------------------------
+Cost Centre: 1117
+----------------------------------------------------------------------
+# create webex meeting
+https://tdbg.webex.com/
+----------------------------------------------------------------------
+https://email.td.com/owa/
+tdbfg\ashra48
+----------------------------------------------------------------------
+Seungmoon: 647-876-0888
+Nitasha:   306.209.4064
+Shakti:    647.504.0117
+----------------------------------------------------------------------
+account lock status:
+https://adlabportal.tdbfg.com/links.asp 
+unlock acounts:
+https://adlabportal.tdbfg.com/
+----------------------------------------------------------------------
+http://10.155.56.54:8081/job/RCP/job/DEV/job/develop-hoj-jenkins-test/
+Username: jenkins@td.dev16
+password is: shweta11
+Security token (case-sensitive): OlWcd5Yxr8Y6CW8mfiF1RaHdy
+----------------------------------------------------------------------
+nexus-iq-server:
+tdctapi/J32en2k2
+veracode:
+tdctapi/H8_H)4Jbc,4!p-eQ
+snapshots-nexus3:
+pcfp010devops/57us#w#$
+----------------------------------------------------------------------
+https://mavenrepowealth.tdbank.ca:8443/nexus/#welcome
+http://nexus.tdct.tdbank.ca:8081/nexus
+appsdjenkinsci01
+1qazse44
+----------------------------------------------------------------------
+https://clm.dcts.tdbank.com:8443
+tdctapi/J32en2k2
+----------------------------------------------------------------------
+http://10.155.20.44:8080/credentials/store/system/domain/_/credential/CBDC-BITBUCKET-PIPELINE-CREDENTIAL/update
+PNEX011DEVOPS/#gtp$568
+----------------------------------------------------------------------
+repository: Release
+group ID: com.td.jenkins
+
+JAVA_HOME="/c/Program\ Files\ \(x86\)/Java/jre1.8.0_144/"
+JAVA_HOME="/c/Program Files/Java/jre1.8.0_144"
+JAVA_HOME=/c/tools/jdk-8u191-windows-x64
+
+M2_HOME=/C/tools/apache-maven-3.5.4
+PATH=$M2_HOME/bin:$JAVA_HOME/bin:$PATH
+
+nodejs_home=/var/jenkins_home/tools/nodejs-0.10.39
+PATH=$nodejs_home/bin:$PATH
+
+mvn -gs /c/Users/ashra48/OneDrive\ -\ The\ Toronto-Dominion\ Bank/Documents/buffer/settings.xml
+
+-Djavax.net.ssl.trustStore="$JAVA_HOME/jre/lib/security/cacerts" -Djavax.net.ssl.trustStorePassword="changeit"
+
+INSTALLED_JRE=/tmp/jdk1.8.0_131
+JAVA_HOME=/tmp/jdk1.8.0_131
+PATH=$JAVA_HOME/bin:$PATH

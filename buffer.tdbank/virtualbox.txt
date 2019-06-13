@@ -1,0 +1,39 @@
+cd /c/Program\ Files/Oracle/VirtualBox/
+VBoxManage sharedfolder add "centos" --name "virtual-box-shared-folder" --hostpath "C:\temp\virtual-box-shared-folder"
+----------------------------------------------------------------------
+/c/Program\ Files/Oracle/VirtualBox/VBoxManage startvm centos --type headless
+ssh -p 2222 root@127.0.0.1
+----------------------------------------------------------------------
+cd /root/docker-images/jenkins_ssh-slave-td
+docker rmi jenkins/ssh-slave-td
+vi Dockerfile
+docker build . -t jenkins/ssh-slave-td
+
+docker run -u 0 -dit jenkins/ssh-slave-td #--net=host
+docker exec -u 0 -it $(docker ps --latest --quiet) bash
+docker stop $(docker ps --latest --quiet) && docker rm $(docker ps -a -f status=exited -q)
+
+docker save -o jenkins_ssh-slave-td.tar jenkins/ssh-slave-td
+
+scp -P 2222 root@127.0.0.1:/root/docker-images/jenkins_ssh-slave-td/jenkins_ssh-slave-td.tar .
+scp jenkins_ssh-slave-td.tar tnextdctjenkinscidev@10.155.62.125:/tmp/.
+docker load -i jenkins_ssh-slave-td.tar
+----------------------------------------------------------------------
+https://unix.stackexchange.com/questions/145997/trying-to-ssh-to-local-vm-ubuntu-with-putty
+----------------------------------------------------------------------
+Click the Add + Icon -> NatNetwork will show up.
+----------------------------------------------------------------------
+Storage -> Controller -> IDE Secondary Master -> check Live CD/DVD
+click on CD icon and navigate to CentOS-7-x86_64-Minimal-1804.iso
+Install
+
+https://superuser.com/questions/915536/centos-7-virtualbox-no-internet-access
+vi /etc/sysconfig/network-scripts/ifcfg-enp0s3
+onboot=yes
+----------------------------------------------------------------------
+/c/Program\ Files/Oracle/VirtualBox/VBoxManage startvm minikube --type headless
+ssh -p 2222 root@127.0.0.2
+----------------------------------------------------------------------
+
+
+

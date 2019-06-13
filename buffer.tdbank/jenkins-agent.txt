@@ -1,0 +1,144 @@
+openssl s_client -showcerts -connect https://updates.jenkins.io < /dev/null 2> /dev/null | openssl x509 -outform PEM > ~/root_ca.pem
+
+- start jenkins
+- basic setup
+- forget about uid/guid
+- save admin password
+- commit
+- add plug ins
+^^^^
+not working, can't commit: https://stackoverflow.com/questions/44490402/docker-commit-doesnt-save-the-changed-state-of-my-container
+
+- start jenkins, just don't rm the container
+- or start with clean centos and yum install
+
+scp jenkins-td tnextdctjenkinscidev@10.155.18.250:/tmp/.
+docker load -i /tmp/jenkins-td
+docker images
+docker run -p 8080:8080 -u 497:497 -d -v /home/tnextdctjenkinscidev/jenkins_home:/var/jenkins_home jenkins/td
+docker logs -f --tail=all $(docker ps --latest --quiet)
+docker exec -u 0 -it $(docker ps --latest --quiet) bash
+ 
+
+JENKINS_HOST=admin:password@104.196.100.255:8080
+curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/'
+
+node ('docker-agent') {
+   def mvnHome
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      // git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool 'maven_3_rhel6'
+   }
+   stage('Build') {
+      // Run the maven build
+      if (isUnix()) {
+        withMaven(
+            maven: 'maven_3_rhel6',
+            globalMavenSettingsConfig: 'nexus-maven-settings') {
+            sh "mvn --help"
+        }
+        input "Proceed or Abort?"
+        withMaven(
+            maven: 'maven_3_rhel6',
+            globalMavenSettingsConfig: 'nexus-maven-settings') {
+            sh "mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false -U"
+        }
+      }
+   }
+}
+
+mvn archetype:generate                                  \
+  -DarchetypeGroupId=com.td                \
+  -DarchetypeArtifactId=sample          \
+  -DarchetypeVersion=0.1.0                \
+  -DgroupId=com.td                                \
+  -DartifactId=<my-artifactId>
+
+M2_HOME=/home/jenkins/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.5.4/apache-maven-3.5.4
+PATH=$M2_HOME/bin::$PATH
+
+mvn archetype:generate -gs /tmp/settings.xml -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false -U
+
+----------------------------------------------------------------------
+#https://stackoverflow.com/questions/42050626/jenkins-pipeline-agent-vs-node
+There are no nodes with the label ‘HOJ-LINUX-AGENT2’
+
+----------------------------------------------------------------------
+sudo curl -o /mnt/store/var/lib/jenkins/agent.jar http://10.155.20.44:8080/jnlpJars/agent.jar
+# run as user jenkins
+sudo -H -u jenkins java -jar /mnt/store/var/lib/jenkins/agent.jar -jnlpUrl http://hoj-jenkins.cbdc.td.com:8080/computer/HOJ-LINUX-AGENT/slave-agent.jnlp 
+sudo -H -u jenkins java -jar /mnt/store/var/lib/jenkins/agent.jar -jnlpUrl file:///mnt/store/var/lib/jenkins/slave-agent.jnlp 
+chown jenkins:jenkins -R /mnt/store/var/lib/jenkins
+----------------------------------------------------------------------
+sudo usermod -a -G jenkins tnextdctjenkinscidev
+----------------------------------------------------------------------
+#apt-get install make g++
+#apt-get update
+#apt-get install make g++
+----------------------------------------------------------------------
+sudo yum install java-1.8.0-openjdk-devel.x86_64
+sudo yum install g++ -y
+#sudo yum install gcc-c++-4.8.5-28.el7_5.1.x86_64 -y
+COPY phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+#wget --no-check-certificate -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+#scp jq tnextdctjenkinscidev@10.155.116.32:/tmp/.
+#cd /tmp
+#chmod +x ./jq
+#sudo mv jq /usr/bin
+#sudo chown root:root /usr/bin/jq
+----------------------------------------------------------------------
+#multibranchPipelineJob discard old builds
+#https://support.cloudbees.com/hc/en-us/articles/115000237071-How-do-I-set-discard-old-builds-for-a-Multi-Branch-Pipeline-Job-
+Hudson.instance.getAllItems(org.jenkinsci.plugins.workflow.job.WorkflowJob).each { job ->
+	if(job.getBuildDiscarder() == null) {
+	  job.logRotator = new hudson.tasks.LogRotator(int,int) // (int,int,int,int) to include artifacts
+	}
+}
+----------------------------------------------------------------------
+sudo rm -rf /home/jenkins/workspace/ && sudo mkdir /home/jenkins/workspace && sudo chown -R jenkins:jenkins /home/jenkins/workspace && sudo ls -al /home/jenkins/workspace
+----------------------------------------------------------------------
+
+//dockerNode(credentialsId: '', dockerHost: 'tcp://jboss-vm1-pnalr.dev.tdct.cloud.td.com:4243', image: 'jenkinsci/slave-td', remoteFs: '/home/jenkins') {
+----------------------------------------------------------------------
+#https://support.cloudbees.com/hc/en-us/articles/115000494608-Why-is-there-Failed-Signature-Check-when-using-update-server-
+-Dhudson.model.DownloadService.noSignatureCheck=true
+
+https://updates.jenkins-ci.org/update-center.json
+
+http://updates.jenkins-ci.org/download/plugins/ant/1.9/ant.hpi 
+
+http://updates.jenkins-ci.org/download/plugins/ant/1.9/ant.hpi
+http://archives.jenkins-ci.org/plugins/ant/1.9/ant.hpi
+http://ftp-nyc.osuosl.org/pub/jenkins/plugins/ant/1.9/ant.hpi
+
+sed 's,http://updates.jenkins-ci.org/download/plugins/,http://archives.jenkins-ci.org/plugins/,g' default.json > default.archives.json
+----------------------------------------------------------------------
+#https://github.com/jenkinsci/juseppe/wiki/Complete-Guide-of-own-update-center-using-Juseppe
+docker run -d --name juseppe -p 80:8080 -e JUSEPPE_BASE_URI=http://localhost:8081 lanwen/juseppe
+
+M2_HOME=/tmp/apache-maven-3.6.0
+PATH=$M2_HOME/bin:$PATH
+#https://github.com/jenkins-infra/update-center2
+cd /c/temp/git-repos/update-center2
+mvn package appassembler:assemble -Dmaven.test.skip=true -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+----------------------------------------------------------------------
+#https://stackoverflow.com/questions/14456592/how-to-stop-an-unstoppable-zombie-job-on-jenkins-without-restarting-the-server
+String url = "http://deliver.dev.tdct.tdbank.com:8080/job/RCP/job/DEV/job/salesforce/job/develop-mar19/job/DEVM19A/job/validate/339/console"
+// parse out job name = /RCP/DEV/salesforce/develop-mar19/DEVM19A/validate
+// parse out build number = 339
+item = Jenkins.instance.getItemByFullName("/RCP/DEV/salesforce/develop-mar19/DEVM19A/validate")
+
+item.getBuildByNumber(339)
+	.finish(
+			hudson.model.Result.ABORTED,
+			new java.io.IOException("Aborting build")
+	);
+----------------------------------------------------------------------
+
+
+
+

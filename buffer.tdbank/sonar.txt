@@ -1,0 +1,36 @@
+https://collaborate.td.com/display/OSS/SonarQube+Server+Configuration 
+----------------------------------------------------------------------
+mstsc /w:1680 /h:1000 /v:sonarqube.dev.wealth.tdbank.com
+d2-tdbfg\tnextdctjenkinscidev / 1qazse44
+
+----------------------------------------------------------------------
+CBAW-SonarQube
+http://sonarqube.dev.wealth.tdbank.com
+be5071e928f6c341cbc050d916fd6a05328f2673
+5b4c71855f740c9160e8ce0c136f613671beafa5
+----------------------------------------------------------------------
+sudo /home/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner_3.0.3_rhel6/sonar-scanner-3.0.3.778-linux/bin/sonar-scanner \
+-Dsonar.projectBaseDir=./ \
+-Dsonar.host.url=http://sonarqube.dev.wealth.tdbank.com \
+-Dsonar.login=be5071e928f6c341cbc050d916fd6a05328f2673 
+----------------------------------------------------------------------
+#old token 6b5ed5f39597fade0532e560a6e6b20f123b7784
+----------------------------------------------------------------------
+cd /tmp
+wget --no-check-certificate https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.4.zip
+docker run -p 9000:9000 -dit -v sonarqube:/opt/sonarqube-6.4 --add-host dockerHost:172.17.0.1 openjdk:8-jdk
+docker cp /tmp/sonarqube-6.4.zip $(docker ps --latest --quiet):/tmp/.
+docker cp /tmp/angular-full-app.tar.gz $(docker ps --latest --quiet):/tmp/.
+docker cp /tmp/nodejs-8.9.2.tar.gz $(docker ps --latest --quiet):/tmp/.
+docker cp /tmp/sonar-scanner-cli-3.0.3.778-linux.zip $(docker ps --latest --quiet):/tmp/.
+docker exec -it $(docker ps --latest --quiet) bash
+cd /tmp && unzip sonarqube-6.4.zip && mv sonarqube-6.4/* /opt/sonarqube-6.4/ && /opt/sonarqube-6.4/bin/linux-x86-64/sonar.sh start
+tail -100f /opt/sonarqube-6.4/logs/web.log
+docker stop $(docker ps --latest --quiet) && docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+
+
+cd /root/angular-full-app
+/root/sonar-scanner-3.0.3.778-linux/bin/sonar-scanner \
+-Dsonar.projectBaseDir=./ \
+-Dsonar.host.url=http://localhost:9000 \
+-Dsonar.login=be5071e928f6c341cbc050d916fd6a05328f2673 

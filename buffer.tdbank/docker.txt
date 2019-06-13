@@ -1,0 +1,112 @@
+https://collaborate.td.com/display/INFOEXAL/Run+Docker+on+your+Local+Laptop
+----------------------------------------------------------------------
+cd /var/lib/docker/volumes/jenkins_home/_data/workspace/abc
+----------------------------------------------------------------------
+https://docs.docker.com/v1.7/installation/rhel/#red-hat-enterprise-linux-6.5-installation
+----------------------------------------------------------------------
+cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 6.9 (Santiago)
+----------------------------------------------------------------------
+uname -r
+2.6.32-696.30.1.el6.x86_64
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+Enabling Docker Remote API
+#https://www.ivankrizsan.se/2016/05/18/enabling-docker-remote-api-on-ubuntu-16-04/
+sudo vi /lib/systemd/system/docker.service
+          -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock
+curl http://172.17.0.1:2375/version
+----------------------------------------------------------------------
+Enabling Docker 1.7 (rhel6) Remote API
+https://www.packtpub.com/mapt/book/virtualization_and_cloud/9781783984862/6/ch06lvl1sec64/configuring-the-docker-daemon-remote-api
+sudo vi /etc/sysconfig/docker
+>>>
+other_args="-H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock"
+<<<
+curl http://localhost:4243/version
+----------------------------------------------------------------------
+# docker install rhel6
+#https://docs.docker.com/v1.7/installation/rhel/#red-hat-enterprise-linux-6.5-installation
+#https://foxutech.com/how-to-install-docker-on-centos/
+#https://stackoverflow.com/questions/42211380/add-insecure-registry-to-docker
+curl -O -sSL https://rpmfind.net/linux/epel/6/x86_64/Packages/d/docker-io-1.7.1-2.el6.x86_64.rpm
+sudo yum localinstall --nogpgcheck docker-io-1.7.1-2.el6.x86_64.rpm
+sudo yum install docker-engine --nogpgcheck -y #--disablerepo="epel" 
+sudo service docker start
+sudo /etc/sysconfig/docker # add --insecure-registry
+----------------------------------------------------------------------
+# docker install rhel7
+# https://stackoverflow.com/questions/42981114/install-docker-ce-17-03-on-rhel7
+sudo subscription-manager repos --enable rhel-7-server-extras-rpms
+sudo yum update -y
+# https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce
+sudo yum list docker\*
+sudo yum install docker.x86_64 -y
+----------------------------------------------------------------------
+#log out and log back in after this command
+sudo groupadd docker
+sudo usermod -aG docker pereik3
+sudo chkconfig docker on # enable a service
+sudo service docker restart
+----------------------------------------------------------------------
+sudo yum remove docker-engine -y
+----------------------------------------------------------------------
+# https://cloud.google.com/container-registry/docs/using-dockerhub-mirroring
+sudo vi /etc/docker/daemon.json
+{
+"insecure-registries": [
+    "mirror.gcr.io",
+    "docker.io"
+  ],
+  "registry-mirrors": ["https://mirror.gcr.io"]
+}
+{
+        "insecure-registries" : ["cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000"]
+}
+sudo systemctl daemon-reload
+sudo service docker restart
+----------------------------------------------------------------------
+cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td
+cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td:latest
+docker load -i jenkinsci-slave.tar
+----------------------------------------------------------------------
+#docker clean up maintenance
+https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
+https://hackernoon.com/cleaning-up-docker-f14edd6fcf4c
+----------------------------------------------------------------------
+wget https://rpmfind.net/linux/dag/redhat/el7/en/x86_64/dag/RPMS/sshpass-1.05-1.el7.rf.x86_64.rpm
+scp /c/Users/ashra48/Downloads/sshpass-1.05-1.el7.rf.x86_64.rpm tnextdctjenkinscidev@10.155.62.158:/tmp/.
+rpm -i sshpass-1.05-1.el7.rf.x86_64.rpm
+----------------------------------------------------------------------
+# run on machine connected to internet (notebook)
+wget http://deb.debian.org/debian/pool/main/s/sshpass/sshpass_1.06-1_amd64.deb
+scp sshpass_1.06-1_amd64.deb tnextdctjenkinscidev@10.155.62.125:/tmp/.
+----------------------------------------------------------------------
+# run on host with docker image
+docker run -u 0 -dit jenkins/ssh-slave-td
+docker cp /tmp/sshpass_1.06-1_amd64.deb $(docker ps --latest --quiet):/tmp/.
+docker exec -u 0 -it $(docker ps --latest --quiet) bash
+# https://unix.stackexchange.com/questions/159094/how-to-install-a-deb-file-by-dpkg-i-or-by-apt
+dpkg -i /tmp/sshpass_1.06-1_amd64.deb && apt-get install -f
+rm -rf /tmp/sshpass_1.06-1_amd64.deb
+docker commit $(docker ps --latest --quiet) jenkins/ssh-slave-td
+docker stop $(docker ps --latest --quiet) && docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+----------------------------------------------------------------------
+dpkg-reconfigure tzdata
+2/102 (montreal)
+echo "America/Montreal" | tee /etc/timezone
+mv /etc/localtime /etc/localtime.old
+ln -s /usr/share/zoneinfo/America/Toronto /etc/localtime
+
+issues:
+- docker supports very old version, 1.7 (released 2015) on redhat 6; you must have a minnimal kernal version as well; we do
+- 
+- no connection to public respositories; will need to proxy dockerhub via nexus
+- port 8443 should be open
+- need access to jenkins agent where fulapp currently builds; what is the ip address of CBAW-Main?
+- I need to tar -zcvf the /opt/nodejs/bin tool folder from link below, and place them into docker image
+  - http://deliver.dev.tdct.tdbank.com:8080/computer/CBAW-Main/configure
+  - how do I get on to ssh tnextdctjenkinscidev@10.87.103.93 (cbaw-main)?
+  - can not seem to ssh on to there; we need to open ssh port and use ssh as launch method
+
+Error during callback: com.github.dockerjava.api.exception.NotFoundException: 404 page not found

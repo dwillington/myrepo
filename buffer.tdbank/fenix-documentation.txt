@@ -1,0 +1,12 @@
+----------------------------------------------------------------------
+all default settings go here:
+  com/td/jenkins/util/default_settings.yaml
+everything gets overridden here:
+  com/td/jenkins/$scmName/jenkinsConfig.yaml
+
+----------------------------------------------------------------------
+- salesforce pipeline needs to be refactored
+  - var/methods are actually helper methods should be moved into classes in src folder
+  - resources contains the actuall entry methods, and they should exist in vars
+
+

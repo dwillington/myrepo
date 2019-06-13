@@ -1,0 +1,44 @@
+FROM openjdk:8-jdk
+MAINTAINER Oleg Nenashev <o.v.nenashev@gmail.com>
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=10000
+ARG gid=10000
+
+ENV HOME /home/${user}
+RUN groupadd -g ${gid} ${group}
+RUN useradd -c "Jenkins user" -d $HOME -u ${uid} -g ${gid} -m ${user}
+LABEL Description="This is a base image, which provides the Jenkins agent executable (slave.jar)" Vendor="Jenkins project" Version="3.27"
+
+ARG VERSION=3.27
+ARG AGENT_WORKDIR=/home/${user}/agent
+
+COPY phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+
+RUN curl -k --create-dirs -sSLo /usr/share/jenkins/slave.jar https://repo.jenkins-ci.org/public/org/jenkins-ci/main/remoting/${VERSION}/remoting-${VERSION}.jar \
+  && chmod 755 /usr/share/jenkins \
+  && chmod 644 /usr/share/jenkins/slave.jar \
+  && chown jenkins:jenkins -R /tmp/phantomjs \
+  && mv /etc/localtime /etc/localtime.old \
+  && ln -s /usr/share/zoneinfo/America/Toronto /etc/localtime \
+  && wget --no-check-certificate -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
+  && chmod +x ./jq \
+  && mv jq /usr/bin \
+  && chown root:root /usr/bin/jq \
+  && mkdir /home/jenkins/.ssh \
+  && chmod 700 /home/jenkins/.ssh \
+  && echo    "Host *"                       > /home/jenkins/.ssh/config \
+  && echo -e "\tStrictHostKeyChecking no" >> /home/jenkins/.ssh/config \
+  && chmod 400 /home/jenkins/.ssh/config \
+  && chown jenkins:jenkins -R /home/jenkins/.ssh
+
+RUN apt-get update && apt-get install -qy zip make g++
+
+USER ${user}
+ENV AGENT_WORKDIR=${AGENT_WORKDIR}
+RUN mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR}
+
+VOLUME /home/${user}/.jenkins
+VOLUME ${AGENT_WORKDIR}
+WORKDIR /home/${user}

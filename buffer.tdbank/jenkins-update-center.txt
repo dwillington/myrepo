@@ -1,0 +1,97 @@
+https://groups.google.com/forum/#!topic/jenkinsci-users/KXu7LQEIIjs
+
+https://github.com/jenkinsci/juseppe
+
+openssl genrsa -out uc.key 2048 \
+&& openssl req -nodes -x509 -new \
+    -key uc.key \
+    -out uc.crt \
+    -days 1056 \
+    -subj "//C=EN\ST=Update-Center\L=Juseppe\O=Juseppe"
+
+----------------------------------------------------------------------
+13G     RCP
+6.8G   \n
+ CNFT
+6.4G    PBSI
+4.8G    BBPro
+2.1G    PBPP
+1.2G    CLKAI
+946M    PLCOM
+685M    BSR
+646M    AGILE_COE
+613M    BOW
+----------------------------------------------------------------------
+(DEV) tnextdctjenkinscidev@jboss-tk33v:/mnt/jobs $ du -hsx * | sort -rh | head -10
+6.9G    OBSV
+1.8G    SBL
+1.1G    SBF
+1.1G    BBPro
+830M    RCP
+742M   \n
+ CNFT
+381M    PBPP
+337M    PBSI
+330M    PAPI
+303M    BBOUI
+
+13:49:26,008 FINER [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) Looking up group of {tokengroups=tokenGroups: [B@5d90325f, [B@2f4b84bd, [B@6b0339d7, [B@6fe3b235, [B@333d775c, [B@402063ea, [B@321f37b8, [B@401f59d4, [B@18c0411c, [B@5b3c4edd, [B@105500f5, [B@2a3e2ad2, [B@30ec5628, [B@99fac4e, [B@31754720, [B@6a469366, [B@38c9d510, [B@4c40e39b, [B@5797f174, [B@9148543, [B@7f83b024, [B@3414c874, [B@5ce083d3, [B@71733b91, [B@1393a70b, [B@1568a65, [B@59706f87, [B@3137688b, [B@3f923a59, [B@a229a6c, [B@5074d0f8, memberof=memberOf:\n
+ CN=Bitbucket_Users,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CTX-TDBFG-O365WEB,OU=Citrix,OU=Groups,OU=TDSI,DC=TDBFG,DC=com,\n
+ CN=CONFLUENCE_OBOE_GRP,OU=OBOE,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=Bitbucket_OBOE_GRP,OU=OBOE,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=JIRA_OBOE_GRP,OU=OBOE,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=cts-omni-hoj,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CC3456,OU=Cost Centre,OU=Role,OU=Enterprise Groups,DC=TDBFG,DC=com,\n
+ CN=CTS-Omni Canadian Banking-C,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=distribution spare,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=TDCT-RCP-DevOps-Admin,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=O365_License_Corp_Users_NoMobile,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CTS-CONTRACTORS,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=AIMI_NOTREGISTERED,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CTX-TDBFG-DEFAULTAPPS,OU=Citrix,OU=Groups,OU=TDSI,DC=TDBFG,DC=com,\n
+ CN=EDGE Local machine,OU=Win10,OU=DAAR,OU=PeopleGroups,OU=Enterprise Privileged Objects,DC=TDBFG,DC=com,\n
+ CN=BU_CORP_DS_TOR1,OU=Groups,OU=CDP,DC=TDBFG,DC=com,\n
+ CN=EDGE_Corp_Users,OU=Groups,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CTX-TDBFG-APPSENSE-USERS,OU=Citrix,OU=Groups,OU=TDSI,DC=TDBFG,DC=com,\n
+ CN=CTS-TORONTO,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CTX-TDBFG-ACCESS,OU=Citrix,OU=Groups,OU=TDSI,DC=TDBFG,DC=com,\n
+ CN=OCS-TDBFG-FULL,OU=Distribution Lists,OU=TDBFG,DC=TDBFG,DC=com,\n
+ CN=CTX-TDBFG-REMOTE-ACCESS,OU=Citrix,OU=Groups,OU=TDSI,DC=TDBFG,DC=com,\n
+ CN=CDP Users,OU=Groups,OU=CDP,DC=TDBFG,DC=com,\n
+ CN=cn: Limjoco, David}
+
+ 
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: Users
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: Distributed COM Users
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: Domain Users
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-TDBFG-ACCESS
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-ACCESS
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CDP Users
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-REMOTE-ACCESS
+13:49:25,466 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-TDBFG-REMOTE-ACCESS
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: MSD-MFSwitchpairs
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: WM-MSD-DoNotCallListManagement
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: WM-MS-ACCOUNTSMANAGEMENT
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: WM-MS-RIFManagement
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-APPSENSE-USERS
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-TDBFG-APPSENSE-USERS
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: EDGE_Corp_Users
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: BU_CORP_DS_TOR1
+13:49:25,467 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: EDGE Local machine
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-DEFAULTAPPS
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-TDBFG-DEFAULTAPPS
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: EZPAS_TDBFG_Domain_Users
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: DMS_EZPASOS1_TDBFG_Domain_Users
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: AIMI_NOTREGISTERED
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: O365_License_Corp_Users_NoMobile
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: TDCT-RCP-DevOps-Admin
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CC3456
+13:49:25,468 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: JIRA_OBOE_GRP
+13:49:25,469 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-O365WEB
+13:49:25,469 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: Bitbucket_OBOE_GRP
+13:49:25,469 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CONFLUENCE_OBOE_GRP
+13:49:25,469 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: CTX-TDBFG-O365WEB
+13:49:25,649 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: Users
+13:49:25,650 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) CN=Limjoco\, David,OU=Users,OU=CDP,DC=TDBFG,DC=com is a member of cn: Distributed COM Users
+13:49:26,007 FINE  [hudson.plugins.active_directory.ActiveDirectoryUnixAuthenticationProvider] (Handling POST /j_acegi_security_check from 10.153.228.111 : http-10.87.98.5:8080-18) Stage 2: looking up via memberOf

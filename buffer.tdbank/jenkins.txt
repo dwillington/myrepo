@@ -1,0 +1,197 @@
+1qazse44
+tnextdctjenkinscidev
+----------------------------------------------------------------------
+ssh tnextdctjenkinscidev@10.155.20.44  # HOJ jenkins master cbdc-jenkins-v92oh.dev.tdct.cloud.td.com (10.87.98.5)
+sudo ls -al /var/lib/jbossas/.jenkins
+
+ssh tnextdctjenkinscidev@10.155.62.125 # HOJ docker agent 1 rhel-2k4p4a.dynamic.tdct.cloud.td.com (10.87.80.197)
+ssh tnextdctjenkinscidev@10.155.62.158 # HOJ docker agent 2 rhel-7b1ydr.dynamic.tdct.cloud.td.com (10.87.80.196)
+ssh tnextdctjenkinscidev@10.155.62.162 # HOJ docker agent 3 rhel-mkry0k.dynamic.tdct.cloud.td.com (10.87.80.194)
+sudo ls -al /home/jenkins
+
+ssh tnextdctjenkinscidev@10.155.60.77  # HOJ jenkins agent with docker agents jboss-vm1-pnalr.dev.tdct.cloud.td.com
+ssh tnextdctjenkinscidev@10.155.116.32 # HOJ jenkins agent with docker agents ???.dev.tdct.cloud.td.com
+
+# what are these
+ssh tnextdctjenkinscidev@10.87.103.93
+ssh tnextdctjenkinscidev@10.87.103.175
+----------------------------------------------------------------------
+ssh tnextdctjenkinscidev@10.155.56.54  # HOJ UAT jenkins master 		rhel-3chimv.dev.tdct.cloud.td.com (10.87.80.34)
+#tcp://rhel-3chimv.dev.tdct.cloud.td.com:4000
+#tcp://rhel-srzp4r.dev.tdct.cloud.td.com:4243
+#tcp://cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:4000
+ssh tnextdctjenkinscidev@10.155.56.76  # HOJ UAT jenkins docker agent 	rhel-srzp4r.dev.tdct.cloud.td.com (10.87.80.22)
+ssh tnextdctjenkinscidev@10.155.57.15  # HOJ UAT jenkins docker agent 	rhel-av7fu0.dev.tdct.cloud.td.com (10.87.80.210)
+----------------------------------------------------------------------
+http://deliver.dev.tdct.tdbank.com:8080
+----------------------------------------------------------------------
+ssh tnextdctjenkinscidev@deliver.dev.tdct.tdbank.com # CURRENT MASTER
+sudo ls -al /var/lib/.jenkins
+tail -100f /var/log/jbossas/DEVOPS_0000/server.log
+ssh tnextdctjenkinscidev@10.155.58.74  # CBAW agent
+cd /mnt/store/var/lib/jenkins
+ssh tnextdctjenkinscidev@10.155.61.0   # HOJ-LINUX-AGENT2 jenkins agent with docker agents rhel-r4vuz.dev.tdct.cloud.td.com
+#ls -al /mnt/store/var/lib/jenkins
+ssh tnextdctjenkinscidev@10.155.59.52 # HOJ-LINUX-AGENT
+----------------------------------------------------------------------
+IP: mstsc /v:10.155.57.253
+Username: d2-tdbfg\tnextdctjenkinscidev
+Password: 1qazse44
+----------------------------------------------------------------------
+ssh tnextdctjenkinscidev@10.155.18.96  # spare jenkins agent with docker (abandoned) rhel-7osy5.dev.wealth.cloud.td.com
+sudo -H -u jenkins java -jar agent.jar -jnlpUrl http://hoj-jenkins.cbdc.td.com:8080/computer/HOJ-LINUX-AGENT/slave-agent.jnlp
+sudo -H -u jenkins /mnt/store/var/lib/jenkins/tools/hudson.model.JDK/jdk_8_rhel6/jdk1.8.0_131/bin/javaws http://hoj-jenkins.cbdc.td.com:8080/jenkins/computer/HOJ-LINUX-AGENT/slave-agent.jnlp
+----------------------------------------------------------------------
+angular-full-app jenkins test environment:
+ssh tnextdctjenkinscidev@10.155.18.250 # angular-full-app jenkins test environment rhel-ed050
+----------------------------------------------------------------------
+sudo service HOJ_0000 restart
+tail -1000f /var/log/jbossas/HOJ_0000/server.log
+----------------------------------------------------------------------
+docker run -p 8080:8080 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins \
+--env JAVA_OPTS="-Dcom.sun.net.ssl.checkRevocation=false -Dtrust_all_cert=true" \
+--env JAVA_OPTS=-Dhttp.proxyHost=host -Dhttp.proxyPort=8080 
+--env JAVA_OPTS="-Djavax.net.ssl.trustStore=$JENKINS_HOME/keystore/cacerts"
+--env JAVA_OPTS="-Dhudson.model.DownloadService.noSignatureCheck=true"
+--env JENKINS_INCREMENTALS_REPO_MIRROR="http://repo.jenkins-ci.org/incrementals" \
+--env JENKINS_UC="http://updates.jenkins.io" \
+docker run -p 8080:8080 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins
+docker logs -f --tail=100 $(docker ps -a | grep 8080 | awk '{ print $1 }')
+
+docker run -p 8090:8080 -d -v jenkins_tdct_home:/var/jenkins_home --add-host dockerHost:172.17.0.1 --env JENKINS_UC="http://updates.jenkins.io" --env JAVA_OPTS="-Dhudson.model.DownloadService.noSignatureCheck=true" jenkins/jenkins
+
+docker run -p 8080:8080 -d -v jenkins_home:/var/jenkins_home --add-host dockerHost:172.17.0.1 --env JENKINS_UC="http://updates.jenkins.io" --env JAVA_OPTS="-Dhudson.model.DownloadService.noSignatureCheck=true" jenkins/jenkins
+docker cp /root/hudson.model.UpdateCenter.xml $(docker ps --latest --quiet):/var/jenkins_home/hudson.model.UpdateCenter.xml
+#wget --no-check-certificate https://updates.jenkins-ci.org/download/war/2.150.1/jenkins.war
+#mv jenkins.war jenkins.2.150.1.war
+docker cp /root/jenkins.2.150.1.war $(docker ps --latest --quiet):/usr/share/jenkins/jenkins.war
+docker stop $(docker ps --latest --quiet)
+rm -rf /var/lib/docker/volumes/jenkins_home/_data/var/jenkins_home/_data/war/
+docker start $(docker ps --latest --quiet)
+cat /var/lib/docker/volumes/jenkins_home/_data/secrets/initialAdminPassword
+
+docker logs -f --tail=100 $(docker ps -a | grep 8080 | awk '{ print $1 }')
+docker exec -u 0 -it $(docker ps --latest --quiet) bash
+
+docker stop $(docker ps --latest --quiet) && docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+docker rm $(docker ps --latest --quiet)
+#$(docker ps -a | grep sshd | awk '{ print $1 }')
+docker volume rm -f volume_ID
+----------------------------------------------------------------------
+http://35.237.31.215:8080/configureSecurity/
+uncheck Enable script security for Job DSL scripts
+----------------------------------------------------------------------
+http://35.237.31.215:8080//descriptorByName/hudson.tools.JDKInstaller/enterCredential
+----------------------------------------------------------------------
+#chmod 700 .ssh
+#chmod 600 .ssh/authorized_keys
+#/tmp/phatomjs/phatomjs...
+#sudo yum install gcc-c++
+#vi ./bin/deploy/credentials.json
+#{"prod": {"username": "$SF_USER","password": "$SF_PW$SF_TOKEN","loginUrl": "$SF_URL"}}
+#echo '{\"prod\": {\"username\": \"\$SF_USER\",\"password\": \"$\SF_PW\$SF_TOKEN\",\"loginUrl\": \"\$SF_URL\"}}' > bin/deploy/credentials.json
+#wget --no-check-certificate -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+#scp jq tnextdctjenkinscidev@10.155.116.32:/tmp/.
+#scp phantomjs-2.1.1-linux-x86_64.tar.bz2 tnextdctjenkinscidev@10.155.116.32:/tmp/.
+#ssh
+#cd /tmp
+#chmod +x ./jq
+#sudo mv jq /usr/bin
+#sudo chown root:root /usr/bin/jq
+----------------------------------------------------------------------
+nodejs_home=/root/nodejs-8.9.2
+nodejs_home=/home/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/npm_8_rhel6/nodejs-8.9.2
+nodejs_home=/home/tnextdctjenkinscidev/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/npm_8_rhel6/nodejs-8.9.2
+PATH=$nodejs_home/bin:$PATH
+cross-env API_CONFIG="file:/tmp/com-td-api-pbtpa-targeted-pricing/configurations/DEV/API"
+cd /root/angular-full-app
+#npm install phantomjs-prebuilt
+#npm uninstall phantomjs
+npm install
+npm run deploy:prod
+npm rebuild node-sass
+----------------------------------------------------------------------
+sudo ls -al /home/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/npm_8_rhel6/nodejs-8.9.2/bin/
+echo "
+	nodejs_home=/home/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/npm_8_rhel6/nodejs-8.9.2
+	PATH=\$nodejs_home/bin:$PATH
+	npm ls -g --depth=0
+	npm -g uninstall gulp-cli --save
+	npm -g rm gulp-cli --save
+" > /tmp/uninstall-gulp.sh
+chmod a+x /tmp/uninstall-gulp.sh
+sudo -H -u jenkins ./uninstall-gulp.sh
+sudo ls -al /home/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/npm_8_rhel6/nodejs-8.9.2/bin/
+----------------------------------------------------------------------
+#grep recursively
+grep -r --include "*.js" hantom .
+----------------------------------------------------------------------
+http://erproxypac.tdbank.ca/prd/proxy.pac
+wget -e use_proxy=yes -e http_proxy=erproxy.tdbank.ca:8080 http://get.docker.com/docker/1.7.0/rpms/centos-6/RPMS/x86_64/docker-engine-1.7.0-0.1.el6.x86_64.rpm
+----------------------------------------------------------------------
+println "uname -a".execute().text
+----------------------------------------------------------------------
+http://codeheaven.io/using-nexus-3-as-your-repository-part-3-docker-images/
+docker run -d -p 8081:8081 sonatype/nexus
+----------------------------------------------------------------------
+http://bugmenot.com/view/oracle.com
+----------------------------------------------------------------------
+sudo groupadd -g 10000 jenkins
+sudo useradd  -u 10000 -g 10000 jenkins
+
+sudo mkdir -p /home/jenkins/tools
+sudo mkdir -p /home/jenkins/.m2
+sudo mkdir -p /home/jenkins/.npm
+echo    "[user]"                       	>  /home/jenkins/.gitconfig
+echo    "\temail = Jenkins@td.com" 		>> /home/jenkins/.gitconfig
+echo    "\tname = Jenkins" 				>> /home/jenkins/.gitconfig
+sudo chown jenkins:jenkins -R /home/jenkins
+
+sudo groupmod -g 10000 jenkins
+sudo usermod  -u 10000 jenkins
+# restart container
+# docker commit
+----------------------------------------------------------------------
+docker commit $(docker ps --latest --quiet) jenkinsci/slave-td
+docker images
+#docker save -o jenkinsci_slave-td.tar jenkinsci/slave-td
+#scp -P 2222 root@127.0.0.1:/tmp/jenkinsci_slave.tar .
+scp -P 2222 root@127.0.0.1:/tmp/jenkinsci_slave/jenkinsci_slave-td.tar .
+#scp jenkinsci_slave-td.tar tnextdctjenkinscidev@10.155.20.44:/tmp/.
+scp jenkinsci_slave-td.tar tnextdctjenkinscidev@10.155.62.125:/tmp/.
+#docker load -i jenkinsci_slave-td.tar
+----------------------------------------------------------------------
+find / -name cacerts
+server=jenkins-ci.org
+echo -n | openssl s_client -connect $server:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/$server.cert
+
+keytool -importcert -file /tmp/$server.cert -alias $server -storepass changeit -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts
+keytool -importcert -file /tmp/$server.cert -alias $server -storepass changeit -keystore /etc/default/cacerts
+keytool -importcert -file /tmp/$server.cert -alias $server -storepass changeit -keystore /etc/ssl/certs/java/cacerts
+----------------------------------------------------------------------
+USER=ashra48
+APITOKEN=11c1f84da38923060f927baa0c3b234c71
+SERVER=10.155.20.44:8080
+CRUMB=$(curl --user $USER:$APITOKEN $SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+curl --user $USER:$APITOKEN -H "$CRUMB" \
+--data-urlencode "script=$(cat /c/temp/git-repos/job-dsl-scripts/groovy-scripts/update-build-discarder-property.groovy)" http://$SERVER/scriptText
+#update-build-discarder-property
+#trigger-multibranch-pipeline-scans
+----------------------------------------------------------------------
+sudo vi /var/lib/jbossas/.jenkins/init.groovy.d/logging.groovy
+Logger.getLogger("org.kohsuke.stapler.NoStaplerConstructorException").setLevel(Level.FINE)
+#https://docs.oracle.com/javase/7/docs/api/java/util/logging/Level.html
+----------------------------------------------------------------------
+sudo python -m smtpd -n -c DebuggingServer localhost:25 > /dev/null 2>&1 &
+cd /tmp && sudo python -m SimpleHTTPServer 8000 > /dev/null 2>&1 &
+
+cd /tmp/tools
+nodejs_home=/tmp/tools/nodejs-8.9.2
+PATH=$nodejs_home/bin:$PATH
+#npm config set registry=https://repo.dcts.tdbank.com:9443/content/groups/npm-all/
+#npm install -g http-server   # install dependency
+http-server -p 8081 > /dev/null 2>&1 &
+
+docker run --restart always --net=host -d -p 8043:8043 -v /home/tnextdctjenkinscidev/tools/:/srv/http pierrezemb/gostatic
+curl http://10.87.98.5:8043
+

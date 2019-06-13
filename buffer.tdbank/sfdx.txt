@@ -1,0 +1,106 @@
+wget https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+mkdir sfdx
+tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1
+./sfdx/install
+
+#https://wipdeveloper.com/salesforce-dx-jenkins-jenkinsfile/
+----------------------------------------------------------------------
+  rm -rf .git && git init && time git fetch --tags --progress https://PNEX011DEVOPS@code.td.com/scm/rcp/rcp-salesforce.git +refs/heads/*:refs/remotes/origin/* # timeout=30
+		real    11m4.143s
+		user    0m48.682s
+		sys     0m12.521s
+  rm -rf .git && git init && time git fetch --no-tags --depth=1 --progress https://PNEX011DEVOPS@code.td.com/scm/rcp/rcp-salesforce.git +refs/heads/*:refs/remotes/origin/* # timeout=30
+		real    4m49.377s
+		user    0m11.316s
+		sys     0m4.380s
+----------------------------------------------------------------------
+rm -rf .git && git init && time git fetch --no-tags --progress ssh://git@code.td.com/hoj/angular-full-app.git +refs/heads/*:refs/remotes/origin/*
+	real    6m50.153s
+	user    0m0.015s
+	sys     0m0.078s
+
+rm -rf .git && git init && time git fetch --no-tags --depth=1 --progress ssh://git@code.td.com/hoj/angular-full-app.git +refs/heads/*:refs/remotes/origin/*
+	real    2m8.277s
+	user    0m0.030s
+	sys     0m0.078s
+----------------------------------------------------------------------
+rm -rf .git && git init
+
+rm -rf rcp-salesforce
+time git clone --branch develop --depth 50 ssh://git@code.td.com/rcp/rcp-salesforce.git
+cd rcp-salesforce
+git reset --hard origin/test-single-branch
+git pull
+
+echo $(date) >> src/pages/CoborrowerInvite.page
+git add -A
+git commit -am "angular-handoff"
+git push origin HEAD:test-single-branch --force
+
+time git fetch -q --no-tags --depth=1 --progress https://PNEX011DEVOPS@code.td.com/scm/rcp/rcp-salesforce.git +refs/heads/*:refs/remotes/origin/*
+
+git init --bare
+git remote add origin https://PNEX011DEVOPS@code.td.com/scm/rcp/rcp-salesforce.git
+git config remote.origin.fetch +refs/heads/*:refs/heads/* 
+git config remote.origin.tagopt --no-tags 
+git remote update origin 
+
+
+git config remote.origin.url ssh://git@code.td.com/hoj/angular-full-app.git # timeout=10
+git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+git config remote.origin.url ssh://git@code.td.com/hoj/angular-full-app.git # timeout=10
+----------------------------------------------------------------------
+node ('HOJ-LINUX-AGENT') {
+	stage('git') {
+	    sshagent(credentials: ['CBDC-BITBUCKET-PIPELINE-SSHKEY']) {
+			for(int i=0; i<2; i++) {
+				sh "rm -rf .git"
+				sh "git init --quiet"
+				if(i%2 == 0) {
+					sh "{ time git fetch -q --tags --progress ssh://git@code.td.com/rcp/rcp-salesforce.git +refs/heads/*:refs/remotes/origin/* ; } 2> time.txt"
+					sh "cat time.txt"
+					sh "grep real time.txt >> /tmp/tags.txt"
+				}
+				else {
+					sh "{ time git fetch -q --no-tags --depth=1 --progress ssh://git@code.td.com/rcp/rcp-salesforce.git +refs/heads/*:refs/remotes/origin/* ; } 2> time.txt"
+					sh "cat time.txt"
+					sh "grep real time.txt >> /tmp/no-tags-depth-1.txt"
+				}
+				sh "ls -al"
+				sh "sleep 10"
+			}
+	    }
+	}
+}
+----------------------------------------------------------------------
+--tags:
+real    6m16.036s
+real    2m38.977s
+real    2m37.012s
+real    5m19.253s
+real    2m34.331s
+
+real    13m56.040s
+real    4m42.980s
+real    5m13.365s
+real    3m46.248s
+--no-tags:
+real    2m31.953s
+real    2m27.190s
+real    2m38.642s
+real    2m36.651s
+real    2m35.431s
+
+real    7m51.985s
+real    7m10.541s
+real    4m17.909s
+--no-tags --depth=1:
+real    2m24.590s
+real    2m21.412s
+real    2m23.090s
+real    2m31.674s
+real    5m24.319s
+
+real    6m55.396s
+real    3m29.255s
+real    2m26.235s

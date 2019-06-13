@@ -1,0 +1,27 @@
+https://collaborate.td.com/display/~POSGAP2/How+to+upload+files+to+Nexus+with+CURL 
+----------------------------------------------------------------------
+https://mavenrepowealth.tdbank.ca:8443/nexus/#welcome
+http://nexus.tdct.tdbank.ca:8081/nexus
+appsdjenkinsci01
+1qazse44
+----------------------------------------------------------------------
+http://nexus.tdct.tdbank.ca:8081/nexus  <-- devops owned; requires authentication (?); test that
+  - what is added here is mirrored into http://nexus.cloud.td.com/nexus
+  - add tools in http://nexus.tdct.tdbank.ca:8081/nexus/content/sites/cbdc-devops/
+  - update http://10.155.20.44:8080/configureTools/
+
+http://nexus.cloud.td.com/nexus 		<-- enterprise level; requires no authentication
+----------------------------------------------------------------------
+Nexus IQ Configuration
+#https://collaborate.td.com/pages/editpage.action?pageId=385983238
+#key_store=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-3.b14.el6_9.x86_64/jre/lib/security/cacerts
+key_store=/opt/jboss/security/truststore.jks
+key_store=/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/cacerts
+sudo keytool -list -v -keystore $key_store | grep Alias
+sudo keytool -delete -alias nexusiq -keystore $key_store
+sudo keytool -import -alias nexusiq -keystore $key_store -file /tmp/nexus-iq-cert.pem.cert
+----------------------------------------------------------------------
+
+
+
+

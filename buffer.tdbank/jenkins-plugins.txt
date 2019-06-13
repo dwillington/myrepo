@@ -1,0 +1,79 @@
+----------------------------------------------------------------------
+ssh -p 2222 root@127.0.0.1 # into virtualbox
+# copy plugins from HOJ PROD --> 127.0.0.1
+ssh tnextdctjenkinscidev@10.155.20.44
+cd /tmp/jenkins-plugins-bk/
+sudo rm -rf plugins/
+sudo cp -R /var/lib/jbossas/.jenkins/plugins .
+find plugins -name "*.jpi" -o -name "*.hpi" | tar -zcvf /tmp/jenkins-plugins.tar -T -
+exit
+scp tnextdctjenkinscidev@10.155.20.44:/tmp/jenkins-plugins.tar /tmp/.
+cd /tmp
+tar -xvf jenkins-plugins.tar
+rm -rf /var/lib/docker/volumes/jenkins_home/_data/plugins
+cp -R plugins /var/lib/docker/volumes/jenkins_home/_data/
+chown osboxes:osboxes -R /var/lib/docker/volumes/jenkins_home/_data/plugins
+docker stop $(docker ps --latest --quiet) && docker start $(docker ps --latest --quiet) && docker ps -a
+docker logs -f $(docker ps --latest --quiet)
+rm -rf /tmp/plugins
+rm -rf /tmp/jenkins-plugins.tar
+----------------------------------------------------------------------
+# upgrade plugins through GUI except the following. new versions of these plug ins are having issues with exist fenix syntax and other issues
+# active-directory
+# nexus-iq-jenkins-plugin
+# nexus-jenkins-plugin
+# sonar
+# veracode-jenkins-plugin
+# copy plugins 127.0.0.1 --> HOJ UAT
+cd /var/lib/docker/volumes/jenkins_tdct_home/_data
+find plugins -name "*.jpi" -o -name "*.hpi" | tar -zcvf /tmp/jenkins-plugins.tar -T -
+scp /tmp/jenkins-plugins.tar tnextdctjenkinscidev@10.155.56.54:/tmp/.
+#scp /tmp/jenkins-plugins.tar tnextdctjenkinscidev@10.155.20.44:/tmp/.
+----------------------------------------------------------------------
+# install plugins --> HOJ UAT
+ssh tnextdctjenkinscidev@10.155.56.54  # HOJ UAT jenkins master 		rhel-3chimv.dev.tdct.cloud.td.com (10.87.80.34)
+rm -rf /tmp/plugins
+cd /tmp
+tar -zxvf jenkins-plugins.tar
+sudo service jenkins stop
+#UAT
+sudo mv /var/lib/jenkins/plugins /var/lib/jenkins/plugins.bk
+sudo cp -R plugins /var/lib/jenkins/
+sudo chown tnextdctjenkinscidev:users -R /var/lib/jenkins/plugins
+#PROD
+sudo mv /var/lib/jbossas/.jenkins/plugins /var/lib/jbossas/.jenkins/plugins.bk
+sudo cp -R plugins /var/lib/jbossas/.jenkins/
+sudo chown jboss:jboss -R /var/lib/jbossas/.jenkins/plugins
+sudo service jenkins start
+----------------------------------------------------------------------
+find /var/lib/docker/volumes/jenkins_tdct_home/_data/plugins -type f -name \*.jpi | sed 's/.*\///' | sed 's/.jpi//' > iplugins
+echo "active-directory
+nexus-iq-jenkins-plugin
+nexus-jenkins-plugin
+sonar
+veracode-jenkins-plugin" > xplugins
+./batch-install-jenkins-plugins.sh --plugins iplugins --xplugins xplugins --plugindir plugins
+----------------------------------------------------------------------
+ssh -p 2222 root@127.0.0.1
+cd /root/jenkins-plugins
+ls -1 plugins/ | sort > /tmp/plugins-1.txt
+cd /var/lib/docker/volumes/jenkins_tdct_home/_data/plugins
+ls -1 *.jpi | sort > /tmp/plugins-2.txt
+----------------------------------------------------------------------
+#https://github.com/jenkinsci/docker/blob/master/README.md
+#https://github.com/jenkinsci/docker
+#tnextdctjenkinscidev:1qazse44@
+JENKINS_HOST=admin:password@localhost:8080
+JENKINS_HOST=tnextdctjenkinscidev:1qazse44@deliver.dev.tdct.tdbank.com:8080
+curl -sSL "http://$JENKINS_HOST/pluginManager/api/xml?depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins" | perl -pe 's/.*?<shortName>([\w-]+).*?<version>([^<]+)()(<\/\w+>)+/\1 \2\n/g'|sed 's/ /:/' 
+curl -s -k "http://$JENKINS_HOST/pluginManager/api/json?depth=1" | jq '.plugins[]|{shortName, version}' -c \
+| sed 's/{"shortName":"//g' \
+| sed 's/","version":"/:/g' \
+| sed 's/"}//g' \
+ | sort
+#> /usr/share/jenkins/ref/plugins.txt
+
+rm -rf /usr/share/jenkins/ref/plugins/*
+/usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+----------------------------------------------------------------------
+

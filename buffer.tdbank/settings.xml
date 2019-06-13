@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<servers>
+        <server>
+			<id>nexus</id>
+			<username>deploy-user</username>
+			<password>tdbank11</password>
+		</server>
+		<server>
+			<id>nexus2</id>
+			<username>deploy-user</username>
+			<password>tdbank11</password>
+		</server>
+	</servers>
+  <mirrors>
+    <mirror>
+      <id>nexus</id>
+      <name>Nexus Public Mirror</name>
+      <url>http://nexus.cloud.td.com/nexus/content/groups/public</url>
+      <mirrorOf>external:*,!td-central,!plugin,!nexus2</mirrorOf>
+    </mirror>
+	</mirrors>
+	<pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                  http://sonarqube.dev.wealth.tdbank.com
+                </sonar.host.url>
+            </properties>
+        </profile>
+		<profile>
+			<id>nexus</id>
+			<!--Enable snapshots for the built in central repo to direct -->
+			<!--all requests to nexus via the mirror -->
+			<repositories>
+                <repository>
+                    <id>lob</id>
+                    <name>TDCT</name>
+                    <url>http://nexus.tdct.tdbank.ca:8081/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </repository>
+
+                <repository>
+                    <id>central</id>
+                    <url>http://central</url>
+                    <releases><enabled>true</enabled><updatePolicy>always</updatePolicy></releases>
+                    <snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
+                </repository>
+
+				<repository>
+					<id>td-central</id>
+					<name>TD central</name>
+					<url>https://repo.dcts.tdbank.com:9443/content/groups/secured</url>
+					<releases>
+						<enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>nexus2</id>
+					<name>Nexus Private Repository</name>
+					<url>http://nexus.tdct.tdbank.ca:8081/nexus/content/groups/public</url>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+                    <id>pl-lob</id>
+                    <name>TDCT</name>
+                    <url>http://nexus.tdct.tdbank.ca:8081/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+
+				<pluginRepository>
+					<id>plugin</id>
+					<url>https://repo.dcts.tdbank.com:9443/content/groups/securedPlugins</url>
+					<releases>
+						<enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+                        <updatePolicy>always</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>      
+        <profile>
+          <id>SUREFIRE-1588</id>
+          <activation>
+            <activeByDefault>true</activeByDefault>
+          </activation>
+          <properties>
+            <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+          </properties>
+        </profile>
+  </profiles>
+  <activeProfiles>
+    <!-- make the profile active all the time -->
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+</settings>

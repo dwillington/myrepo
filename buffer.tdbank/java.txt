@@ -1,0 +1,6 @@
+keytool -import -alias example -keystore /c/tools/jdk-8u191-windows-x64/jre/lib/security/cacerts -file /c/temp/jcenter-base64.cert.cer
+
+keytool -delete -alias jcenter -keystore /c/tools/jdk-8u191-windows-x64/jre/lib/security/cacerts
+
+openssl s_client -showcerts -connect https://jcenter.bintray.com\
+< /dev/null 2> /dev/null | openssl x509 -outform PEM > ~/root_ca.pem

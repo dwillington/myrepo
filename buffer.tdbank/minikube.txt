@@ -1,0 +1,68 @@
+
+https://kubernetes.io/docs/tasks/tools/install-minikube/ 
+https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver
+
+https://kubernetes.io/docs/setup/independent/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
+
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kube*
+sslverify=0
+EOF
+
+# Set SELinux in permissive mode (effectively disabling it)
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum remove -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+systemctl enable kubelet && systemctl start kubelet
+
+echo "{
+"insecure-registries": [
+    "k8s.gcr.io"
+  ]
+}" > /etc/docker/daemon.json
+sudo systemctl daemon-reload
+sudo service docker restart
+echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
+systemctl enable kubelet.service
+swapoff -a
+
+kubeadm init  --ignore-preflight-errors='NumCPU'
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+rm -rf .minikube && mkdir -p .minikube/cache/iso && cp minikube-v0.33.1.iso .minikube/cache/iso
+
+minikube delete && minikube start --vm-driver=none
+
+minikube delete && minikube --bootstrapper=localkube start --vm-driver=none
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit
+
+install -o root -g wheel -m 4755 docker-machine-driver-hyperkit /usr/local/bin/
+
+#https://serverfault.com/questions/139728/how-to-download-the-ssl-certificate-from-a-website
+echo -n | openssl s_client -connect storage.googleapis.com:443 -showcerts \
+    | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /tmp/storage.googleapis.com.cert
+
+
+#https://gist.github.com/kekru/deabd57f0605ed95d5c8246d18483687
+cp /tmp/server.pem /etc/pki/ca-trust/source/anchors/.
+update-ca-trust enable
+update-ca-trust extract
+curl https://storage.googleapis.com
+
+curl -kO https://storage.googleapis.com/kubernetes-release/release/v1.13.2/bin/linux/amd64/kubeadm.sha1
+
+

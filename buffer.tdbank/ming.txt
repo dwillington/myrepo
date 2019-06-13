@@ -1,0 +1,3 @@
+C:\msys64\usr\bin
+/c/Users/ashra48/AppData/Local/Programs/Git/bin/rsync /c/Users/ashra48/Downloads/registry.tar tnextdctjenkinscidev@10.155.20.44:/tmp/.
+

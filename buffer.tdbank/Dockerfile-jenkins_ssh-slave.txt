@@ -1,0 +1,53 @@
+FROM openjdk:8-jdk
+LABEL MAINTAINER="Nicolas De Loof <nicolas.deloof@gmail.com>"
+
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=10000
+ARG gid=10000
+ARG JENKINS_AGENT_HOME=/home/${user}
+
+ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
+
+RUN groupadd -g ${gid} ${group} \
+    && useradd -d "${JENKINS_AGENT_HOME}" -u "${uid}" -g "${gid}" -m -s /bin/bash "${user}"
+
+COPY phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
+
+# setup SSH server
+RUN apt-get update \
+	&& apt-get install --no-install-recommends -y openssh-server \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& chown jenkins:jenkins -R /tmp/phantomjs \
+	&& mv /etc/localtime /etc/localtime.old \
+	&& ln -s /usr/share/zoneinfo/America/Toronto /etc/localtime \
+	&& wget --no-check-certificate -O jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
+	&& chmod +x ./jq \
+	&& mv jq /usr/bin \
+	&& chown root:root /usr/bin/jq \
+	&& wget --no-check-certificate http://deb.debian.org/debian/pool/main/s/sshpass/sshpass_1.06-1_amd64.deb \
+	&& dpkg -i sshpass_1.06-1_amd64.deb && apt-get install -f \
+	&& rm -rf sshpass_1.06-1_amd64.deb \
+	&& echo    "[user]"                       	>  /home/jenkins/.gitconfig \
+	&& echo    "\temail = Jenkins@td.com" 		>> /home/jenkins/.gitconfig \
+	&& echo    "\tname = Jenkins" 				>> /home/jenkins/.gitconfig \
+	&& chown jenkins:jenkins /home/jenkins/.gitconfig
+
+RUN apt-get update && apt-get install -qy zip make g++
+
+RUN sed -i /etc/ssh/sshd_config \
+        -e 's/#PermitRootLogin.*/PermitRootLogin no/' \
+        -e 's/#RSAAuthentication.*/RSAAuthentication yes/'  \
+        -e 's/#PasswordAuthentication.*/PasswordAuthentication no/' \
+        -e 's/#SyslogFacility.*/SyslogFacility AUTH/' \
+        -e 's/#LogLevel.*/LogLevel INFO/' && \
+    mkdir /var/run/sshd
+
+VOLUME "${JENKINS_AGENT_HOME}" "/tmp" "/run" "/var/run"
+WORKDIR "${JENKINS_AGENT_HOME}"
+
+COPY setup-sshd /usr/local/bin/setup-sshd
+
+EXPOSE 22
+
+ENTRYPOINT ["setup-sshd"]

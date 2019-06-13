@@ -1,0 +1,349 @@
+- we should upgrade jenkins, monthly
+- how are job permissions handled in jenkins?
+
+- research how to become a google partner
+
+- test docker swarm with two agents and have hoj master point to swarm url
+  - https://docs.docker.com/swarm/overview/#understand-swarm-cluster-creation
+  - https://docs.docker.com/swarm/install-manual/#step-6-communicate-with-the-swarm
+
+- upgrade all plug ins around 8 pm during down time and do testing...
+
+- document
+  - docker swarm setup
+  - jenkins uat setup
+
+- setup 1-2 KT's on:
+  - jenkins / docker configuration
+  - docker swarm setup
+  - use of Dockerfile for Jenkins agent maintenance
+  - Jenkins UAT setup
+    - create HOJ / TDCT UAT from scratch
+	  - 
+
+- what are all the problems with jenkins right now?
+    - HOJ UAT not able to pull image when using swarm
+	- TDCT UAT active directory
+
+- create a UAT environment for Jenkins
+  - testing pipeline shared libraries
+  - testing Jenkins and plug in upgrades
+  - automate creation of HOJ UAT Jenkins from HOJ PROD Jenkins
+    - identify candidate jobs from HOJ and TDCT which represent Fenix coverage
+	- we need to identify missing stages for testing and provide a testing environment to do so, i.e JBOSS DEPLOYMENT
+  - create a matrix of all pipeline stage / step types to be tested; use jenkinsConfig.yaml and stages from jobs; provide done statuses
+  - add uat-testing to all relevant jenkinsConfig.yaml
+
+- reduce git times for Angular-Handoff
+  - SANDBOXY-DEPLOY.groovy
+    - notifyEmail throws exception in finally block preventing the following from completing. Need to wrap in try/catch block, otherwise non empty directory waiting for git clone
+		rm -rf * 
+		rm -rf .* || true
+java.io.IOException: java.io.FileNotFoundException: /mnt/store/var/lib/jenkins/workspace/RCP/DEV/salesforce/develop-11may19/DEVMA19B/deploy/reporting/build_report.html (No such file or directory)
+
+- advanced clone behavior (noTags: true, shallow: true, depth: 1) via job dsl script
+  http://10.155.20.44:8080/job/HOJ/job/angular-deal-dashboard/configure
+
+- can you provide me a contact that can help me install jboss same as your bp on a docker container?
+
+- load Jenkinsfile via script id in managed files
+  - https://collaborate.td.com/display/OSS/HOJ+-+FENIX+Jenkinsfile
+  - so convention for testing fenix@branch; name your repo branch "fenix-testing/..."
+#!groovy
+if(env.BRANCH_NAME.startsWith("fenix-testing")) {
+  // repo@fenix-testing/feature --> fenix@fenix-testing/feature
+  // repo@fenix-testing/featureDDD (where DDD=digits) --> fenix@fenix-testing/feature
+  library("fenix@" + env.BRANCH_NAME.replaceAll("\\d*\$", ""))
+}
+else {
+  library("fenix@master")
+}
+mainMethod("")
+
+- reduce git times for DEVR31A/salesforce-automation
+  - https://issues.jenkins-ci.org/browse/JENKINS-33022
+  - [$class: 'CloneOption', noTags: true, shallow: true]
+
+- update Global Pipeline Libraries (GPL) to NOT fetch tags and perform shallow clone
+  - so that git will not download history of the project, saving time and disk space when you just want to access the latest version of a repository
+  - MEASUREABLE improvments, will scale for all jobs
+  - research adding this to all multibranch pipelines
+			scope.checkout([
+				$class: 'GitSCM',
+				branches: scope.scm.branches,
+				doGenerateSubmoduleConfigurations: scope.scm.doGenerateSubmoduleConfigurations,
+				extensions: scope.scm.extensions + [[$class: 'CloneOption', noTags: true, shallow: true, depth: 1]],
+				userRemoteConfigs: scope.scm.userRemoteConfigs
+			])
+
+- deploySalesforceWithSfdxCli
+  - the following does allow access to username/password via environment variables in a shell script
+	node ('HOJ-LINUX-AGENT') {
+		stage('git') {
+			withCredentials([usernamePassword(credentialsId: 'CBDC-BITBUCKET-PIPELINE-CREDENTIAL', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+				sh "./echoUP.sh"
+			}
+		}
+	}
+
+- this.scm.getUserRemoteConfigs()[0].getUrl() takes a long time when many branches
+
+- multibranchPipelineJob tigger scan
+  https://track.td.com/browse/CBDCDEVOPS-294
+  - when I trigger scan via gui after configuration change, nothing happens
+  - when I trigger scan via trigger-multibranch-pipeline-scans.groovy, everything builds
+  - test the above on non COAPP pipeline
+
+- develop POC of multiple masters in docker with the exact same config mirror of TDCT
+  - create jobs on each one using DSL, create job history, simulate production data
+  - test changing of configuration, plugins, etc, cascading to all jenkins, reload from disk, verify new configuration takes
+  - what agents does each master get or share?
+  - what other use cases?
+
+- remove access to create jobs in jenkins; should never happen
+
+- we need to remove unused branches
+  - keeping them around cascades issues all the way down: unused branches hog up logs/archives on jenkins multibranch builds, re scan triggers tons of unused branch builds
+
+- we should stick to project / repository naming conventions
+  - these symbols cascade all the way down: folder / job name in Jenkins, project prefix for AD groups, mapping to folder name regex via jenkins roles
+
+- try docker swarm changes
+tcp://rhel-2k4p4a.dev.tdct.cloud.td.com:4243 --> tcp://cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:4000
+
+- can a masked password be passed to a sh script called from pipeline
+
+----------------------------------------------------------------------
+kijiji: leesa, olufsen, nest e, pixel buds, surface pro, chromecast audio
+----------------------------------------------------------------------
+- need to be positive about the prospect of moving state side; do pros / cons. do an analysis; but be positive about things working out as they best should...
+
+----------------------------------------------------------------------
+- how to create an ssh tunnel; to be able to view blocked ports through 22; following allows re directing ports to an open port
+  - https://unix.stackexchange.com/questions/10428/simple-way-to-create-a-tunnel-from-one-local-port-to-another#187038
+
+- create scripts for automated jenkins plugins upgrade
+  - local script to download the latest plugins via rest api call; filtering out certain plugins
+  - remote sudo script to update the plugins within jenkins
+
+- document virtualbox / docker setup
+  - https://collaborate.td.com/display/OSS/How+to+Install+Oracle+VirtualBox+and+Docker
+
+- portainer
+- does consul have a ui of registered servers?
+- cadvisor / monitoring for swarm?
+
+- we should have UAT Jenkins with a seperate unit test job that exercises every pipeline pathway
+  - upgrade of plugins can then run all jobs and verify success to ensure pipeline code / plugins are not broken
+
+- prevent a new multibranch pipeline from running builds on all discovered branches at once
+  - https://stackoverflow.com/questions/47840096/how-to-disable-a-jenkins-multibranch-pipeline-project?rq=1
+
+- updateCenter issue
+  - sudo vi /opt/jboss/profiles/HOJ_0000/bin/standalone.conf
+
+- research creating a docker hosted repository 
+  - google "docker repository in nexus" (docker image of sonatype/nexus)
+  - https://blog.sleeplessbeastie.eu/2018/04/16/how-to-setup-private-docker-registry/
+
+----------------------------------------------------------------------
+DONE
+----------------------------------------------------------------------
+- in RunJenkinsJob.groovy / Step.groovy, logic seems to be that UNSTABLE build results in exception which is being treated as failure
+  - propogate=false, catch exception check status, and treat UNSTABLE as okay to proceed
+    https://stackoverflow.com/questions/38713865/jenkins-pipeline-fails-if-step-is-unstable
+- improve "Improper branch name" message
+- fenix@feature/flxa -> fenix@master merge
+    - search stage_name in all of resources; identify every unique type
+  - highlight during code review
+    - notification.groovy
+  - backup up flxa/resources
+    - delete flxa/resources, replace with master/resources, except default_settings.yaml
+	- create PR, review, merge
+- uat
+	- install pipeline-multibranch-defaults.hpi on TDCT
+	- waitForQualityGate timing out
+	  - waiting for admin to sonar to configure webhook
+		- https://jenkins.io/doc/pipeline/steps/sonar/ 
+- docker clean up won't run because of ssh public key
+- Global Pipeline Libraries are cloning EVERYTIME (5MB)
+  - if this were an online application, you are loading code and users properties EVERYTIME
+  - https://issues.jenkins-ci.org/browse/JENKINS-40695
+  - https://stackoverflow.com/questions/45178811/jenkins-load-global-pipeline-library-from-filesystem-instead-of-scm
+- helping sajjad with angular-deal-dashboard issues
+  - use -SNAPSHOT for development (-> develop)
+  - use release/1.0 branch for MAVEN RELEASE
+	<scm>
+		<url>https://code.td.com/projects/CFP/repos/com.td.cfp.api/browse</url>
+		<connection>scm:git:ssh://git@code.td.com/cfp/com.td.cfp.api.git</connection>
+		<developerConnection>scm:git:ssh://git@code.td.com/cfp/com.td.cfp.api.git</developerConnection>
+		<tag>com.td.cfp.api-1.0.42</tag>
+	</scm>
+- use jenkins api to update all jobs to discard builds older than count 10
+- how to install sfdx via global tool configuration
+  https://track.td.com/browse/CBDCDEVOPS-263
+- how to disable archiving
+options: [GeneratedArtifactsPublisher(disabled: true)]
+options: [org.jenkinsci.plugins.pipeline.maven.publishers.GeneratedArtifactsPublisher(disabled: true)]
+options: [artifactReporter: [disabled: true)]
+options: [artifactsPublisher(disabled: true)]
+options: [skipArchiveGeneratedArtifacts: true]
+publisherStrategy: 'EXPLICIT'
+- how to delete old builds
+properties([buildDiscarder(logRotator(numToKeepStr: '5'))])
+  - pull request created for merge with master
+  - once merged, will monitor hoj jenkins to ensure last 10 build history is maintained
+- research running gulp via npm for com-td-api-pbpp-rates
+angular-full-app:
+releaseR3.1 --> develop-R3.1.0
+releaseR3.1.1 --> develop-R3.1.1
+release19.march --> develop-mar19
+job_parameter_map: "[[$class: 'StringParameterValue', name: 'ARTIFACT_ID', value: 'angular-full-app-R3.1.0']
+
+rcp-mortgage-preapproval-client:
+develop -> develop-R3.1.0
+develop2.6 -> develop-R3.1.1
+develop2.7 -> develop-mar19
+- setup SOA-Agent for hoj-jenkins
+- research why sonatype scan fails with null pointer or connection error
+  - sonatype scan works on docker agent (not sure why); we can add -v /home/jenkins/.gitconfig:/home/jenkins/.gitconfig:z to continue using docker agent
+- docker maintenance / cleanup strategy
+  - create a jenkins job on hoj master
+- reliable http server for tools and angular.zip
+  - docker run --restart always --net=host -d -p 8081:8043 -v /tmp/tools/:/srv/http pierrezemb/gostatic
+-create documentation on using job dsl
+- research and report on windows container on docker
+- run angular on non docker native agent
+- create docker agent template; verify connectivity
+  - mount tools volume
+  - /home/jenkins/tools:/home/jenkins/tools:z
+  - /mnt/store/var/lib/jenkins/workspace:/home/jenkins/workspace:z
+  - chown jenkins:jenkins -R /mnt/store/var/lib/jenkins/tools
+  - after a fuck ton of research, figured out how to mount volumes as rw for selinux using :z flag with this post
+  - https://stackoverflow.com/questions/44139279/docker-mounting-volume-with-permission-denied
+- resolve why pipeline syntax dockerNode() shuts down docker agent after 10 minutes for angular-full-app build
+  - test setting timeout to 1 minute via cloud config and adding sleep of 5 minutes to cloud agent build
+- get angular-full-app working in docker environment
+  - I can use spare agent 10.155.60.77 (rhel6 so OLD verion of docker 1.7 fuck)
+  - unfortunately scope.node for each stage technically allows for a new agent to be chosen with that label;
+    this is not happening b/c HOJ-LINUX-AGENT(2) is fixed so it is chosen over and again. But docker creates a new agent with that label and steps 
+	counting on prior stage 'code checkout' to be in the context can not be gauranteed. node ('label') will need to wrap all stages that depend on each other.
+	this will have to be an architectural change to fenix pipeline library code.
+- google: hudson.remoting.ChannelClosedException: Channel "unknown"
+  - https://github.com/jenkinsci/docker-plugin/issues/653
+  TL;DR: Try disabling "Response Time"
+  http://10.155.20.44:8080/computer/configure
+  - none of the above worked until downgrade to 1.1.4 as mentioned in the jira ticket above by some
+  - com.nirima.jenkins.plugins.docker.DockerContainerWatchdog.enabled=false
+  - if 1.1.4 remains stable, please help by adding your input to the above thread
+  - https://github.com/jenkinsci/docker-plugin/pull/658
+    - sudo vi /opt/jboss/profiles/HOJ_0000/bin/standalone.conf ## -Dcom.nirima.jenkins.plugins.docker.DockerContainerWatchdog.enabled=false
+  - https://stackoverflow.com/questions/9998298/jenkins-slave-jobs-failing-on-unexpected-termination-of-channel 
+    - could it be java process is dying abruptly and we don't have enough memory?
+  - docker logger:
+    com.nirima.jenkins.plugins.docker (all), io.jenkins.docker.client (config), io.jenkins.docker (config), io.netty (config)
+- diff plugins; make /usr/local/bin/install-plugins.sh work
+  - cd /c/temp && comm -2 -3 delivery-plugins.txt hoj-plugins.txt # all plugins in delivery not in hoj
+- create JobDSLUtils.createMultibranchPipelineJob
+- resolve hoj jenkins security active directory
+   - AD Site: CA-ON-Toronto-SOC-CPO
+   - AD immediately closes connection from hoj master; might need to add to whitelist
+   - fixed via downgrade of active-directory plugin from 2.10 to 2.0
+- we need to 'install automatically' for all tools possible (jdk, maven, ant, groovy, sonarqube, nodejs, etc)
+  - can also use 'extract zip' from url where we place zip in nexus repository or filesystem
+  - http://deliver.dev.tdct.tdbank.com:8080/configureTools/
+- create test maven job
+- add apache-maven to managed tools; add apache-maven to nexus
+  - apache-maven-3.5.4
+  - http://10.155.61.0:8081/nexus/content/repositories/tools/apache/org/maven/3.5.4/maven-3.5.4-bin.zip
+  - file:////tmp/apache-maven-3.5.4-bin.zip
+  - should we create a git binary repository for tools and a jenkins master job to update?
+- we need to use managed config files for settings.xml
+  - http://deliver.dev.tdct.tdbank.com:8080/configfiles/
+- update AD plugin to 2.10 on hoj master
+- order brooklinen comforter; ask for discount first
+- start VDI headless; confirm less memory
+- change migration-test job (and all jobs to be created via job dsl)?
+- install docker
+- configure docker
+- add jenkins docker plug in (<-- very manual and laborious to add individual plugins and dependencies without whitelist!)
+- enable docker remote api
+- add jenkins system configuration cloud docker to connect to docker agent
+- download and docker jenkinsci/agent image (<-- very manual and laborious since docker is BLOCKED)
+- add maven pipeline integration plug in (<-- very manual and laborious to add individual plugins and dependencies without whitelist!)
+- write maven pipeline
+- add settings.xml to managed files
+  - nexus-maven-settings
+- add managed files plug in
+- I think we should upgrade jenkins to the latest 2.148 and then uprgade the plug ins
+- ssh using the local jenkins user is disabled within TD; will need to create a jenkins service account
+  - Seungmoon says it's possible to use a service account tnextdctjenkinscidev
+- create fake local smtp server for hoj master
+  - sudo python -m smtpd -n -c DebuggingServer localhost:25 > /dev/null 2>&1 &
+- return moleskine...
+- look up prices for via first class vs flight to montreal
+- inquiry levis with pl #
+- run java / maven job on rhel-r4vuz.dev.tdct.cloud.td.com in docker
+  - http://10.155.20.44:8080/job/migration-test/job/devops%252Ftest
+----------------------------------------------------------------------
+SOMEDAY/MAYBE
+----------------------------------------------------------------------
+- set up nexus on jenkins master docker with Seungmoon as an exercise in docker
+* - can jenkins bypass firewall via http proxy?
+- we should only checkout jenkinsfile as part of MultibranchPipelineJob b/c it takes forever to checkout the whole repository on master; will bottleneck future jobs
+- upgrade jenkins in delivery prod
+  - back up /var/lib/jenkins; cp -R /var/lib/jenkins /var/lib/jenkins.backup
+  - rm -rf /var/lib/jenkins/*; cp -R /var/lib/jenkins.backup/ /var/lib/jenkins/.
+  - test restarting jenkins; this confirms that placing the contents of /var/lib/jenkins
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

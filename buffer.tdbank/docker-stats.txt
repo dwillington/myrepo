@@ -1,0 +1,95 @@
+----------------------------------------------------------------------
+#https://github.com/google/cadvisor/issues/1444
+sudo mount -o remount,rw '/sys/fs/cgroup'
+sudo ln -s /sys/fs/cgroup/cpu,cpuacct /sys/fs/cgroup/cpuacct,cpu
+----------------------------------------------------------------------
+sudo 
+docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:rw \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --publish=8082:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --privileged=true \
+  --restart always \
+  google/cadvisor:latest
+
+docker logs -f --tail=100 $(docker ps -a | grep cadvisor | awk '{ print $1 }')
+docker stop $(docker ps -a | grep cadvisor | awk '{ print $1 }') && docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+----------------------------------------------------------------------
+#https://portainer.readthedocs.io/en/stable/deployment.html#quick-start
+
+#--net=host \
+docker run -d \
+-p 8083:9000 \
+--name portainer \
+--restart always \
+-v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+
+docker logs -f --tail=100 $(docker ps -a | grep portainer | awk '{ print $1 }')
+docker load -i portainer_portainer.tar
+docker tag f00d88726186 portainer/portainer
+cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:4000
+http://10.155.20.44:8081
+admin/password
+----------------------------------------------------------------------
+#https://www.cyberciti.biz/faq/linux-unix-tcp-port-forwarding/#comments
+#https://unix.stackexchange.com/questions/10428/simple-way-to-create-a-tunnel-from-one-local-port-to-another#187038
+socat tcp-listen:9443,reuseaddr,fork tcp:localhost:9000
+----------------------------------------------------------------------
+did not try, but interesting...
+iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 0.0.0.0:9000
+ssh -g -L 8043:localhost:8000 -f -N tnextdctjenkinscidev@10.155.62.125
+----------------------------------------------------------------------
+#https://gist.github.com/bastman/5b57ddb3c11942094f8d0a97d461b430
+#https://hackernoon.com/cleaning-up-docker-f14edd6fcf4c
+https://github.com/softonic/docker-system-prune
+
+#!/bin/bash
+
+declare -a nodes=("10.155.62.125" "10.155.62.158" "10.155.62.162")
+
+for i in "${nodes[@]}"
+do
+ ssh -o StrictHostKeyChecking=no tnextdctjenkinscidev@"$i" "if [ -f /usr/bin/docker ];then docker container prune-f; fi"
+# ssh -o StrictHostKeyChecking=no tnextdctjenkinscidev@"$i" "if [ -f /usr/bin/docker ];then docker volume prune-f; fi"
+done
+----------------------------------------------------------------------
+sudo du -smh /var/lib/docker/volumes
+----------------------------------------------------------------------
+netstat -plnt | grep 8081
+----------------------------------------------------------------------
+openstack_rules:
+default:
+  - port: 8080
+  - port: 8443
+  - port: 9080
+  - port: 9443
+  - port: 9991
+  - port: 10080
+  - port: 10443
+  - port: 10991
+  - port: 11080
+  - port: 11443
+  - port: 11991
+  - port: 12080
+  - port: 12443
+  - port: 12991
+  - port: 13080
+  - port: 13443
+  - port: 13991
+  - port: 14080
+  - port: 14443
+  - port: 14991
+  - port: 15080
+  - port: 15443
+  - port: 15991
+  - port: 16080
+  - port: 16443
+  - port: 16991
+  - port: 17991
+  - remote_ip_prefix: 10.112.213.0/24
+	port: 16163
+

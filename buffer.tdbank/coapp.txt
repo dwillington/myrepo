@@ -1,0 +1,65 @@
+cat temp | awk \"'FNR == 2 {print \$1}'\" | cut -d\" \" -f1 > temp1
+cat temp | awk "FNR == 2 {print \$1}" | cut -d" " -f1 > temp1
+
+DEPLOY_PW=1qazse44
+sshpass -p $DEPLOY_PW ssh tnextdctjenkinscidev@10.155.82.112 'mkdir "jenkins-COAPP-UI-release%2Fcoapp-2"'
+sshpass -p $DEPLOY_PW scp -v -P 22 /home/tnextdctjenkinscidev/workspace/COAPP_UI_release_coapp/stage/* tnextdctjenkinscidev@10.155.82.112:"/home/tnextdctjenkinscidev/jenkins-COAPP-UI-release%2Fcoapp-2"
+
+mkdir -p /home/tnextdctjenkinscidev/jenkins-COAPP-UI-release%2Fcoapp-2
+cd /home/tnextdctjenkinscidev/jenkins-COAPP-UI-release%2Fcoapp-2
+touch com.td.cfp.api-1.0.42-SNAPSHOT.war
+find "/home/tnextdctjenkinscidev/jenkins-COAPP-UI-release%2Fcoapp-2" -type f -regex "^.*\.\(war\|ear\|jar\)"  > to_deploy
+APP=/home/tnextdctjenkinscidev/jenkins-COAPP-UI-release%2Fcoapp-2/com.td.cfp.api-1.0.42-SNAPSHOT.war
+DEPLOY_PW=1qazse44
+echo $DEPLOY_PW | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect deployment-info > temp
+cat temp | grep $(basename $APP) | cut -d" " -f1 > temp1
+EXISTING_APP=$(cat temp1)
+echo $EXISTING_APP
+
+DEPLOY_PW=1qazse44
+echo $DEPLOY_PW | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect deployment-info
+
+APP=/home/tnextdctjenkinscidev/jenkins-COAPP-UI-release%2Fcoapp-4/hoj-ui-war-1.0-SNAPSHOT.war
+
+echo $DEPLOY_PW | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect deployment-info > temp
+
+if [[ $(wc -l < temp) > 2 ]];then
+	echo "JBOSS shared deployment"
+fi
+
+cat temp | grep $(basename $APP) | cut -d" " -f1 > temp1
+
+
+
+EXISTING_APP=hoj-ui-war-1.0-SNAPSHOT.war
+EXISTING_APP=coapp-web-1.0-SNAPSHOT.war
+echo $DEPLOY_PW | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect --controller=127.0.0.1:9999 /deployment=$EXISTING_APP:remove
+
+APP=coapp-web-1.0-SNAPSHOT.war
+APP=com.td.cfp.api-1.0.42-SNAPSHOT.war
+echo $DEPLOY_PW | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --commands="connect --controller=127.0.0.1:9999, deploy $APP"
+
+
+while read APP; do
+	echo $(basename $APP)
+	APP_NAME=$(basename $APP | cut -d"/" -f1)
+	echo $APP_NAME
+done < to_deploy
+	echo $DEPLOY_PW | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect deployment-info > temp						
+	cat temp | awk \"'FNR == 2 {print \$1}'\" | cut -d\" \" -f1 > temp1
+	EXISTING_APP=\$(cat temp1)
+	if [ -z \$EXISTING_APP ]
+	then
+		echo \"First time deployment\"
+	else
+		echo \"Undeploying \$EXISTING_APP\"
+		echo ${scope.env.DEPLOY_PW} | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect --controller=127.0.0.1:9999 /deployment=\$EXISTING_APP:remove
+	fi
+	echo \"Deploying \$APP_NAME\"
+	echo ${scope.env.DEPLOY_PW} | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --commands=\"connect --controller=127.0.0.1:9999, deploy \$APP\"
+	echo ${scope.env.DEPLOY_PW} | sudo -kS /usr/share/jbossas/bin/jboss-cli.sh --connect deployment-info > /home/${scope.env.DEPLOY_ACCOUNT.toLowerCase()}/${scope.env.BUILD_TAG}/outcome.txt 
+done < to_deploy
+
+shopt -s extglob
+rm -rf ./!(bin|boot)
+find . -not -name 'bin|boot' -delete

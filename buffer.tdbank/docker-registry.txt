@@ -1,0 +1,55 @@
+# https://blog.sleeplessbeastie.eu/2018/04/16/how-to-setup-private-docker-registry/
+docker run -d --net=host \
+  -p 5000:5000 \
+  -v /mnt/jenkins/tnextdctjenkinscidev/docker-registry-data:/var/lib/registry \
+  --name registry \
+  --restart always \
+  registry:2
+
+docker logs -f --tail=100 $(docker ps -a | grep registry | awk '{ print $1 }')
+----------------------------------------------------------------------
+(DEV) tnextdctjenkinscidev@cbdc-jenkins-v92oh:/tmp $ docker run registry:2 --version
+registry github.com/docker/distribution v2.6.2
+----------------------------------------------------------------------
+UNTESTED:
+  docker run -d --restart=always \
+  --name registry 
+  -v `pwd`/certs:/certs \
+  -v `pwd`/auth:/auth \
+  -e "REGISTRY_AUTH=htpasswd" \
+  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+  -e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:5000 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry-selfsigned.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/registry-selfsigned.key \
+  -p 5000:5000 \
+  registry:2
+----------------------------------------------------------------------
+docker logs -f $(docker ps --latest --quiet)
+
+docker stop $(docker ps --latest --quiet) && docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+
+docker tag jenkins/ssh-slave-td cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td
+docker push cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td
+
+docker pull cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td
+----------------------------------------------------------------------
+sudo vi /etc/docker/daemon.json
+{
+  "insecure-registries" : ["cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000"]
+}
+#, "registry.access.redhat.com:5000"
+----------------------------------------------------------------------
+curl http://cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/v1/_ping
+curl http://10.155.20.44:5000/v1/_ping
+----------------------------------------------------------------------
+#https://www.admintome.com/blog/running-your-own-docker-registry/
+----------------------------------------------------------------------
+sudo yum install docker-distribution.x86_64 -y
+sudo systemctl start docker-distribution.service
+ls -al /etc/docker-distribution/registry/config.yml
+docker tag cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td rhel-3chimv.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td
+docker push rhel-3chimv.dev.tdct.cloud.td.com:5000/jenkins/ssh-slave-td
+----------------------------------------------------------------------
+sudo yum remove docker-distribution.x86_64 -y
+

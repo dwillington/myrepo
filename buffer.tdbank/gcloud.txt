@@ -1,0 +1,24 @@
+gcloud compute instances attach-disk docker-swarm-manager \
+  --disk jenkins-master --zone us-east1-b
+
+gcloud compute instances detach-disk jenkins-master \
+  --disk jenkins-master --zone us-east1-b
+
+gcloud config set project totemic-gravity-195222
+
+mount /dev/disk/by-id/google-DEVICE_NAME
+
+mkdir -p /mnt/disks/jenkins-master
+mount -o defaults /dev/disk/by-id/google-jenkins-master /mnt/disks/jenkins-master
+
+mount /dev/disk/by-id/scsi-0Google_PersistentDisk_jenkins-master /mnt/disks/jenkins-master
+
+----------------------------------------------------------------------
+#https://gist.github.com/willurd/5720255
+#serving up files via http server from google cloud to td
+/var/lib/docker/volumes/jenkins_home/_data/workspace/abc
+python -m SimpleHTTPServer 8080
+
+
+
+

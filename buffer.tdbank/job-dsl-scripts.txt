@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+USER=ashra48
+APITOKEN=11c1f84da38923060f927baa0c3b234c71
+SERVER=10.155.20.44:8080
+CRUMB=$(curl --user $USER:$APITOKEN $SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+curl -O --user $USER:$APITOKEN -H "$CRUMB" \
+http://$SERVER/job/CFP/job/com.td.cfp.api/job/develop/lastBuild/consoleText
+
+http://$SERVER/job/CFP/job/com.td.cfp.api/job/develop/lastSuccessfulBuild/artifact/com/td/cfp/com.td.cfp.api/1.0.42-SNAPSHOT/com.td.cfp.api-1.0.42-SNAPSHOT.war
+----------------------------------------------------------------------
+USER=admin
+APITOKEN=11da5534c85a5199fc08cfe4b92031d6c7
+SERVER=10.155.62.158:8080
+CRUMB=$(curl --user $USER:$APITOKEN $SERVER/crumbIssuer/api/xml?xpath=concat\(//crumbRequestField,%22:%22,//crumb\))
+for i in {0..3}
+do
+  curl -X POST --user $USER:$APITOKEN -H "$CRUMB" http://$SERVER/job/example-$i/build
+done
+----------------------------------------------------------------------
+cd /c/temp
+curl -O https://repo.jenkins-ci.org/public/org/jenkins-ci/plugins/job-dsl-core/1.70/job-dsl-core-1.70-standalone.jar
+cd /c/temp/job-dsl-test
+java -cp /c/temp/job-dsl-core-1.70-standalone/lib/commons-codec-1.8.jar:/c/temp/job-dsl-core-1.70-standalone/lib/groovy-all-2.4.11.jar:/c/temp/job-dsl-core-1.70-standalone/lib/xmlunit-1.4.jar:/c/temp/job-dsl-core-1.70-standalone/lib/xstream-1.4.7-jenkins-1.jar:/c/temp/job-dsl-core-1.70-standalone/main/main.jar:/c/temp/git-repos/job-dsl-scripts/src/ \
+javaposse.jobdsl.Run \
+/c/temp/git-repos/job-dsl-scripts/master-TDCT-UAT/createJobs.groovy
+cat PBBSL/DEV/example.xml
+----------------------------------------------------------------------

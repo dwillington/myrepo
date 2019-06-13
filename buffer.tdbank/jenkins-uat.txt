@@ -1,0 +1,87 @@
+1qazse44
+----------------------------------------------------------------------
+ssh tnextdctjenkinscidev@10.155.56.54  # HOJ UAT jenkins master 		rhel-3chimv.dev.tdct.cloud.td.com (10.87.80.34)
+# jenkins uat TDCT setup
+# run on TDCT Jenkins
+sudo tar -cvf /tmp/tdct-jenkins.tar -C /var/lib/.jenkins . \
+--exclude='config-history' --exclude='caches' --exclude='jobs' --exclude='jobs.bak' --exclude='plugins.bk' --exclude='fingerprints' --exclude='log' --exclude='logs' --exclude='nodes' \
+--exclude='workspace' --exclude='backup_dir' --exclude='backup_dir@tmp' --exclude='mnt' --exclude='backup_dir'
+
+ssh tnextdctjenkinscidev@10.155.56.54  # HOJ UAT jenkins master 		rhel-3chimv.dev.tdct.cloud.td.com
+docker run -p 8443:8080 -d -v jenkins_tdct_home:/var/jenkins_home jenkins/jenkins #--add-host dockerHost:172.17.0.1 
+docker cp /home/tnextdctjenkinscidev/jenkins_tdct_home_config/jenkins.war $(docker ps --latest --quiet):/usr/share/jenkins/jenkins.war
+docker stop $(docker ps --latest --quiet)
+sudo rm -rf /var/lib/docker/volumes/jenkins_tdct_home/_data/war/
+sudo tar -C /var/lib/docker/volumes/jenkins_tdct_home/_data -xvf /home/tnextdctjenkinscidev/jenkins_tdct_home_config/tdct-jenkins.tar
+sudo touch /var/lib/docker/volumes/jenkins_tdct_home/_data/IntegritySCM/log
+sudo rm -rf /var/lib/docker/volumes/jenkins_tdct_home/_data/plugins/ca-service-virtualization
+sudo rm -rf /var/lib/docker/volumes/jenkins_tdct_home/_data/plugins/ca-service-virtualization.jpi
+sudo sed -i 's/true/false/' /var/lib/docker/volumes/jenkins_tdct_home/_data/config.xml # turn off security because for some reason active directory is not working here
+sudo sed -i 's/deliver.dev.tdct.tdbank.com:8080/10.155.56.54:8443/' /var/lib/docker/volumes/jenkins_tdct_home/_data/jenkins.model.JenkinsLocationConfiguration.xml # replace Jenkins URL
+sudo mkdir -p /var/lib/docker/volumes/jenkins_tdct_home/_data/nga/logs
+sudo touch /var/lib/docker/volumes/jenkins_tdct_home/_data/nga/logs/nga.log
+sudo cp /home/tnextdctjenkinscidev/jenkins_tdct_home_config/org.jenkinsci.plugins.configfiles.GlobalConfigFiles.xml /var/lib/docker/volumes/jenkins_tdct_home/_data/.
+sudo cp /home/tnextdctjenkinscidev/jenkins_tdct_home_config/plugins/pipeline-multibranch-defaults.jpi /var/lib/docker/volumes/jenkins_tdct_home/_data/plugins/.
+sudo cp -R 	/home/tnextdctjenkinscidev/jenkins_tdct_home_config/jobs/ /var/lib/docker/volumes/jenkins_tdct_home/_data/
+sudo cp -R /home/tnextdctjenkinscidev/jenkins_tdct_home_config/nodes/ /var/lib/docker/volumes/jenkins_tdct_home/_data/
+sudo chown cloud-user:cloud-user -R /var/lib/docker/volumes/jenkins_tdct_home
+docker start $(docker ps --latest --quiet)
+docker logs -f $(docker ps -a | grep jenkins | awk '{ print $1 }')
+docker stop $(docker ps --latest --quiet) && docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+docker volume prune -f
+
+ssh tnextdctjenkinscidev@10.155.56.76  # HOJ UAT jenkins docker agent 	rhel-srzp4r.dev.tdct.cloud.td.com
+----------------------------------------------------------------------
+ssh tnextdctjenkinscidev@10.155.61.0   # HOJ-LINUX-AGENT2 jenkins agent with docker agents rhel-r4vuz.dev.tdct.cloud.td.com
+mkdir -p /home/tnextdctjenkinscidev/.m2
+cp /mnt/store/var/lib/jenkins/.m2/*.xml /home/tnextdctjenkinscidev/.m2
+vi /home/tnextdctjenkinscidev/.m2/settings.xml
+  <localRepository>/home/tnextdctjenkinscidev/.m2/repository</localRepository>
+----------------------------------------------------------------------
+#jenkins uat HOJ setup; install jenkins rpm; capTARe jenkins prod config; restore in uat 
+ssh tnextdctjenkinscidev@10.155.56.54  # HOJ UAT jenkins master 		rhel-3chimv.dev.tdct.cloud.td.com
+#download latest stable http://pkg.jenkins-ci.org/redhat-stable/
+sudo rpm -i /tmp/jenkins-2.150.1-1.1.noarch.rpm
+sudo find / -name jenkins
+#http://blog.manula.org/2013/03/running-jenkins-under-different-user-in.html
+sudo vi /etc/sysconfig/jenkins
+$JENKINS_USER=tnextdctjenkinscidev
+sudo chown -R tnextdctjenkinscidev:users /var/lib/jenkins 
+sudo chown -R tnextdctjenkinscidev:users /var/cache/jenkins
+sudo chown -R tnextdctjenkinscidev:users /var/log/jenkins
+sudo chown -R tnextdctjenkinscidev:users /usr/lib/jenkins
+sudo chown -R tnextdctjenkinscidev:users /etc/sysconfig/jenkins
+
+# run on Jenkins you want to migrate i.e HOJ Master
+#ssh tnextdctjenkinscidev@10.155.20.44  # HOJ jenkins master cbdc-jenkins-v92oh.dev.tdct.cloud.td.com (10.87.98.5)
+#sudo tar -cvf /tmp/hoj-jenkins.tar -C /var/lib/jbossas/.jenkins . --exclude='caches' --exclude='config-history' --exclude='fingerprints' --exclude='jobs' --exclude='log' --exclude='logs' --exclude='plugins.bk' --exclude='fingerprints' --exclude='updates' --exclude='nodes' --exclude='workspace'
+
+# run on Jenkins UAT Master
+# sudo cp -R /var/lib/jenkins /var/lib/jenkins.bk
+# sudo chown tnextdctjenkinscidev:users -R /var/lib/jenkins.bk
+
+scp tnextdctjenkinscidev@10.155.20.44:/tmp/hoj-jenkins.tar /tmp/.
+#sudo rm -rf /var/lib/jenkins/
+#sudo mkdir /var/lib/jenkins/
+sudo chown -R tnextdctjenkinscidev:users /var/lib/jenkins
+cd /var/lib/jenkins/
+sudo tar -xvf /tmp/hoj-jenkins.tar
+cp -R /home/tnextdctjenkinscidev/jenkins_hoj_home_config/jobs /var/lib/jenkins/.
+sed -i 's/cbdc-jenkins-v92oh.dev.tdct.cloud.td.com:4000/rhel-srzp4r.dev.tdct.cloud.td.com:4243/' /var/lib/jenkins/config.xml
+sed -i 's/hoj-jenkins.cbdc.td.com/rhel-srzp4r.dev.tdct.cloud.td.com/' jenkins.model.JenkinsLocationConfiguration.xml
+sudo chown -R tnextdctjenkinscidev:users /var/lib/jenkins
+
+# restore to "clean slate" jenkins
+sudo service jenkins stop
+sudo rm -rf /var/lib/jenkins/
+#sudo rpm -i /tmp/jenkins-2.150.1-1.1.noarch.rpm
+sudo mkdir /var/lib/jenkins/
+sudo chown -R tnextdctjenkinscidev:users /var/lib/jenkins 
+sudo service jenkins start
+sudo ls -al /var/lib/jenkins
+tail -100f /var/log/jenkins/jenkins.log
+
+# back jenkins uat config.xml
+find /var/lib/jenkins/jobs -name "config.xml" | tar -cvf hoj-jenkins-uat-job-configs.tar -T -
+----------------------------------------------------------------------
+

@@ -1,0 +1,33 @@
+- Jenkins UAT setup
+  - create HOJ / TDCT UAT from scratch
+
+----------------------------------------------------------------------
+- show a docker tutorial
+  - start a container with an image
+      docker run -u 0 -dit openjdk:8-jdk
+	  docker stop $(docker ps -a | grep jdk | awk '{ print $1 }')
+	  docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+
+    - show that you can expose ports, mount volumes
+    - exec bash and run some commands
+	- explain that jenkins master can technically connect to this agent over ssh, show http://10.155.20.44:8080/computer/10.155.62.158/configure
+
+- show jenkins docker plug in
+  - docker host
+    - go over docker installation
+	  - http://localhost:4243/version
+  - docker agent templates
+    - label
+	- image
+  	  - show docker image via docker images
+	- volumes
+	  - sudo ls -al /home/jenkins/
+	- connect method
+  - run job demonstrate use of label
+  - show pipeline syntax example via pipeline-code.txt
+
+- useradd
+
+- show Dockerfile
+
+- docker swarm demo on UAT...

@@ -1,0 +1,148 @@
+----------------------------------------------------------------------
+#https://docs.docker.com/swarm/install-manual/#step-5-create-swarm-cluster
+----------------------------------------------------------------------
+#10.155.20.44
+  consul0_ip=10.150.0.2
+manager0_ip=10.150.0.2
+#manager0_ip=10.155.20.44
+docker stop $(docker ps -a | grep swarm | awk '{ print $1 }')
+docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+
+docker run -d -p 8500:8500 --name=consul progrium/consul -server -bootstrap -advertise=$consul0_ip
+#docker run --restart always --net=host -d -v /home/tnextdctjenkinscidev/consul/config:/tmp/config:Z -p 8500:8500 --name=consul progrium/consul -server -bootstrap -advertise=$consul0_ip -config-dir=/tmp/config
+docker logs -f --tail=100 $(docker ps -a | grep consul | awk '{ print $1 }')
+docker run --restart always --net=host -d -p 4000:4000 swarm manage -H :4000 --replication --advertise $manager0_ip:4000 consul://$consul0_ip:8500
+docker logs -f --tail=100 $(docker ps -a | grep swarm | awk '{ print $1 }')
+
+curl http://localhost:8500/v1/kv/docker/swarm/nodes
+curl http://localhost:8500/v1/kv/docker/network
+curl http://localhost:8500/v1/agent/members
+  consul0_ip=10.150.0.2
+docker stop $(docker ps -a | grep swarm | awk '{ print $1 }')
+docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+  consul0_ip=10.150.0.2
+  node0_ip=10.150.0.3
+docker run -d swarm join --advertise=$node0_ip:4243 consul://$consul0_ip:8500
+docker logs -f $(docker ps -a | grep swarm | awk '{ print $1 }')
+
+  consul0_ip=rhel-3chimv
+  node0_ip=10.87.80.210
+docker run -d swarm join --advertise=$node0_ip:4243 consul://$consul0_ip:8500
+docker logs -f $(docker ps -a | grep swarm | awk '{ print $1 }')
+
+docker stop $(docker ps --latest --quiet)
+docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+----------------------------------------------------------------------
+docker run swarm list consul://$consul0_ip:8500
+docker run swarm --version
+	swarm version 1.2.9 (527a849)
+docker run progrium/consul --version
+	Consul v0.5.2
+	Consul Protocol: 2 (Understands back to: 1)
+----------------------------------------------------------------------
+docker -H :4000 info
+docker -H :4000 ps -a
+----------------------------------------------------------------------
+#   --httpListenAddress=10.155.20.44
+#	--env JENKINS_OPTS="--httpPort=8081" \
+ssh tnextdctjenkinscidev@10.155.62.158 # HOJ jenkins agent with docker agents rhel-7b1ydr.dynamic.tdct.cloud.td.com
+docker run --net=host -d -p 8080:8080 \
+	-v /home/tnextdctjenkinscidev/jenkins_home:/var/jenkins_home:z \
+	jenkins/jenkins
+
+docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+docker logs -f $(docker ps -a | grep jenkins | awk '{ print $1 }')
+----------------------------------------------------------------------
+https://stackoverflow.com/questions/37956298/how-to-pass-parameters-while-creating-consul-client-agent-inside-a-docker-contai
+https://github.com/docker/swarm/issues/2225
+cat /tmp/consul/config/consul.json
+{
+        "data_dir": "/data",
+        "ui_dir": "/ui",
+        "client_addr": "0.0.0.0",
+        "ports": {
+                "dns": 54,
+                "rpc": 8401
+        },
+        "recursor": "8.8.8.8",
+        "disable_update_check": true
+}
+----------------------------------------------------------------------
+#https://docs.docker.com/swarm/discovery/#a-static-file-or-list-of-nodes
+echo <10.87.80.196:4243> > /tmp/my_cluster
+docker run -d -p 4000:4000 swarm manage -H :4000 --replication --advertise $manager0_ip:4000 file:///tmp/my_cluster
+----------------------------------------------------------------------
+(DEV) tnextdctjenkinscidev@cbdc-jenkins-v92oh:~ $ docker run swarm --help
+Usage: swarm [OPTIONS] COMMAND [arg...]
+
+A Docker-native clustering system
+
+Version: 1.2.9 (527a849)
+
+Options:
+  --debug                       debug mode [$DEBUG]
+  --log-level, -l "info"        Log level (options: debug, info, warn, error, fatal, panic)
+  --experimental                enable experimental features
+  --help, -h                    show help
+  --version, -v                 print the version
+
+Commands:
+  create, c     Create a cluster
+  list, l       List nodes in a cluster
+  manage, m     Manage a docker cluster
+  join, j       Join a docker cluster
+  help          Shows a list of commands or help for one command
+
+Run 'swarm COMMAND --help' for more information on a command.
+----------------------------------------------------------------------
+(DEV) tnextdctjenkinscidev@cbdc-jenkins-v92oh:~ $ docker run progrium/consul --help
+==> Usage: consul agent [options]
+
+  Starts the Consul agent and runs until an interrupt is received. The
+  agent represents a single node in a cluster.
+
+Options:
+
+  -advertise=addr          Sets the advertise address to use
+  -atlas=org/name          Sets the Atlas infrastructure name, enables SCADA.
+  -atlas-join              Enables auto-joining the Atlas cluster
+  -atlas-token=token       Provides the Atlas API token
+  -bootstrap               Sets server to bootstrap mode
+  -bind=0.0.0.0            Sets the bind address for cluster communication
+  -bootstrap-expect=0      Sets server to expect bootstrap mode.
+  -client=127.0.0.1        Sets the address to bind for client access.
+                           This includes RPC, DNS, HTTP and HTTPS (if configured)
+  -config-file=foo         Path to a JSON file to read configuration from.
+                           This can be specified multiple times.
+  -config-dir=foo          Path to a directory to read configuration files
+                           from. This will read every file ending in ".json"
+                           as configuration in this directory in alphabetical
+                           order. This can be specified multiple times.
+  -data-dir=path           Path to a data directory to store agent state
+  -recursor=1.2.3.4        Address of an upstream DNS server.
+                           Can be specified multiple times.
+  -dc=east-aws             Datacenter of the agent
+  -encrypt=key             Provides the gossip encryption key
+  -join=1.2.3.4            Address of an agent to join at start time.
+                           Can be specified multiple times.
+  -join-wan=1.2.3.4        Address of an agent to join -wan at start time.
+                           Can be specified multiple times.
+  -retry-join=1.2.3.4      Address of an agent to join at start time with
+                           retries enabled. Can be specified multiple times.
+  -retry-interval=30s      Time to wait between join attempts.
+  -retry-max=0             Maximum number of join attempts. Defaults to 0, which
+                           will retry indefinitely.
+  -retry-join-wan=1.2.3.4  Address of an agent to join -wan at start time with
+                           retries enabled. Can be specified multiple times.
+  -retry-interval-wan=30s  Time to wait between join -wan attempts.
+  -retry-max-wan=0         Maximum number of join -wan attempts. Defaults to 0, which
+                           will retry indefinitely.
+  -log-level=info          Log level of the agent.
+  -node=hostname           Name of this node. Must be unique in the cluster
+  -protocol=N              Sets the protocol version. Defaults to latest.
+  -rejoin                  Ignores a previous leave and attempts to rejoin the cluster.
+  -server                  Switches agent to server mode.
+  -syslog                  Enables logging to syslog
+  -ui-dir=path             Path to directory containing the Web UI resources
+  -pid-file=path           Path to file to store agent PID
+----------------------------------------------------------------------

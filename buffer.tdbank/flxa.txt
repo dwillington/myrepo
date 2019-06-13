@@ -1,0 +1,32 @@
+----------------------------------------------------------------------
+Required parameter email_type is not defined
+This new parameter is now required. We should change code to default to email_type: 'REGULAR' if not explicitly specified.
+- notification:
+  agent: 'HOJ-LINUX-AGENT2'
+  stage_name: 'EMAIL NOTIFICATION'
+  checkout_scm: false
+  clean_up_workspace: true
+  notification_type: 'EMAIL'
+  email_type: 'REGULAR'
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

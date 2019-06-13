@@ -1,0 +1,83 @@
+git add -A
+git commit -m "--depth 50"
+git push
+----------------------------------------------------------------------
+git clone https://github.com/dwillington/myrepo.git
+set password=xxx
+git clone https://ASHRA48:$password@code.td.com/scm/hoj/angular-full-app.git
+git checkout remotes/origin/release/R3.1
+----------------------------------------------------------------------
+/c/Users/ashra48/AppData/Local/Programs/Git/bin/tmux.exe
+echo "alias more=less
+alias np=/c/tools/notepad++/notepad++.exe" > ~/.bashrc && source ~/.bashrc
+----------------------------------------------------------------------
+git clone ssh://git@code.td.com/cbawjen/fenix.git
+----------------------------------------------------------------------
+for i in {1..5}
+do
+	echo $i
+done
+----------------------------------------------------------------------
+# delete local and remote branch
+git checkout master
+git branch -D test-single-branch
+git push origin --delete test-single-branch
+----------------------------------------------------------------------
+# create new remote branch
+git checkout -b fenix-testing/run-jenkins-job
+git push origin fenix-testing/run-jenkins-job
+
+git checkout -b copy-master
+git push origin copy-master
+
+----------------------------------------------------------------------
+git reset --hard origin/master
+git pull
+----------------------------------------------------------------------
+find . -name '*.sh' | xargs git update-index --chmod=+x
+----------------------------------------------------------------------
+ashra48@WINL08152006 MINGW64 /c/temp/toDelete
+$ time git clone ssh://git@code.td.com/cbawjen/fenix.git
+Cloning into 'fenix'...
+remote: Counting objects: 21408, done.
+remote: Compressing objects: 100% (6546/6546), done.
+remote: Total 21408 (delta 7135), reused 19207 (delta 6476)
+Receiving objects: 100% (21408/21408), 3.76 MiB | 801.00 KiB/s, done.
+Resolving deltas: 100% (7135/7135), done.
+
+real    0m29.003s
+user    0m0.000s
+sys     0m0.062s
+
+ashra48@WINL08152006 MINGW64 /c/temp/toDelete
+$ rm -rf fenix/
+
+ashra48@WINL08152006 MINGW64 /c/temp/toDelete
+$ time git clone ssh://git@code.td.com/cbawjen/fenix.git
+Cloning into 'fenix'...
+remote: Counting objects: 21408, done.
+remote: Compressing objects: 100% (6546/6546), done.
+remote: Total 21408 (delta 7135), reused 19207 (delta 6476)
+Receiving objects: 100% (21408/21408), 3.76 MiB | 835.00 KiB/s, done.
+Resolving deltas: 100% (7135/7135), done.
+
+real    0m13.641s
+user    0m0.015s
+sys     0m0.062s
+
+ashra48@WINL08152006 MINGW64 /c/temp/toDelete
+$ du -smh fenix/
+4.9M    fenix/
+----------------------------------------------------------------------
+for ref in $(git for-each-ref --format='%(refname:short)' | grep 'origin/')
+do
+	git_date=$(git --no-pager log $ref -n 1 --oneline --pretty='%ad' --date=format:'%Y/%m/%d')
+	echo $git_date $ref 
+done
+
+ref=origin/master
+git_date=$(git --no-pager log $ref -n 1 --oneline --pretty='%ad' --date=format:'%Y/%m/%d')
+echo $git_date $ref 
+
+
+
