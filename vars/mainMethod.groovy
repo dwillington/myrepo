@@ -13,8 +13,8 @@ def call(body) {
 		// String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		// echo scmName
 
-		echo scmUrl
-		echo branch
+		echo pipelineParams.scmUrl
+		echo pipelineParams.branch
 
 
 }
