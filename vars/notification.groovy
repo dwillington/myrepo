@@ -26,8 +26,6 @@ def call(config) {
 				def scmNotification = new com.td.jenkins.notify.scm.SCMNotification(this, config.stage_name)
 				currentBuild.result = scmNotification.run(config)
 				break
-			case "PUBLISH_REPORT":
-				break
 			default:
 				com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "notification_type cannot be found"])
 				currentBuild.result = "FAILURE"
