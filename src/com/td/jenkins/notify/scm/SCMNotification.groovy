@@ -52,26 +52,26 @@ public class SCMNotification extends com.td.jenkins.notify.Notifier {
                         state = "INPROGRESS"
                     }
                     Utilities.printToConsoleOutput(scope, [["BLUE", "BitBucket notification state"], ["CYAN", state]], " : ")
-                    String commitHash = scope.sh returnStdout: true, script: 'git rev-parse HEAD'
-                    String shortCommitHash = scope.sh returnStdout: true, script: 'git rev-parse --short HEAD'
-                    def json = new JsonBuilder([
-                        name: "${currentBranch} ${buildNumber}",
-                        state: state,
-                        key: currentBranch + "-" + shortCommitHash,
-                        url: buildUrl
-                    ]).toString()
-                    Utilities.printToConsoleOutput(scope, [["BLUE", "JSON body of request"], ["CYAN", json.toString()]], " : ")
-                    def response = scope.httpRequest authentication: config.notification_scm_account_id, contentType: 'APPLICATION_JSON',
-                        httpMode: 'POST', requestBody: json, url: "https://code.td.com/rest/build-status/1.0/commits/${commitHash}",
-                        consoleLogResponseBody: true
-                    Utilities.printToConsoleOutput(scope, [["BLUE", "response"], ["CYAN", response.toString()]], " : ")
-                    if (response.status == 204) {
-                        Utilities.printToConsoleOutput(scope, ["GREEN", "Successfully notified Bitbucket"])
-                    }
-                    else {
-                        status = "FAILURE"
-                        Utilities.printToConsoleOutput(scope, ["RED", "unexpected http status code : " + response.status.toString()])
-                    }
+                    // String commitHash = scope.sh returnStdout: true, script: 'git rev-parse HEAD'
+                    // String shortCommitHash = scope.sh returnStdout: true, script: 'git rev-parse --short HEAD'
+                    // def json = new JsonBuilder([
+                        // name: "${currentBranch} ${buildNumber}",
+                        // state: state,
+                        // key: currentBranch + "-" + shortCommitHash,
+                        // url: buildUrl
+                    // ]).toString()
+                    // Utilities.printToConsoleOutput(scope, [["BLUE", "JSON body of request"], ["CYAN", json.toString()]], " : ")
+                    // def response = scope.httpRequest authentication: config.notification_scm_account_id, contentType: 'APPLICATION_JSON',
+                        // httpMode: 'POST', requestBody: json, url: "https://code.td.com/rest/build-status/1.0/commits/${commitHash}",
+                        // consoleLogResponseBody: true
+                    // Utilities.printToConsoleOutput(scope, [["BLUE", "response"], ["CYAN", response.toString()]], " : ")
+                    // if (response.status == 204) {
+                        // Utilities.printToConsoleOutput(scope, ["GREEN", "Successfully notified Bitbucket"])
+                    // }
+                    // else {
+                        // status = "FAILURE"
+                        // Utilities.printToConsoleOutput(scope, ["RED", "unexpected http status code : " + response.status.toString()])
+                    // }
                 }
                 else {
                     Utilities.printToConsoleOutput(scope, [["BLUE", "Not sending SCM notification for"],
