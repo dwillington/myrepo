@@ -66,29 +66,6 @@ def call(body) {
 		 	}
 		}
 	}
-
-		// Reading Jenkins master on which pipeline is triggered
-    	String internalHostname = InetAddress.localHost.canonicalHostName
-		if(true) {
-			properties([buildDiscarder(logRotator(numToKeepStr: '10'))])
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
-				["CYAN", "using pipeline v2"]], " : ")
-			// config.pipeline_version = "v2"
-			com.td.jenkins.util.Utilities.startTimer()
-			node(config.agent) {
-				for (step in workflow.steps) {
-					step.each { stepName, stepConfig ->
-						runStep(config, stepName, stepConfig)
-					}
-				}	
-			}
-		}
-		else {
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "Cannot recongzie this Jenkins master"])
-			currentBuild.result = "ABORTED"
-			return // exit pipeline prematurely
-		}
-
 }
 
 def runStep(config, stepName, stepConfig) {
