@@ -1,6 +1,5 @@
 package com.td.jenkins.build.java
 
-import com.td.jenkins.util.Reporter
 import com.td.jenkins.util.Utilities
 
 public class MavenBuild extends com.td.jenkins.build.Builder {
@@ -25,7 +24,7 @@ public class MavenBuild extends com.td.jenkins.build.Builder {
     }
 
     protected String report(Map config, String status) {
-        return Reporter.simpleReport(name, status)
+        // return Reporter.simpleReport(name, status)
     }
 
     // Build based on settings.xml residing on .m2 folder of Jenkins agent
