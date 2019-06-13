@@ -14,6 +14,7 @@ def call(body) {
 		// echo scmName
 
 		String scmUrl = pipelineParams.scmUrl
+		String currentBranch = pipelineParams.branch
 		echo pipelineParams.scmUrl
 		echo pipelineParams.branch
 
