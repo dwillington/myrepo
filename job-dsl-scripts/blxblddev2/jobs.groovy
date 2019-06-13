@@ -4,11 +4,11 @@ folder("CIAD-TEST/hello-world-war/DEV")
 
 pipelineJob('CIAD-TEST/hello-world-war/DEV/hello-world-war-pipeline') {
 	parameters {
-        stringParam('scmName', 'https://github.com/dwillington/hello-world-war.git')
+        stringParam('REPO_URL', 'https://github.com/dwillington/hello-world-war.git')
     }
     definition {
         cps {
-            script("""@Library('my-repo') _"""
+            script("""@Library('myrepo') _"""
 			)
             sandbox()
         }
