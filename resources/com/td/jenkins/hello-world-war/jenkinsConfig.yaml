@@ -26,5 +26,5 @@ workflow:
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
           clean_up_workspace: true
-          notification_type: 'PUBLISH_REPORT'
+          notification_type: 'SCM'
           in_progress: false
