@@ -11,6 +11,9 @@ public class SCMNotification extends com.td.jenkins.notify.Notifier {
     }
 
     protected void notify(Map config) throws Exception {
+
+		if(true) return;
+
         switch(config.pipeline_version) {
             case "v1":
                 notifySCM(config)
