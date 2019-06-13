@@ -26,8 +26,8 @@ workflow:
           checkout_scm: false
           clean_up_workspace: false
           notification_type: 'EMAIL'
-          notification_email_sender: 'CBDCDevOpsToolsAdmins@tdsecurities.com'
-          notification_email_recipients: 'seungmoon.rieh@td.com,nitasha.goyal@td.com'
+          notification_email_sender: dwillington@yahoo.com'
+          notification_email_recipients: dwillington@yahoo.com'
       - notification:
           agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'FINAL SCM NOTIFICATION'
@@ -99,8 +99,8 @@ workflow:
           checkout_scm: false
           clean_up_workspace: false
           notification_type: 'EMAIL'
-          notification_email_sender: 'CBDCDevOpsToolsAdmins@tdsecurities.com'
-          notification_email_recipients: 'seungmoon.rieh@td.com,nitasha.goyal@td.com'
+          notification_email_sender: dwillington@yahoo.com'
+          notification_email_recipients: dwillington@yahoo.com'
       - notification:
           agent: 'HOJ-LINUX-AGENT2'
           stage_name: 'FINAL SCM NOTIFICATION'
@@ -173,9 +173,8 @@ workflow:
           checkout_scm: false
           clean_up_workspace: false
           notification_type: 'EMAIL'
-          notification_email_sender: 'CBDCDevOpsToolsAdmins@tdsecurities.com'
-          #notification_email_recipients: 'seungmoon.rieh@td.com,nitasha.goyal@td.com'
-          notification_email_recipients: 'seungmoon.rieh@td.com,nitasha.goyal@td.com,marlon.llorente@td.com,sabina.albu@td.com,Anurag.Umraiya@td.com,Abdullah.Adeeb@td.com,cts-omni-hoj@td.com,RESLHOJDigitalQETeam@td.com,Hao.Shen@td.com,Matthew.Lemos@td.com,kevin.pereira@td.com,Max.Arulananthan@td.com,Martin.Ogorzelec@td.com,Shina.Amin@td.com,Ning.Zou@td.com,Joshua.Z.Williams@td.com'
+          notification_email_sender: dwillington@yahoo.com'
+          notification_email_recipients: dwillington@yahoo.com'
           
       - notification:
           agent: 'HOJ-LINUX-AGENT2'
