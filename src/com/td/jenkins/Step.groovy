@@ -61,11 +61,8 @@ public abstract class Step implements Serializable {
             scope.stage(config.git_clone_stage_name) {
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Checking out scm"])
                 // scope.checkout(scope.scm)
-
-				checkout([
-                    $class: 'GitSCM',
-                    branches: scope.scm.branches,
-					])
+				
+				git url: scope.scm.remote, branch: scope.scm.branch
 
                 getSourceBranchInfo(config)
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
