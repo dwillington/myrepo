@@ -8,7 +8,7 @@ workflow:
           checkout_scm: true
           clean_up_workspace: false
           notification_type: 'SCM'
-          in_progress: true
+          in_progress: false
       - maven:
           stage_name: 'MAVEN BUILD'
           checkout_scm: false
