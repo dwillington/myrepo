@@ -65,6 +65,7 @@ def call(body) {
 		 		workflow = defaultWorkflow
 		 	}
 		}
+
 		// Reading Jenkins master on which pipeline is triggered
     	String internalHostname = InetAddress.localHost.canonicalHostName
 		if(true) {
