@@ -1,6 +1,7 @@
 import groovy.json.*
 
 def call(body) {
+	ansiColor('xterm') {
 		// evaluate the body block, and collect configuration into the object
 		def pipelineParams= [:]
 		body.resolveStrategy = Closure.DELEGATE_FIRST
@@ -66,5 +67,5 @@ def call(body) {
 		}
 
 
-
+	}
 }
