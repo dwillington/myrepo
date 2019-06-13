@@ -1,12 +1,9 @@
-#!/usr/bin/groovy
+import groovy.json.*
 
 def call(body) {
-    def pipelineParams = [:]
-    body.resolveStrategy = Closure.DELEGATE_FIRST
-    body.delegate = pipelineParams
-    body()
-    
-    def instance = this.class.classLoader.loadClass( "mavenPipeline", true, false )?.newInstance()
-    instance( body )
+		Map config = null // stores entire job configuration
+		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")
+		
+		echo scmName
 
 }
