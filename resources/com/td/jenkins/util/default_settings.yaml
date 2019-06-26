@@ -14,7 +14,7 @@ version: '1.0-SNAPSHOT'
 packaging: 'html'
 repository: 'snapshots'
 release_repository: 'releases'
-nexus_url: 'http://nexus.tdct.tdbank.ca:8081/nexus/content/repositories'
+nexus_url: 'http://blxblddev3:8081/artifactory'
 
 ##--OTHER SETTING
 check_jenkins_job_status_wait_period: '300' # In seconds
