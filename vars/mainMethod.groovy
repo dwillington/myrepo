@@ -34,8 +34,8 @@ def call(body) {
 		// global flag
 		// this.env.BUILD_RUNNING = "false"
 
-		echo scmUrl
-		echo currentBranch
+		echo "scmUrl: " + scmUrl
+		echo "currentBranch: " + currentBranch
 
 		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		echo scmName
