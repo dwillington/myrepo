@@ -13,17 +13,20 @@ def call(body) {
 		Map defaultWorkflow = null // stores steps for the default branch
 
 		String scmUrl;
-		String currentBranch;
+		String currentBranch; // this will only capture the prefix branch name i.e feature/abc -> currentBranch = feature
+		String fullBranchName;
 
 		if(env.BRANCH_NAME) {
 		    // scmUrl = this.scm.getUserRemoteConfigs()[0].getUrl()
 			scmUrl = this.scm.getSource()
-			currentBranch = env.BRANCH_NAME.split('/')[0]
+			fullBranchName = env.BRANCH_NAME
 		}
 		else {
 			scmUrl = pipelineParams.scmUrl
-			currentBranch = pipelineParams.branch
+			fullBranchName = pipelineParams.branch
 		}
+
+		currentBranch = fullBranchName.split('/')[0]
 
 		// if (env.BRANCH_NAME.split('/').size() > 2) {
 			// com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["RED", "FATAL: Improper branch name, more than one forward slash '/' not allowed"],
@@ -32,10 +35,11 @@ def call(body) {
 		// }    
 
 		// global flag
-		// this.env.BUILD_RUNNING = "false"
+		this.env.BUILD_RUNNING = "false"
 
 		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		echo "scmUrl: " + scmUrl
+		echo "fullBranchName: " + fullBranchName
 		echo "currentBranch: " + currentBranch
 		echo "scmName: " + scmName
 
@@ -50,7 +54,7 @@ def call(body) {
     		config = com.tuc.jenkins.util.Utilities.reconcileConfig(projectConfig, globalConfig)
     		config.scm_repository = scmName
     		config.scm_url = scmUrl
-    		config.scm_branch = currentBranch
+    		config.scm_branch = fullBranchName
 		}
 		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["BLUE", new JsonBuilder(config).toPrettyString()])
 
