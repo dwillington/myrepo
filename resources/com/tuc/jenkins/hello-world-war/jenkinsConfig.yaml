@@ -21,7 +21,7 @@ workflow:
           clean_up_workspace: true
           notification_type: 'SCM'
           in_progress: false
-  - branch: 'feautre'
+  - branch: 'feature'
     steps: 
       - notification:
           stage_name: 'INITIAL SCM NOTIFICATION'

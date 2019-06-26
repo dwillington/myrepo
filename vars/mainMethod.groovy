@@ -34,11 +34,10 @@ def call(body) {
 		// global flag
 		// this.env.BUILD_RUNNING = "false"
 
+		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		echo "scmUrl: " + scmUrl
 		echo "currentBranch: " + currentBranch
-
-		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
-		echo scmName
+		echo "scmName: " + scmName
 
 		// Reading pipeline configuration. This step will be performed by a default agent or master
 		node {	
