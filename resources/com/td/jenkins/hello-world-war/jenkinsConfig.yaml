@@ -1,7 +1,7 @@
 agent: 'master' # This will be the default agent
 
 workflow:
-  - branch: 'master' 
+  - branch: 'default' 
     steps: 
       - notification:
           stage_name: 'INITIAL SCM NOTIFICATION'
