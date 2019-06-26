@@ -26,8 +26,8 @@ def call(body) {
 
 		// Reading pipeline configuration. This step will be performed by a default agent or master
 		node {	
-			String globalConfigString = this.libraryResource("com/td/jenkins/util/default_settings.yaml")
-    		String projectConfigString = this.libraryResource("com/td/jenkins/$scmName/jenkinsConfig.yaml")
+			String globalConfigString = this.libraryResource("com/tuc/jenkins/util/default_settings.yaml")
+    		String projectConfigString = this.libraryResource("com/tuc/jenkins/$scmName/jenkinsConfig.yaml")
     		this.writeFile file: "global_config", text: globalConfigString
 			this.writeFile file: "project_config", text: projectConfigString
     		Map globalConfig = this.readYaml file: "global_config"
