@@ -33,7 +33,9 @@ def call(body) {
     		Map globalConfig = this.readYaml file: "global_config"
     		Map projectConfig = this.readYaml file: "project_config"
     		config = com.td.jenkins.util.Utilities.reconcileConfig(projectConfig, globalConfig)
-    		config.git_repository = scmName
+    		config.scm_repository = scmName
+    		config.scm_url = scmUrl
+    		config.scm_branch = currentBranch
 		}
 		com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["BLUE", new JsonBuilder(config).toPrettyString()])
 
