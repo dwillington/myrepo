@@ -65,7 +65,7 @@ public abstract class Step implements Serializable {
 				// scope.git url: scope.scm.remote, branch: scope.scm.branch
 				// scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: 'master'])
 				// revisionType: 'BRANCH', revision: "default", 
-				scope.checkout scope.scm: [$class: 'MercurialSCM', source: "http://blxblddev3.transunion.ca:10002/apps/hello-world-war", credentialsId: 'jenkins-rhodecode']
+				scope.checkout ([$class: 'MercurialSCM', source: "http://blxblddev3.transunion.ca:10002/apps/hello-world-war", credentialsId: 'jenkins-rhodecode'])
 
                 // getSourceBranchInfo(config)
                 // Utilities.printToConsoleOutput(scope, ["BLUE", "Setting up report"])
