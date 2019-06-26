@@ -16,8 +16,8 @@ def call(body) {
 		String currentBranch;
 
 		if(env.BRANCH_NAME) {
-			currentBranch = env.BRANCH_NAME.split('/')[0]
 		    scmUrl = this.scm.getUserRemoteConfigs()[0].getUrl()
+			currentBranch = env.BRANCH_NAME.split('/')[0]
 		}
 		else {
 			scmUrl = pipelineParams.scmUrl
@@ -33,8 +33,8 @@ def call(body) {
 		// global flag
 		// this.env.BUILD_RUNNING = "false"
 
-		echo pipelineParams.scmUrl
-		echo pipelineParams.branch
+		echo scmUrl
+		echo currentBranch
 
 		String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
 		echo scmName
