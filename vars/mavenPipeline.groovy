@@ -9,7 +9,7 @@ def call(body) {
         agent any
         // agent { label 'docker-agent' }
         stages {
-            stage('git checkout') {
+            stage('checkout') {
                 steps {
 					checkout scm: [$class: 'MercurialSCM', source: pipelineParams.scmUrl, revisionType: 'BRANCH', revision: pipelineParams.branch, credentialsId: 'jenkins-rhodecode']
                     // git branch: pipelineParams.branch, url: pipelineParams.scmUrl
