@@ -12,27 +12,27 @@ def call(body) {
 	    Map workflow = null // stores steps for current branch 
 		Map defaultWorkflow = null // stores steps for the default branch
 
+		String scmUrl;
+		String currentBranch;
 
-		String currentBranch = env.BRANCH_NAME.split('/')[0]
+		if(env.BRANCH_NAME) {
+			currentBranch = env.BRANCH_NAME.split('/')[0]
+		    scmUrl = this.scm.getUserRemoteConfigs()[0].getUrl()
+		}
+		else {
+			scmUrl = pipelineParams.scmUrl
+			currentBranch = pipelineParams.branch
+		}
 
-		if (env.BRANCH_NAME.split('/').size() > 2) {
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["RED", "FATAL: Improper branch name, more than one forward slash '/' not allowed"],
-				["WHITE", env.BRANCH_NAME]], " : ")
-`			return // exit pipeline prematurely
-		}    
+		// if (env.BRANCH_NAME.split('/').size() > 2) {
+			// com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["RED", "FATAL: Improper branch name, more than one forward slash '/' not allowed"],
+				// ["WHITE", env.BRANCH_NAME]], " : ")
+// `			return // exit pipeline prematurely
+		// }    
 
 		// global flag
-		this.env.BUILD_RUNNING = "false"
+		// this.env.BUILD_RUNNING = "false"
 
-		String scmUrl = this.scm.getUserRemoteConfigs()[0].getUrl()
-
-
-		// String scmUrl = params.REPO_URL
-		// String scmName = scmUrl.split("/")[scmUrl.split("/").size()-1].replace(".git", "")		
-		// echo scmName
-
-		String scmUrl = pipelineParams.scmUrl
-		String currentBranch = pipelineParams.branch
 		echo pipelineParams.scmUrl
 		echo pipelineParams.branch
 
