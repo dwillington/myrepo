@@ -16,7 +16,8 @@ def call(body) {
 		String currentBranch;
 
 		if(env.BRANCH_NAME) {
-		    scmUrl = this.scm.getUserRemoteConfigs()[0].getUrl()
+		    // scmUrl = this.scm.getUserRemoteConfigs()[0].getUrl()
+			scmUrl = this.scm.getSource()
 			currentBranch = env.BRANCH_NAME.split('/')[0]
 		}
 		else {
