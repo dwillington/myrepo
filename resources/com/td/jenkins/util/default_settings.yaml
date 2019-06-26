@@ -8,7 +8,7 @@ default_branch: ''
 workspace: ''
 
 ##--REPORT SETTING
-group_id: 'com.td.flxa.report'
+group_id: 'com.tuc.flxa.report'
 artifact_id: ''
 version: '1.0-SNAPSHOT'
 packaging: 'html'

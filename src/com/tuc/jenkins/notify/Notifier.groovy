@@ -1,6 +1,6 @@
-package com.td.jenkins.notify
+package com.tuc.jenkins.notify
 
-public abstract class Notifier extends com.td.jenkins.Step {
+public abstract class Notifier extends com.tuc.jenkins.Step {
 	
 	protected abstract void notify(Map config)
 

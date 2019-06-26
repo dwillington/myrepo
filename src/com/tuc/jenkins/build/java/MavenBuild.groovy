@@ -1,8 +1,8 @@
-package com.td.jenkins.build.java
+package com.tuc.jenkins.build.java
 
-import com.td.jenkins.util.Utilities
+import com.tuc.jenkins.util.Utilities
 
-public class MavenBuild extends com.td.jenkins.build.Builder {
+public class MavenBuild extends com.tuc.jenkins.build.Builder {
 
     public MavenBuild(Object scope, String name) {
         this.scope = scope

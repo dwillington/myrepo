@@ -32,19 +32,19 @@ def call(body) {
 			this.writeFile file: "project_config", text: projectConfigString
     		Map globalConfig = this.readYaml file: "global_config"
     		Map projectConfig = this.readYaml file: "project_config"
-    		config = com.td.jenkins.util.Utilities.reconcileConfig(projectConfig, globalConfig)
+    		config = com.tuc.jenkins.util.Utilities.reconcileConfig(projectConfig, globalConfig)
     		config.scm_repository = scmName
     		config.scm_url = scmUrl
     		config.scm_branch = currentBranch
 		}
-		com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["BLUE", new JsonBuilder(config).toPrettyString()])
+		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["BLUE", new JsonBuilder(config).toPrettyString()])
 
 		// Validating pipeline steps for the current branch
     	currentBuild.result = "SUCCESS"
 	    for (wf in config.workflow) {
 	    	if (wf.branch == currentBranch) {
 	     		workflow = wf
-	     		com.td.jenkins.util.Utilities.printToConsoleOutput(this, [
+	     		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [
 	     			["GREEN", "Successfully detected configuration for current branch. Executing pipeline on"],
 	     			["WHITE", currentBranch]], " : ")
 	     	}
@@ -54,14 +54,14 @@ def call(body) {
 	    }
 		if (workflow == null) {
 			if (defaultWorkflow == null) {
-				com.td.jenkins.util.Utilities.printToConsoleOutput(this, [
+				com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [
 					["RED", "FATAL: No workflows match the current branch"],
 					["WHITE", currentBranch]], " : ")
 		 		currentBuild.result = "ABORTED"
 		 		return // exit pipeline prematurely
 		 	}
 		 	else {
-		 		com.td.jenkins.util.Utilities.printToConsoleOutput(this, [
+		 		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [
 		 			["GREEN", "Successfully detected configuration for default branch. Executing pipeline on"],
 		 			["WHITE", config.default_branch]], " : ")
 		 		workflow = defaultWorkflow
@@ -72,10 +72,10 @@ def call(body) {
     	String internalHostname = InetAddress.localHost.canonicalHostName
 		if(true) {
 			properties([buildDiscarder(logRotator(numToKeepStr: '10'))])
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
+			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
 				["CYAN", "using pipeline v2"]], " : ")
 			config.pipeline_version = "v2"
-			com.td.jenkins.util.Utilities.startTimer()
+			com.tuc.jenkins.util.Utilities.startTimer()
 			node(config.agent) {
 				for (step in workflow.steps) {
 					step.each { stepName, stepConfig ->
@@ -85,7 +85,7 @@ def call(body) {
 			}
 		}
 		else {
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "Cannot recongzie this Jenkins master"])
+			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "Cannot recongzie this Jenkins master"])
 			currentBuild.result = "ABORTED"
 			return // exit pipeline prematurely
 		}
@@ -95,27 +95,27 @@ def call(body) {
 def runStep(config, stepName, stepConfig) {
 	if (currentBuild.result == "SUCCESS" || currentBuild.result == "UNSTABLE") {
 		def instance = this.class.classLoader.loadClass(stepName, true, false)?.newInstance()
-		stepConfig = com.td.jenkins.util.Utilities.reconcileConfig(stepConfig, config)
-		com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "STAGE"], ["YELLOW", stepConfig.stage_name]], " : ")
+		stepConfig = com.tuc.jenkins.util.Utilities.reconcileConfig(stepConfig, config)
+		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "STAGE"], ["YELLOW", stepConfig.stage_name]], " : ")
 		instance(stepConfig)
 	}
 	else if (currentBuild.result == "FAILURE") {
 		if (stepName == "notification") {
 			def instance = this.class.classLoader.loadClass(stepName, true, false)?.newInstance()
-			stepConfig = com.td.jenkins.util.Utilities.reconcileConfig(stepConfig, config)
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "STAGE"], ["YELLOW", stepConfig.stage_name]], " : ")
+			stepConfig = com.tuc.jenkins.util.Utilities.reconcileConfig(stepConfig, config)
+			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "STAGE"], ["YELLOW", stepConfig.stage_name]], " : ")
 			instance(stepConfig)
 		}
 		else {
-			com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "Skipping"],
+			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "Skipping"],
 				["YELLOW", stepConfig.stage_name], ["BLUE", "due to previous step failing"]], " ")
 		}
 	}
 	else if (currentBuild.result == "ABORTED") {
-		com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "Skipping"],
+		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", "Skipping"],
 			["YELLOW", stepConfig.stage_name], ["BLUE", "due to previous step aborting"]], " ")
 	}
 	else {
-		com.td.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "FATAL: cannot recognize " + currentBuild.result])
+		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "FATAL: cannot recognize " + currentBuild.result])
 	}
 }

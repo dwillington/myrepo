@@ -1,4 +1,4 @@
-package com.td.jenkins.util
+package com.tuc.jenkins.util
 
 import java.util.Map
 
@@ -95,7 +95,7 @@ public class Utilities {
         int size = requiredConfig.size()
         for (int index=0; index < size; index++) {
             if ( ! actualConfig.containsKey(requiredConfig[index]) ) {
-                com.td.jenkins.util.Utilities.printToConsoleOutput(scope, [["RED", "Required parameter"],
+                com.tuc.jenkins.util.Utilities.printToConsoleOutput(scope, [["RED", "Required parameter"],
                     ["CYAN", requiredConfig[index]], ["RED", "is not defined"]], " ")
                 hasRequiredConfig = false
             }
