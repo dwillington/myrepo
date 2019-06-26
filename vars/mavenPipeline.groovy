@@ -11,7 +11,8 @@ def call(body) {
         stages {
             stage('git checkout') {
                 steps {
-                    git branch: pipelineParams.branch, url: pipelineParams.scmUrl
+					checkout scm: [$class: 'MercurialSCM', source: pipelineParams.scmUrl, revisionType: 'BRANCH', revision: pipelineParams.branch, credentialsId: 'jenkins-rhodecode']
+                    // git branch: pipelineParams.branch, url: pipelineParams.scmUrl
                 }
             }
             stage('build') {
