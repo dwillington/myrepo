@@ -1,7 +1,7 @@
 agent: 'master' # This will be the default agent
 
 workflow:
-  - branch: 'default' 
+  - branch: 'default'
     steps: 
       - notification:
           stage_name: 'INITIAL SCM NOTIFICATION'
@@ -15,6 +15,26 @@ workflow:
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
           maven_command: 'mvn clean deploy'
+      - notification:
+          stage_name: 'FINAL SCM NOTIFICATION'
+          checkout_scm: false
+          clean_up_workspace: true
+          notification_type: 'SCM'
+          in_progress: false
+  - branch: 'feautre'
+    steps: 
+      - notification:
+          stage_name: 'INITIAL SCM NOTIFICATION'
+          checkout_scm: true
+          clean_up_workspace: false
+          notification_type: 'SCM'
+          in_progress: true
+      - maven:
+          stage_name: 'MAVEN BUILD'
+          checkout_scm: false
+          clean_up_workspace: false
+          maven_operation_type: 'BUILD'
+          maven_command: 'mvn clean package -DskipTests=true'
       - notification:
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
