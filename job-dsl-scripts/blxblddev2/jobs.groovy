@@ -21,16 +21,16 @@ mainMethod{
     }
 }
 
-multibranchPipelineJob('CIAD-TEST/hello-world-war/DEV/hello-world-war-multibranch-pipeline-job-dsl') {
-    branchSources {
-        hg ('http://blxblddev3.transunion.ca:10002/apps/hello-world-war') {
-            installation('builtin')
-            credentialsId('jenkins-rhodecode')
-        }
-    }
-    orphanedItemStrategy {
-        discardOldItems {
-            numToKeep(1)
-        }
-    }
-}
+// multibranchPipelineJob('CIAD-TEST/hello-world-war/DEV/hello-world-war-multibranch-pipeline-job-dsl') {
+    // branchSources {
+        // hg ('http://blxblddev3.transunion.ca:10002/apps/hello-world-war') {
+            // installation('builtin')
+            // credentialsId('jenkins-rhodecode')
+        // }
+    // }
+    // orphanedItemStrategy {
+        // discardOldItems {
+            // numToKeep(1)
+        // }
+    // }
+// }
