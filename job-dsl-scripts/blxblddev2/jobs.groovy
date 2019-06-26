@@ -11,7 +11,8 @@ pipelineJob('CIAD-TEST/hello-world-war/DEV/hello-world-war-pipeline') {
         cps {
             script("""@Library('myrepo') _
 mainMethod{
-    scmUrl = "https://github.com/dwillington/hello-world-war.git"
+    // scmUrl = "https://github.com/dwillington/hello-world-war.git"
+	scmUrl = "hhttp://blxblddev3.transunion.ca:10002/apps/hello-world-war"
     branch = "master"
 }"""
 			)
