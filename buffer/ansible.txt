@@ -1,0 +1,127 @@
+docker pull centos
+docker container run -it -d centos:latest
+docker container exec -it $(docker ps -a -q) bash
+
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker ps -a
+----------------------------------------------------------------------
+cd /root/docker-images/centos7-ansible/
+echo "" > Dockerfile
+vi Dockerfile
+FROM centos:centos7
+RUN yum install epel-release -y
+RUN yum install ansible -y
+RUN yum install git -y
+RUN yum install initscripts -y 
+RUN yum install firewalld -y 
+RUN yum install wget -y 
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+CMD /usr/sbin/init
+docker build . -t centos7-ansible
+----------------------------------------------------------------------
+docker container run -it --privileged -e "container=docker" -v /sys/fs/cgroup:/sys/fs/cgroup -d --net=host --name=jboss7 centos7-ansible 
+docker container exec -it $(docker ps -a | grep jboss7 | awk '{ print $1 }') bash
+docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker ps -a
+docker rm $(docker ps -a -f status=exited -q) && docker ps -a
+----------------------------------------------------------------------
+docker container run -it --privileged -e "container=docker" -v /sys/fs/cgroup:/sys/fs/cgroup -d --net=host --name=jboss6 centos7-ansible 
+docker container exec -it $(docker ps -a | grep jboss6 | awk '{ print $1 }') bash
+yum install java-1.8.0-openjdk unzip -y
+wget http://sourceforge.net/projects/jboss/files/JBoss/JBoss-6.0.0.Final/jboss-as-distribution-6.0.0.Final.zip/download
+mv download /usr/share/jboss-as-distribution-6.0.0.Final.zip
+cd /usr/share
+unzip -q jboss-as-distribution-6.0.0.Final.zip
+groupadd jboss
+useradd -s /bin/bash -g jboss jboss
+chown -Rf jboss.jboss /usr/share/jboss-6.0.0.Final/
+----------------------------------------------------------------------
+systemctl enable firewalld
+service firewalld status
+git clone https://github.com/ansible/ansible-examples.git
+cd /ansible-examples/jboss-standalone
+echo "localhost" > hosts
+ansible-playbook -i hosts site.yml --connection=local
+ansible-playbook -i hosts deploy-application.yml --connection=local
+
+#https://github.com/ansible/ansible-examples/issues/227
+cd /usr/share/jboss-as
+mv jboss-modules.jar jboss-modules.jar.bk
+wget -O jboss-modules.jar http://repo1.maven.org/maven2/org/jboss/modules/jboss-modules/1.1.5.GA/jboss-modules-1.1.5.GA.jar
+chown jboss:jboss jboss-modules.jar                                                                                                                            
+
+----------------------------------------------------------------------
+docker start $(docker ps -a -q)
+docker container exec -it $(docker ps -a -q) bash
+mkdir -p /opt/Canada/logs
+touch /opt/Canada/logs/enstream-wrapper.log
+chown jboss:jboss -R /opt/Canada/
+/usr/share/jboss-as/bin/jboss-cli.sh
+connect
+
+/subsystem=logging/periodic-rotating-file-handler=FILE-ENSTREAM-WRAPPER:remove
+/subsystem=logging/periodic-rotating-file-handler=FILE-ENSTREAM-WRAPPER:read-resource
+/subsystem=logging/periodic-rotating-file-handler=FILE-ENSTREAM-WRAPPER:add(autoflush="true", file={"path"=>"/opt/Canada/logs/enstream-wrapper.log"}, suffix=".yyyy-MM-dd", append=true)
+/subsystem=logging/periodic-rotating-file-handler=FILE-ENSTREAM-WRAPPER:write-attribute(name=filter-spec, value="not(match(&quot;EnStream Response:&quot;))")  
+
+/subsystem=logging/console-handler=HANDLER:write-attribute(name=named-formatter, value=ENSTREAM-WRAPPER-PATTERN)
+
+/subsystem=logging/logger=ca.tuc.enstream.wrapper:add(use-parent-handlers="false")
+/subsystem=logging/logger=ca.tuc.enstream.wrapper:write-attribute(name=level, value=DEBUG)
+/subsystem=logging/logger=ca.tuc.enstream.wrapper:add-handler(name=CONSOLE)
+/subsystem=logging/logger=ca.tuc.enstream.wrapper:add-handler(name=FILE-ENSTREAM-WRAPPER)
+
+/subsystem=logging/formatter=ENSTREAM-WRAPPER-PATTERN:add(pattern-formatter={"pattern"=>"%d{yyyy-MM-dd}T%d{HH:mm:ss.SSSSSXXX}, TransactionId=%X{requestId}, Level=%-5p, Class=%c, Thread=%t, Message=[%m]%n"})
+
+/subsystem=logging/custom-formatter=ENSTREAM-WRAPPER-PATTERN-MASKED:add(class=ca.tuc.enstream.wrapper.logging.Jboss6CustomFormatter, module=tuc.enstream-wrapper.logging)
+
+cd /usr/share/jboss-as/standalone/configuration
+
+
+----------------------------------------------------------------------
+docker pull ybalt/ansible-tower
+#docker run -d -p 443:443 --privileged --name tower ybalt/ansible-tower
+docker run --privileged -d -p 443:443 -v pgdata:/var/lib/postgresql/9.6/main --name ansible-tower ybalt/ansible-tower
+docker logs -f --tail=100 $(docker ps -a | grep ansible-tower | awk '{ print $1 }')
+
+
+- test the ability of jenkins -> ansible tower -> run ansible job on docker container with ssh port exposed and credentials configured
+
+
+
+git archive --remote=https://github.com/dwillington/hello-world-war.git HEAD README.md
+
+----------------------------------------------------------------------
+yum install openssh openssh-server openssh-clients openssl-libs -y
+sed -i 's/#Port 22/Port 2022/' /etc/ssh/sshd_config
+systemctl restart sshd.service
+rm -rf /run/nologin
+
+useradd jboss
+passwd jboss
+
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -p 2022 root@ansible-host
+passwd
+
+rm -rf /tmp/*.war /usr/share/jboss-as/standalone/deployments/hello-world-war.*
+ls -al /usr/share/jboss-as/standalone/deployments/
+
+M2_HOME=/var/lib//jenkins/tools/hudson.tasks.Maven_MavenInstallation/mvn-3.5.3
+PATH=$M2_HOME/bin::$PATH
+
+----------------------------------------------------------------------
+- need a repository to create Ansible playbooks, read / write
+- need ssh credentials to JBoss DEV server
+- need credentials for Artifactory, read only, to download artifacts
+- need access to Ansible Tower
+  - url
+  - credentials and authorization to create projectes, templates, etc
+----------------------------------------------------------------------
+for %a in (*.*) do ren "%a" "Game of Thrones - %a"
+
+
