@@ -9,7 +9,7 @@ def call(body) {
 		body()
 
 		Map config = null // stores entire job configuration
-	    Map workflow = null // stores steps for current branch 
+		Map workflow = null // stores steps for current branch 
 		Map defaultWorkflow = null // stores steps for the default branch
 
 		String scmUrl;

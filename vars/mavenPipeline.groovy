@@ -11,9 +11,9 @@ def call(body) {
         stages {
             stage('checkout') {
                 steps {
-					checkout scm: [$class: 'MercurialSCM', source: pipelineParams.scmUrl, revisionType: 'BRANCH', revision: pipelineParams.branch, credentialsId: 'jenkins-rhodecode']
-                    // git branch: pipelineParams.branch, url: pipelineParams.scmUrl
-                }
+                    checkout scm: [$class: 'MercurialSCM', source: pipelineParams.scmUrl, revisionType: 'BRANCH', revision: pipelineParams.branch, credentialsId: 'jenkins-rhodecode']
+                            // git branch: pipelineParams.branch, url: pipelineParams.scmUrl
+                    }
             }
             stage('build') {
                 steps {
@@ -23,27 +23,27 @@ def call(body) {
                     }
                 }
             }
-            // stage ('unit test') {
-                // steps {
-                    // withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
-                        // sh 'mvn test'
-                    // }
-                // }
-            // }
-            // stage('sonar scan') {
-                // steps {
-                    // withSonarQubeEnv('sonarqube') {
-                        // withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
-                            // sh 'mvn org.sonarsource.scanner.maven:/-maven-plugin:3.2:sonar'
-                        // }
-                    // }
-                // }
-            // }
-            // stage('static security scan') {
-                // steps {
-                    // sh "echo fority.sh"
-                // }
-            // }
+            stage ('unit test') {
+                steps {
+                    withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') {
+                        sh 'mvn test'
+                    }
+                }
+            }
+            stage('sonar scan') {
+                steps {
+                    withSonarQubeEnv('sonarqube') {
+                        withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4') { //, globalMavenSettingsConfig: 'maven-settings.xml'
+                            sh 'mvn org.sonarsource.scanner.maven:/-maven-plugin:3.2:sonar'
+                        }
+                    }
+                }
+            }
+            stage('static security scan') {
+                steps {
+                    sh "echo fority.sh"
+                }
+            }
             stage('publish to repository') {
                 steps {
                     withMaven(maven:'mvn-3.5.3', jdk: 'jdk-9.0.4', globalMavenSettingsConfig: 'settings.xml') {
