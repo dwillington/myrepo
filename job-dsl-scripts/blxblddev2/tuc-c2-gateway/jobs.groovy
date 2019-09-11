@@ -17,17 +17,3 @@ folder("CIAD-TEST/apps/services/tuc-c2-gateway/DEV")
         // }
     // }
 // }
-
-multibranchPipelineJob('CIAD-TEST/apps/services/tuc-c2-gateway/DEV/tuc-c2-gateway-multibranch-pipeline-dsl') {
-    branchSources {
-        hg ('http://blxblddev3.transunion.ca:10002/apps/services/tuc-c2-gateway') {
-            installation('builtin')
-            credentialsId('jenkins-rhodecode')
-        }
-    }
-    orphanedItemStrategy {
-        discardOldItems {
-            numToKeep(1)
-        }
-    }
-}
