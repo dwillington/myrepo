@@ -1,0 +1,7 @@
+jboss_home: /opt/jboss/jboss-eap-6.4
+deploy_home: /opt/deploy
+artifactoryUrl: http://blxblddev3:8081/artifactory
+tuc_prod_home: /opt/tuc-prod
+tomcat8_workspace: tomcat8
+
+serverEnvironment: dev

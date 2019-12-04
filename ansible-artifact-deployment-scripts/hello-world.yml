@@ -1,0 +1,7 @@
+---
+- name: hello world
+  hosts: all
+  tasks:
+    - name: msg hello world
+      debug:
+        msg: "hello world : {{ mysql_password }}"
