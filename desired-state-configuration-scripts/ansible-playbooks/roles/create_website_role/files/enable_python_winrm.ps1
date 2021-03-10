@@ -53,5 +53,5 @@ if (!(Test-Path "C:\temp\Setup-winrm-For-Ansible.ps1")) {
 if ($PSVersionTable.PSVersion.Major -lt 5) {
   Write-Output "Upgrade PowerShell to 5.X"
   C:\ProgramData\chocolatey\choco upgrade powershell -y
-  Restart-Computer
+  Restart-Computer -Force
 }
