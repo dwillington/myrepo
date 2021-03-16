@@ -51,7 +51,11 @@ if (!(Test-Path "C:\temp\Setup-winrm-For-Ansible.ps1")) {
 # upgrade powershell to 5.X if needed
 ######################################################################
 if ($PSVersionTable.PSVersion.Major -lt 5) {
-  Write-Output "Upgrade PowerShell to 5.X"
-  C:\ProgramData\chocolatey\choco upgrade powershell -y
-  Restart-Computer -Force
+  Write-Output "Upgrade PowerShell from $($PSVersionTable.PSVersion.Major) to 5.X"
+  C:\ProgramData\chocolatey\choco upgrade powershell -y | Out-File -FilePath C:\temp\choco_upgrade_powershell.log
+  # Get-Content C:\temp\choco_upgrade_powershell.log
+  $output = (Get-Content C:\temp\choco_upgrade_powershell.log | select-string "reboot is necessary")
+  if($output -match "reboot is necessary") {
+    Restart-Computer -Force
+  }
 }
