@@ -1,0 +1,45 @@
+--------------------------------------------------------------------------------
+$psISE.Options.FontSize = 14
+--------------------------------------------------------------------------------
+# show file extensions
+# https://stackoverflow.com/questions/4491999/configure-windows-explorer-folder-options-through-powershell
+$key = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+Set-ItemProperty $key HideFileExt 0
+--------------------------------------------------------------------------------
+# https://www.snel.com/support/install-chrome-in-windows-server/
+# Install Chrome in Windows Server using Powershell
+$LocalTempDir = $env:TEMP; $ChromeInstaller = "ChromeInstaller.exe"; (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller"); & "$LocalTempDir\$ChromeInstaller" /silent /install; $Process2Monitor =  "ChromeInstaller"; Do { $ProcessesFound = Get-Process | ?{$Process2Monitor -contains $_.Name} | Select-Object -ExpandProperty Name; If ($ProcessesFound) { "Still running: $($ProcessesFound -join ', ')" | Write-Host; Start-Sleep -Seconds 2 } else { rm "$LocalTempDir\$ChromeInstaller" -ErrorAction SilentlyContinue -Verbose } } Until (!$ProcessesFound)
+--------------------------------------------------------------------------------
+# windows remote session / ssh
+# https://cloudblogs.microsoft.com/industry-blog/en-gb/technetuk/2016/02/11/configuring-winrm-over-https-to-enable-powershell-remoting/
+$ip_address = "52.228.36.96"
+$so = New-PsSessionOption –SkipCACheck -SkipCNCheck
+Enter-PSSession -ComputerName $ip_address -Credential azureuser -UseSSL -SessionOption $so
+
+$so = New-PsSessionOption –SkipCACheck -SkipCNCheck
+Enter-PSSession -ComputerName AZNPBUILD01 -Credential aashraf -UseSSL -SessionOption $so
+
+$so = New-PsSessionOption –SkipCACheck -SkipCNCheck
+$session = New-PSSession –ComputerName 20.47.87.36 -Credential azureuser -UseSSL -SessionOption $so
+Copy-Item –Path SharePoint2013DSC.7z –Destination E:\SharePoint2013DSC.7z –ToSession $session
+Copy-Item –FromSession $session –Path C:\sp2013.7z –Destination C:\sp2013.7z
+--------------------------------------------------------------------------------
+$ip_address = "52.228.36.96"
+Set-Item -Path WSMan:\localhost\Client\TrustedHosts -Value $ip_address
+Get-Item WSMan:\localhost\Client\TrustedHosts\
+Enter-PSSession -ComputerName $ip_address -Credential azureuser
+--------------------------------------------------------------------------------
+https://www.concurrency.com/blog/february-2019/getting-started-with-ssh-on-windows-server-2019
+
+--------------------------------------------------------------------------------
+$so = New-PsSessionOption –SkipCACheck -SkipCNCheck
+$session = New-PSSession –ComputerName 20.47.87.36 -Credential azureuser -UseSSL -SessionOption $so
+Copy-Item –Path D:\Sitefinity-MYLIFE2\web.config –Destination C:\temp\Sitefinity-MYLIFE2 –ToSession $session
+--------------------------------------------------------------------------------
+# https://serverfault.com/questions/548103/customizing-powershell-font-face-and-size
+# $psISE.Options.FontName = 'Lucida Sans Console' 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+
+
+
