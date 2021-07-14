@@ -33,6 +33,7 @@ def call(config) {
 		}
 	}
 	else {
+		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "com.tuc.jenkins.util.Utilities.hasRequiredConfig(this, config, required) = false"])
 		currentBuild.result = "FAILURE"
 	}
 }
