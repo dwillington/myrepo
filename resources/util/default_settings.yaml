@@ -27,7 +27,7 @@ additional_branches: ['feature', 'scan', 'soatestdev', 'release', 'soatestsit', 
 all_branches: ['feature', 'develop', 'scan', 'soatestdev', 'release', 'soatestsit', 'soatestpat', 'master']
 time_report_branches: ['feature', 'develop', 'release', 'master']
 git_clone_timeout: '5' # In minutes
-git_clone_stage_name: 'GIT CLONE AND SETUP REPORT'
+git_clone_stage_name: 'GIT CLONE'
 report_file: 'report.html'
 
 ##--MAVEN SETTINGS
