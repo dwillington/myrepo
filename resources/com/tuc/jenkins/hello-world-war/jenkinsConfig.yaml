@@ -14,7 +14,7 @@ workflow:
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
-          maven_command: 'mvn clean deploy'
+          maven_command: 'mvn clean package'
       - maven:
           stage_name: 'SONAR BUILD'
           checkout_scm: false
