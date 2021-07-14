@@ -30,7 +30,15 @@ mainMethod()
 
 
 --------------------------------------------------------------------------------
+https://www.cloudbees.com/blog/top-10-best-practices-jenkins-pipeline-plugin
 https://plugins.jenkins.io/pipeline-multibranch-defaults/
 --------------------------------------------------------------------------------
 git@github.com:dwillington/myrepo.git
-git -c core.sshCommand="ssh -i /c/Users/aashraf/.ssh/id_rsa -o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null" push
+git -c core.sshCommand="ssh -i /c/Users/aashraf/.ssh/id_rsa -o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null" pull
+# http://52.228.14.144:3083/
+--------------------------------------------------------------------------------
+
+
+
+
+
