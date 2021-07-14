@@ -62,8 +62,8 @@ public abstract class Step implements Serializable {
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Checking out scm"])
                 // scope.checkout(scope.scm)
 				
-				scope.git url: scope.scm.remote, branch: scope.scm.branch
-				// scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: 'master'])
+				// scope.git url: scope.scm.remote, branch: scope.scm.branch
+				scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: 'master'])
 				// 
 				// scope.checkout ([$class: 'MercurialSCM', source: config.scm_url, revisionType: 'BRANCH', revision: config.scm_branch, credentialsId: 'jenkins-rhodecode', clean: true])
 
