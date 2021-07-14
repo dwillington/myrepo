@@ -9,18 +9,18 @@ workflow:
           clean_up_workspace: false
           notification_type: 'SCM'
           in_progress: true
-      - maven:
-          stage_name: 'MAVEN BUILD'
-          checkout_scm: false
-          clean_up_workspace: false
-          maven_operation_type: 'BUILD'
-          maven_command: 'mvn clean package'
+      # - maven:
+          # stage_name: 'MAVEN BUILD'
+          # checkout_scm: false
+          # clean_up_workspace: false
+          # maven_operation_type: 'BUILD'
+          # maven_command: 'mvn clean package'
       - maven:
           stage_name: 'SONAR BUILD'
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
-          maven_command: 'mvn sonar:sonar -Dsonar.host.url=172.16.18.4:9000'
+          maven_command: 'mvn sonar:sonar -Dsonar.host.url=http://172.16.18.4:9000'
       - notification:
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
