@@ -61,7 +61,7 @@ workflow:
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
-          maven_command: 'mvn sonar:sonar -Dsonar.host.url=http://172.16.18.4:9000'
+          maven_command: 'mvn -DMAVEN_OPTS="-Xms256m -Xmx1024m" sonar:sonar -Dsonar.host.url=http://172.16.18.4:9000'
       - notification:
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
