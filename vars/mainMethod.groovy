@@ -31,7 +31,7 @@ def call(body) {
 		branchPrefix = fullBranchName.split('/')[0]
 
 		// if (env.BRANCH_NAME.split('/').size() > 2) {
-			// com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["RED", "FATAL: Improper branch name, more than one forward slash '/' not allowed"],
+			// com.jenkins.util.Utilities.printToConsoleOutput(this, [["RED", "FATAL: Improper branch name, more than one forward slash '/' not allowed"],
 				// ["WHITE", env.BRANCH_NAME]], " : ")
 			// return // exit pipeline prematurely
 		// }
