@@ -1,0 +1,7 @@
+--------------------------------------------------------------------------------
+docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins
+docker logs -f jenkins
+
+--------------------------------------------------------------------------------
+cat /c/ProgramData/docker/volumes/jenkins_home/_data/secrets/initialAdminPassword
+7a03b23007c34ea0bc70feaa1d1edb16

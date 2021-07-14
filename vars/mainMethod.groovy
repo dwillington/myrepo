@@ -32,7 +32,7 @@ def call(body) {
 		// if (env.BRANCH_NAME.split('/').size() > 2) {
 			// com.td.jenkins.util.Utilities.printToConsoleOutput(this, [["RED", "FATAL: Improper branch name, more than one forward slash '/' not allowed"],
 				// ["WHITE", env.BRANCH_NAME]], " : ")
- `			// return // exit pipeline prematurely
+			// return // exit pipeline prematurely
 		// }
 
 		// global flag
@@ -49,7 +49,7 @@ def call(body) {
   		  String globalConfigString = this.libraryResource("com/tuc/jenkins/util/default_settings.yaml")
     		String projectConfigString = this.libraryResource("com/tuc/jenkins/$scmName/jenkinsConfig.yaml")
     		this.writeFile file: "global_config", text: globalConfigString
-			  this.writeFile file: "project_config", text: projectConfigString
+			this.writeFile file: "project_config", text: projectConfigString
     		Map globalConfig = this.readYaml file: "global_config"
     		Map projectConfig = this.readYaml file: "project_config"
     		config = com.tuc.jenkins.util.Utilities.reconcileConfig(projectConfig, globalConfig)
