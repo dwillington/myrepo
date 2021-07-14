@@ -91,7 +91,7 @@ def call(body) {
 		// Reading Jenkins master on which pipeline is triggered
     	String internalHostname = "docker"; //InetAddress.localHost.canonicalHostName
 		if(true) {
-			properties([buildDiscarder(logRotator(numToKeepStr: '10'))])
+			properties([buildDiscarder(logRotator(numToKeepStr: '5'))])
 			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
 				["CYAN", "using pipeline v2"]], " : ")
 			config.pipeline_version = "v2"
