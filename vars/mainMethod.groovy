@@ -18,7 +18,8 @@ def call(body) {
 
 		if(env.BRANCH_NAME) { 
 			// MULTI BRANCH PIPELINE, scm url, branch parameters are introspected
-			scmUrl = this.scm.getSource()
+			// scmUrl = this.scm.getSource()
+			scmUrl = this.scm.userRemoteConfigs[0].url
 			fullBranchName = env.BRANCH_NAME
 		}
 		else {
