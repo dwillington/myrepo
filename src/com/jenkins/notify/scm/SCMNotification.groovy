@@ -1,9 +1,9 @@
-package com.tuc.jenkins.notify.scm
+package com.jenkins.notify.scm
 
-import com.tuc.jenkins.util.Utilities
+import com.jenkins.util.Utilities
 import groovy.json.*
 
-public class SCMNotification extends com.tuc.jenkins.notify.Notifier {
+public class SCMNotification extends com.jenkins.notify.Notifier {
 
     public SCMNotification(Object scope, String name) {
         this.scope = scope

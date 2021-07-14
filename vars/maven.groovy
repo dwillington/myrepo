@@ -13,27 +13,27 @@ def call(config) {
 			break
 	}
 
-	if (com.tuc.jenkins.util.Utilities.hasRequiredConfig(this, config, required)) {
+	if (com.jenkins.util.Utilities.hasRequiredConfig(this, config, required)) {
 		switch(config.maven_operation_type) {
 			case "BUILD":
-				def mavenBuild = new com.tuc.jenkins.build.java.MavenBuild(this, config.stage_name)
+				def mavenBuild = new com.jenkins.build.java.MavenBuild(this, config.stage_name)
 				currentBuild.result = mavenBuild.run(config)
 				break
 			// case "PUBLISH":
-				// def mavenPublish = new com.tuc.jenkins.publish.java.MavenPublish(this, config.stage_name)
+				// def mavenPublish = new com.jenkins.publish.java.MavenPublish(this, config.stage_name)
 				// currentBuild.result = mavenPublish.run(config)
 				// break
 			// case "RELEASE":
-				// def mavenRelease = new com.tuc.jenkins.publish.java.MavenRelease(this, config.stage_name)
+				// def mavenRelease = new com.jenkins.publish.java.MavenRelease(this, config.stage_name)
 				// currentBuild.result = mavenRelease.run(config)
 				// break
 			default:
-				com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "maven_operation_type cannot be found"])
+				com.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "maven_operation_type cannot be found"])
 				currentBuild.result = "FAILURE"
 		}
 	}
 	else {
-		com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "com.tuc.jenkins.util.Utilities.hasRequiredConfig(this, config, required) = false"])
+		com.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "com.jenkins.util.Utilities.hasRequiredConfig(this, config, required) = false"])
 		currentBuild.result = "FAILURE"
 	}
 }

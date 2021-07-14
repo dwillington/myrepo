@@ -1,6 +1,6 @@
-package com.tuc.jenkins.build
+package com.jenkins.build
 
-public abstract class Builder extends com.tuc.jenkins.Step {
+public abstract class Builder extends com.jenkins.Step {
 
 	protected abstract void build(Map config)
 	

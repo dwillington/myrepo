@@ -1,8 +1,8 @@
-package com.tuc.jenkins.notify.email
+package com.jenkins.notify.email
 
-import com.tuc.jenkins.util.Utilities
+import com.jenkins.util.Utilities
 
-public class EmailNotification extends com.tuc.jenkins.notify.Notifier {
+public class EmailNotification extends com.jenkins.notify.Notifier {
 
     public EmailNotification(Object scope, String name) {
         this.scope = scope

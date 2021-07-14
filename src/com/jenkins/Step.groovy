@@ -1,6 +1,6 @@
-package com.tuc.jenkins
+package com.jenkins
 
-import com.tuc.jenkins.util.Utilities
+import com.jenkins.util.Utilities
 
 public abstract class Step implements Serializable {
 

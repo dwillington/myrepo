@@ -16,18 +16,18 @@ def call(config) {
 			break
 	}
 
-	if (com.tuc.jenkins.util.Utilities.hasRequiredConfig(this, config, required)) {
+	if (com.jenkins.util.Utilities.hasRequiredConfig(this, config, required)) {
 		switch(config.notification_type) {
 			case "EMAIL":
-				def emailNotification = new com.tuc.jenkins.notify.email.EmailNotification(this, config.stage_name)
+				def emailNotification = new com.jenkins.notify.email.EmailNotification(this, config.stage_name)
 				currentBuild.result = emailNotification.run(config)
 				break
 			case "SCM":
-				def scmNotification = new com.tuc.jenkins.notify.scm.SCMNotification(this, config.stage_name)
+				def scmNotification = new com.jenkins.notify.scm.SCMNotification(this, config.stage_name)
 				currentBuild.result = scmNotification.run(config)
 				break
 			default:
-				com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "notification_type cannot be found"])
+				com.jenkins.util.Utilities.printToConsoleOutput(this, ["RED", "notification_type cannot be found"])
 				currentBuild.result = "FAILURE"
 				break
 		}
