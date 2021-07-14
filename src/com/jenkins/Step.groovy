@@ -62,9 +62,9 @@ public abstract class Step implements Serializable {
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Checking out scm"])
                 
 				// echo scope.scm.remote
-				echo config.scm_url
+				scope.echo config.scm_url
 				// echo scope.scm.branch
-				echo config.scm_branch
+				scope.echo config.scm_branch
 
 				// scope.checkout(scope.scm)
 				// scope.git url: scope.scm.remote, branch: scope.scm.branch
