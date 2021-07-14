@@ -60,13 +60,17 @@ public abstract class Step implements Serializable {
         if (config.checkout_scm) {
             scope.stage(config.git_clone_stage_name) {
                 Utilities.printToConsoleOutput(scope, ["BLUE", "Checking out scm"])
-                // scope.checkout(scope.scm)
+                
+				echo scope.pipelineParams.scmUrl
+				echo scope.pipelineParams.branch
 				
-				// scope.git url: scope.scm.remote, branch: scope.scm.branch
+				// scope.checkout(scope.scm)
+				
+				scope.git url: scope.scm.remote, branch: scope.scm.branch
 				// scope.git([url: scope.scm.remote, branch: scope.scm.branch])
 				// hudson.AbortException: ‘checkout scm’ is only available when using “Multibranch Pipeline” or “Pipeline script from SCM”
 
-				scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: 'master'])
+				// scope.git([url: 'https://github.com/dwillington/hello-world-war.git', branch: 'master'])
 
 				
 				// scope.checkout ([$class: 'MercurialSCM', source: config.scm_url, revisionType: 'BRANCH', revision: config.scm_branch, credentialsId: 'jenkins-rhodecode', clean: true])
