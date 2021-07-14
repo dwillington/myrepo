@@ -1,8 +1,8 @@
-package com.td.jenkins.util
+package com.jenkins.util
 
-import com.td.jenkins.util.Reporter
+import com.jenkins.util.Reporter
 
-public class RunCommand extends com.td.jenkins.Step {
+public class RunCommand extends com.jenkins.Step {
 
     public RunCommand(Object scope, String name) {
         this.scope = scope
