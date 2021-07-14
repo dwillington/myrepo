@@ -1,7 +1,8 @@
 ##--PROJECT SETTINGS
 mal_code: ''
 agent: ''
-tools: ['jdk-16', 'apache-maven-3.0.3']
+# 'jdk-16', 
+tools: ['jdk8u144', 'apache-maven-3.0.3']
 checkout_scm: false
 clean_up_workspace: false
 default_branch: ''
