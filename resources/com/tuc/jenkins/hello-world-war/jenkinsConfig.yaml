@@ -9,22 +9,16 @@ workflow:
           clean_up_workspace: false
           notification_type: 'SCM'
           in_progress: true
-      # - maven:
-          # stage_name: 'MAVEN BUILD'
-          # checkout_scm: false
-          # clean_up_workspace: false
-          # maven_operation_type: 'BUILD'
-          # maven_command: 'mvn clean package'
       - maven:
-          stage_name: 'SONAR BUILD'
+          stage_name: 'MAVEN BUILD'
           checkout_scm: false
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
-          maven_command: 'mvn sonar:sonar -Dsonar.host.url=http://172.16.18.4:9000'
+          maven_command: 'mvn clean package'
       - notification:
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
-          clean_up_workspace: false
+          clean_up_workspace: true
           notification_type: 'SCM'
           in_progress: false
   - branch: 'feature'
@@ -41,6 +35,33 @@ workflow:
           clean_up_workspace: false
           maven_operation_type: 'BUILD'
           maven_command: 'mvn clean package -DskipTests=true'
+      - notification:
+          stage_name: 'FINAL SCM NOTIFICATION'
+          checkout_scm: false
+          clean_up_workspace: true
+          notification_type: 'SCM'
+          in_progress: false
+  - branch: 'master'
+    steps: 
+    steps: 
+      - notification:
+          stage_name: 'INITIAL SCM NOTIFICATION'
+          checkout_scm: true
+          clean_up_workspace: false
+          notification_type: 'SCM'
+          in_progress: true
+      - maven:
+          stage_name: 'MAVEN BUILD'
+          checkout_scm: false
+          clean_up_workspace: false
+          maven_operation_type: 'BUILD'
+          maven_command: 'mvn clean package'
+      - maven:
+          stage_name: 'SONAR BUILD'
+          checkout_scm: false
+          clean_up_workspace: false
+          maven_operation_type: 'BUILD'
+          maven_command: 'mvn sonar:sonar -Dsonar.host.url=http://172.16.18.4:9000'
       - notification:
           stage_name: 'FINAL SCM NOTIFICATION'
           checkout_scm: false
