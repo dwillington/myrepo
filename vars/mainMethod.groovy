@@ -93,8 +93,8 @@ def call(body) {
 		if(true) {
 			properties([buildDiscarder(logRotator(numToKeepStr: '5'))])
 			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
-				["CYAN", "using pipeline v2"]], " : ")
-			config.pipeline_version = "v2"
+				["CYAN", "using pipeline v1"]], " : ")
+			config.pipeline_version = "v1"
 			com.tuc.jenkins.util.Utilities.startTimer()
 			node(config.agent) {
 				for (step in workflow.steps) {
