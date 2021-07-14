@@ -2,11 +2,17 @@
 docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins
 docker logs -f jenkins
 --------------------------------------------------------------------------------
-cat /c/ProgramData/docker/volumes/jenkins_home/_data/secrets/initialAdminPassword
+cat /var/jenkins_home/secrets/initialAdminPassword
 7a03b23007c34ea0bc70feaa1d1edb16
 --------------------------------------------------------------------------------
 docker run -d --memory=2G --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
 docker logs -f sonarqube
 --------------------------------------------------------------------------------
+winpty docker exec -it jenkins bash
+
+PATH=/var/jenkins_home/tools/hudson.model.JDK/jdk8u144/bin:/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/apache-maven-3.0.3/bin:$PATH
+cd /var/jenkins_home/workspace/hello-world-war
+mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.host.url=http://172.16.18.4:9000
+
 
 
