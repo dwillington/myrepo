@@ -17,12 +17,14 @@ cd /var/jenkins_home/workspace/hello-world-war
 mvn -DMAVEN_OPTS="-Xms256m -Xmx1024m" sonar:sonar -Dsonar.host.url=http://172.16.18.4:9000
 mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.host.url=http://172.16.18.4:9000
 
+# normal pipeline
 @Library('myrepo') _
 mainMethod{
-    scmUrl = "https://github.com/dwillington/hello-world-war.git"
-    branch = "default"
+    scmUrl = "https://github.com/jenkins-docs/simple-java-maven-app.git"
+    branch = "master"
 }
 
+# multibranch pipeline
 @Library('myrepo') _
 mainMethod()
 
