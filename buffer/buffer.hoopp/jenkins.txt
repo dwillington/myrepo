@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-docker run -d --memory=2G -p 8080:8080 -v jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins
+docker run -d --memory=4G -p 8080:8080 -v jenkins_home:/var/jenkins_home --name jenkins jenkins/jenkins
 docker logs -f jenkins
 --------------------------------------------------------------------------------
 cat /var/jenkins_home/secrets/initialAdminPassword
