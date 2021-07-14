@@ -89,7 +89,7 @@ def call(body) {
 		}
 
 		// Reading Jenkins master on which pipeline is triggered
-    	String internalHostname = InetAddress.localHost.canonicalHostName
+    	String internalHostname = "docker"; //InetAddress.localHost.canonicalHostName
 		if(true) {
 			properties([buildDiscarder(logRotator(numToKeepStr: '10'))])
 			com.tuc.jenkins.util.Utilities.printToConsoleOutput(this, [["BLUE", internalHostname],
