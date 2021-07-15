@@ -5,7 +5,7 @@ agent: ''
 tools: ['jdk8u144', 'apache-maven-3.0.3']
 checkout_scm: false
 clean_up_workspace: false
-default_branch: ''
+default_branch: 'default'
 workspace: ''
 
 ##--REPORT SETTING

@@ -70,6 +70,7 @@ def call(body) {
 	     			["WHITE", branchPrefix]], " : ")
 	     	}
 	     	else if (wf.branch == config.default_branch) {
+				// capture the "branch: 'default'" workflow, may need it later if branch is not explicitly matched
 	     		defaultWorkflow = wf
 	     	}
 	    }
