@@ -1,0 +1,146 @@
+---
+    ################################################################################
+    # PREREQUISITES
+    # must exist with chown -Rf jbs1app:jbs1appq: /opt/deploy, /opt/tuc-prod, /opt/Canada
+    ################################################################################
+
+    ################################################################################
+    # Check mandatory variables are defined
+    ################################################################################
+    - name: Check mandatory variables are defined
+      assert:
+        that:
+          - projectName is defined
+          - repoName is defined
+          - rhodecodeUrl is defined
+          - artifactoryRepository is defined
+          - pomGroupIdAnsible is defined
+          - pomAritfactIdAnsible is defined
+          - pomVersionAnsible is defined
+          - pomAritfactExtensionAnsible is defined
+    ################################################################################
+    # Assert Java Version
+    ################################################################################
+    - name: Fetch Java version
+      shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
+      register: java_version
+    - assert:
+        that: 
+          - java_version.stdout is version_compare('1.8', '>=')
+    ################################################################################
+    # Remove Existing Application
+    ################################################################################
+    - name: Remove Ansible Tower repo workspace
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /tmp/ansible-tower-workspace/{{ tomcat8_workspace }}/{{ repoName }}
+    - name: Create Ansible Tower repo workspace
+      file:
+        path: "{{ item }}"
+        state: directory
+      with_items:
+        - /tmp/ansible-tower-workspace/{{ tomcat8_workspace }}/{{ repoName }}
+    #https://www.unixarena.com/2018/12/ansible-tower-awx-store-credential-custom-credentials-type.html/
+    ################################################################################
+    # Clone applicatioon repository
+    ################################################################################
+    - name: Clone application repo with rhodecode_password as new Credential Type
+      shell: |
+        cd /tmp/ansible-tower-workspace/{{ tomcat8_workspace }}/{{ repoName }}
+        ~/usr/bin/hg clone http://admin:"{{ RhodeCode_password }}"@"{{ rhodecodeUrl }}"
+    ################################################################################
+    # Extract groupId, artifactId, version from pom.xml / pipeline-configuration.yaml
+    # https://webcache.googleusercontent.com/search?q=cache:W8wvMriZ-xAJ:https://rickosborne.org/blog/2019/01/extract-a-maven-module-version-with-xpath-and-ansible/+&cd=7&hl=en&ct=clnk&gl=ca
+    ################################################################################
+    # - name: get pom version from pom.xml
+      # command: xmllint --xpath "/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='project']/*[namespace-uri()='http://maven.apache.org/POM/4.0.0' and local-name()='version']/text()" /tmp/hello-world-{{ pomAritfactExtension }}/pom.xml
+      # register: registerPomVersion
+      # when: pomVersionAnsible is not defined
+    # - debug:
+        # var: registerPomVersion.stdout
+      # when: pomVersionAnsible is not defined
+    # - name: assign variable pomVersion from pom.xml
+      # set_fact:
+        # pomVersion: "{{ registerPomVersion.stdout }}"
+      # when: pomVersionAnsible is not defined
+    - name: assign variable pomGroupId from extra-vars pomGroupIdAnsible
+      set_fact:
+        pomGroupId: "{{ pomGroupIdAnsible }}"
+      when: pomGroupIdAnsible is defined
+    - name: assign variable pomAritfactId from extra-vars pomAritfactIdAnsible
+      set_fact:
+        pomAritfactId: "{{ pomAritfactIdAnsible }}"
+      when: pomAritfactIdAnsible is defined
+    - name: assign variable pomVersion from extra-vars pomVersionAnsible
+      set_fact:
+        pomVersion: "{{ pomVersionAnsible }}"
+      when: pomVersionAnsible is defined
+    - name: assign variable pomAritfactExtension from extra-vars pomAritfactExtensionAnsible
+      set_fact:
+        pomAritfactExtension: "{{ pomAritfactExtensionAnsible }}"
+      when: pomAritfactExtensionAnsible is defined
+    ################################################################################
+    # Download artifact from repository
+    # http://www.mydailytutorials.com/ansible-delete-multiple-files-directories-ansible/
+    ################################################################################
+    - name: Download deployment artifact from Artifactory
+      maven_artifact:
+        repository_url: "{{ artifactoryUrl }}/{{ artifactoryRepository }}"
+        group_id: "{{ pomGroupId }}"
+        artifact_id: "{{ pomAritfactId }}"
+        version: "{{ pomVersion }}"
+        extension: "{{ pomAritfactExtension }}"
+        dest: /tmp/ansible-tower-workspace/{{ tomcat8_workspace }}/{{ repoName }}/{{ pomAritfactId }}-{{ pomVersion }}.{{ pomAritfactExtension }}
+        # username: user
+        # password: pass
+    ################################################################################
+    # Remove Application
+    # can also remove init.d script in the future
+    ################################################################################
+    - name: Check {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/tomcat8/bin/shutdown.sh exists
+      stat:
+        path: "{{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/tomcat8/bin/shutdown.sh"
+      register: stat_result
+    - name: Stop Application
+      shell: |
+        {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/tomcat8/bin/shutdown.sh
+      when: stat_result.stat.exists == True
+      ignore_errors: true
+    - name: Remove {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}
+      file:
+        path: "{{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}"
+        state: absent
+    - name: Create {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}
+      file:
+        path: "{{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}"
+        state: directory
+
+    - name: copy {{ role_path }}/files/{{ projectName }}
+      copy:
+        src: "{{ role_path }}/files/{{ projectName }}/{{ serverEnvironment }}/set-env.sh"
+        dest: "{{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/set-env.sh"
+    ################################################################################
+    # Deploy Application
+    ################################################################################
+    - name: Deploy Application
+      shell: |
+        cp -R /tmp/jws-3.0/tomcat8 {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}
+        cp /tmp/ansible-tower-workspace/{{ tomcat8_workspace }}/{{ repoName }}/{{ pomAritfactId }}-{{ pomVersion }}.{{ pomAritfactExtensionAnsible }} {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/tomcat8/webapps
+        cd {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}
+        chmod a+x *.sh
+        source {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/set-env.sh
+        nohup {{ tuc_prod_home }}/{{ tomcat8_workspace }}/{{ projectName }}/tomcat8/bin/startup.sh > nohup.out 2>&1
+
+    ################################################################################
+    # Acceptance Test
+    ################################################################################
+    - name: Check {{ tuc_prod_home }}/{{ projectName }}/acceptance_test.sh exists
+      stat:
+        path: "{{ tuc_prod_home }}/{{ projectName }}/acceptance_test.sh"
+      register: stat_result
+    - name: Acceptance Test
+      shell: |
+        {{ tuc_prod_home }}/{{ projectName }}/acceptance_test.sh
+      when: stat_result.stat.exists == True

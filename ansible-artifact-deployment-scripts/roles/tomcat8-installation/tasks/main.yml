@@ -1,0 +1,18 @@
+---
+- name: Check /tmp/jws-3.0 exists
+  stat:
+    path: /tmp/jws-3.0
+  register: jws_exists
+#https://stackoverflow.com/questions/32802314/how-to-group-set-of-tasks-into-a-block-in-ansible-playbook
+- block:
+    - name: Download tomcat8
+      get_url:
+        url: http://blxblddev3.transunion.ca:8081/artifactory/generic-local/jws-application-servers-3.0.3-RHEL6-x86_64.zip
+        dest: /tmp/jws-application-servers-3.0.3-RHEL6-x86_64.zip
+    - name: Install tomcat8 if it does not exist
+      unarchive:
+        dest: /tmp
+        src: /tmp/jws-application-servers-3.0.3-RHEL6-x86_64.zip
+        creates: /tmp/jws-3.0
+        copy: no
+  when: jws_exists.stat.exists == False

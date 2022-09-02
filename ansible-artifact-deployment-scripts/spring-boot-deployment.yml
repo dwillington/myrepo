@@ -1,0 +1,6 @@
+-
+  name: 'Deploy spring boot Application'
+  hosts: all
+  roles:
+    - role: roles/hg
+    - role: roles/spring-boot-deployment

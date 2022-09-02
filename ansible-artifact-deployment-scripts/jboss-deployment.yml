@@ -1,0 +1,7 @@
+-
+  name: 'Deploy JBoss Application'
+  hosts: all
+  roles:
+    - role: roles/hg
+    - role: roles/jboss-post-installation
+    - role: roles/jboss-deployment

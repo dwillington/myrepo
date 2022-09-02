@@ -1,0 +1,18 @@
+---
+- name: Check {{ jboss_home }}/modules/tuc exists
+  stat:
+    path: "{{ jboss_home }}/modules/tuc"
+  register: stat_result
+- block:
+    - name: Download jboss-tuc-modules
+      get_url:
+        url: http://blxblddev3:8081/artifactory/generic-local/jboss-eap-6.4-tuc-modules.tar
+        dest: /tmp/jboss-eap-6.4-tuc-modules.tar
+    - name: Install jboss-tuc-modules if it does not exist
+      unarchive:
+        dest: /opt/jboss/jboss-eap-6.4/modules
+        src: /tmp/jboss-eap-6.4-tuc-modules.tar
+        creates: /opt/jboss/jboss-eap-6.4/modules/tuc
+        copy: no
+  when: stat_result.stat.exists == False
+

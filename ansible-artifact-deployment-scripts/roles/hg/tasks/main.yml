@@ -1,0 +1,18 @@
+---
+- name: Check ~/usr/bin/hg exists
+  stat:
+    path: ~/usr/bin/hg
+  register: hg_exists
+#https://stackoverflow.com/questions/32802314/how-to-group-set-of-tasks-into-a-block-in-ansible-playbook
+- block:
+    - name: Download hg
+      get_url:
+        url: http://mirror.centos.org/centos/7/os/x86_64/Packages/mercurial-2.6.2-8.el7_4.x86_64.rpm
+        dest: /tmp/mercurial-2.6.2-8.el7_4.x86_64.rpm
+    - name: Install hg if it does not exist
+      shell: |
+        cd ~/ # change into home folder
+        rpm2cpio /tmp/mercurial-2.6.2-8.el7_4.x86_64.rpm | cpio -idv
+  when: hg_exists.stat.exists == False
+
+

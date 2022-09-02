@@ -1,0 +1,7 @@
+-
+  name: 'Deploy tomcat Application'
+  hosts: all
+  roles:
+    - role: roles/hg
+    - role: roles/tomcat8-installation
+    - role: roles/tomcat8-deployment
