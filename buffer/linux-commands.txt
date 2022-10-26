@@ -1,0 +1,6 @@
+--------------------------------------------------------------------------------
+/c/Program\ Files/Oracle/VirtualBox/VBoxManage startvm centos-7 --type headless
+ssh root@localhost
+/c/Program\ Files/Oracle/VirtualBox/VBoxManage controlvm "centos-7" acpipowerbutton
+--------------------------------------------------------------------------------
+
