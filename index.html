@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <title>Futurepreneur</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+textarea  
+{  
+ font-size: 16px;
+}
+body{
+  font-family: 'Roboto', sans-serif;
+  background-color: #101214;
+  color: #7A7C80;
+  font-size: 1.1rem;
+}
+
+.button_gen{
+  font-size: 18px;background-color:#c5e951
+}
+
+.button_gpt
+{
+  font-size: 16px;float: right;background-color:#c5e951
+}
+
+h2,.white{
+  border-bottom: 2px solid #323795;
+  color: #fff;background:#c5e951
+  <!-- color: #f883a4; -->
+}
+</style>
+
+</head>
+<body>
+<h2>Brand Story</h2>
+<!-- https://www.color-hex.com/color-palette/1024242 -->
+<!-- <textarea rows="3" cols="100">Write a paragraph on the frustrations, limitations, and lost opportunities an entrepreneur can feel when they don't know how to leverage technology or they are technically phobic or technically challenged</textarea> -->
+<table>
+  <tr>
+    <td>
+<h3>Step 1</h3>
+<p>
+<font color="ff6978">
+What happens to my hero (frustrated CEO’s, target audience) when the villain runs the show?<br />
+</font>
+</p>
+<font color="ffa22f">
+CUSTOMIZE your ChatGPT prompt below.
+</font>
+<br />
+<textarea rows="2" cols="100">Write 100 words on the frustration and disillusionment that a corporate executive can feel</textarea>
+<br />
+<font color="ffe066">
+PASTE your ChatGPT response below and modify with the help of a thesaurus.
+</font>
+<br />
+<textarea id="textArea1" style="background-color:#c5d3c5;" rows="5" cols="100"></textarea>
+    </td>
+    <td>
+      &nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;<br />
+      <img src="gpt.png" width="300">
+    </td>
+  </tr>
+</table>
+
+<h3>Step 2</h3>
+<p>
+<font color="ff6978">
+Describe the solution: How can someone like me help them<br />
+</font>
+</p>
+<font color="ffa22f">
+CUSTOMIZE your ChatGPT prompt below.
+</font>
+<br />
+<textarea rows="2" cols="100">Write 100 words on how a personal brand coach can be helpful to a frustrated and disillusioned corporate executive who feels his relevancy waning every day</textarea>
+<br />
+<font color="ffe066">
+PASTE your ChatGPT response below and modify with the help of a thesaurus.
+</font>
+<br />
+<textarea id="textArea2" style="background-color:#c5d3c5;" rows="5" cols="100"></textarea>
+
+<h3>Step 3</h3>
+<p>
+<font color="ff6978">
+Describe what happens when the hero feels ecstatic joy. <b>Passion</b> is what I want my corporate execs to feel<br />
+</font>
+</p>
+<font color="ffa22f">
+CUSTOMIZE your ChatGPT prompt below.
+</font>
+<br />
+<textarea rows="2" cols="100">Write 100 words on what happens when a formerly frustrated and disillusioned corporate executive has finally discovered their full potential and is experiencing ecstatic joy at work</textarea>
+<br />
+<font color="ffe066">
+PASTE your ChatGPT response below and modify with the help of a thesaurus.
+</font>
+<br />
+<textarea id="textArea3" style="background-color:#c5d3c5;" rows="5" cols="100"></textarea>
+
+<h2>Futurepreneur Deck - Copy</h2>
+
+
+<table>
+  <tr>
+    <td>
+<h3>Slide 1: What happens when the hero doesn’t exist?</h3>
+
+<font color="ffa22f">
+<input class="button_gen" type="button" value="GENERATE" onclick="genPrompt1();" />
+and CUSTOMIZE your ChatGPT prompt below and then 
+<input class="button_gpt" type="button" value="COPY to CLIPBOARD for PASTE to CHATGPT" onclick="copy_to_clipboard('prompt1');">
+
+</font>
+<br />
+<textarea id="prompt1" rows="6" cols="100"></textarea>
+    </td>
+    <td style="background-color:#ebe5d5;">
+    <pre>
+  Sample Authors:
+  Joe Dispenza
+  Aubrey Marcus
+  Wim Hoff
+  Marianne Williamson 
+    </pre>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+<h3>Slide 2: What’s required to solve the problem?</h3>
+
+<font color="ffa22f">
+<input class="button_gen" type="button" value="GENERATE" onclick="genPrompt2();" />
+and CUSTOMIZE your ChatGPT prompt below and then 
+<input class="button_gpt" type="button" value="COPY to CLIPBOARD for PASTE to CHATGPT" onclick="copy_to_clipboard('prompt2');">
+
+</font>
+<br />
+<textarea id="prompt2" rows="6" cols="100"></textarea>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+<h3>Slide 3: What happens if the hero succeeds?</h3>
+
+<font color="ffa22f">
+<input class="button_gen" type="button" value="GENERATE" onclick="genPrompt3();" />
+and CUSTOMIZE your ChatGPT prompt below and then 
+<input class="button_gpt" type="button" value="COPY to CLIPBOARD for PASTE to CHATGPT" onclick="copy_to_clipboard('prompt3');">
+
+</font>
+<br />
+<textarea id="prompt3" rows="6" cols="100"></textarea>
+    </td>
+  </tr>
+</table>
+
+<script>
+  function genPrompt1() {
+    prefix = "In 100-200 words write a business brand story in the hero, villain passion format in the style of [insert your favorite author] based on the 3 following paragraphs and describe what happens when the hero doesn't exist."
+    document.getElementById("prompt1").innerHTML = concatText(prefix);
+  }
+  function genPrompt2() {
+    prefix = "In 100-200 words write a business brand story in the hero, villain passion format in the style of [insert your favorite author] based on the 3 following paragraphs and describe what is required to solve the problem."
+    document.getElementById("prompt2").innerHTML = concatText(prefix);
+  }
+  function genPrompt3() {
+    prefix = "In 100-200 words write a business brand story in the hero, villain passion format in the style of [insert your favorite author], based on the 3 following paragraphs, and describe what happens if the hero succeeds."
+    document.getElementById("prompt3").innerHTML = concatText(prefix);
+  }
+
+  function concatText(beginning) {
+    var text1 = document.getElementById("textArea1").value;
+    var text2 = document.getElementById("textArea2").value;
+    var text3 = document.getElementById("textArea3").value;
+    var concatenatedText = beginning + "\n\n" + text1 + "\n\n" + text2 + "\n\n" + text3;
+    return concatenatedText;
+  }
+  function copy_to_clipboard(id)
+  {
+      document.getElementById(id).select();
+      document.execCommand('copy');
+  }
+
+</script>
+
+</body>
+</html>
